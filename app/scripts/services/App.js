@@ -1,6 +1,9 @@
 /**
  * List of valid Demo Elements (to minimise indexing errors while coding)
- * @typedef {{searchComponent: CCSearch?}} AppComponents
+ * @typedef {{
+ *      searchComponent: CCSearch?,
+ *      testItem: CCSearchableItem?
+ * }} AppComponents
  */
 
 /**
@@ -35,6 +38,7 @@ class App {
      * @type {AppComponents}
      */
     static components = {
-        searchComponent: null
+        searchComponent: null,
+        testItem: null
     };
 }

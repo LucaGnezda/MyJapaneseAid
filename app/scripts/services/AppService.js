@@ -51,6 +51,8 @@ class AppService {
 
         // @ts-ignore
         App.components.searchComponent = document.getElementById("TopNavSearch");
+        // @ts-ignore
+        App.components.testItem = document.getElementById("TestItem");
 
     }
 
@@ -67,6 +69,11 @@ class AppService {
 
         if (App.components.searchComponent) {
             App.components.searchComponent.attachOnChangeDebouncedCallback(App.dispatcher.newEventDispatchCallback("App_ApplySearch"));
+        }
+
+        if (App.components.testItem) {
+            App.components.testItem.attachDelectRequestCallback(App.dispatcher.newEventDispatchCallback("App_Item_DeleteRequest"));
+            App.components.testItem.attachDataUpdateCallback(App.dispatcher.newEventDispatchCallback("App_Item_DataUpdate"));
         }
     }
 

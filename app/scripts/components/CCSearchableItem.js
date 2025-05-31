@@ -58,6 +58,11 @@
  *      romaji: string?,
  *      meaning: string?
  * }} CCSearchableItemPropertyBagExample
+ * 
+ * @typedef {{
+ *      deleteRequestCallback: Function?,
+ *      dataUpdateCallback: Function?
+ * }} CCSearchableItemAttachedCallbacks
  */
 
 class CCSearchableItem extends CCBase {
@@ -119,7 +124,16 @@ class CCSearchableItem extends CCBase {
         literal: null,
         structure: null,
         notes: null,
-        examples: [],
+        examples: []
+    }
+
+    /**
+     * The elements that make up this component
+     * @type {CCSearchableItemAttachedCallbacks}
+     */
+    #attachedCallbacks = {
+        deleteRequestCallback: null,
+        dataUpdateCallback: null
     }
 
     static #htmlRootTemplate = `
@@ -310,7 +324,7 @@ class CCSearchableItem extends CCBase {
             this.#elements.editSaveButton.addEventListener("click", this.saveCallback.bind(this), this.getPreDisposeSignal());
             this.#elements.editCancelButton.addEventListener("click", this.cancelCallback.bind(this), this.getPreDisposeSignal());
             this.#elements.editButton.addEventListener("click", this.editCallback.bind(this), this.getPreDisposeSignal());
-            this.#elements.deleteButton.addEventListener("click", this.deleteCallback.bind(this), this.getPreDisposeSignal());
+            this.#elements.deleteButton.addEventListener("click", this.deleteRequestCallback.bind(this), this.getPreDisposeSignal());
 
             this.#elements.examplesTitle.addEventListener("click", this.examplesExpanderCallback.bind(this), this.getPreDisposeSignal());
             this.#elements.examplesExpander.addEventListener("click", this.examplesExpanderCallback.bind(this), this.getPreDisposeSignal());
@@ -873,6 +887,34 @@ class CCSearchableItem extends CCBase {
         return false;
     }
 
+    /**
+     * @param {Function?} callback 
+     * @returns
+     */
+    attachDelectRequestCallback(callback) {
+
+        if (callback != null && typeof callback === "function") {
+            this.#attachedCallbacks.deleteRequestCallback = callback;
+        }
+        else {
+            this.#attachedCallbacks.deleteRequestCallback = null;
+        }
+    }
+
+    /**
+     * @param {Function?} callback 
+     * @returns
+     */
+    attachDataUpdateCallback(callback) {
+        
+        if (callback != null && typeof callback === "function") {
+            this.#attachedCallbacks.dataUpdateCallback = callback;
+        }
+        else {
+            this.#attachedCallbacks.dataUpdateCallback = null;
+        }
+    }
+
 
     /**
      * Callbacks
@@ -919,7 +961,20 @@ class CCSearchableItem extends CCBase {
 
         // Build & set highlightable outputs 
         this.#regenerateHighlightableOutputs();
+
+        // Fire callback if 
+        if (this.#attachedCallbacks.dataUpdateCallback) {
+
+            let event = {};
+            event.originatingEvent = mouseEvent;
+            event.originatingObject = mouseEvent.currentTarget;
+            event.currentData = Object.assign({}, this.#propertyBag);
+
+
+            this.#attachedCallbacks.dataUpdateCallback(event);
+        }
     }
+
 
     /**
      * @param {MouseEvent} mouseEvent 
@@ -947,8 +1002,19 @@ class CCSearchableItem extends CCBase {
      * @param {MouseEvent} mouseEvent 
      * @returns
      */
-    deleteCallback(mouseEvent) {
+    deleteRequestCallback(mouseEvent) {
         console.log("Delete");
+
+        if (this.#attachedCallbacks.deleteRequestCallback) {
+
+            let event = {};
+            event.originatingEvent = mouseEvent;
+            event.originatingObject = mouseEvent.currentTarget;
+            event.currentData = Object.assign({}, this.#propertyBag);
+
+
+            this.#attachedCallbacks.deleteRequestCallback(event);
+        }
     }
 
     /**

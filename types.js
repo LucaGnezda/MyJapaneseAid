@@ -45,5 +45,6 @@
  * @typedef {Object} EventBase
  * @property {Event} originatingEvent
  * @property {*} originatingObject
+ * @property {*} currentData
  */
             
