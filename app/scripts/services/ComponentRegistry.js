@@ -12,7 +12,7 @@ class ComponentRegistry {
     static registerComponents() {
         
         // Register your components here...
-        // For example:
-        //     customElements.define("cc-mycomponent", CCMyComponent);  
+        customElements.define("cc-search", CCSearch);
+        customElements.define("cc-searchableitem", CCSearchableItem);  
     }
 }

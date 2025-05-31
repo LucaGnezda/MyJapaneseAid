@@ -134,3 +134,29 @@ function JSONstringifyOrder(obj, space = undefined)
     // order is enforced.
     return JSON.stringify(obj, Array.from(allKeys).sort(), space);
 }
+
+/**
+ * Rate limits calls. Great for things like searches and other expensive operations.
+ * set up like this:
+ *   let doThis = debounce(console.log)
+ * then use like this:
+ *   doThis("Hello world 1");doThis("Hello world 2");doThis("Hello world 3");doThis("Hello world 4")
+ * Only the last call before the colldown will actually be fired. So in the above example, you would get:
+ *   Hello World 4
+ * @param {Function} func
+ * @param {Number} timeout
+*/
+function debounce(func, timeout = 300){
+    
+    // @ts-ignore
+    let timer;
+    
+    // @ts-ignore
+    return (...args) => {
+        // @ts-ignore
+        clearTimeout(timer);
+      
+        // @ts-ignore
+        timer = setTimeout(() => { func.apply(this, args); }, timeout);
+    };
+}

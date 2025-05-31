@@ -1,0 +1,1351 @@
+
+.AppHeader {
+    flex: 0 0 auto;
+    height: 45px;
+    width:100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.AppHeaderSpacer {
+    display: flex;
+    flex-direction: row;
+    flex: 0 0 auto;
+    min-width: 0vw;
+    max-width: 15vw;
+    margin-left: 12px;
+}
+
+.AppHeaderControlSurface {
+    display: flex;
+    flex-direction: row;
+    flex: 1 1 auto;
+    width: auto;
+    margin-left: 12px;
+    margin-right: 12px;
+}
+
+.AppHeaderSpacer.AlignLeft {
+    justify-content: flex-start;
+}
+
+.AppTitle {
+    flex: 0 0 auto;
+    font-family: "Geist"; 
+    font-weight: 700;
+    font-size: 1.4vw;
+}
+
+.AppTitle > span {
+    color: var(--colourPrimaryDarker40);
+}
+
+.AppBody {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    padding: 12px;
+}
+
+@media (width <= 800px) {
+    .AppHeaderSpacer.AlignLeft {
+        display: none;
+    }
+}
+
+@media (width >= 1600px) {
+    .AppTitle {
+        font-size: 1.4rem;
+    }
+}
+
+.Font100 {
+    font-weight: 100;
+}
+
+.Font200 {
+    font-weight: 200;
+}
+
+.Font300 {
+    font-weight: 300;
+}
+
+.Font400 {
+    font-weight: 400;
+}
+
+.Font500 {
+    font-weight: 500;
+}
+
+.Font600 {
+    font-weight: 600;
+}
+
+.Font700 {
+    font-weight: 700;
+}
+
+.Font800 {
+    font-weight: 800;
+}
+
+/* --- Japanese Fonts --- */
+.KanaXL {
+    font-size: 3vw;
+    font-family: Noto Sans JP;
+}
+
+.KanaL {
+    font-size: 2.6vw;
+    font-family: Noto Sans JP;
+}
+
+.KanaM {
+    font-size: 2.2vw;
+    font-family: Noto Sans JP;
+}
+
+.KanaS {
+    font-size: 1.9vw;
+    font-family: Noto Sans JP;
+}
+
+.KanaXS {
+    font-size: 1.6vw;
+    font-family: Noto Sans JP;
+}
+
+/* --- Japanese Font Minimums --- */
+@media (width <= 800px) {
+    .KanaXL {
+        font-size: 1.5rem;
+        font-family: Noto Sans JP;
+    }
+
+    .KanaL {
+        font-size: 1.3rem;
+        font-family: Noto Sans JP;
+    }
+
+    .KanaM{
+        font-size: 1.1rem;
+        font-family: Noto Sans JP;
+    }
+
+    .KanaS {
+        font-size: 0.95rem;
+        font-family: Noto Sans JP;
+    }
+
+    .KanaXS {
+        font-size: 0.8rem;
+        font-family: Noto Sans JP;
+    }
+}
+
+/* --- Japanese Font Maximums --- */
+@media (width >= 1200px) {
+    .KanaXL {
+        font-size: 2.25rem;
+        font-family: Noto Sans JP;
+    }
+
+    .KanaL {
+        font-size: 1.95rem;
+        font-family: Noto Sans JP;
+    }
+
+    .KanaM {
+        font-size: 1.65rem;
+        font-family: Noto Sans JP;
+    }
+
+    .KanaS {
+        font-size: 1.425rem;
+        font-family: Noto Sans JP;
+    }
+
+    .KanaXS {
+        font-size: 1.2rem;
+        font-family: Noto Sans JP;
+    }
+}
+
+
+/* --- Equivalent English Fonts --- */
+.RomanXL {
+    font-size: 2.2vw;
+    font-family: Geist;
+}
+
+.RomanL {
+    font-size: 1.9vw;
+    font-family: Geist;
+}
+
+.RomanM {
+    font-size: 1.6vw;
+    font-family: Geist;
+}
+
+.RomanS {
+    font-size: 1.4vw;
+    font-family: Geist;
+}
+
+.RomanXS {
+    font-size: 1.2vw;
+    font-family: Geist;
+}
+
+/* --- Equivalent English Font Minimums --- */
+@media (width <= 800px) {
+    .RomanXL {
+        font-size: 1.1rem;
+        font-family: Geist;
+    }
+
+    .RomanL {
+        font-size: 0.95rem;
+        font-family: Geist;
+    }
+
+    .RomanM {
+        font-size: 0.8rem;
+        font-family: Geist;
+    }
+
+    .RomanS {
+        font-size: 0.7rem;
+        font-family: Geist;
+    }
+
+    .RomanXS {
+        font-size: 0.6rem;
+        font-family: Geist;
+    }
+}
+
+/* --- Equivalent English Font Maximums --- */
+@media (width >= 1200px) {
+    .RomanXL {
+        font-size: 1.65rem;
+        font-family: Geist;
+    }
+
+    .RomanL {
+        font-size: 1.425rem;
+        font-family: Geist;
+    }
+
+    .RomanM {
+        font-size: 1.2rem;
+        font-family: Geist;
+    }
+
+    .RomanS {
+        font-size: 1.05rem;
+        font-family: Geist;
+    }
+
+    .RomanXS {
+        font-size: 0.9rem;
+        font-family: Geist;
+    }
+}
+
+/* --- Dynamic Padding --- */
+/* XL Base = 12-18px @ 16 */
+.PadTXL {
+    padding-top: 1.5vw;
+}
+
+.PadBXL {
+    padding-bottom: 1.5vw;
+}
+
+.PadTBXL {
+    padding-top: 1.5vw;
+    padding-bottom: 1.5vw;
+}
+
+.PadLXL {
+    padding-left: 1.5vw;
+}
+
+.PadRXL {
+    padding-right: 1.5vw;
+}
+
+.PadLRXL {
+    padding-left: 1.5vw;
+    padding-right: 1.5vw;
+}
+
+.PadXL {
+    padding: 1.5vw;
+}
+
+/* L Base = 8-12px @ 16 */
+.PadTL {
+    padding-top: 1vw;
+}
+
+.PadBL {
+    padding-bottom: 1vw;
+}
+
+.PadTBL {
+    padding-top: 1vw;
+    padding-bottom: 1vw;
+}
+
+.PadLL {
+    padding-left: 1vw;
+}
+
+.PadRL {
+    padding-right: 1vw;
+}
+
+.PadLRL {
+    padding-left: 1vw;
+    padding-right: 1vw;
+}
+
+.PadL {
+    padding: 1vw;
+}
+
+/* M Base = 6-9px @ 16 */
+.PadTM {
+    padding-top: 0.75vw;
+}
+
+.PadBM {
+    padding-bottom: 0.75vw;
+}
+
+.PadTBM {
+    padding-top: 0.75vw;
+    padding-bottom: 0.75vw;
+}
+
+.PadLM {
+    padding-left: 0.75vw;
+}
+
+.PadRM {
+    padding-right: 0.75vw;
+}
+
+.PadLRM {
+    padding-left: 0.75vw;
+    padding-right: 0.75vw;
+}
+
+.PadM {
+    padding: 0.75vw;
+}
+
+/* S Base = 4-6px @ 16 */
+.PadTS {
+    padding-top: 0.5vw;
+}
+
+.PadBS {
+    padding-bottom: 0.5vw;
+}
+
+.PadTBS {
+    padding-top: 0.5vw;
+    padding-bottom: 0.5vw;
+}
+
+.PadLS {
+    padding-left: 0.5vw;
+}
+
+.PadRS {
+    padding-right: 0.5vw;
+}
+
+.PadLRS {
+    padding-left: 0.5vw;
+    padding-right: 0.5vw;
+}
+
+.PadS {
+    padding: 0.5vw;
+}
+
+/* XS Base = 2-3px @ 16 */
+.PadTXS {
+    padding-top: 0.25vw;
+}
+
+.PadBXS {
+    padding-bottom: 0.25vw;
+}
+
+.PadTBXS {
+    padding-top: 0.25vw;
+    padding-bottom: 0.25vw;
+}
+
+.PadLXS {
+    padding-left: 0.25vw;
+}
+
+.PadRXS {
+    padding-right: 0.25vw;
+}
+
+.PadLRXS {
+    padding-left: 0.25vw;
+    padding-right: 0.25vw;
+}
+
+.PadXS {
+    padding: 0.25vw;
+}
+
+/* No Padding */
+.NoPadT {
+    padding-top: 0.25vw;
+}
+
+.NoPadB {
+    padding-bottom: 0.25vw;
+}
+
+.NoPadTB {
+    padding-top: 0.25vw;
+    padding-bottom: 0.25vw;
+}
+
+.NoPadL {
+    padding-left: 0.25vw;
+}
+
+.NoPadR {
+    padding-right: 0.25vw;
+}
+
+.NoPadLR {
+    padding-left: 0.25vw;
+    padding-right: 0.25vw;
+}
+
+.NoPad {
+    padding: 0.25vw;
+}
+
+@media (width <= 800px) {
+    /* XL Base = 12px @ 16 */
+    .PadTXL {
+        padding-top: 0.75rem;
+    }
+
+    .PadBXL {
+        padding-bottom: 0.75rem;
+    }
+
+    .PadTBXL {
+        padding-top: 0.75rem;
+        padding-bottom: 0.75rem;
+    }
+
+    .PadLXL {
+        padding-left: 0.75rem;
+    }
+
+    .PadRXL {
+        padding-right: 0.75rem;
+    }
+
+    .PadLRXL {
+        padding-left: 0.75rem;
+        padding-right: 0.75rem;
+    }
+
+    .PadXL {
+        padding: 0.75rem;
+    }
+
+    /* L Base = 8px @ 16 */
+    .PadTL {
+        padding-top: 0.5rem;
+    }
+
+    .PadBL {
+        padding-bottom: 0.5rem;
+    }
+
+    .PadTBL {
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
+    }
+
+    .PadLL {
+        padding-left: 0.5rem;
+    }
+
+    .PadRL {
+        padding-right: 0.5rem;
+    }
+
+    .PadLRL {
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+    }
+
+    .PadL {
+        padding: 0.5rem;
+    }
+
+    /* M Base = 6px @ 16 */
+    .PadTM {
+        padding-top: 0.375rem;
+    }
+
+    .PadBM {
+        padding-bottom: 0.375rem;
+    }
+
+    .PadTBM {
+        padding-top: 0.375rem;
+        padding-bottom: 0.375rem;
+    }
+
+    .PadLM {
+        padding-left: 0.375rem;
+    }
+
+    .PadRM {
+        padding-right: 0.375rem;
+    }
+
+    .PadLRM {
+        padding-left: 0.375rem;
+        padding-right: 0.375rem;
+    }
+
+    .PadM {
+        padding: 0.375rem;
+    }
+
+    /* S Base = 4px @ 16 */
+    .PadTS {
+        padding-top: 0.25rem;
+    }
+
+    .PadBS {
+        padding-bottom: 0.25rem;
+    }
+
+    .PadTBS {
+        padding-top: 0.25rem;
+        padding-bottom: 0.25rem;
+    }
+
+    .PadLS {
+        padding-left: 0.25rem;
+    }
+
+    .PadRS {
+        padding-right: 0.25rem;
+    }
+
+    .PadLRS {
+        padding-left: 0.25rem;
+        padding-right: 0.25rem;
+    }
+
+    .PadS {
+        padding: 0.25rem;
+    }
+
+    /* XS Base = 2px @ 16 */
+    .PadTXS {
+        padding-top: 0.125rem;
+    }
+
+    .PadBXS {
+        padding-bottom: 0.125rem;
+    }
+
+    .PadTBXS {
+        padding-top: 0.125rem;
+        padding-bottom: 0.125rem;
+    }
+
+    .PadLXS {
+        padding-left: 0.125rem;
+    }
+
+    .PadRXS {
+        padding-right: 0.125rem;
+    }
+
+    .PadLRXS {
+        padding-left: 0.125rem;
+        padding-right: 0.125rem;
+    }
+
+    .PadXS {
+        padding: 0.125rem;
+    }
+}
+
+@media (width >= 1200px) {
+    /* XL Base = 18px @ 16 */
+    .PadTXL {
+        padding-top: 1.125rem;
+    }
+
+    .PadBXL {
+        padding-bottom: 1.125rem;
+    }
+
+    .PadTBXL {
+        padding-top: 1.125rem;
+        padding-bottom: 1.125rem;
+    }
+
+    .PadLXL {
+        padding-left: 1.125rem;
+    }
+
+    .PadRXL {
+        padding-right: 1.125rem;
+    }
+
+    .PadLRXL {
+        padding-left: 1.125rem;
+        padding-right: 1.125rem;
+    }
+
+    .PadXL {
+        padding: 1.125rem;
+    }
+
+    /* L Base = 12px @ 16 */
+    .PadTL {
+        padding-top: 0.75rem;
+    }
+
+    .PadBL {
+        padding-bottom: 0.75rem;
+    }
+
+    .PadTBL {
+        padding-top: 0.75rem;
+        padding-bottom: 0.75rem;
+    }
+
+    .PadLL {
+        padding-left: 0.75rem;
+    }
+
+    .PadRL {
+        padding-right: 0.75rem;
+    }
+
+    .PadLRL {
+        padding-left: 0.75rem;
+        padding-right: 0.75rem;
+    }
+
+    .PadL {
+        padding: 0.5rem;
+    }
+
+    /* M Base = 9px @ 16 */
+    .PadTM {
+        padding-top: 0.5625rem;
+    }
+
+    .PadBM {
+        padding-bottom: 0.5625rem;
+    }
+
+    .PadTBM {
+        padding-top: 0.5625rem;
+        padding-bottom: 0.5625rem;
+    }
+
+    .PadLM {
+        padding-left: 0.5625rem;
+    }
+
+    .PadRM {
+        padding-right: 0.5625rem;
+    }
+
+    .PadLRM {
+        padding-left: 0.5625rem;
+        padding-right: 0.5625rem;
+    }
+
+    .PadM {
+        padding: 0.5625rem;
+    }
+
+    /* S Base = 6px @ 16 */
+    .PadTS {
+        padding-top: 0.375rem;
+    }
+
+    .PadBS {
+        padding-bottom: 0.375rem;
+    }
+
+    .PadTBS {
+        padding-top: 0.375rem;
+        padding-bottom: 0.375rem;
+    }
+
+    .PadLS {
+        padding-left: 0.375rem;
+    }
+
+    .PadRS {
+        padding-right: 0.375rem;
+    }
+
+    .PadLRS {
+        padding-left: 0.375rem;
+        padding-right: 0.375rem;
+    }
+
+    .PadS {
+        padding: 0.25rem;
+    }
+
+    /* XS Base = 3px @ 16 */
+    .PadTXS {
+        padding-top: 0.1875rem;
+    }
+
+    .PadBXS {
+        padding-bottom: 0.1875rem;
+    }
+
+    .PadTBXS {
+        padding-top: 0.1875rem;
+        padding-bottom: 0.1875rem;
+    }
+
+    .PadLXS {
+        padding-left: 0.1875rem;
+    }
+
+    .PadRXS {
+        padding-right: 0.1875rem;
+    }
+
+    .PadLRXS {
+        padding-left: 0.1875rem;
+        padding-right: 0.1875rem;
+    }
+
+    .PadXS {
+        padding: 0.1875rem;
+    }
+}
+
+.NoBlockMargins {
+    margin-block-start: 0px;
+    margin-block-end: 0px;
+}
+
+/* Dynamic KanaMargins */
+.KanaXLMargin {
+    margin-bottom: -0.3vw;
+    margin-top: -0.3vw;
+}
+
+.KanaLMargin {
+    margin-bottom: -0.26vw;
+    margin-top: -0.26vw;
+}
+
+.KanaMMargin {
+    margin-bottom: -0.22vw;
+    margin-top: -0.22vw;
+}
+
+.KanaSMargin {
+    margin-bottom: -0.19vw;
+    margin-top: -0.19vw;
+}
+
+.KanaXSMargin {
+    margin-bottom: -0.16vw;
+    margin-top: -0.16vw;
+}
+
+/* --- Japanese Font Minimums --- */
+@media (width <= 800px) {
+    .KanaXLMargin {
+        margin-bottom: -0.15rem;
+        margin-top: -0.15rem;
+    }
+
+    .KanaLMargin {
+        margin-bottom: -0.13rem;
+        margin-top: -0.13rem;
+    }
+
+    .KanaMMargin {
+        margin-bottom: -0.11rem;
+        margin-top: -0.11rem;
+    }
+
+    .KanaSMargin {
+        margin-bottom: -0.095rem;
+        margin-top: -0.095rem;
+    }
+
+    .KanaXSMargin {
+        margin-bottom: -0.08rem;
+        margin-top: -0.08rem;
+    }
+}
+
+/* --- Japanese Font Maximums --- */
+@media (width >= 1200px) {
+    .KanaXLMargin {
+        margin-bottom: -0.225rem;
+        margin-top: -0.225rem;
+    }
+
+    .KanaLMargin {
+        margin-bottom: -0.195rem;
+        margin-top: -0.195rem;
+    }
+
+    .KanaMMargin {
+        margin-bottom: -0.165rem;
+        margin-top: -0.165rem;
+    }
+
+    .KanaSMargin {
+        margin-bottom: -0.1425rem;
+        margin-top: -0.1425rem;
+    }
+
+    .KanaXSMargin {
+        margin-bottom: -0.12rem;
+        margin-top: -0.12rem;
+    }
+}
+
+
+/* --- Dynamic Margins --- */
+/* XL Base = 12-18px @ 16 */
+.MarginTXL {
+    margin-top: 1.5vw;
+}
+
+.MarginBXL {
+    margin-bottom: 1.5vw;
+}
+
+.MarginTBXL {
+    margin-top: 1.5vw;
+    margin-bottom: 1.5vw;
+}
+
+.MarginLXL {
+    margin-left: 1.5vw;
+}
+
+.MarginRXL {
+    margin-right: 1.5vw;
+}
+
+.MarginLRXL {
+    margin-left: 1.5vw;
+    margin-right: 1.5vw;
+}
+
+.MarginXL {
+    padding: 1.5vw;
+}
+
+/* L Base = 8-12px @ 16 */
+.MarginTL {
+    margin-top: 1vw;
+}
+
+.MarginBL {
+    margin-bottom: 1vw;
+}
+
+.MarginTBL {
+    margin-top: 1vw;
+    margin-bottom: 1vw;
+}
+
+.MarginLL {
+    margin-left: 1vw;
+}
+
+.MarginRL {
+    margin-right: 1vw;
+}
+
+.MarginLRL {
+    margin-left: 1vw;
+    margin-right: 1vw;
+}
+
+.MarginL {
+    padding: 1vw;
+}
+
+/* M Base = 6-9px @ 16 */
+.MarginTM {
+    margin-top: 0.75vw;
+}
+
+.MarginBM {
+    margin-bottom: 0.75vw;
+}
+
+.MarginTBM {
+    margin-top: 0.75vw;
+    margin-bottom: 0.75vw;
+}
+
+.MarginLM {
+    margin-left: 0.75vw;
+}
+
+.MarginRM {
+    margin-right: 0.75vw;
+}
+
+.MarginLRM {
+    margin-left: 0.75vw;
+    margin-right: 0.75vw;
+}
+
+.MarginM {
+    padding: 0.75vw;
+}
+
+/* S Base = 4-6px @ 16 */
+.MarginTS {
+    margin-top: 0.5vw;
+}
+
+.MarginBS {
+    margin-bottom: 0.5vw;
+}
+
+.MarginTBS {
+    margin-top: 0.5vw;
+    margin-bottom: 0.5vw;
+}
+
+.MarginLS {
+    margin-left: 0.5vw;
+}
+
+.MarginRS {
+    margin-right: 0.5vw;
+}
+
+.MarginLRS {
+    margin-left: 0.5vw;
+    margin-right: 0.5vw;
+}
+
+.MarginS {
+    padding: 0.5vw;
+}
+
+/* XS Base = 2-3px @ 16 */
+.MarginTXS {
+    margin-top: 0.25vw;
+}
+
+.MarginBXS {
+    margin-bottom: 0.25vw;
+}
+
+.MarginTBXS {
+    margin-top: 0.25vw;
+    margin-bottom: 0.25vw;
+}
+
+.MarginLXS {
+    margin-left: 0.25vw;
+}
+
+.MarginRXS {
+    margin-right: 0.25vw;
+}
+
+.MarginLRXS {
+    margin-left: 0.25vw;
+    margin-right: 0.25vw;
+}
+
+.MarginXS {
+    padding: 0.25vw;
+}
+
+/* No Padding */
+.NoPadT {
+    margin-top: 0.25vw;
+}
+
+.NoPadB {
+    margin-bottom: 0.25vw;
+}
+
+.NoPadTB {
+    margin-top: 0.25vw;
+    margin-bottom: 0.25vw;
+}
+
+.NoPadL {
+    margin-left: 0.25vw;
+}
+
+.NoPadR {
+    margin-right: 0.25vw;
+}
+
+.NoPadLR {
+    margin-left: 0.25vw;
+    margin-right: 0.25vw;
+}
+
+.NoPad {
+    padding: 0.25vw;
+}
+
+@media (width <= 800px) {
+    /* XL Base = 12px @ 16 */
+    .MarginTXL {
+        margin-top: 0.75rem;
+    }
+
+    .MarginBXL {
+        margin-bottom: 0.75rem;
+    }
+
+    .MarginTBXL {
+        margin-top: 0.75rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .MarginLXL {
+        margin-left: 0.75rem;
+    }
+
+    .MarginRXL {
+        margin-right: 0.75rem;
+    }
+
+    .MarginLRXL {
+        margin-left: 0.75rem;
+        margin-right: 0.75rem;
+    }
+
+    .MarginXL {
+        padding: 0.75rem;
+    }
+
+    /* L Base = 8px @ 16 */
+    .MarginTL {
+        margin-top: 0.5rem;
+    }
+
+    .MarginBL {
+        margin-bottom: 0.5rem;
+    }
+
+    .MarginTBL {
+        margin-top: 0.5rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .MarginLL {
+        margin-left: 0.5rem;
+    }
+
+    .MarginRL {
+        margin-right: 0.5rem;
+    }
+
+    .MarginLRL {
+        margin-left: 0.5rem;
+        margin-right: 0.5rem;
+    }
+
+    .MarginL {
+        padding: 0.5rem;
+    }
+
+    /* M Base = 6px @ 16 */
+    .MarginTM {
+        margin-top: 0.375rem;
+    }
+
+    .MarginBM {
+        margin-bottom: 0.375rem;
+    }
+
+    .MarginTBM {
+        margin-top: 0.375rem;
+        margin-bottom: 0.375rem;
+    }
+
+    .MarginLM {
+        margin-left: 0.375rem;
+    }
+
+    .MarginRM {
+        margin-right: 0.375rem;
+    }
+
+    .MarginLRM {
+        margin-left: 0.375rem;
+        margin-right: 0.375rem;
+    }
+
+    .MarginM {
+        padding: 0.375rem;
+    }
+
+    /* S Base = 4px @ 16 */
+    .MarginTS {
+        margin-top: 0.25rem;
+    }
+
+    .MarginBS {
+        margin-bottom: 0.25rem;
+    }
+
+    .MarginTBS {
+        margin-top: 0.25rem;
+        margin-bottom: 0.25rem;
+    }
+
+    .MarginLS {
+        margin-left: 0.25rem;
+    }
+
+    .MarginRS {
+        margin-right: 0.25rem;
+    }
+
+    .MarginLRS {
+        margin-left: 0.25rem;
+        margin-right: 0.25rem;
+    }
+
+    .MarginS {
+        padding: 0.25rem;
+    }
+
+    /* XS Base = 2px @ 16 */
+    .MarginTXS {
+        margin-top: 0.125rem;
+    }
+
+    .MarginBXS {
+        margin-bottom: 0.125rem;
+    }
+
+    .MarginTBXS {
+        margin-top: 0.125rem;
+        margin-bottom: 0.125rem;
+    }
+
+    .MarginLXS {
+        margin-left: 0.125rem;
+    }
+
+    .MarginRXS {
+        margin-right: 0.125rem;
+    }
+
+    .MarginLRXS {
+        margin-left: 0.125rem;
+        margin-right: 0.125rem;
+    }
+
+    .MarginXS {
+        padding: 0.125rem;
+    }
+}
+
+@media (width >= 1200px) {
+    /* XL Base = 18px @ 16 */
+    .MarginTXL {
+        margin-top: 1.125rem;
+    }
+
+    .MarginBXL {
+        margin-bottom: 1.125rem;
+    }
+
+    .MarginTBXL {
+        margin-top: 1.125rem;
+        margin-bottom: 1.125rem;
+    }
+
+    .MarginLXL {
+        margin-left: 1.125rem;
+    }
+
+    .MarginRXL {
+        margin-right: 1.125rem;
+    }
+
+    .MarginLRXL {
+        margin-left: 1.125rem;
+        margin-right: 1.125rem;
+    }
+
+    .MarginXL {
+        padding: 1.125rem;
+    }
+
+    /* L Base = 12px @ 16 */
+    .MarginTL {
+        margin-top: 0.75rem;
+    }
+
+    .MarginBL {
+        margin-bottom: 0.75rem;
+    }
+
+    .MarginTBL {
+        margin-top: 0.75rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .MarginLL {
+        margin-left: 0.75rem;
+    }
+
+    .MarginRL {
+        margin-right: 0.75rem;
+    }
+
+    .MarginLRL {
+        margin-left: 0.75rem;
+        margin-right: 0.75rem;
+    }
+
+    .MarginL {
+        padding: 0.5rem;
+    }
+
+    /* M Base = 9px @ 16 */
+    .MarginTM {
+        margin-top: 0.5625rem;
+    }
+
+    .MarginBM {
+        margin-bottom: 0.5625rem;
+    }
+
+    .MarginTBM {
+        margin-top: 0.5625rem;
+        margin-bottom: 0.5625rem;
+    }
+
+    .MarginLM {
+        margin-left: 0.5625rem;
+    }
+
+    .MarginRM {
+        margin-right: 0.5625rem;
+    }
+
+    .MarginLRM {
+        margin-left: 0.5625rem;
+        margin-right: 0.5625rem;
+    }
+
+    .MarginM {
+        padding: 0.5625rem;
+    }
+
+    /* S Base = 6px @ 16 */
+    .MarginTS {
+        margin-top: 0.375rem;
+    }
+
+    .MarginBS {
+        margin-bottom: 0.375rem;
+    }
+
+    .MarginTBS {
+        margin-top: 0.375rem;
+        margin-bottom: 0.375rem;
+    }
+
+    .MarginLS {
+        margin-left: 0.375rem;
+    }
+
+    .MarginRS {
+        margin-right: 0.375rem;
+    }
+
+    .MarginLRS {
+        margin-left: 0.375rem;
+        margin-right: 0.375rem;
+    }
+
+    .MarginS {
+        padding: 0.25rem;
+    }
+
+    /* XS Base = 3px @ 16 */
+    .MarginTXS {
+        margin-top: 0.1875rem;
+    }
+
+    .MarginBXS {
+        margin-bottom: 0.1875rem;
+    }
+
+    .MarginTBXS {
+        margin-top: 0.1875rem;
+        margin-bottom: 0.1875rem;
+    }
+
+    .MarginLXS {
+        margin-left: 0.1875rem;
+    }
+
+    .MarginRXS {
+        margin-right: 0.1875rem;
+    }
+
+    .MarginLRXS {
+        margin-left: 0.1875rem;
+        margin-right: 0.1875rem;
+    }
+
+    .MarginXS {
+        padding: 0.1875rem;
+    }
+}

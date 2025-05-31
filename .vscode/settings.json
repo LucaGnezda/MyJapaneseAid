@@ -1,0 +1,8 @@
+{
+    "workbench.editorAssociations": {
+        "*.svg": "default"
+    },
+    "chat.agent.enabled": false,
+    "telemetry.feedback.enabled": false,
+    "chat.commandCenter.enabled": false
+}

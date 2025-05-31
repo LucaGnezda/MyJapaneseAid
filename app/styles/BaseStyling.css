@@ -1,0 +1,114 @@
+:root {
+    interpolate-size: allow-keywords;        /* to allow transitions from auto, Yay! */
+    
+    --colourBlue: #238ddd;                 /* var(--colourBlue) */
+
+    --colourPrimaryLighter90: #EAF7EF;
+    --colourPrimaryLighter80: #D4EFE0; 
+    --colourPrimaryLighter70: #BFE7D0; 
+    --colourPrimaryLighter60: #A9DFC0; 
+    --colourPrimaryLighter50: #94D7B1; 
+    --colourPrimaryLighter40: #7ECFA1; 
+    --colourPrimaryLighter30: #69C791; 
+    --colourPrimaryLighter20: #53BF81; 
+    --colourPrimaryLighter10: #3EB772;  
+    --colourPrimary: #28af62;                /* var(--colourGreen) */
+    --colourPrimaryDarker10: #249E58;
+    --colourPrimaryDarker20: #208C4E; 
+    --colourPrimaryDarker30: #1C7A45; 
+    --colourPrimaryDarker40: #18693B; 
+    --colourPrimaryDarker50: #145831; 
+    --colourPrimaryDarker60: #104627; 
+    --colourPrimaryDarker70: #0C341D; 
+    --colourPrimaryDarker80: #082314; 
+    --colourPrimaryDarker90: #04110A;
+
+    --colourSecondaryLighter90: #F7EAF1;
+    --colourSecondaryLighter80: #EFD4E3; 
+    --colourSecondaryLighter70: #E7BFD6; 
+    --colourSecondaryLighter60: #DFA9C8; 
+    --colourSecondaryLighter50: #D794BA; 
+    --colourSecondaryLighter40: #CF7EAC; 
+    --colourSecondaryLighter30: #C7699E; 
+    --colourSecondaryLighter20: #BF5391; 
+    --colourSecondaryLighter10: #B73E83;  
+    --colourSecondary: #AF2875;                /* var(--colourGreen) */
+    --colourSecondaryDarker10: #9E2469;
+    --colourSecondaryDarker20: #8C205E; 
+    --colourSecondaryDarker30: #7A1C52; 
+    --colourSecondaryDarker40: #691846; 
+    --colourSecondaryDarker50: #58143B; 
+    --colourSecondaryDarker60: #46102F; 
+    --colourSecondaryDarker70: #340C23; 
+    --colourSecondaryDarker80: #230817; 
+    --colourSecondaryDarker90: #11040C;
+    
+    --blacktranslucent90: #0000001a;
+    --blacktranslucent80: #00000033;
+    --blacktranslucent70: #0000004d;
+    --blacktranslucent60: #00000066;
+    --blacktranslucent50: #00000080;      /* var(--blacktranslucent50) */
+    --blacktranslucent40: #00000099;
+    --blacktranslucent30: #000000b3;
+    --blacktranslucent20: #000000cc;
+    --blacktranslucent10: #000000e6;
+
+    --whitetranslucent90: #ffffff1a;
+    --whitetranslucent80: #ffffff33;
+    --whitetranslucent70: #ffffff4d;
+    --whitetranslucent60: #ffffff66;
+    --whitetranslucent50: #ffffff80;      /* var(--whitetranslucent50) */
+    --whitetranslucent40: #ffffff99;
+    --whitetranslucent30: #ffffffb3;
+    --whitetranslucent20: #ffffffcc;
+    --whitetranslucent10: #ffffffe6;
+
+    --redtranslucent90: #e748561a;
+    --redtranslucent80: #e7485633;
+    --redtranslucent70: #e748564d;
+    --redtranslucent60: #e7485666;
+    --redtranslucent50: #e7485680;      /* var(--redtranslucent50) */
+    --redtranslucent40: #e7485699;
+    --redtranslucent30: #e74856b3;
+    --redtranslucent20: #e74856cc;
+    --redtranslucent10: #e74856e6;
+    
+    --colourIce: #9cdcfe;                  /* var(--colourIce) */
+    --colourYellow: #fffdab;               /* var(--colourYellow) */
+    --colourRed: #e74856;                  /* var(--colourRed) */
+    --colourCharcoal: #323436;             /* var(--colourCharcoal) */
+    --colourDDDDarkSteelBlue: #3E5668;     /* var(--colourDDDDarkSteelBlue) */
+    --colourDDDTeal: #1BA5A6;              /* var(--colourDDDTeal) */
+    --colourDDDTan: #f3ebe0;               /* var(--colourDDDTan) */
+}
+
+body {
+    background-color: #000000;
+    background-image: url("../assets/svg/liquid-cheese.svg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin: 0px;
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+}
+
+fieldset {
+    outline: none;
+    border: none;
+    padding: 0px;
+    margin: 0px;
+}
+
+input:disabled {
+    background-color: transparent;
+    border: none;
+    color: black;
+}
+
+input:read-only:focus {
+    outline: none;
+}

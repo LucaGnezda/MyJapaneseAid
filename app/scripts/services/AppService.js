@@ -35,6 +35,7 @@ class AppService {
     static InitialiseAppEventProcessing() {
         // Initialise event processing
         App.dispatcher = new Dispatcher();
+        App.dispatcher.addDispatchHandler(new AppActionHandler(), "route");
 
         // Now add your action handlers
         // For example:
@@ -47,6 +48,9 @@ class AppService {
         // Index any of the html you keep needing (don't forget to define it in the App obect first)
         // for example:
         //    App.elements["MyListContainer"] = document.getElementById("MyListContainer");
+
+        // @ts-ignore
+        App.components.searchComponent = document.getElementById("TopNavSearch");
 
     }
 
@@ -61,6 +65,9 @@ class AppService {
         // for example:
         //    document.body.addEventListener("click", MyClickCallback);
 
+        if (App.components.searchComponent) {
+            App.components.searchComponent.attachOnChangeDebouncedCallback(App.dispatcher.newEventDispatchCallback("App_ApplySearch"));
+        }
     }
 
     static LoadStore() {
