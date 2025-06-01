@@ -1,4 +1,4 @@
-.CCSearchableItemContainer {
+.CCLanguageItemContainer {
     background-color: var(--whitetranslucent70);
     border: 1px solid var(--blacktranslucent80);
     border-radius: 10px 10px 10px 10px;
@@ -8,18 +8,18 @@
     min-height: 72px;
 }
 
-.CCSearchableItemFieldset {
+.CCLanguageItemFieldset {
     padding-top: 28px;
     padding-right: 0px;
     transition: all 0.5s;
 }
 
-.CCSearchableItemFieldset:disabled {
+.CCLanguageItemFieldset:disabled {
     padding-top: 0px;
     padding-right: 28px;
 }
 
-.CCSearchableItemFormButtonStrip {
+.CCLanguageItemFormButtonStrip {
     top: 4px;
     right: 4px;
     width: auto;
@@ -30,31 +30,31 @@
     gap: 4px;
 }
 
-.CCSearchableItemFormButtonStrip.Row {
+.CCLanguageItemFormButtonStrip.Row {
     flex-direction: row;
 }
 
-.CCSearchableItemFormButtonStrip.Col {
+.CCLanguageItemFormButtonStrip.Col {
     flex-direction: column;
 }
 
-.CCSearchableItemFieldset:not(:disabled) .CCSearchableItemFormButtonStrip.ShowOnRead {
+.CCLanguageItemFieldset:not(:disabled) .CCLanguageItemFormButtonStrip.ShowOnRead {
     display: none;
 }
 
-.CCSearchableItemFieldset:disabled .CCSearchableItemFormButtonStrip.ShowOnRead {
+.CCLanguageItemFieldset:disabled .CCLanguageItemFormButtonStrip.ShowOnRead {
     display: flex;
 }
 
-.CCSearchableItemFieldset:not(:disabled) .CCSearchableItemFormButtonStrip.ShowOnEdit {
+.CCLanguageItemFieldset:not(:disabled) .CCLanguageItemFormButtonStrip.ShowOnEdit {
     display: flex;
 }
 
-.CCSearchableItemFieldset:disabled .CCSearchableItemFormButtonStrip.ShowOnEdit {
+.CCLanguageItemFieldset:disabled .CCLanguageItemFormButtonStrip.ShowOnEdit {
     display: none;
 }
 
-.CCSearchableItemFormButton {
+.CCLanguageItemFormButton {
     width: 32px;
     height: 32px;
     background-color: var(--blacktranslucent90);
@@ -67,70 +67,70 @@
     transition: all 0.3s ease;
 }
 
-.CCSearchableItemFormButton:not(.Disabled):hover {
+.CCLanguageItemFormButton:not(.Disabled):hover {
     background-color: var(--blacktranslucent80);
 }
 
-.CCSearchableItemFormButton.Disabled {
+.CCLanguageItemFormButton.Disabled {
     opacity: 0.5;
 }
 
-.CCSearchableItemFormButton.RedTint {
+.CCLanguageItemFormButton.RedTint {
     background-color: var(--redtranslucent80);
 }
 
-.CCSearchableItemFormButton.RedTint:hover {
+.CCLanguageItemFormButton.RedTint:hover {
     background-color: var(--redtranslucent60);
 }
 
 
-.CCSearchableItemFormButton.ShadowRed {
+.CCLanguageItemFormButton.ShadowRed {
     background-color: transparent;
     filter: brightness(0) saturate(100%) invert(46%) sepia(86%) saturate(4267%) hue-rotate(331deg) brightness(97%) contrast(87%);
 }
 
-.CCSearchableItemFormButton.ShadowRed:hover {
+.CCLanguageItemFormButton.ShadowRed:hover {
     background-color: var(--redtranslucent80);
 }
 
-.CCSearchableItemFormButton.ShowOnExampleHover {
+.CCLanguageItemFormButton.ShowOnExampleHover {
     transition: all 0.3s;
     transition-behavior: allow-discrete;
     opacity: 0.3;
 }
 
-.CCSearchableItemExample:hover .CCSearchableItemFormButton.ShowOnExampleHover {
+.CCLanguageItemExample:hover .CCLanguageItemFormButton.ShowOnExampleHover {
     display: flex;
     opacity: 1;
 }
 
-.CCSearchableItemExample.Deleting {
+.CCLanguageItemExample.Deleting {
     height: 0px;
     margin-bottom: 0px;
 }
 
-.CCSearchableItemFormButton.ShowOnContainerHover {
+.CCLanguageItemFormButton.ShowOnContainerHover {
     display: none;
     opacity: 0;
     transition: all 0.3s;
     transition-behavior: allow-discrete;
 }
 
-.CCSearchableItemContainer:hover .CCSearchableItemFormButton.ShowOnContainerHover {
+.CCLanguageItemContainer:hover .CCLanguageItemFormButton.ShowOnContainerHover {
     display: flex;
     opacity: 1;
     
 }
 
-.CCSearchableItemFormButton.ShowOnEdit {
+.CCLanguageItemFormButton.ShowOnEdit {
     display: flex;
 }
 
-.CCSearchableItemFieldset:disabled .CCSearchableItemFormButton.ShowOnEdit {
+.CCLanguageItemFieldset:disabled .CCLanguageItemFormButton.ShowOnEdit {
     display: none;
 }
 
-.CCSearchableItemFormButtonVerticalSpacer {
+.CCLanguageItemFormButtonVerticalSpacer {
     width: 32px;
     height: 16px;
     background-color: transparent;
@@ -143,25 +143,25 @@
     opacity: 0.3;
 }
 
-.CCSearchableItemFormButtonVerticalSpacer.ShowOnContainerHover {
+.CCLanguageItemFormButtonVerticalSpacer.ShowOnContainerHover {
     display: none;
     transition: all 0.3s;
     opacity: 0;
     transition-behavior: allow-discrete;
 }
 
-.CCSearchableItemContainer:hover .CCSearchableItemFormButtonVerticalSpacer.ShowOnContainerHover {
+.CCLanguageItemContainer:hover .CCLanguageItemFormButtonVerticalSpacer.ShowOnContainerHover {
     display: flex;
     opacity: 0.3;
 }
 
-.CCSearchableItemFormButtonIcon {
+.CCLanguageItemFormButtonIcon {
     width: 20px;
     height: 20px;
     filter: brightness(0) saturate(100%) invert(0%) sepia(2%) saturate(0%) hue-rotate(189deg) brightness(96%) contrast(101%);
 }
 
-.CCSearchableItemGrid {
+.CCLanguageItemGrid {
     border-left: 2px solid var(--colourPrimary);
     display: grid;
     grid-template-columns: 1fr 99fr;
@@ -171,23 +171,23 @@
     transition: all 0.5s;
 }
 
-.CCSearchableItemGrid.Hide {
+.CCLanguageItemGrid.Hide {
     height: 0px;
     margin: 0px;
 }
 
-.CCSearchableItemLabel {
+.CCLanguageItemLabel {
     color: var(--colourPrimaryDarker20);
     font-weight: 400;
     display: block;
 }
 
-.CCSearchableItemLabel.Hide {
+.CCLanguageItemLabel.Hide {
     display: none;
 }
 
 
-.CCSearchableItemExamplesSectionBreak {
+.CCLanguageItemExamplesSectionBreak {
     font-weight: 800;
     color: var(--colourPrimaryDarker20);
     display: flex;
@@ -195,13 +195,13 @@
     transition: all 0.5s;
 }
 
-.CCSearchableItemExamplesSectionBreak.Hide {
+.CCLanguageItemExamplesSectionBreak.Hide {
     height: 0px;
     overflow: hidden;
     margin: 0px;
 }
 
-.CCSearchableItemExamplesHeader {
+.CCLanguageItemExamplesHeader {
     flex: 0 0 auto;
     display: flex;
     flex-direction: row;
@@ -210,13 +210,13 @@
     width: 1px;
 }
 
-.CCSearchableItemExamplesHeader.Expanded {
+.CCLanguageItemExamplesHeader.Expanded {
     flex: 1 1 auto;
     border-bottom: 2px solid var(--colourPrimary);
     width: 100%;
 }
 
-.CCSearchableItemExamplesTitle {
+.CCLanguageItemExamplesTitle {
     font-weight: 400;
     color: var(--colourPrimaryDarker20);
     flex: 1 1 auto;
@@ -224,7 +224,7 @@
     transition: all 500ms;
 }
 
-.CCSearchableItemSectionButton {
+.CCLanguageItemSectionButton {
     flex: 0 0 auto;
     height: 26px;
     width: 0px;
@@ -242,29 +242,29 @@
     border-radius: 6px 6px 6px 6px;
 }
 
-.CCSearchableItemSectionButton.Show {
+.CCLanguageItemSectionButton.Show {
     width: 26px;
     opacity: 1;
     pointer-events: all;
     margin-right: 2px;
 }
 
-.CCSearchableItemSectionButton.Show:hover {
+.CCLanguageItemSectionButton.Show:hover {
     background-color: var(--blacktranslucent90);
 }
 
-.CCSearchableItemSectionButton.Rotate180 {
+.CCLanguageItemSectionButton.Rotate180 {
     transform: rotate(180deg);
 }
 
-.CCSearchableItemExpandCollapseIcon {
+.CCLanguageItemExpandCollapseIcon {
     width: 16px;
     height: 16px;
     filter: brightness(0) saturate(100%) invert(30%) sepia(46%) saturate(5149%) hue-rotate(138deg) brightness(93%) contrast(75%);
     transition: all 500ms;
 }
 
-.CCSearchableItemExamples {
+.CCLanguageItemExamples {
     display: none;
     transition: all 0.5s;
     transition-behavior: allow-discrete;
@@ -272,7 +272,7 @@
     height: 0px;
 }
 
-.CCSearchableItemExamples.Show {
+.CCLanguageItemExamples.Show {
     display: block;
     height: auto;
     @starting-style {
@@ -280,7 +280,7 @@
     }
 }
 
-.CCSearchableItemExample {
+.CCLanguageItemExample {
     display: flex;
     flex-direction: row;
     border-left: 2px solid var(--colourPrimary);
@@ -294,40 +294,40 @@
     }
 }
 
-.CCSearchableItemExample.Hide {
+.CCLanguageItemExample.Hide {
     height: 0px;
     margin: 0px;
 }
 
-.CCSearchableItemFlex {
+.CCLanguageItemFlex {
     display: flex;
 }
 
-.CCSearchableItemFlex.Hide {
+.CCLanguageItemFlex.Hide {
     display: none;
 }
 
-.CCSearchableItemFlex.Row {
+.CCLanguageItemFlex.Row {
     flex-direction: row;
 }
 
-.CCSearchableItemFlex.Row.Reverse {
+.CCLanguageItemFlex.Row.Reverse {
     flex-direction: row-reverse;
 }
 
-.CCSearchableItemFlex.Col {
+.CCLanguageItemFlex.Col {
     flex-direction: column;
 }
 
-.CCSearchableItemFlex.Col.Reverse {
+.CCLanguageItemFlex.Col.Reverse {
     flex-direction: column-reverse;
 }
 
-.CCSearchableItemFlex.JustifyEnd {
+.CCLanguageItemFlex.JustifyEnd {
     justify-content: end;
 }
 
-.CCSearchableItemInput {
+.CCLanguageItemInput {
     display: block;
     background: var(--whitetranslucent90);
     border-radius: 10px 10px 10px 10px;
@@ -337,17 +337,17 @@
     padding-left: 1vw;
 }
 
-.CCSearchableItemInput:disabled {
+.CCLanguageItemInput:disabled {
     margin-bottom: -0.25vw;
     margin-top: 0rem;
     padding-left: 0rem;
 }
 
-.CCSearchableItemInput.LinkedHighlighter {
+.CCLanguageItemInput.LinkedHighlighter {
     width: 25vw;
 }
 
-.CCSearchableItemInput.LinkedHighlighter:disabled {
+.CCLanguageItemInput.LinkedHighlighter:disabled {
     border: 0px solid transparent;
     background: transparent;
     height: 0px;
@@ -356,20 +356,20 @@
     opacity: 1;
 }
 
-.CCSearchableItemInput.HideOnRead:disabled {
+.CCLanguageItemInput.HideOnRead:disabled {
     display: none;
 }
 
-.CCSearchableItemInput:focus {
+.CCLanguageItemInput:focus {
     border: 1px solid var(--blacktranslucent50);
     outline: none;
 }
 
-.CCSearchableItemInput.Error {
+.CCLanguageItemInput.Error {
     background: var(--redtranslucent90);
 }
 
-.CCSearchableItemInputLabel {
+.CCLanguageItemInputLabel {
     margin-right: 0.5vw;
     padding-left: 0px;
     font-weight: 300;
@@ -386,39 +386,39 @@
 
 /* --- Japanese Font Minimums --- */
 @media (width <= 800px) {
-    .CCSearchableItemInput {
+    .CCLanguageItemInput {
         margin-bottom: 0.25rem;
         padding-left: 0.5rem;
     }
 
-    .CCSearchableItemInput:disabled {
+    .CCLanguageItemInput:disabled {
         margin-bottom: -0.125rem;
         padding-left: 0rem;
     }
 
-    .CCSearchableItemInputLabel {
+    .CCLanguageItemInputLabel {
         margin-right: 0.25rem;
     }
 }
 
 /* --- Japanese Font Maximums --- */
 @media (width >= 1200px) {
-    .CCSearchableItemInput {
+    .CCLanguageItemInput {
         margin-bottom: 0.1875rem;
         margin-top: 0rem;
         padding-left: 0.75rem;
     }
 
-    .CCSearchableItemInput:disabled {
+    .CCLanguageItemInput:disabled {
         margin-bottom: -0.1875rem;
     }
 
-    .CCSearchableItemInputLabel {
+    .CCLanguageItemInputLabel {
         margin-right: 0.375rem;
     }
 }
 
-.CCSearchableItemFieldset:disabled .CCSearchableItemInputLabel {
+.CCLanguageItemFieldset:disabled .CCLanguageItemInputLabel {
     display: none;
     height: 0px;
     opacity: 0;
@@ -428,19 +428,19 @@
     
 } 
 
-.CCSearchableItemFieldset .CCSearchableItemOutput {
+.CCLanguageItemFieldset .CCLanguageItemOutput {
     display: none;
 }
 
-.CCSearchableItemFieldset:disabled .CCSearchableItemOutput {
+.CCLanguageItemFieldset:disabled .CCLanguageItemOutput {
     display: block;
 }
 
-.CCSearchableItemOutput span {
+.CCLanguageItemOutput span {
     position: relative; /* To anchor the ::after below */
 }
 
-.CCSearchableItemOutput span::after {
+.CCLanguageItemOutput span::after {
     content: '';
     position: absolute;
     bottom: 0;
@@ -454,18 +454,18 @@
     transform-origin: center;
 }
 
-.CCSearchableItemOutput span.Underline::after {
+.CCLanguageItemOutput span.Underline::after {
     opacity: 1;
     transform: scale(1);
 }
 
-.CCSearchableItemExampleInputs {
+.CCLanguageItemExampleInputs {
     display: flex;
     flex-direction: column;
     flex: 1 1 auto;
 }
 
-.CCSearchableItemExampleControls {
+.CCLanguageItemExampleControls {
     display: flex;
     flex-direction: column;
     flex: 0 0 auto;
@@ -475,7 +475,7 @@
     width: auto;
 }
 
-.CCSearchableItemFieldset:disabled .CCSearchableItemExampleControls {
+.CCLanguageItemFieldset:disabled .CCLanguageItemExampleControls {
     display: none;
     width: 0px;
 }

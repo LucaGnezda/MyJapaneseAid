@@ -38,7 +38,7 @@
  *      examplesExpander: HTMLDivElement?,
  *      examplesAdd: HTMLDivElement?,
  *      examplesContainer: HTMLDivElement?
- * }} CCSearchableItemElements
+ * }} CCLanguageItemElements
  * 
  * @typedef {{
  *      kana: string?,
@@ -50,22 +50,22 @@
  *      literal: string?,
  *      structure: string?,
  *      notes: string?,
- *      examples: CCSearchableItemPropertyBagExample[];
- * }} CCSearchableItemPropertyBag
+ *      examples: CCLanguageItemPropertyBagExample[];
+ * }} CCLanguageItemPropertyBag
  * 
  * @typedef {{
  *      kana: string?,
  *      romaji: string?,
  *      meaning: string?
- * }} CCSearchableItemPropertyBagExample
+ * }} CCLanguageItemPropertyBagExample
  * 
  * @typedef {{
  *      deleteRequestCallback: Function?,
  *      dataUpdateCallback: Function?
- * }} CCSearchableItemAttachedCallbacks
+ * }} CCLanguageItemAttachedCallbacks
  */
 
-class CCSearchableItem extends CCBase {
+class CCLanguageItem extends CCBase {
 
     /**
      * Member attributes
@@ -73,7 +73,7 @@ class CCSearchableItem extends CCBase {
 
     /**
      * The elements that make up this component
-     * @type {CCSearchableItemElements}
+     * @type {CCLanguageItemElements}
      */
     #elements = {
         rootContainer: null,
@@ -112,7 +112,7 @@ class CCSearchableItem extends CCBase {
 
     /**
      * The elements that make up this component
-     * @type {CCSearchableItemPropertyBag}
+     * @type {CCLanguageItemPropertyBag}
      */
     #propertyBag = {
         kana: null,
@@ -129,7 +129,7 @@ class CCSearchableItem extends CCBase {
 
     /**
      * The elements that make up this component
-     * @type {CCSearchableItemAttachedCallbacks}
+     * @type {CCLanguageItemAttachedCallbacks}
      */
     #attachedCallbacks = {
         deleteRequestCallback: null,
@@ -137,70 +137,70 @@ class CCSearchableItem extends CCBase {
     }
 
     static #htmlRootTemplate = `
-        <div class="CCSearchableItemContainer PadTBL PadLRXL" data-use="root-container">
+        <div class="CCLanguageItemContainer PadTBL PadLRXL" data-use="root-container">
             <form>
-                <fieldset class="CCSearchableItemFieldset" data-use="fieldset">
-                    <div class="CCSearchableItemFlex Col">
-                        <label class="CCSearchableItemInputLabel RomanXS">Kana</label>
-                        <input class="CCSearchableItemInput KanaXL NoBlockMargins HideOnRead" data-use="kana.input"></input>
-                        <p class="CCSearchableItemOutput KanaXL NoBlockMargins" data-use="kana.output"></p>
-                        <div class="CCSearchableItemFlex Row JustifyEnd">
-                            <label class="CCSearchableItemInputLabel RomanXS">Linked Highlighting</label>
-                            <input class="CCSearchableItemInput RomanXS NoBlockMargins LinkedHighlighter" data-use="kana.highlighter-input"></input>
+                <fieldset class="CCLanguageItemFieldset" data-use="fieldset">
+                    <div class="CCLanguageItemFlex Col">
+                        <label class="CCLanguageItemInputLabel RomanXS">Kana</label>
+                        <input class="CCLanguageItemInput KanaXL NoBlockMargins HideOnRead" data-use="kana.input"></input>
+                        <p class="CCLanguageItemOutput KanaXL NoBlockMargins" data-use="kana.output"></p>
+                        <div class="CCLanguageItemFlex Row JustifyEnd">
+                            <label class="CCLanguageItemInputLabel RomanXS">Linked Highlighting</label>
+                            <input class="CCLanguageItemInput RomanXS NoBlockMargins LinkedHighlighter" data-use="kana.highlighter-input"></input>
                         </div>
                     </div>
-                    <div class="CCSearchableItemFlex Col">
-                        <label class="CCSearchableItemInputLabel RomanXS">Romaji</label>              
-                        <input class="CCSearchableItemInput RomanXL NoBlockMargins HideOnRead" data-use="romaji.input"></input>                    
-                        <p class="CCSearchableItemOutput RomanXL NoBlockMargins" data-use="romaji.output"></p>
-                        <div class="CCSearchableItemFlex Row JustifyEnd">
-                            <label class="CCSearchableItemInputLabel RomanXS">Linked Highlighting</label>
-                            <input class="CCSearchableItemInput RomanXS NoBlockMargins LinkedHighlighter" data-use="romaji.highlighter-input"></input>
+                    <div class="CCLanguageItemFlex Col">
+                        <label class="CCLanguageItemInputLabel RomanXS">Romaji</label>              
+                        <input class="CCLanguageItemInput RomanXL NoBlockMargins HideOnRead" data-use="romaji.input"></input>                    
+                        <p class="CCLanguageItemOutput RomanXL NoBlockMargins" data-use="romaji.output"></p>
+                        <div class="CCLanguageItemFlex Row JustifyEnd">
+                            <label class="CCLanguageItemInputLabel RomanXS">Linked Highlighting</label>
+                            <input class="CCLanguageItemInput RomanXS NoBlockMargins LinkedHighlighter" data-use="romaji.highlighter-input"></input>
                         </div>  
                     </div>
-                    <div class="CCSearchableItemGrid PadLL MarginTBM" data-use="translation-grid">
-                        <div class="CCSearchableItemLabel" data-use="meaning.grid-cell-1"><p class="RomanM NoBlockMargins">Meaning:</p></div>
-                        <div class="CCSearchableItemFlex Col" data-use="meaning.grid-cell-2">
-                            <input class="CCSearchableItemInput RomanM NoBlockMargins Font300 HideOnRead" data-use="meaning.input"></input>
-                            <p class="CCSearchableItemOutput RomanM Font300 NoBlockMargins" data-use="meaning.output"></p>
-                            <div class="CCSearchableItemFlex Row JustifyEnd">
-                                <label class="CCSearchableItemInputLabel RomanXS">Linked Highlighting</label>
-                                <input class="CCSearchableItemInput RomanXS NoBlockMargins Font300 LinkedHighlighter" data-use="meaning.highlighter-input"></input>
+                    <div class="CCLanguageItemGrid PadLL MarginTBM" data-use="translation-grid">
+                        <div class="CCLanguageItemLabel" data-use="meaning.grid-cell-1"><p class="RomanM NoBlockMargins">Meaning:</p></div>
+                        <div class="CCLanguageItemFlex Col" data-use="meaning.grid-cell-2">
+                            <input class="CCLanguageItemInput RomanM NoBlockMargins Font300 HideOnRead" data-use="meaning.input"></input>
+                            <p class="CCLanguageItemOutput RomanM Font300 NoBlockMargins" data-use="meaning.output"></p>
+                            <div class="CCLanguageItemFlex Row JustifyEnd">
+                                <label class="CCLanguageItemInputLabel RomanXS">Linked Highlighting</label>
+                                <input class="CCLanguageItemInput RomanXS NoBlockMargins Font300 LinkedHighlighter" data-use="meaning.highlighter-input"></input>
                             </div>
                         </div>
-                        <div class="CCSearchableItemLabel" data-use="literal.grid-cell-1"><p class="RomanM NoBlockMargins">Literal:</p></div>
-                        <div class="CCSearchableItemFlex Col" data-use="literal.grid-cell-2"><input class="CCSearchableItemInput RomanM NoBlockMargins Font300" data-use="literal.input"></input></div>
-                        <div class="CCSearchableItemLabel"  data-use="structure.grid-cell-1"><p class="RomanM NoBlockMargins">Structure:</p></div>
-                        <div class="CCSearchableItemFlex Col" data-use="structure.grid-cell-2"><input class="CCSearchableItemInput RomanM NoBlockMargins Font300" data-use="structure.input"></input></div>
-                        <div class="CCSearchableItemLabel" data-use="notes.grid-cell-1"><p class="RomanM NoBlockMargins">Notes:</p></div>
-                        <div class="CCSearchableItemFlex Col" data-use="notes.grid-cell-2"><input class="CCSearchableItemInput RomanM NoBlockMargins Font300" data-use="notes.input"></input></div>
+                        <div class="CCLanguageItemLabel" data-use="literal.grid-cell-1"><p class="RomanM NoBlockMargins">Literal:</p></div>
+                        <div class="CCLanguageItemFlex Col" data-use="literal.grid-cell-2"><input class="CCLanguageItemInput RomanM NoBlockMargins Font300" data-use="literal.input"></input></div>
+                        <div class="CCLanguageItemLabel"  data-use="structure.grid-cell-1"><p class="RomanM NoBlockMargins">Structure:</p></div>
+                        <div class="CCLanguageItemFlex Col" data-use="structure.grid-cell-2"><input class="CCLanguageItemInput RomanM NoBlockMargins Font300" data-use="structure.input"></input></div>
+                        <div class="CCLanguageItemLabel" data-use="notes.grid-cell-1"><p class="RomanM NoBlockMargins">Notes:</p></div>
+                        <div class="CCLanguageItemFlex Col" data-use="notes.grid-cell-2"><input class="CCLanguageItemInput RomanM NoBlockMargins Font300" data-use="notes.input"></input></div>
                     </div>
-                    <div class="CCSearchableItemExamplesSectionBreak MarginTXL MarginBS">
-                        <div class="CCSearchableItemExamplesHeader" data-use="examples-header">
-                            <div class="CCSearchableItemExamplesTitle MarginRM" data-use="examples-header.title"><p class="RomanM NoBlockMargins">Examples</p></div>
-                            <div class="CCSearchableItemSectionButton Show" data-use="examples-header.expander"><img src="./app/assets/svg/arrow-down.svg" class="CCSearchableItemExpandCollapseIcon"></div>
-                            <div class="CCSearchableItemSectionButton Show" data-use="examples-header.add"><img src="./app/assets/svg/plus.svg" class="CCSearchableItemExpandCollapseIcon"></div>
-                        </div>
-                    </div>
-                    <div class="CCSearchableItemExamples" data-use="examples-container">
-                    </div>
-                    <div class="CCSearchableItemFormButtonStrip Col ShowOnRead">
-                        <div class="CCSearchableItemFormButton ShowOnContainerHover" data-use="edit-button">
-                            <img src="./app/assets/svg/pencil.svg" class="CCSearchableItemFormButtonIcon">
-                        </div>
-                        <div class="CCSearchableItemFormButtonVerticalSpacer ShowOnContainerHover">
-                            <img src="./app/assets/svg/minus.svg" class="CCSearchableItemFormButtonIcon">
-                        </div>
-                        <div class="CCSearchableItemFormButton ShowOnContainerHover RedTint" data-use="delete-button">
-                            <img src="./app/assets/svg/trash.svg" class="CCSearchableItemFormButtonIcon">
+                    <div class="CCLanguageItemExamplesSectionBreak MarginTXL MarginBS">
+                        <div class="CCLanguageItemExamplesHeader" data-use="examples-header">
+                            <div class="CCLanguageItemExamplesTitle MarginRM" data-use="examples-header.title"><p class="RomanM NoBlockMargins">Examples</p></div>
+                            <div class="CCLanguageItemSectionButton Show" data-use="examples-header.expander"><img src="./app/assets/svg/arrow-down.svg" class="CCLanguageItemExpandCollapseIcon"></div>
+                            <div class="CCLanguageItemSectionButton Show" data-use="examples-header.add"><img src="./app/assets/svg/plus.svg" class="CCLanguageItemExpandCollapseIcon"></div>
                         </div>
                     </div>
-                    <div class="CCSearchableItemFormButtonStrip Row ShowOnEdit">
-                        <div class="CCSearchableItemFormButton ShowOnEdit" data-use="saveedit-button">
-                            <img src="./app/assets/svg/check.svg" class="CCSearchableItemFormButtonIcon">
+                    <div class="CCLanguageItemExamples" data-use="examples-container">
+                    </div>
+                    <div class="CCLanguageItemFormButtonStrip Col ShowOnRead">
+                        <div class="CCLanguageItemFormButton ShowOnContainerHover" data-use="edit-button">
+                            <img src="./app/assets/svg/pencil.svg" class="CCLanguageItemFormButtonIcon">
                         </div>
-                        <div class="CCSearchableItemFormButton ShowOnEdit" data-use="canceledit-button">
-                            <img src="./app/assets/svg/cross.svg" class="CCSearchableItemFormButtonIcon">
+                        <div class="CCLanguageItemFormButtonVerticalSpacer ShowOnContainerHover">
+                            <img src="./app/assets/svg/minus.svg" class="CCLanguageItemFormButtonIcon">
+                        </div>
+                        <div class="CCLanguageItemFormButton ShowOnContainerHover RedTint" data-use="delete-button">
+                            <img src="./app/assets/svg/trash.svg" class="CCLanguageItemFormButtonIcon">
+                        </div>
+                    </div>
+                    <div class="CCLanguageItemFormButtonStrip Row ShowOnEdit">
+                        <div class="CCLanguageItemFormButton ShowOnEdit" data-use="saveedit-button">
+                            <img src="./app/assets/svg/check.svg" class="CCLanguageItemFormButtonIcon">
+                        </div>
+                        <div class="CCLanguageItemFormButton ShowOnEdit" data-use="canceledit-button">
+                            <img src="./app/assets/svg/cross.svg" class="CCLanguageItemFormButtonIcon">
                         </div>
                     </div>
                 </fieldset>
@@ -209,24 +209,24 @@ class CCSearchableItem extends CCBase {
     `;
 
     static #htmlExampleTemplate = `
-                        <div class="CCSearchableItemExample MarginBM PadLXL" data-use="example">
-                            <div class="CCSearchableItemExampleInputs PadRXL">
-                                <div class="CCSearchableItemFlex Col">
-                                    <label class="CCSearchableItemInputLabel RomanXS">Kana</label>
-                                    <input class="CCSearchableItemInput KanaS NoBlockMargins" data-use="example.kana.input" data-as="kana"></input>
+                        <div class="CCLanguageItemExample MarginBM PadLXL" data-use="example">
+                            <div class="CCLanguageItemExampleInputs PadRXL">
+                                <div class="CCLanguageItemFlex Col">
+                                    <label class="CCLanguageItemInputLabel RomanXS">Kana</label>
+                                    <input class="CCLanguageItemInput KanaS NoBlockMargins" data-use="example.kana.input" data-as="kana"></input>
                                 </div>
-                                <div class="CCSearchableItemFlex Col">
-                                    <label class="CCSearchableItemInputLabel RomanXS">Romaji</label>
-                                    <input class="CCSearchableItemInput RomanS NoBlockMargins" data-use="example.romaji.input" data-as="romaji"></input>
+                                <div class="CCLanguageItemFlex Col">
+                                    <label class="CCLanguageItemInputLabel RomanXS">Romaji</label>
+                                    <input class="CCLanguageItemInput RomanS NoBlockMargins" data-use="example.romaji.input" data-as="romaji"></input>
                                 </div>
-                                <div class="CCSearchableItemFlex Col">
-                                    <label class="CCSearchableItemInputLabel RomanXS">Meaning</label>
-                                    <input class="CCSearchableItemInput RomanS NoBlockMargins" data-use="example.meaning.input" data-as="meaning"></input>
+                                <div class="CCLanguageItemFlex Col">
+                                    <label class="CCLanguageItemInputLabel RomanXS">Meaning</label>
+                                    <input class="CCLanguageItemInput RomanS NoBlockMargins" data-use="example.meaning.input" data-as="meaning"></input>
                                 </div>
                             </div>
-                            <div class="CCSearchableItemExampleControls">
-                                <div class="CCSearchableItemFormButton ShadowRed ShowOnExampleHover" data-use="example.delete-button">
-                                    <img src="./app/assets/svg/trash.svg" class="CCSearchableItemFormButtonIcon">
+                            <div class="CCLanguageItemExampleControls">
+                                <div class="CCLanguageItemFormButton ShadowRed ShowOnExampleHover" data-use="example.delete-button">
+                                    <img src="./app/assets/svg/trash.svg" class="CCLanguageItemFormButtonIcon">
                                 </div>
                             </div>
                         </div>
@@ -259,7 +259,7 @@ class CCSearchableItem extends CCBase {
      */
     #initialiseUI() {
 
-        let fragment = getDOMFragmentFromString(CCSearchableItem.#htmlRootTemplate);
+        let fragment = getDOMFragmentFromString(CCLanguageItem.#htmlRootTemplate);
 
         this.#elements.rootContainer = fragment.querySelector('[data-use="root-container"]');
         this.#elements.fieldset = fragment.querySelector('[data-use="fieldset"]');
@@ -686,7 +686,7 @@ class CCSearchableItem extends CCBase {
 
             for(let propertyBagExample of this.#propertyBag.examples) {
 
-                let fragment = getDOMFragmentFromString(CCSearchableItem.#htmlExampleTemplate);
+                let fragment = getDOMFragmentFromString(CCLanguageItem.#htmlExampleTemplate);
 
                 /** @type {HTMLInputElement | ?} */
                 let kana = fragment.querySelector("input[data-use='example.kana.input']");
@@ -1102,7 +1102,7 @@ class CCSearchableItem extends CCBase {
         console.log("Add");
 
         if (this.#elements.examplesContainer) {
-            let fragment = getDOMFragmentFromString(CCSearchableItem.#htmlExampleTemplate);
+            let fragment = getDOMFragmentFromString(CCLanguageItem.#htmlExampleTemplate);
             this.#elements.examplesContainer.appendChild(fragment);
         }
         else { 
