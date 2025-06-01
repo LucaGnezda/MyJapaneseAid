@@ -42,6 +42,17 @@
     --colourSecondaryDarker70: #340C23; 
     --colourSecondaryDarker80: #230817; 
     --colourSecondaryDarker90: #11040C;
+
+    --colourBlack90: #1a1a1a;
+    --colourBlack80: #333333; 
+    --colourBlack70: #4d4d4d; 
+    --colourBlack60: #666666; 
+    --colourBlack50: #808080; 
+    --colourWhite50: #808080;                  /* var(--greyscale) */
+    --colourWhite60: #999999; 
+    --colourWhite70: #b3b3b3;
+    --colourWhite80: #cccccc;
+    --colourWhite90: #e6e6e6;
     
     --blacktranslucent90: #0000001a;
     --blacktranslucent80: #00000033;

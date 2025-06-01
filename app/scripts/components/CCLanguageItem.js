@@ -185,21 +185,21 @@ class CCLanguageItem extends CCBase {
                     <div class="CCLanguageItemExamples" data-use="examples-container">
                     </div>
                     <div class="FormButtonStrip Col ShowOnRead">
-                        <div class="CCLanguageItemFormButton ShowOnContainerHover" data-use="edit-button">
+                        <div class="FormButton ShowOnContainerHover BlackTint" data-use="edit-button">
                             <img src="./app/assets/svg/pencil.svg" class="CCLanguageItemFormButtonIcon">
                         </div>
                         <div class="CCLanguageItemFormButtonVerticalSpacer ShowOnContainerHover">
                             <img src="./app/assets/svg/minus.svg" class="CCLanguageItemFormButtonIcon">
                         </div>
-                        <div class="CCLanguageItemFormButton ShowOnContainerHover RedTint" data-use="delete-button">
+                        <div class="FormButton ShowOnContainerHover RedTint" data-use="delete-button">
                             <img src="./app/assets/svg/trash.svg" class="CCLanguageItemFormButtonIcon">
                         </div>
                     </div>
                     <div class="FormButtonStrip Row ShowOnEdit">
-                        <div class="CCLanguageItemFormButton ShowOnEdit" data-use="saveedit-button">
+                        <div class="FormButton BlackTint" data-use="saveedit-button">
                             <img src="./app/assets/svg/check.svg" class="CCLanguageItemFormButtonIcon">
                         </div>
-                        <div class="CCLanguageItemFormButton ShowOnEdit" data-use="canceledit-button">
+                        <div class="FormButton BlackTint" data-use="canceledit-button">
                             <img src="./app/assets/svg/cross.svg" class="CCLanguageItemFormButtonIcon">
                         </div>
                     </div>
@@ -225,7 +225,7 @@ class CCLanguageItem extends CCBase {
                                 </div>
                             </div>
                             <div class="CCLanguageItemExampleControls">
-                                <div class="CCLanguageItemFormButton ShadowRed ShowOnExampleHover" data-use="example.delete-button">
+                                <div class="FormButton ShadowRed StrengthenOnExampleHover" data-use="example.delete-button">
                                     <img src="./app/assets/svg/trash.svg" class="CCLanguageItemFormButtonIcon">
                                 </div>
                             </div>

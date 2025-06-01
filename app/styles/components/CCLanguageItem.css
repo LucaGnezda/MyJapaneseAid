@@ -4,7 +4,9 @@ cc-languageitem {
 
 .CCLanguageItem {
 
-    /* Container - the outermost rendered element that acts as an anchor for all other CSS */
+    /** 
+     * Container - the outermost rendered element that acts as an anchor for all other CSS 
+     */
     &.Container {
         background-color: var(--whitetranslucent70);
         border: 1px solid var(--blacktranslucent80);
@@ -16,7 +18,9 @@ cc-languageitem {
     }
 
 
-    /* Fieldset - Anchors read/edit mod styling logic through use of the 'disabled' attribute */
+    /** 
+     * Fieldset - Anchors read/edit mod styling logic through use of the 'disabled' attribute 
+     */
     .Fieldset {
         padding-top: 28px;
         padding-right: 0px;
@@ -28,7 +32,9 @@ cc-languageitem {
         padding-right: 28px;
     }
     
-    /* Buttonstrip & FormButton - Main interactive buttons for the form and their arrangement*/
+    /** 
+     * Buttonstrip - Group arrangement of interactive buttons for the form 
+     */
     .FormButtonStrip {
         top: 4px;
         right: 4px;
@@ -64,85 +70,109 @@ cc-languageitem {
         display: none;
     }
 
-}
 
+    /** 
+     * FormButton - Standard format buttons 
+     */
+    .FormButton {
+        width: 32px;
+        height: 32px;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        border-radius: 6px 6px 6px 6px;
+        border: none;
+        transition: all 0.3s ease;
+    }
 
+    .FormButton.Disabled {
+        opacity: 0.5;
+    }
 
-.CCLanguageItemFormButton {
-    width: 32px;
-    height: 32px;
-    background-color: var(--blacktranslucent90);
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    border-radius: 6px 6px 6px 6px;
-    border: none;
-    transition: all 0.3s ease;
-}
+    /* BlackTint Version */
+    .FormButton.BlackTint.Disabled {
+        background-color: var(--blacktranslucent90);
+    }
 
-.CCLanguageItemFormButton:not(.Disabled):hover {
-    background-color: var(--blacktranslucent80);
-}
-
-.CCLanguageItemFormButton.Disabled {
-    opacity: 0.5;
-}
-
-.CCLanguageItemFormButton.RedTint {
-    background-color: var(--redtranslucent80);
-}
-
-.CCLanguageItemFormButton.RedTint:hover {
-    background-color: var(--redtranslucent60);
-}
-
-
-.CCLanguageItemFormButton.ShadowRed {
-    background-color: transparent;
-    filter: brightness(0) saturate(100%) invert(46%) sepia(86%) saturate(4267%) hue-rotate(331deg) brightness(97%) contrast(87%);
-}
-
-.CCLanguageItemFormButton.ShadowRed:hover {
-    background-color: var(--redtranslucent80);
-}
-
-.CCLanguageItemFormButton.ShowOnExampleHover {
-    transition: all 0.3s;
-    transition-behavior: allow-discrete;
-    opacity: 0.3;
-}
-
-.CCLanguageItemExample:hover .CCLanguageItemFormButton.ShowOnExampleHover {
-    display: flex;
-    opacity: 1;
-}
-
-.CCLanguageItemExample.Deleting {
-    height: 0px;
-    margin-bottom: 0px;
-}
-
-.CCLanguageItemFormButton.ShowOnContainerHover {
-    display: none;
-    opacity: 0;
-    transition: all 0.3s;
-    transition-behavior: allow-discrete;
-}
-
-.CCLanguageItem.Container:hover .CCLanguageItemFormButton.ShowOnContainerHover {
-    display: flex;
-    opacity: 1;
+    .FormButton.BlackTint:not(.Disabled) {
+        background-color: var(--blacktranslucent90);
+    }
     
+    .FormButton.BlackTint:not(.Disabled):hover {
+        background-color: var(--blacktranslucent80);
+    }
+
+    /* RedTint Version */
+    .FormButton.RedTint.Disabled {
+        background-color: var(--redtranslucent80);
+    }
+
+    .FormButton.RedTint:not(.Disabled) {
+        background-color: var(--redtranslucent80);
+    }
+
+    .FormButton.RedTint:not(.Disabled):hover {
+        background-color: var(--redtranslucent60);
+    }
+
+    /* ShadowBlack Version */
+    .FormButton.ShadowBlack.Disabled {
+        background-color: transparent;
+        filter: brightness(0) saturate(100%) invert(16%) sepia(5%) saturate(0%) hue-rotate(296deg) brightness(103%) contrast(90%);
+    }
+
+    .FormButton.ShadowBlack:not(.Disabled) {
+        background-color: transparent;
+        filter: brightness(0) saturate(100%) invert(16%) sepia(5%) saturate(0%) hue-rotate(296deg) brightness(103%) contrast(90%);
+    }
+
+    .FormButton.ShadowBlack:not(.Disabled):hover {
+        background-color: var(--blacktranslucent90);
+        filter: brightness(0) saturate(100%) invert(0%) sepia(100%) saturate(7466%) hue-rotate(319deg) brightness(96%) contrast(103%);
+    }
+
+    /* ShadowRed Version */
+    .FormButton.ShadowRed.Disabled {
+        background-color: transparent;
+        filter: brightness(0) saturate(100%) invert(46%) sepia(86%) saturate(4267%) hue-rotate(331deg) brightness(97%) contrast(87%);
+    }
+
+    .FormButton.ShadowRed:not(.Disabled) {
+        background-color: transparent;
+        filter: brightness(0) saturate(100%) invert(46%) sepia(86%) saturate(4267%) hue-rotate(331deg) brightness(97%) contrast(87%);
+    }
+
+    .FormButton.ShadowRed:not(.Disabled):hover {
+        background-color: var(--redtranslucent80);
+    }
+
+    /* Special case treatments */
+    .FormButton.ShowOnContainerHover {
+        display: none;
+        opacity: 0;
+        transition: all 0.3s;
+        transition-behavior: allow-discrete;
+    }
+
+    &.Container:hover .FormButton.ShowOnContainerHover {
+        display: flex;
+        opacity: 1;    
+    }
+
+    .FormButton.StrengthenOnExampleHover {
+        transition: all 0.3s;
+        opacity: 0.3;
+        transition-behavior: allow-discrete;
+    }
+
+    .CCLanguageItemExample:hover .FormButton.StrengthenOnExampleHover {
+        display: flex;
+        opacity: 1;
+    }
 }
 
-.CCLanguageItemFormButton.ShowOnEdit {
-    display: flex;
-}
 
-.CCLanguageItem .Fieldset:disabled .CCLanguageItemFormButton.ShowOnEdit {
-    display: none;
-}
 
 .CCLanguageItemFormButtonVerticalSpacer {
     width: 32px;
@@ -167,6 +197,11 @@ cc-languageitem {
 .CCLanguageItem.Container:hover .CCLanguageItemFormButtonVerticalSpacer.ShowOnContainerHover {
     display: flex;
     opacity: 0.3;
+}
+
+.CCLanguageItemExample.Deleting {
+    height: 0px;
+    margin-bottom: 0px;
 }
 
 .CCLanguageItemFormButtonIcon {
