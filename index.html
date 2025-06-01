@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline';" />
+
+        <!-- Styles -->
+        <link rel="stylesheet" type="text/css" href="./app/assets/fonts/Fonts.css">
+
+        <link rel="stylesheet" type="text/css" href="./app/styles/BaseStyling.css">
+        <link rel="stylesheet" type="text/css" href="./app/styles/SpecificStyling.css">
+
+        <link rel="stylesheet" type="text/css" href="./app/styles/components/CCSearch.css">
+        <link rel="stylesheet" type="text/css" href="./app/styles/components/CCSearchableItem.css">
+
+        <!-- Framework -->
+        <script defer src="./framework/scripts/customComponents/CCBase.js"></script>
+        <script defer src="./framework/scripts/customComponents/CCObservableBase.js"></script>
+
+        <script defer src="./framework/scripts/fluxPattern/Action.js"></script>
+        <script defer src="./framework/scripts/fluxPattern/Dispatcher.js"></script>
+        <script defer src="./framework/scripts/fluxPattern/Store.js"></script>
+
+        <script defer src="./framework/scripts/observables/ObservableEnums.js"></script>
+        <script defer src="./framework/scripts/observables/Observable.js"></script>
+        <script defer src="./framework/scripts/observables/ObservableCore.js"></script>
+        <script defer src="./framework/scripts/observables/ObservableDataEvent.js"></script>
+        <script defer src="./framework/scripts/observables/ObservablesDictionary.js"></script>
+
+        <script defer src="./framework/scripts/logging/LoggingEnums.js"></script>
+        <script defer src="./framework/scripts/logging/Log.js"></script>
+
+        <script defer src="./framework/scripts/helpers/Helpers.js"></script>
+
+        <!-- Enums -->
+        <!-- Add your project specific enumeration types here -->
+
+        <!-- ActionHandlers -->
+        <script defer src="./app/scripts/actionHandlers/AppActionHandler.js"></script>
+
+        <!-- Bindings -->
+        <!-- Add your project specific component binding callbacks here -->
+
+        <!-- Components -->
+        <script defer src="./app/scripts/components/CCSearch.js"></script>
+        <script defer src="./app/scripts/components/CCSearchableItem.js"></script>
+        
+
+        <!-- Services -->
+        <script defer src="./app/scripts/services/App.js"></script>
+        <script defer src="./app/scripts/services/AppService.js"></script>
+        <script defer src="./app/scripts/services/ComponentRegistry.js"></script>
+        
+    </head>
+    <body onload="AppService.Initialise()" data-body>
+        <div class="AppHeader">
+            <div class="AppHeaderSpacer AlignLeft">
+                <div class="AppTitle"><span>My</span>Japanese<span>Aid</span></div>
+            </div>
+            <div class="AppHeaderControlSurface">
+                <cc-search id="TopNavSearch"></cc-search>
+            </div>
+            <!-- <div class="AppHeaderSpacer"></div> -->
+        </div>
+        <div class="AppBody">
+            <cc-searchableitem id="TestItem"></cc-searchableitem>
+        </div>
+    </body>
+</html>
