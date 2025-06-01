@@ -24,6 +24,9 @@ class CCObservableBase extends HTMLElement {
      */
     id = "";
 
+    /** @type {AbortController} #preDisposeController */
+    #abortController = new AbortController();
+
     /**
      * @type {AnyDictionary}
      */
@@ -114,5 +117,21 @@ class CCObservableBase extends HTMLElement {
      */
     removeAllSubscriptions() {
         this.#state.removeAllSubscriptions();
+    }
+
+    /**
+     * getPreDisposeSignal
+     */
+    getPreDisposeSignal() {
+        let { signal } = this.#abortController;
+        return { signal };
+    }
+
+    /**
+     * PreDispose
+     * Call this before releasing references to ensure event listeners and ourward facing object references are removed 
+     */
+    preDispose() {
+        this.#abortController.abort();
     }
 }

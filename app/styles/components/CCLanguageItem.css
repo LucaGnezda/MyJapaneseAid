@@ -1,12 +1,27 @@
-.CCLanguageItemContainer {
-    background-color: var(--whitetranslucent70);
-    border: 1px solid var(--blacktranslucent80);
-    border-radius: 10px 10px 10px 10px;
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    min-height: 72px;
+cc-languageitem {
+    display: contents;
 }
+
+.CCLanguageItem {
+
+    /* Container - the outermost rendered element that acts as an anchor for all other CSS */
+    &.Container {
+        background-color: var(--whitetranslucent70);
+        border: 1px solid var(--blacktranslucent80);
+        border-radius: 10px 10px 10px 10px;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        min-height: 72px;
+    }
+
+
+
+    
+
+}
+
+
 
 .CCLanguageItemFieldset {
     padding-top: 28px;
@@ -116,7 +131,7 @@
     transition-behavior: allow-discrete;
 }
 
-.CCLanguageItemContainer:hover .CCLanguageItemFormButton.ShowOnContainerHover {
+.CCLanguageItem.Container:hover .CCLanguageItemFormButton.ShowOnContainerHover {
     display: flex;
     opacity: 1;
     
@@ -150,7 +165,7 @@
     transition-behavior: allow-discrete;
 }
 
-.CCLanguageItemContainer:hover .CCLanguageItemFormButtonVerticalSpacer.ShowOnContainerHover {
+.CCLanguageItem.Container:hover .CCLanguageItemFormButtonVerticalSpacer.ShowOnContainerHover {
     display: flex;
     opacity: 0.3;
 }

@@ -13,7 +13,7 @@ class ComponentRegistry {
         
         // Register your components here...
         customElements.define("cc-search", CCSearch);
-        customElements.define("cc-searchableitem", CCLanguageItem);
-        customElements.define("cc-searchableitem", CCLanguageItemList);    
+        customElements.define("cc-languageitem", CCLanguageItem);
+        customElements.define("cc-languageitemlist", CCLanguageItemList);    
     }
 }
