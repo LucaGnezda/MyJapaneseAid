@@ -226,7 +226,7 @@ cc-languageitem {
 
 
     /**
-     * Grids & Layouts - 
+     * Grids & Layouts
      */
     .FormGrid {
         border-left: 2px solid var(--colourPrimary);
@@ -271,6 +271,130 @@ cc-languageitem {
         justify-content: end;
     }
 
+
+    /**
+     * Labels
+     */
+    .GridLabel {
+        color: var(--colourPrimaryDarker20);
+        font-weight: 400;
+        display: block;
+    }
+
+    .GridLabel.Hide {
+        display: none;
+    }
+
+    .InputLabel {
+        margin-right: 0.5vw;
+        padding-left: 0px;
+        font-weight: 300;
+        display: block;
+        transition: all 0.5s;
+        transition-behavior: allow-discrete;
+        height: auto;
+        overflow: hidden;
+        opacity: 1;
+        @starting-style {
+            height: 0px;
+        }
+    }
+
+    .Fieldset:disabled .InputLabel {
+        display: none;
+        height: 0px;
+        opacity: 0;
+        @starting-style {
+            height: auto;
+        }
+        
+    } 
+
+    /* --- Label Font Minimums --- */
+    @media (width <= 800px) {
+        .InputLabel {
+            margin-right: 0.25rem;
+        }
+    }
+
+    /* --- Label Font Maximums --- */
+    @media (width >= 1200px) {
+        .InputLabel {
+            margin-right: 0.375rem;
+        }
+    }
+
+
+    /**
+     * Form Inputs
+     */
+    .ItemInput {
+        display: block;
+        background: var(--whitetranslucent90);
+        border-radius: 10px 10px 10px 10px;
+        border: 1px solid var(--blacktranslucent80);
+        margin-bottom: 0.5vw;
+        margin-top: 0vw;
+        padding-left: 1vw;
+    }
+
+    .ItemInput:disabled {
+        margin-bottom: -0.25vw;
+        margin-top: 0rem;
+        padding-left: 0rem;
+    }
+
+    .ItemInput.LinkedHighlighter {
+        width: 25vw;
+    }
+
+    .ItemInput.LinkedHighlighter:disabled {
+        border: 0px solid transparent;
+        background: transparent;
+        height: 0px;
+        border: 0px;
+        padding: 0px;
+        opacity: 1;
+    }
+
+    .ItemInput.HideOnRead:disabled {
+        display: none;
+    }
+
+    .ItemInput:focus {
+        border: 1px solid var(--blacktranslucent50);
+        outline: none;
+    }
+
+    .ItemInput.Error {
+        background: var(--redtranslucent90);
+    }
+
+    /* --- Japanese Font Minimums --- */
+    @media (width <= 800px) {
+        .ItemInput {
+            margin-bottom: 0.25rem;
+            padding-left: 0.5rem;
+        }
+
+        .ItemInput:disabled {
+            margin-bottom: -0.125rem;
+            padding-left: 0rem;
+        }
+    }
+
+    /* --- Japanese Font Maximums --- */
+    @media (width >= 1200px) {
+        .ItemInput {
+            margin-bottom: 0.1875rem;
+            margin-top: 0rem;
+            padding-left: 0.75rem;
+        }
+
+        .ItemInput:disabled {
+            margin-bottom: -0.1875rem;
+        }
+    }
 }
 
 
@@ -284,15 +408,7 @@ cc-languageitem {
 
 
 
-.CCLanguageItemLabel {
-    color: var(--colourPrimaryDarker20);
-    font-weight: 400;
-    display: block;
-}
 
-.CCLanguageItemLabel.Hide {
-    display: none;
-}
 
 
 .CCLanguageItemExamplesSectionBreak {
@@ -411,107 +527,6 @@ cc-languageitem {
     height: 0px;
     margin: 0px;
 }
-
-.CCLanguageItemInput {
-    display: block;
-    background: var(--whitetranslucent90);
-    border-radius: 10px 10px 10px 10px;
-    border: 1px solid var(--blacktranslucent80);
-    margin-bottom: 0.5vw;
-    margin-top: 0vw;
-    padding-left: 1vw;
-}
-
-.CCLanguageItemInput:disabled {
-    margin-bottom: -0.25vw;
-    margin-top: 0rem;
-    padding-left: 0rem;
-}
-
-.CCLanguageItemInput.LinkedHighlighter {
-    width: 25vw;
-}
-
-.CCLanguageItemInput.LinkedHighlighter:disabled {
-    border: 0px solid transparent;
-    background: transparent;
-    height: 0px;
-    border: 0px;
-    padding: 0px;
-    opacity: 1;
-}
-
-.CCLanguageItemInput.HideOnRead:disabled {
-    display: none;
-}
-
-.CCLanguageItemInput:focus {
-    border: 1px solid var(--blacktranslucent50);
-    outline: none;
-}
-
-.CCLanguageItemInput.Error {
-    background: var(--redtranslucent90);
-}
-
-.CCLanguageItemInputLabel {
-    margin-right: 0.5vw;
-    padding-left: 0px;
-    font-weight: 300;
-    display: block;
-    transition: all 0.5s;
-    transition-behavior: allow-discrete;
-    height: auto;
-    overflow: hidden;
-    opacity: 1;
-    @starting-style {
-        height: 0px;
-    }
-}
-
-/* --- Japanese Font Minimums --- */
-@media (width <= 800px) {
-    .CCLanguageItemInput {
-        margin-bottom: 0.25rem;
-        padding-left: 0.5rem;
-    }
-
-    .CCLanguageItemInput:disabled {
-        margin-bottom: -0.125rem;
-        padding-left: 0rem;
-    }
-
-    .CCLanguageItemInputLabel {
-        margin-right: 0.25rem;
-    }
-}
-
-/* --- Japanese Font Maximums --- */
-@media (width >= 1200px) {
-    .CCLanguageItemInput {
-        margin-bottom: 0.1875rem;
-        margin-top: 0rem;
-        padding-left: 0.75rem;
-    }
-
-    .CCLanguageItemInput:disabled {
-        margin-bottom: -0.1875rem;
-    }
-
-    .CCLanguageItemInputLabel {
-        margin-right: 0.375rem;
-    }
-}
-
-.CCLanguageItem .Fieldset:disabled .CCLanguageItemInputLabel {
-    display: none;
-    height: 0px;
-    opacity: 0;
-    @starting-style {
-        height: auto;
-    }
-    
-} 
 
 .CCLanguageItem .Fieldset .CCLanguageItemOutput {
     display: none;

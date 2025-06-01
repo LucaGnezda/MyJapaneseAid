@@ -141,39 +141,39 @@ class CCLanguageItem extends CCBase {
             <form>
                 <fieldset class="Fieldset" data-use="fieldset">
                     <div class="FlexLayout Col">
-                        <label class="CCLanguageItemInputLabel RomanXS">Kana</label>
-                        <input class="CCLanguageItemInput KanaXL NoBlockMargins HideOnRead" data-use="kana.input"></input>
+                        <label class="InputLabel RomanXS">Kana</label>
+                        <input class="ItemInput KanaXL NoBlockMargins HideOnRead" data-use="kana.input"></input>
                         <p class="CCLanguageItemOutput KanaXL NoBlockMargins" data-use="kana.output"></p>
                         <div class="FlexLayout Row JustifyEnd">
-                            <label class="CCLanguageItemInputLabel RomanXS">Linked Highlighting</label>
-                            <input class="CCLanguageItemInput RomanXS NoBlockMargins LinkedHighlighter" data-use="kana.highlighter-input"></input>
+                            <label class="InputLabel RomanXS">Linked Highlighting</label>
+                            <input class="ItemInput RomanXS NoBlockMargins LinkedHighlighter" data-use="kana.highlighter-input"></input>
                         </div>
                     </div>
                     <div class="FlexLayout Col">
-                        <label class="CCLanguageItemInputLabel RomanXS">Romaji</label>              
-                        <input class="CCLanguageItemInput RomanXL NoBlockMargins HideOnRead" data-use="romaji.input"></input>                    
+                        <label class="InputLabel RomanXS">Romaji</label>              
+                        <input class="ItemInput RomanXL NoBlockMargins HideOnRead" data-use="romaji.input"></input>                    
                         <p class="CCLanguageItemOutput RomanXL NoBlockMargins" data-use="romaji.output"></p>
                         <div class="FlexLayout Row JustifyEnd">
-                            <label class="CCLanguageItemInputLabel RomanXS">Linked Highlighting</label>
-                            <input class="CCLanguageItemInput RomanXS NoBlockMargins LinkedHighlighter" data-use="romaji.highlighter-input"></input>
+                            <label class="InputLabel RomanXS">Linked Highlighting</label>
+                            <input class="ItemInput RomanXS NoBlockMargins LinkedHighlighter" data-use="romaji.highlighter-input"></input>
                         </div>  
                     </div>
                     <div class="FormGrid PadLL MarginTBM" data-use="translation-grid">
-                        <div class="CCLanguageItemLabel" data-use="meaning.grid-cell-1"><p class="RomanM NoBlockMargins">Meaning:</p></div>
+                        <div class="GridLabel" data-use="meaning.grid-cell-1"><p class="RomanM NoBlockMargins">Meaning:</p></div>
                         <div class="FlexLayout Col" data-use="meaning.grid-cell-2">
-                            <input class="CCLanguageItemInput RomanM NoBlockMargins Font300 HideOnRead" data-use="meaning.input"></input>
+                            <input class="ItemInput RomanM NoBlockMargins Font300 HideOnRead" data-use="meaning.input"></input>
                             <p class="CCLanguageItemOutput RomanM Font300 NoBlockMargins" data-use="meaning.output"></p>
                             <div class="FlexLayout Row JustifyEnd">
-                                <label class="CCLanguageItemInputLabel RomanXS">Linked Highlighting</label>
-                                <input class="CCLanguageItemInput RomanXS NoBlockMargins Font300 LinkedHighlighter" data-use="meaning.highlighter-input"></input>
+                                <label class="InputLabel RomanXS">Linked Highlighting</label>
+                                <input class="ItemInput RomanXS NoBlockMargins Font300 LinkedHighlighter" data-use="meaning.highlighter-input"></input>
                             </div>
                         </div>
-                        <div class="CCLanguageItemLabel" data-use="literal.grid-cell-1"><p class="RomanM NoBlockMargins">Literal:</p></div>
-                        <div class="FlexLayout Col" data-use="literal.grid-cell-2"><input class="CCLanguageItemInput RomanM NoBlockMargins Font300" data-use="literal.input"></input></div>
-                        <div class="CCLanguageItemLabel"  data-use="structure.grid-cell-1"><p class="RomanM NoBlockMargins">Structure:</p></div>
-                        <div class="FlexLayout Col" data-use="structure.grid-cell-2"><input class="CCLanguageItemInput RomanM NoBlockMargins Font300" data-use="structure.input"></input></div>
-                        <div class="CCLanguageItemLabel" data-use="notes.grid-cell-1"><p class="RomanM NoBlockMargins">Notes:</p></div>
-                        <div class="FlexLayout Col" data-use="notes.grid-cell-2"><input class="CCLanguageItemInput RomanM NoBlockMargins Font300" data-use="notes.input"></input></div>
+                        <div class="GridLabel" data-use="literal.grid-cell-1"><p class="RomanM NoBlockMargins">Literal:</p></div>
+                        <div class="FlexLayout Col" data-use="literal.grid-cell-2"><input class="ItemInput RomanM NoBlockMargins Font300" data-use="literal.input"></input></div>
+                        <div class="GridLabel"  data-use="structure.grid-cell-1"><p class="RomanM NoBlockMargins">Structure:</p></div>
+                        <div class="FlexLayout Col" data-use="structure.grid-cell-2"><input class="ItemInput RomanM NoBlockMargins Font300" data-use="structure.input"></input></div>
+                        <div class="GridLabel" data-use="notes.grid-cell-1"><p class="RomanM NoBlockMargins">Notes:</p></div>
+                        <div class="FlexLayout Col" data-use="notes.grid-cell-2"><input class="ItemInput RomanM NoBlockMargins Font300" data-use="notes.input"></input></div>
                     </div>
                     <div class="CCLanguageItemExamplesSectionBreak MarginTXL MarginBS">
                         <div class="CCLanguageItemExamplesHeader" data-use="examples-header">
@@ -212,16 +212,16 @@ class CCLanguageItem extends CCBase {
                         <div class="CCLanguageItemExample MarginBM PadLXL" data-use="example">
                             <div class="CCLanguageItemExampleInputs PadRXL">
                                 <div class="FlexLayout Col">
-                                    <label class="CCLanguageItemInputLabel RomanXS">Kana</label>
-                                    <input class="CCLanguageItemInput KanaS NoBlockMargins" data-use="example.kana.input" data-as="kana"></input>
+                                    <label class="InputLabel RomanXS">Kana</label>
+                                    <input class="ItemInput KanaS NoBlockMargins" data-use="example.kana.input" data-as="kana"></input>
                                 </div>
                                 <div class="FlexLayout Col">
-                                    <label class="CCLanguageItemInputLabel RomanXS">Romaji</label>
-                                    <input class="CCLanguageItemInput RomanS NoBlockMargins" data-use="example.romaji.input" data-as="romaji"></input>
+                                    <label class="InputLabel RomanXS">Romaji</label>
+                                    <input class="ItemInput RomanS NoBlockMargins" data-use="example.romaji.input" data-as="romaji"></input>
                                 </div>
                                 <div class="FlexLayout Col">
-                                    <label class="CCLanguageItemInputLabel RomanXS">Meaning</label>
-                                    <input class="CCLanguageItemInput RomanS NoBlockMargins" data-use="example.meaning.input" data-as="meaning"></input>
+                                    <label class="InputLabel RomanXS">Meaning</label>
+                                    <input class="ItemInput RomanS NoBlockMargins" data-use="example.meaning.input" data-as="meaning"></input>
                                 </div>
                             </div>
                             <div class="CCLanguageItemExampleControls">
