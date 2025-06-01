@@ -23,13 +23,13 @@ cc-languageitem {
 
 
 
-.CCLanguageItemFieldset {
+.CCLanguageItem .Fieldset {
     padding-top: 28px;
     padding-right: 0px;
     transition: all 0.5s;
 }
 
-.CCLanguageItemFieldset:disabled {
+.CCLanguageItem .Fieldset:disabled {
     padding-top: 0px;
     padding-right: 28px;
 }
@@ -53,19 +53,19 @@ cc-languageitem {
     flex-direction: column;
 }
 
-.CCLanguageItemFieldset:not(:disabled) .CCLanguageItemFormButtonStrip.ShowOnRead {
+.CCLanguageItem .Fieldset:not(:disabled) .CCLanguageItemFormButtonStrip.ShowOnRead {
     display: none;
 }
 
-.CCLanguageItemFieldset:disabled .CCLanguageItemFormButtonStrip.ShowOnRead {
+.CCLanguageItem .Fieldset:disabled .CCLanguageItemFormButtonStrip.ShowOnRead {
     display: flex;
 }
 
-.CCLanguageItemFieldset:not(:disabled) .CCLanguageItemFormButtonStrip.ShowOnEdit {
+.CCLanguageItem .Fieldset:not(:disabled) .CCLanguageItemFormButtonStrip.ShowOnEdit {
     display: flex;
 }
 
-.CCLanguageItemFieldset:disabled .CCLanguageItemFormButtonStrip.ShowOnEdit {
+.CCLanguageItem .Fieldset:disabled .CCLanguageItemFormButtonStrip.ShowOnEdit {
     display: none;
 }
 
@@ -141,7 +141,7 @@ cc-languageitem {
     display: flex;
 }
 
-.CCLanguageItemFieldset:disabled .CCLanguageItemFormButton.ShowOnEdit {
+.CCLanguageItem .Fieldset:disabled .CCLanguageItemFormButton.ShowOnEdit {
     display: none;
 }
 
@@ -433,7 +433,7 @@ cc-languageitem {
     }
 }
 
-.CCLanguageItemFieldset:disabled .CCLanguageItemInputLabel {
+.CCLanguageItem .Fieldset:disabled .CCLanguageItemInputLabel {
     display: none;
     height: 0px;
     opacity: 0;
@@ -443,11 +443,11 @@ cc-languageitem {
     
 } 
 
-.CCLanguageItemFieldset .CCLanguageItemOutput {
+.CCLanguageItem .Fieldset .CCLanguageItemOutput {
     display: none;
 }
 
-.CCLanguageItemFieldset:disabled .CCLanguageItemOutput {
+.CCLanguageItem .Fieldset:disabled .CCLanguageItemOutput {
     display: block;
 }
 
@@ -490,7 +490,7 @@ cc-languageitem {
     width: auto;
 }
 
-.CCLanguageItemFieldset:disabled .CCLanguageItemExampleControls {
+.CCLanguageItem .Fieldset:disabled .CCLanguageItemExampleControls {
     display: none;
     width: 0px;
 }
