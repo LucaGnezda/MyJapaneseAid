@@ -14,7 +14,8 @@ cc-languageitem {
         display: flex;
         flex-direction: column;
         position: relative;
-        min-height: 72px;
+        min-height: 96px;
+        padding: 0px;
     }
 
 
@@ -466,7 +467,7 @@ cc-languageitem {
         opacity: 1;
         transform: scale(1);
     }
-    
+
 
     /**
      * Special Case - Examples UI

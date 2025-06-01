@@ -137,8 +137,8 @@ class CCLanguageItem extends CCBase {
     }
 
     static #htmlRootTemplate = `
-        <div class="CCLanguageItem Container PadTBL PadLRXL" data-use="root-container">
-            <form>
+        <div class="CCLanguageItem Container" data-use="root-container">
+            <form class="PadTBL PadLRXL">
                 <fieldset class="Fieldset" data-use="fieldset">
                     <div class="FlexLayout Col">
                         <label class="InputLabel RomanXS">Kana</label>
