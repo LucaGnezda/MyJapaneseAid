@@ -86,6 +86,12 @@ cc-languageitem {
         transition: all 0.3s ease;
     }
 
+    .FormButtonIcon {
+        width: 20px;
+        height: 20px;
+        filter: brightness(0) saturate(100%) invert(0%) sepia(2%) saturate(0%) hue-rotate(189deg) brightness(96%) contrast(101%);
+    }
+
     .FormButton.Disabled {
         opacity: 0.5;
     }
@@ -218,6 +224,53 @@ cc-languageitem {
         }
     }
 
+
+    /**
+     * Grids & Layouts - 
+     */
+    .FormGrid {
+        border-left: 2px solid var(--colourPrimary);
+        display: grid;
+        grid-template-columns: 1fr 99fr;
+        column-gap: 1rem;
+        row-gap: 0.3rem;
+        font-weight: 300;
+        transition: all 0.5s;
+    }
+
+    .FormGrid.Hide {
+        height: 0px;
+        margin: 0px;
+    }
+
+    .FlexLayout {
+        display: flex;
+    }
+
+    .FlexLayout.Hide {
+        display: none;
+    }
+
+    .FlexLayout.Row {
+        flex-direction: row;
+    }
+
+    .FlexLayout.Row.Reverse {
+        flex-direction: row-reverse;
+    }
+
+    .FlexLayout.Col {
+        flex-direction: column;
+    }
+
+    .FlexLayout.Col.Reverse {
+        flex-direction: column-reverse;
+    }
+
+    .FlexLayout.JustifyEnd {
+        justify-content: end;
+    }
+
 }
 
 
@@ -226,31 +279,10 @@ cc-languageitem {
 
 
 
-.CCLanguageItemExample.Deleting {
-    height: 0px;
-    margin-bottom: 0px;
-}
 
-.CCLanguageItemFormButtonIcon {
-    width: 20px;
-    height: 20px;
-    filter: brightness(0) saturate(100%) invert(0%) sepia(2%) saturate(0%) hue-rotate(189deg) brightness(96%) contrast(101%);
-}
 
-.CCLanguageItemGrid {
-    border-left: 2px solid var(--colourPrimary);
-    display: grid;
-    grid-template-columns: 1fr 99fr;
-    column-gap: 1rem;
-    row-gap: 0.3rem;
-    font-weight: 300;
-    transition: all 0.5s;
-}
 
-.CCLanguageItemGrid.Hide {
-    height: 0px;
-    margin: 0px;
-}
+
 
 .CCLanguageItemLabel {
     color: var(--colourPrimaryDarker20);
@@ -298,6 +330,11 @@ cc-languageitem {
     flex: 1 1 auto;
     width: auto;
     transition: all 500ms;
+}
+
+.CCLanguageItemExample.Deleting {
+    height: 0px;
+    margin-bottom: 0px;
 }
 
 .CCLanguageItemSectionButton {
@@ -373,34 +410,6 @@ cc-languageitem {
 .CCLanguageItemExample.Hide {
     height: 0px;
     margin: 0px;
-}
-
-.CCLanguageItemFlex {
-    display: flex;
-}
-
-.CCLanguageItemFlex.Hide {
-    display: none;
-}
-
-.CCLanguageItemFlex.Row {
-    flex-direction: row;
-}
-
-.CCLanguageItemFlex.Row.Reverse {
-    flex-direction: row-reverse;
-}
-
-.CCLanguageItemFlex.Col {
-    flex-direction: column;
-}
-
-.CCLanguageItemFlex.Col.Reverse {
-    flex-direction: column-reverse;
-}
-
-.CCLanguageItemFlex.JustifyEnd {
-    justify-content: end;
 }
 
 .CCLanguageItemInput {
