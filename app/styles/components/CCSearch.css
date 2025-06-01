@@ -129,7 +129,7 @@ cc-search {
         left: 0;
         width: 100%;
         height: 2px;
-        background-color: var(--colourSecondary);
+        background-color: var(--colourPrimaryDarker30);
         opacity: 0;
         transition: opacity 500ms, transform 500ms;
         transform: scale(0);
@@ -137,7 +137,7 @@ cc-search {
     }
 
     .SearchFilter.Selected {
-        color: var(--colourSecondary);
+        color: var(--colourPrimaryDarker30);
     }
 
     .SearchFilter.Selected::after {

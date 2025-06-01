@@ -435,16 +435,16 @@ class CCLanguageItem extends CCBase {
 
                 /** @ts-ignore */ 
                 this.#elements.examplesHeader.parentNode.classList.remove("Hide");
-
-                this.#elements.examplesHeader.classList.remove("Expanded");
-                this.#elements.examplesExpander.classList.remove("Hide");
-                this.#elements.examplesExpander.classList.remove("Rotate180");
-                this.#elements.examplesAdd.classList.add("Hide");
             }
             else {
                 /** @ts-ignore */ 
                 this.#elements.examplesHeader.parentNode.classList.add("Hide");
             }
+
+            this.#elements.examplesHeader.classList.remove("Expanded");
+            this.#elements.examplesExpander.classList.remove("Hide");
+            this.#elements.examplesExpander.classList.remove("Rotate180");
+            this.#elements.examplesAdd.classList.add("Hide");
 
             this.#elements.examplesContainer.classList.remove("Show");
 
@@ -947,7 +947,7 @@ class CCLanguageItem extends CCBase {
      * @returns
      */
     saveCallback(mouseEvent) {
-        console.log("Save");
+        Log.debug("Save", "COMPONENT");
 
         if (!this.isValid(true) || (mouseEvent.currentTarget && mouseEvent.currentTarget.hasAttribute("data-disabled"))) {
             return;
@@ -981,7 +981,7 @@ class CCLanguageItem extends CCBase {
      * @returns
      */
     cancelCallback(mouseEvent) {
-        console.log("Cancel");
+        Log.debug("Cancel", "COMPONENT");
 
         this.#rollbackChanges();
     }
@@ -991,7 +991,8 @@ class CCLanguageItem extends CCBase {
      * @returns
      */
     editCallback(mouseEvent) {
-        console.log("Edit");
+        Log.debug("Edit", "COMPONENT");
+        
 
         // Update CSS
         this.#setUIForEdit();
@@ -1003,7 +1004,7 @@ class CCLanguageItem extends CCBase {
      * @returns
      */
     deleteRequestCallback(mouseEvent) {
-        console.log("Delete");
+        Log.debug("Delete", "COMPONENT");
 
         if (this.#attachedCallbacks.deleteRequestCallback) {
 
@@ -1022,7 +1023,7 @@ class CCLanguageItem extends CCBase {
      * @returns
      */
     validateHighlighterCallback(event) {
-        console.log("Highlighter Blur");
+        Log.debug("Highlighter Blur", "COMPONENT");
 
         this.#validateHighlighter(event.currentTarget);
         this.#validateForm();
@@ -1033,7 +1034,7 @@ class CCLanguageItem extends CCBase {
      * @returns
      */
     validateRomajiCallback(event) {
-        console.log("Romaji Change");
+        Log.debug("Romaji Change", "COMPONENT");
 
         this.#validateNotNull(event.currentTarget);
         this.#validateForm();
@@ -1070,7 +1071,7 @@ class CCLanguageItem extends CCBase {
      * @returns
      */
     examplesExpanderCallback(mouseEvent) {
-        console.log("Expander");
+        Log.debug("Expand/Collapse Click", "COMPONENT");
 
         if (this.#elements.fieldset && this.#elements.examplesHeader && this.#elements.examplesExpander && this.#elements.examplesContainer) {
             
@@ -1099,7 +1100,7 @@ class CCLanguageItem extends CCBase {
      * @returns
      */
     examplesAddCallback(mouseEvent) {
-        console.log("Add");
+        Log.debug("Add", "COMPONENT");
 
         if (this.#elements.examplesContainer) {
             let fragment = getDOMFragmentFromString(CCLanguageItem.#htmlExampleTemplate);
@@ -1115,7 +1116,7 @@ class CCLanguageItem extends CCBase {
      * @returns
      */
     exampleClickCallback(mouseEvent) {
-        console.log("Delete");
+        Log.debug("Delete", "COMPONENT");
 
         if (mouseEvent.target) {
             

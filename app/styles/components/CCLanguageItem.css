@@ -478,12 +478,14 @@ cc-languageitem {
         display: flex;
         flex-direction: row;
         transition: all 0.5s;
+        opacity: 1;
     }
 
     .ExamplesSectionBreak.Hide {
         height: 0px;
         overflow: hidden;
         margin: 0px;
+        opacity: 0;
     }
 
     .ExamplesHeader {
