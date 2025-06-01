@@ -184,7 +184,7 @@ class CCLanguageItem extends CCBase {
                     </div>
                     <div class="CCLanguageItemExamples" data-use="examples-container">
                     </div>
-                    <div class="CCLanguageItemFormButtonStrip Col ShowOnRead">
+                    <div class="FormButtonStrip Col ShowOnRead">
                         <div class="CCLanguageItemFormButton ShowOnContainerHover" data-use="edit-button">
                             <img src="./app/assets/svg/pencil.svg" class="CCLanguageItemFormButtonIcon">
                         </div>
@@ -195,7 +195,7 @@ class CCLanguageItem extends CCBase {
                             <img src="./app/assets/svg/trash.svg" class="CCLanguageItemFormButtonIcon">
                         </div>
                     </div>
-                    <div class="CCLanguageItemFormButtonStrip Row ShowOnEdit">
+                    <div class="FormButtonStrip Row ShowOnEdit">
                         <div class="CCLanguageItemFormButton ShowOnEdit" data-use="saveedit-button">
                             <img src="./app/assets/svg/check.svg" class="CCLanguageItemFormButtonIcon">
                         </div>

@@ -16,58 +16,57 @@ cc-languageitem {
     }
 
 
+    /* Fieldset - Anchors read/edit mod styling logic through use of the 'disabled' attribute */
+    .Fieldset {
+        padding-top: 28px;
+        padding-right: 0px;
+        transition: all 0.5s;
+    }
 
+    .Fieldset:disabled {
+        padding-top: 0px;
+        padding-right: 28px;
+    }
     
+    /* Buttonstrip & FormButton - Main interactive buttons for the form and their arrangement*/
+    .FormButtonStrip {
+        top: 4px;
+        right: 4px;
+        width: auto;
+        height: auto;
+        display: flex;
+        flex-direction: row;
+        position: absolute;
+        gap: 4px;
+    }
+
+    .FormButtonStrip.Row {
+        flex-direction: row;
+    }
+
+    .FormButtonStrip.Col {
+        flex-direction: column;
+    }
+
+    .Fieldset:not(:disabled) .FormButtonStrip.ShowOnRead {
+        display: none;
+    }
+
+    .Fieldset:disabled .FormButtonStrip.ShowOnRead {
+        display: flex;
+    }
+
+    .Fieldset:not(:disabled) .FormButtonStrip.ShowOnEdit {
+        display: flex;
+    }
+
+    .Fieldset:disabled .FormButtonStrip.ShowOnEdit {
+        display: none;
+    }
 
 }
 
 
-
-.CCLanguageItem .Fieldset {
-    padding-top: 28px;
-    padding-right: 0px;
-    transition: all 0.5s;
-}
-
-.CCLanguageItem .Fieldset:disabled {
-    padding-top: 0px;
-    padding-right: 28px;
-}
-
-.CCLanguageItemFormButtonStrip {
-    top: 4px;
-    right: 4px;
-    width: auto;
-    height: auto;
-    display: flex;
-    flex-direction: row;
-    position: absolute;
-    gap: 4px;
-}
-
-.CCLanguageItemFormButtonStrip.Row {
-    flex-direction: row;
-}
-
-.CCLanguageItemFormButtonStrip.Col {
-    flex-direction: column;
-}
-
-.CCLanguageItem .Fieldset:not(:disabled) .CCLanguageItemFormButtonStrip.ShowOnRead {
-    display: none;
-}
-
-.CCLanguageItem .Fieldset:disabled .CCLanguageItemFormButtonStrip.ShowOnRead {
-    display: flex;
-}
-
-.CCLanguageItem .Fieldset:not(:disabled) .CCLanguageItemFormButtonStrip.ShowOnEdit {
-    display: flex;
-}
-
-.CCLanguageItem .Fieldset:disabled .CCLanguageItemFormButtonStrip.ShowOnEdit {
-    display: none;
-}
 
 .CCLanguageItemFormButton {
     width: 32px;
