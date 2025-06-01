@@ -188,7 +188,7 @@ class CCLanguageItem extends CCBase {
                         <div class="FormButton ShowOnContainerHover BlackTint" data-use="edit-button">
                             <img src="./app/assets/svg/pencil.svg" class="CCLanguageItemFormButtonIcon">
                         </div>
-                        <div class="CCLanguageItemFormButtonVerticalSpacer ShowOnContainerHover">
+                        <div class="Spacer Vertical ShowOnContainerHover">
                             <img src="./app/assets/svg/minus.svg" class="CCLanguageItemFormButtonIcon">
                         </div>
                         <div class="FormButton ShowOnContainerHover RedTint" data-use="delete-button">

@@ -157,7 +157,10 @@ cc-languageitem {
 
     &.Container:hover .FormButton.ShowOnContainerHover {
         display: flex;
-        opacity: 1;    
+        opacity: 1;
+        @starting-style {
+            opacity: 0;
+        }    
     }
 
     .FormButton.StrengthenOnExampleHover {
@@ -166,38 +169,62 @@ cc-languageitem {
         transition-behavior: allow-discrete;
     }
 
+    /* !!!! TODO !!!! - Fix Item Example When I reach it */ 
     .CCLanguageItemExample:hover .FormButton.StrengthenOnExampleHover {
         display: flex;
         opacity: 1;
+        @starting-style {
+            opacity: 0.3;
+        }
     }
+
+
+    /**
+     * ButtonSpacer (Vertical & Horizontal) - Userd to add separation and grouping between buttons
+     */
+    .FormButtonStrip .Spacer {
+        background-color: transparent;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        border: none;
+        overflow: hidden;
+        opacity: 0.3;
+    }
+
+    .FormButtonStrip .Spacer.Vertical {
+        width: 32px;
+        height: 16px;
+    }
+
+    .FormButtonStrip .Spacer.Horizontal {
+        width: 16px;
+        height: 32px;
+    }
+
+    .FormButtonStrip .Spacer.ShowOnContainerHover {
+        display: none;
+        transition: all 0.3s;
+        opacity: 0;
+        transition-behavior: allow-discrete;
+    }
+
+    &.Container:hover .FormButtonStrip .Spacer.ShowOnContainerHover {
+        display: flex;
+        opacity: 0.3;
+        @starting-style {
+            opacity: 0;
+        }
+    }
+
 }
 
 
 
-.CCLanguageItemFormButtonVerticalSpacer {
-    width: 32px;
-    height: 16px;
-    background-color: transparent;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    border: none;
-    overflow: hidden;
-    opacity: 0.3;
-}
 
-.CCLanguageItemFormButtonVerticalSpacer.ShowOnContainerHover {
-    display: none;
-    transition: all 0.3s;
-    opacity: 0;
-    transition-behavior: allow-discrete;
-}
 
-.CCLanguageItem.Container:hover .CCLanguageItemFormButtonVerticalSpacer.ShowOnContainerHover {
-    display: flex;
-    opacity: 0.3;
-}
+
 
 .CCLanguageItemExample.Deleting {
     height: 0px;
