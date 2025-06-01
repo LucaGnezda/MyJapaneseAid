@@ -2,158 +2,161 @@ cc-search {
     display: contents;
 }
 
-.CCSearchContainer {
-    display: flex;
-    flex: 1 1 auto;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-}
+.CCSearch {
 
-.CCSearchControl {
-    display: flex;
-    flex: 1 1 auto;
-    flex-direction: row;    
-    width: 30vmin;
-    max-width: 600px;
-}
-
-.CCSearchInput {
-    flex: 1 1 auto;
-    border-radius: 10px 0px 0px 12px;
-    padding: 0px 0px 0px 10px;
-    border-top: 1px solid var(--blacktranslucent80);
-    border-right: none;
-    border-bottom: 1px solid var(--blacktranslucent80);
-    border-left: 1px solid var(--blacktranslucent80);
-    height: 30px;
-    width: 100%;
-    color: black;
-    text-align: start;
-    font-family: "Geist"; 
-    font-weight: 500;
-    font-size: 0.95rem;
-    background: var(--whitetranslucent80);
-}
-
-.CCSearchButtonSet {
-    display: flex;
-    flex: 0 0 auto;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    border-radius: 0px 10px 10px 0px;
-    padding: 0px 0px 0px 0px;
-    border-top: 1px solid var(--blacktranslucent80);
-    border-right: 1px solid var(--blacktranslucent80);
-    border-bottom: 1px solid var(--blacktranslucent80);
-    border-left: none;
-    height: 30px;
-    color: black;
-    background: var(--whitetranslucent80);
-    background-clip: content-box;
-}
-
-.CCSearchInput:focus {
-    outline: none;
-}
-
-.CCSearchButton {
-    flex: 0 0 auto;
-    height: 26px;
-    width: 0px;
-    opacity: 0;
-    border: none;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    transition: all 0.3s ease;
-    pointer-events: none;
-    background-color: var(--blacktranslucent90);
-    background-clip: content-box;
-    margin-right: 0px;
-}
-
-.CCSearchButton:hover {
-    background-color: var(--blacktranslucent80);
-}
-
-
-.CCSearchButton.Text {
-    font-family: "Geist"; 
-    font-weight: 500;
-    font-size: 0.7rem;
-    user-select: none;
-    -webkit-user-select: none; /* Non standard for Safari */
-}
-
-.CCSearchButton.Show {
-    width: 26px;
-    opacity: 1;
-    pointer-events: all;
-    margin-right: 2px;
-}
-
-.CCSearchButton.Last {
-    border-radius: 0px 8px 8px 0px;
-}
-
-.CCSearchIcon {
-    width: 16px;
-    height: 16px;
-    filter: brightness(0) saturate(100%) invert(0%) sepia(2%) saturate(0%) hue-rotate(189deg) brightness(96%) contrast(101%);
-}
-
-.CCSearchFilters {
-    display: flex;
-    flex-direction: row;
-}
-
-.CCSearchFilter {
-    font-family: "Geist"; 
-    font-weight: 600;
-    font-size: 1.4vw;
-    margin-left: 2vw;
-    position: relative; /* To anchor the ::after below */
-    user-select: none;
-    -webkit-user-select: none; /* Non standard for Safari */
-}
-
-.CCSearchFilter::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 2px;
-    background-color: var(--colourSecondary);
-    opacity: 0;
-    transition: opacity 500ms, transform 500ms;
-    transform: scale(0);
-    transform-origin: center;
-}
-
-.CCSearchFilter.Selected {
-    color: var(--colourSecondary);
-}
-
-.CCSearchFilter.Selected::after {
-    opacity: 1;
-    transform: scale(1);
-}
-
-
-@media (width <= 800px) {
-    .CCSearchFilter {
-        margin-left: 0.9rem;
-        font-size: 0.7rem;
+    &.Container {
+        display: flex;
+        flex: 1 1 auto;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
     }
-}
 
-@media (width >= 1200px) {
-    .CCSearchFilter {
-        margin-left: 1.05rem;
-        font-size: 1rem;
+    .SearchControl {
+        display: flex;
+        flex: 1 1 auto;
+        flex-direction: row;    
+        width: 30vmin;
+        max-width: 600px;
+    }
+
+    .SearchInput {
+        flex: 1 1 auto;
+        border-radius: 10px 0px 0px 12px;
+        padding: 0px 0px 0px 10px;
+        border-top: 1px solid var(--blacktranslucent80);
+        border-right: none;
+        border-bottom: 1px solid var(--blacktranslucent80);
+        border-left: 1px solid var(--blacktranslucent80);
+        height: 30px;
+        width: 100%;
+        color: black;
+        text-align: start;
+        font-family: "Geist"; 
+        font-weight: 500;
+        font-size: 0.95rem;
+        background: var(--whitetranslucent80);
+    }
+
+    .SearchButtonSet {
+        display: flex;
+        flex: 0 0 auto;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        border-radius: 0px 10px 10px 0px;
+        padding: 0px 0px 0px 0px;
+        border-top: 1px solid var(--blacktranslucent80);
+        border-right: 1px solid var(--blacktranslucent80);
+        border-bottom: 1px solid var(--blacktranslucent80);
+        border-left: none;
+        height: 30px;
+        color: black;
+        background: var(--whitetranslucent80);
+        background-clip: content-box;
+    }
+
+    .SearchInput:focus {
+        outline: none;
+    }
+
+    .SearchButton {
+        flex: 0 0 auto;
+        height: 26px;
+        width: 0px;
+        opacity: 0;
+        border: none;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        transition: all 0.3s ease;
+        pointer-events: none;
+        background-color: var(--blacktranslucent90);
+        background-clip: content-box;
+        margin-right: 0px;
+    }
+
+    .SearchButton:hover {
+        background-color: var(--blacktranslucent80);
+    }
+
+
+    .SearchButton.Text {
+        font-family: "Geist"; 
+        font-weight: 500;
+        font-size: 0.7rem;
+        user-select: none;
+        -webkit-user-select: none; /* Non standard for Safari */
+    }
+
+    .SearchButton.Show {
+        width: 26px;
+        opacity: 1;
+        pointer-events: all;
+        margin-right: 2px;
+    }
+
+    .SearchButton.Last {
+        border-radius: 0px 8px 8px 0px;
+    }
+
+    .SearchIcon {
+        width: 16px;
+        height: 16px;
+        filter: brightness(0) saturate(100%) invert(0%) sepia(2%) saturate(0%) hue-rotate(189deg) brightness(96%) contrast(101%);
+    }
+
+    .SearchFilters {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .SearchFilter {
+        font-family: "Geist"; 
+        font-weight: 600;
+        font-size: 1.4vw;
+        margin-left: 2vw;
+        position: relative; /* To anchor the ::after below */
+        user-select: none;
+        -webkit-user-select: none; /* Non standard for Safari */
+    }
+
+    .SearchFilter::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background-color: var(--colourPrimaryDarker30);
+        opacity: 0;
+        transition: opacity 500ms, transform 500ms;
+        transform: scale(0);
+        transform-origin: center;
+    }
+
+    .SearchFilter.Selected {
+        color: var(--colourPrimaryDarker30);
+    }
+
+    .SearchFilter.Selected::after {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+
+    @media (width <= 800px) {
+        .SearchFilter {
+            margin-left: 0.9rem;
+            font-size: 0.7rem;
+        }
+    }
+
+    @media (width >= 1200px) {
+        .SearchFilter {
+            margin-left: 1.05rem;
+            font-size: 1rem;
+        }
     }
 }

@@ -5,8 +5,9 @@
 
 /**
  * Typedefs
- * @typedef {{searchInputElement: HTMLInputElement?, andButtonElement: HTMLInputElement?, orButtonElement: HTMLInputElement?, clearButtonElement: HTMLButtonElement?, searchButtonElement: HTMLInputElement?, scopeAllElement: HTMLDivElement?, scopeSyllabaryElement: HTMLDivElement?, scopeWordsElement: HTMLDivElement?, scopePhrasesElement: HTMLDivElement?, scopeSentencesElement: HTMLDivElement?}} CCSearchElements
- * @typedef {{onChangeCallback: Function?, onChangeDebouncedCallback: Function?, searchType: String?, searchScope: String?}} CCSearchPropertyBag
+ * @typedef {{searchInputElement: HTMLInputElement?, andButtonElement: HTMLInputElement?, orButtonElement: HTMLInputElement?, clearButtonElement: HTMLButtonElement?, searchButtonElement: HTMLInputElement?, scopeAllElement: HTMLDivElement?, scopeKanaElement: HTMLDivElement?, scopeWordsElement: HTMLDivElement?, scopePhrasesElement: HTMLDivElement?, scopeSentencesElement: HTMLDivElement?}} CCSearchElements
+ * @typedef {{searchType: String?, searchScope: String?}} CCSearchPropertyBag
+ * @typedef {{onChangeCallback: Function?, onChangeDebouncedCallback: Function?}} CCSearchAttachedCallbacks
  */
 
 class CCSearch extends CCBase {
@@ -26,7 +27,7 @@ class CCSearch extends CCBase {
         clearButtonElement: null,
         searchButtonElement: null,
         scopeAllElement: null,
-        scopeSyllabaryElement: null,
+        scopeKanaElement: null,
         scopeWordsElement: null,
         scopePhrasesElement: null,
         scopeSentencesElement: null
@@ -37,33 +38,40 @@ class CCSearch extends CCBase {
      * @type {CCSearchPropertyBag}
      */
     #propertyBag = {
-        onChangeCallback: null,
-        onChangeDebouncedCallback: null,
         searchType: null,
         searchScope: null
     }
 
+    /**
+     * The elements that make up this component
+     * @type {CCSearchAttachedCallbacks}
+     */
+    #attachedCallbacks = {
+        onChangeCallback: null,
+        onChangeDebouncedCallback: null,
+    }
+
     static #htmlTemplate = `
-        <div class="CCSearchContainer" data-container>
-            <div class="CCSearchControl">
-                <input type="text" class="CCSearchInput" data-searchinput>
-                <div class="CCSearchButtonSet">
-                    <div class="CCSearchButton Text" data-andbutton>and</div>
-                    <div class="CCSearchButton Text" data-orbutton>or</div>
-                    <div class="CCSearchButton" data-clearbutton>
-                        <img src="./app/assets/svg/cross.svg" class="CCSearchIcon">
+        <div class="CCSearch Container" data-container>
+            <div class="SearchControl">
+                <input type="text" class="SearchInput" data-searchinput>
+                <div class="SearchButtonSet">
+                    <div class="SearchButton Text" data-andbutton>and</div>
+                    <div class="SearchButton Text" data-orbutton>or</div>
+                    <div class="SearchButton" data-clearbutton>
+                        <img src="./app/assets/svg/cross.svg" class="SearchIcon">
                     </div>
-                    <div class="CCSearchButton Show Last" data-searchbutton>
-                        <img src="./app/assets/svg/search.svg" class="CCSearchIcon">            
+                    <div class="SearchButton Show Last" data-searchbutton>
+                        <img src="./app/assets/svg/search.svg" class="SearchIcon">            
                     </div>
                 </div>
             </div>
-            <div class="CCSearchFilters">
-                <div class="CCSearchFilter" data-searchscope="all">All</div>
-                <div class="CCSearchFilter" data-searchscope="syllabary">Syllabary</div>
-                <div class="CCSearchFilter" data-searchscope="words">Words</div>
-                <div class="CCSearchFilter" data-searchscope="phrases">Phrases</div>
-                <div class="CCSearchFilter" data-searchscope="sentences">Sentences</div>
+            <div class="SearchFilters">
+                <div class="SearchFilter" data-searchscope="all">All</div>
+                <div class="SearchFilter" data-searchscope="kana">Kana</div>
+                <div class="SearchFilter" data-searchscope="words">Words</div>
+                <div class="SearchFilter" data-searchscope="phrases">Phrases</div>
+                <div class="SearchFilter" data-searchscope="sentences">Sentences</div>
             </div>
         </div>
     `;
@@ -103,7 +111,7 @@ class CCSearch extends CCBase {
         this.#elements.searchButtonElement = fragment.querySelector('[data-searchbutton]');
 
         this.#elements.scopeAllElement = fragment.querySelector('[data-searchscope="all"]');
-        this.#elements.scopeSyllabaryElement = fragment.querySelector('[data-searchscope="syllabary"]');
+        this.#elements.scopeKanaElement = fragment.querySelector('[data-searchscope="kana"]');
         this.#elements.scopeWordsElement = fragment.querySelector('[data-searchscope="words"]');
         this.#elements.scopePhrasesElement = fragment.querySelector('[data-searchscope="phrases"]');
         this.#elements.scopeSentencesElement = fragment.querySelector('[data-searchscope="sentences"]');
@@ -113,18 +121,18 @@ class CCSearch extends CCBase {
 
     #initialiseElements() {
 
-        if (this.#elements.andButtonElement && this.#elements.orButtonElement && this.#elements.clearButtonElement && this.#elements.searchButtonElement && this.#elements.scopeAllElement && this.#elements.scopeSyllabaryElement && this.#elements.scopeWordsElement && this.#elements.scopePhrasesElement && this.#elements.scopeSentencesElement) {
+        if (this.#elements.andButtonElement && this.#elements.orButtonElement && this.#elements.clearButtonElement && this.#elements.searchButtonElement && this.#elements.scopeAllElement && this.#elements.scopeKanaElement && this.#elements.scopeWordsElement && this.#elements.scopePhrasesElement && this.#elements.scopeSentencesElement) {
             
-            this.#elements.andButtonElement.addEventListener("click", this.andToOrClickCallback.bind(this));
-            this.#elements.orButtonElement.addEventListener("click", this.orToAndClickCallback.bind(this));
-            this.#elements.clearButtonElement.addEventListener("click", this.clearClickCallback.bind(this));
-            this.#elements.searchButtonElement.addEventListener("click", this.searchClickCallback.bind(this));
+            this.#elements.andButtonElement.addEventListener("click", this.andToOrClickCallback.bind(this), this.getPreDisposeSignal());
+            this.#elements.orButtonElement.addEventListener("click", this.orToAndClickCallback.bind(this), this.getPreDisposeSignal());
+            this.#elements.clearButtonElement.addEventListener("click", this.clearClickCallback.bind(this), this.getPreDisposeSignal());
+            this.#elements.searchButtonElement.addEventListener("click", this.searchClickCallback.bind(this), this.getPreDisposeSignal());
 
-            this.#elements.scopeAllElement.addEventListener("click", this.scopeClickCallback.bind(this));
-            this.#elements.scopeSyllabaryElement.addEventListener("click", this.scopeClickCallback.bind(this));
-            this.#elements.scopeWordsElement.addEventListener("click", this.scopeClickCallback.bind(this));
-            this.#elements.scopePhrasesElement.addEventListener("click", this.scopeClickCallback.bind(this));
-            this.#elements.scopeSentencesElement.addEventListener("click", this.scopeClickCallback.bind(this));
+            this.#elements.scopeAllElement.addEventListener("click", this.scopeClickCallback.bind(this), this.getPreDisposeSignal());
+            this.#elements.scopeKanaElement.addEventListener("click", this.scopeClickCallback.bind(this), this.getPreDisposeSignal());
+            this.#elements.scopeWordsElement.addEventListener("click", this.scopeClickCallback.bind(this), this.getPreDisposeSignal());
+            this.#elements.scopePhrasesElement.addEventListener("click", this.scopeClickCallback.bind(this), this.getPreDisposeSignal());
+            this.#elements.scopeSentencesElement.addEventListener("click", this.scopeClickCallback.bind(this), this.getPreDisposeSignal());
 
             this.#propertyBag.searchType = null;
             this.#propertyBag.searchScope = "all";
@@ -143,7 +151,8 @@ class CCSearch extends CCBase {
      */
     #issueEvent(triggerEvent, useDebounce) {
 
-        if (this.#propertyBag && this.#elements && this.#elements.searchInputElement && this.#propertyBag.onChangeDebouncedCallback && this.#propertyBag.onChangeCallback) {
+        if (this.#propertyBag && this.#attachedCallbacks && this.#elements && this.#elements.searchInputElement && 
+            this.#attachedCallbacks.onChangeDebouncedCallback && this.#attachedCallbacks.onChangeCallback) {
 
             let event = {
                 originatingEvent: triggerEvent,
@@ -154,10 +163,10 @@ class CCSearch extends CCBase {
             };
 
             if (useDebounce) {
-                this.#propertyBag.onChangeDebouncedCallback(event);
+                this.#attachedCallbacks.onChangeDebouncedCallback(event);
             }
             else {
-                this.#propertyBag.onChangeCallback(event);
+                this.#attachedCallbacks.onChangeCallback(event);
             }
         }
     }
@@ -193,14 +202,14 @@ class CCSearch extends CCBase {
     attachOnChangeDebouncedCallback(callback) {
 
         if (callback != null && typeof callback === "function" && this.#elements.searchInputElement) {
-            this.#propertyBag.onChangeCallback = callback;
-            this.#propertyBag.onChangeDebouncedCallback = debounce(callback);
+            this.#attachedCallbacks.onChangeCallback = callback;
+            this.#attachedCallbacks.onChangeDebouncedCallback = debounce(callback);
             this.#elements.searchInputElement.addEventListener("keyup", this.keypressCallback.bind(this));
         }
         else if (this.#elements.searchInputElement) {
             this.#elements.searchInputElement.removeEventListener("keyup", this.keypressCallback.bind(this));
-            this.#propertyBag.onChangeCallback = null;
-            this.#propertyBag.onChangeDebouncedCallback = null;
+            this.#attachedCallbacks.onChangeCallback = null;
+            this.#attachedCallbacks.onChangeDebouncedCallback = null;
         }
     }
 
@@ -350,10 +359,10 @@ class CCSearch extends CCBase {
      */
     scopeClickCallback(clickEvent) {
 
-        if (clickEvent && clickEvent.target && this.#propertyBag && this.#propertyBag.onChangeCallback && this.#elements.searchInputElement && this.#elements.scopeAllElement && this.#elements.scopeSyllabaryElement && this.#elements.scopeWordsElement && this.#elements.scopePhrasesElement && this.#elements.scopeSentencesElement) {
+        if (clickEvent && clickEvent.target && this.#propertyBag && this.#attachedCallbacks.onChangeCallback && this.#elements.searchInputElement && this.#elements.scopeAllElement && this.#elements.scopeKanaElement && this.#elements.scopeWordsElement && this.#elements.scopePhrasesElement && this.#elements.scopeSentencesElement) {
             
             this.#elements.scopeAllElement.classList.remove("Selected");
-            this.#elements.scopeSyllabaryElement.classList.remove("Selected");
+            this.#elements.scopeKanaElement.classList.remove("Selected");
             this.#elements.scopeWordsElement.classList.remove("Selected");
             this.#elements.scopePhrasesElement.classList.remove("Selected");
             this.#elements.scopeSentencesElement.classList.remove("Selected");
@@ -366,8 +375,8 @@ class CCSearch extends CCBase {
                     this.#propertyBag.searchScope = scope;
                     break;
 
-                case "syllabary":
-                    this.#elements.scopeSyllabaryElement.classList.add("Selected");
+                case "kana":
+                    this.#elements.scopeKanaElement.classList.add("Selected");
                     this.#propertyBag.searchScope = scope;
                     break;
 

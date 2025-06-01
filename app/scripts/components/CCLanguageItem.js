@@ -137,70 +137,70 @@ class CCLanguageItem extends CCBase {
     }
 
     static #htmlRootTemplate = `
-        <div class="CCLanguageItemContainer PadTBL PadLRXL" data-use="root-container">
-            <form>
-                <fieldset class="CCLanguageItemFieldset" data-use="fieldset">
-                    <div class="CCLanguageItemFlex Col">
-                        <label class="CCLanguageItemInputLabel RomanXS">Kana</label>
-                        <input class="CCLanguageItemInput KanaXL NoBlockMargins HideOnRead" data-use="kana.input"></input>
-                        <p class="CCLanguageItemOutput KanaXL NoBlockMargins" data-use="kana.output"></p>
-                        <div class="CCLanguageItemFlex Row JustifyEnd">
-                            <label class="CCLanguageItemInputLabel RomanXS">Linked Highlighting</label>
-                            <input class="CCLanguageItemInput RomanXS NoBlockMargins LinkedHighlighter" data-use="kana.highlighter-input"></input>
+        <div class="CCLanguageItem Container" data-use="root-container">
+            <form class="PadTBL PadLRXL">
+                <fieldset class="Fieldset" data-use="fieldset">
+                    <div class="FlexLayout Col">
+                        <label class="InputLabel RomanXS">Kana</label>
+                        <input class="ItemInput KanaXL NoBlockMargins HideOnRead" data-use="kana.input"></input>
+                        <p class="ItemOutput KanaXL NoBlockMargins" data-use="kana.output"></p>
+                        <div class="FlexLayout Row JustifyEnd">
+                            <label class="InputLabel RomanXS">Linked Highlighting</label>
+                            <input class="ItemInput RomanXS NoBlockMargins LinkedHighlighter" data-use="kana.highlighter-input"></input>
                         </div>
                     </div>
-                    <div class="CCLanguageItemFlex Col">
-                        <label class="CCLanguageItemInputLabel RomanXS">Romaji</label>              
-                        <input class="CCLanguageItemInput RomanXL NoBlockMargins HideOnRead" data-use="romaji.input"></input>                    
-                        <p class="CCLanguageItemOutput RomanXL NoBlockMargins" data-use="romaji.output"></p>
-                        <div class="CCLanguageItemFlex Row JustifyEnd">
-                            <label class="CCLanguageItemInputLabel RomanXS">Linked Highlighting</label>
-                            <input class="CCLanguageItemInput RomanXS NoBlockMargins LinkedHighlighter" data-use="romaji.highlighter-input"></input>
+                    <div class="FlexLayout Col">
+                        <label class="InputLabel RomanXS">Romaji</label>              
+                        <input class="ItemInput RomanXL NoBlockMargins HideOnRead" data-use="romaji.input"></input>                    
+                        <p class="ItemOutput RomanXL NoBlockMargins" data-use="romaji.output"></p>
+                        <div class="FlexLayout Row JustifyEnd">
+                            <label class="InputLabel RomanXS">Linked Highlighting</label>
+                            <input class="ItemInput RomanXS NoBlockMargins LinkedHighlighter" data-use="romaji.highlighter-input"></input>
                         </div>  
                     </div>
-                    <div class="CCLanguageItemGrid PadLL MarginTBM" data-use="translation-grid">
-                        <div class="CCLanguageItemLabel" data-use="meaning.grid-cell-1"><p class="RomanM NoBlockMargins">Meaning:</p></div>
-                        <div class="CCLanguageItemFlex Col" data-use="meaning.grid-cell-2">
-                            <input class="CCLanguageItemInput RomanM NoBlockMargins Font300 HideOnRead" data-use="meaning.input"></input>
-                            <p class="CCLanguageItemOutput RomanM Font300 NoBlockMargins" data-use="meaning.output"></p>
-                            <div class="CCLanguageItemFlex Row JustifyEnd">
-                                <label class="CCLanguageItemInputLabel RomanXS">Linked Highlighting</label>
-                                <input class="CCLanguageItemInput RomanXS NoBlockMargins Font300 LinkedHighlighter" data-use="meaning.highlighter-input"></input>
+                    <div class="FormGrid PadLL MarginTBM" data-use="translation-grid">
+                        <div class="GridLabel" data-use="meaning.grid-cell-1"><p class="RomanM NoBlockMargins">Meaning:</p></div>
+                        <div class="FlexLayout Col" data-use="meaning.grid-cell-2">
+                            <input class="ItemInput RomanM NoBlockMargins Font300 HideOnRead" data-use="meaning.input"></input>
+                            <p class="ItemOutput RomanM Font300 NoBlockMargins" data-use="meaning.output"></p>
+                            <div class="FlexLayout Row JustifyEnd">
+                                <label class="InputLabel RomanXS">Linked Highlighting</label>
+                                <input class="ItemInput RomanXS NoBlockMargins Font300 LinkedHighlighter" data-use="meaning.highlighter-input"></input>
                             </div>
                         </div>
-                        <div class="CCLanguageItemLabel" data-use="literal.grid-cell-1"><p class="RomanM NoBlockMargins">Literal:</p></div>
-                        <div class="CCLanguageItemFlex Col" data-use="literal.grid-cell-2"><input class="CCLanguageItemInput RomanM NoBlockMargins Font300" data-use="literal.input"></input></div>
-                        <div class="CCLanguageItemLabel"  data-use="structure.grid-cell-1"><p class="RomanM NoBlockMargins">Structure:</p></div>
-                        <div class="CCLanguageItemFlex Col" data-use="structure.grid-cell-2"><input class="CCLanguageItemInput RomanM NoBlockMargins Font300" data-use="structure.input"></input></div>
-                        <div class="CCLanguageItemLabel" data-use="notes.grid-cell-1"><p class="RomanM NoBlockMargins">Notes:</p></div>
-                        <div class="CCLanguageItemFlex Col" data-use="notes.grid-cell-2"><input class="CCLanguageItemInput RomanM NoBlockMargins Font300" data-use="notes.input"></input></div>
+                        <div class="GridLabel" data-use="literal.grid-cell-1"><p class="RomanM NoBlockMargins">Literal:</p></div>
+                        <div class="FlexLayout Col" data-use="literal.grid-cell-2"><input class="ItemInput RomanM NoBlockMargins Font300" data-use="literal.input"></input></div>
+                        <div class="GridLabel"  data-use="structure.grid-cell-1"><p class="RomanM NoBlockMargins">Structure:</p></div>
+                        <div class="FlexLayout Col" data-use="structure.grid-cell-2"><input class="ItemInput RomanM NoBlockMargins Font300" data-use="structure.input"></input></div>
+                        <div class="GridLabel" data-use="notes.grid-cell-1"><p class="RomanM NoBlockMargins">Notes:</p></div>
+                        <div class="FlexLayout Col" data-use="notes.grid-cell-2"><input class="ItemInput RomanM NoBlockMargins Font300" data-use="notes.input"></input></div>
                     </div>
-                    <div class="CCLanguageItemExamplesSectionBreak MarginTXL MarginBS">
-                        <div class="CCLanguageItemExamplesHeader" data-use="examples-header">
-                            <div class="CCLanguageItemExamplesTitle MarginRM" data-use="examples-header.title"><p class="RomanM NoBlockMargins">Examples</p></div>
-                            <div class="CCLanguageItemSectionButton Show" data-use="examples-header.expander"><img src="./app/assets/svg/arrow-down.svg" class="CCLanguageItemExpandCollapseIcon"></div>
-                            <div class="CCLanguageItemSectionButton Show" data-use="examples-header.add"><img src="./app/assets/svg/plus.svg" class="CCLanguageItemExpandCollapseIcon"></div>
-                        </div>
-                    </div>
-                    <div class="CCLanguageItemExamples" data-use="examples-container">
-                    </div>
-                    <div class="CCLanguageItemFormButtonStrip Col ShowOnRead">
-                        <div class="CCLanguageItemFormButton ShowOnContainerHover" data-use="edit-button">
-                            <img src="./app/assets/svg/pencil.svg" class="CCLanguageItemFormButtonIcon">
-                        </div>
-                        <div class="CCLanguageItemFormButtonVerticalSpacer ShowOnContainerHover">
-                            <img src="./app/assets/svg/minus.svg" class="CCLanguageItemFormButtonIcon">
-                        </div>
-                        <div class="CCLanguageItemFormButton ShowOnContainerHover RedTint" data-use="delete-button">
-                            <img src="./app/assets/svg/trash.svg" class="CCLanguageItemFormButtonIcon">
+                    <div class="ExamplesSectionBreak MarginTXL MarginBS">
+                        <div class="ExamplesHeader" data-use="examples-header">
+                            <div class="ExamplesTitle MarginRM" data-use="examples-header.title"><p class="RomanM NoBlockMargins">Examples</p></div>
+                            <div class="FormButton ShadowGreenOnBlack Small" data-use="examples-header.expander"><img src="./app/assets/svg/arrow-down.svg" class="ExpandCollapseIcon"></div>
+                            <div class="FormButton ShadowGreenOnBlack Small" data-use="examples-header.add"><img src="./app/assets/svg/plus.svg" class="ExpandCollapseIcon"></div>
                         </div>
                     </div>
-                    <div class="CCLanguageItemFormButtonStrip Row ShowOnEdit">
-                        <div class="CCLanguageItemFormButton ShowOnEdit" data-use="saveedit-button">
-                            <img src="./app/assets/svg/check.svg" class="CCLanguageItemFormButtonIcon">
+                    <div class="Examples" data-use="examples-container">
+                    </div>
+                    <div class="FormButtonStrip Col ShowOnRead">
+                        <div class="FormButton ShowOnContainerHover BlackTint Medium" data-use="edit-button">
+                            <img src="./app/assets/svg/pencil.svg" class="FormButtonIcon">
                         </div>
-                        <div class="CCLanguageItemFormButton ShowOnEdit" data-use="canceledit-button">
-                            <img src="./app/assets/svg/cross.svg" class="CCLanguageItemFormButtonIcon">
+                        <div class="Spacer Vertical ShowOnContainerHover">
+                            <img src="./app/assets/svg/minus.svg" class="FormButtonIcon">
+                        </div>
+                        <div class="FormButton ShowOnContainerHover RedTint Medium" data-use="delete-button">
+                            <img src="./app/assets/svg/trash.svg" class="FormButtonIcon">
+                        </div>
+                    </div>
+                    <div class="FormButtonStrip Row ShowOnEdit">
+                        <div class="FormButton BlackTint Medium" data-use="saveedit-button">
+                            <img src="./app/assets/svg/check.svg" class="FormButtonIcon">
+                        </div>
+                        <div class="FormButton BlackTint Medium" data-use="canceledit-button">
+                            <img src="./app/assets/svg/cross.svg" class="FormButtonIcon">
                         </div>
                     </div>
                 </fieldset>
@@ -209,24 +209,24 @@ class CCLanguageItem extends CCBase {
     `;
 
     static #htmlExampleTemplate = `
-                        <div class="CCLanguageItemExample MarginBM PadLXL" data-use="example">
-                            <div class="CCLanguageItemExampleInputs PadRXL">
-                                <div class="CCLanguageItemFlex Col">
-                                    <label class="CCLanguageItemInputLabel RomanXS">Kana</label>
-                                    <input class="CCLanguageItemInput KanaS NoBlockMargins" data-use="example.kana.input" data-as="kana"></input>
+                        <div class="Example MarginBM PadLXL" data-use="example">
+                            <div class="ExampleInputs PadRXL">
+                                <div class="FlexLayout Col">
+                                    <label class="InputLabel RomanXS">Kana</label>
+                                    <input class="ItemInput KanaS NoBlockMargins" data-use="example.kana.input" data-as="kana"></input>
                                 </div>
-                                <div class="CCLanguageItemFlex Col">
-                                    <label class="CCLanguageItemInputLabel RomanXS">Romaji</label>
-                                    <input class="CCLanguageItemInput RomanS NoBlockMargins" data-use="example.romaji.input" data-as="romaji"></input>
+                                <div class="FlexLayout Col">
+                                    <label class="InputLabel RomanXS">Romaji</label>
+                                    <input class="ItemInput RomanS NoBlockMargins" data-use="example.romaji.input" data-as="romaji"></input>
                                 </div>
-                                <div class="CCLanguageItemFlex Col">
-                                    <label class="CCLanguageItemInputLabel RomanXS">Meaning</label>
-                                    <input class="CCLanguageItemInput RomanS NoBlockMargins" data-use="example.meaning.input" data-as="meaning"></input>
+                                <div class="FlexLayout Col">
+                                    <label class="InputLabel RomanXS">Meaning</label>
+                                    <input class="ItemInput RomanS NoBlockMargins" data-use="example.meaning.input" data-as="meaning"></input>
                                 </div>
                             </div>
-                            <div class="CCLanguageItemExampleControls">
-                                <div class="CCLanguageItemFormButton ShadowRed ShowOnExampleHover" data-use="example.delete-button">
-                                    <img src="./app/assets/svg/trash.svg" class="CCLanguageItemFormButtonIcon">
+                            <div class="ExampleControls">
+                                <div class="FormButton ShadowRed StrengthenOnExampleHover Medium" data-use="example.delete-button">
+                                    <img src="./app/assets/svg/trash.svg" class="FormButtonIcon">
                                 </div>
                             </div>
                         </div>
@@ -435,16 +435,16 @@ class CCLanguageItem extends CCBase {
 
                 /** @ts-ignore */ 
                 this.#elements.examplesHeader.parentNode.classList.remove("Hide");
-
-                this.#elements.examplesHeader.classList.remove("Expanded");
-                this.#elements.examplesExpander.classList.add("Show");
-                this.#elements.examplesExpander.classList.remove("Rotate180");
-                this.#elements.examplesAdd.classList.remove("Show");
             }
             else {
                 /** @ts-ignore */ 
                 this.#elements.examplesHeader.parentNode.classList.add("Hide");
             }
+
+            this.#elements.examplesHeader.classList.remove("Expanded");
+            this.#elements.examplesExpander.classList.remove("Hide");
+            this.#elements.examplesExpander.classList.remove("Rotate180");
+            this.#elements.examplesAdd.classList.add("Hide");
 
             this.#elements.examplesContainer.classList.remove("Show");
 
@@ -480,9 +480,9 @@ class CCLanguageItem extends CCBase {
             this.#elements.examplesHeader.parentNode.classList.remove("Hide");
 
             this.#elements.examplesHeader.classList.add("Expanded");
-            this.#elements.examplesExpander.classList.remove("Show");
+            this.#elements.examplesExpander.classList.add("Hide");
             this.#elements.examplesExpander.classList.add("Rotate180");
-            this.#elements.examplesAdd.classList.add("Show");
+            this.#elements.examplesAdd.classList.remove("Hide");
             this.#elements.examplesContainer.classList.add("Show");
 
             // Show everything in edit
@@ -947,7 +947,7 @@ class CCLanguageItem extends CCBase {
      * @returns
      */
     saveCallback(mouseEvent) {
-        console.log("Save");
+        Log.debug("Save", "COMPONENT");
 
         if (!this.isValid(true) || (mouseEvent.currentTarget && mouseEvent.currentTarget.hasAttribute("data-disabled"))) {
             return;
@@ -981,7 +981,7 @@ class CCLanguageItem extends CCBase {
      * @returns
      */
     cancelCallback(mouseEvent) {
-        console.log("Cancel");
+        Log.debug("Cancel", "COMPONENT");
 
         this.#rollbackChanges();
     }
@@ -991,7 +991,8 @@ class CCLanguageItem extends CCBase {
      * @returns
      */
     editCallback(mouseEvent) {
-        console.log("Edit");
+        Log.debug("Edit", "COMPONENT");
+        
 
         // Update CSS
         this.#setUIForEdit();
@@ -1003,7 +1004,7 @@ class CCLanguageItem extends CCBase {
      * @returns
      */
     deleteRequestCallback(mouseEvent) {
-        console.log("Delete");
+        Log.debug("Delete", "COMPONENT");
 
         if (this.#attachedCallbacks.deleteRequestCallback) {
 
@@ -1022,7 +1023,7 @@ class CCLanguageItem extends CCBase {
      * @returns
      */
     validateHighlighterCallback(event) {
-        console.log("Highlighter Blur");
+        Log.debug("Highlighter Blur", "COMPONENT");
 
         this.#validateHighlighter(event.currentTarget);
         this.#validateForm();
@@ -1033,7 +1034,7 @@ class CCLanguageItem extends CCBase {
      * @returns
      */
     validateRomajiCallback(event) {
-        console.log("Romaji Change");
+        Log.debug("Romaji Change", "COMPONENT");
 
         this.#validateNotNull(event.currentTarget);
         this.#validateForm();
@@ -1070,7 +1071,7 @@ class CCLanguageItem extends CCBase {
      * @returns
      */
     examplesExpanderCallback(mouseEvent) {
-        console.log("Expander");
+        Log.debug("Expand/Collapse Click", "COMPONENT");
 
         if (this.#elements.fieldset && this.#elements.examplesHeader && this.#elements.examplesExpander && this.#elements.examplesContainer) {
             
@@ -1099,7 +1100,7 @@ class CCLanguageItem extends CCBase {
      * @returns
      */
     examplesAddCallback(mouseEvent) {
-        console.log("Add");
+        Log.debug("Add", "COMPONENT");
 
         if (this.#elements.examplesContainer) {
             let fragment = getDOMFragmentFromString(CCLanguageItem.#htmlExampleTemplate);
@@ -1115,7 +1116,7 @@ class CCLanguageItem extends CCBase {
      * @returns
      */
     exampleClickCallback(mouseEvent) {
-        console.log("Delete");
+        Log.debug("Delete", "COMPONENT");
 
         if (mouseEvent.target) {
             
