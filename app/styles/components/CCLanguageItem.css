@@ -1,481 +1,581 @@
-.CCLanguageItemContainer {
-    background-color: var(--whitetranslucent70);
-    border: 1px solid var(--blacktranslucent80);
-    border-radius: 10px 10px 10px 10px;
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    min-height: 72px;
+cc-languageitem {
+    display: contents;
 }
 
-.CCLanguageItemFieldset {
-    padding-top: 28px;
-    padding-right: 0px;
-    transition: all 0.5s;
-}
+.CCLanguageItem {
 
-.CCLanguageItemFieldset:disabled {
-    padding-top: 0px;
-    padding-right: 28px;
-}
-
-.CCLanguageItemFormButtonStrip {
-    top: 4px;
-    right: 4px;
-    width: auto;
-    height: auto;
-    display: flex;
-    flex-direction: row;
-    position: absolute;
-    gap: 4px;
-}
-
-.CCLanguageItemFormButtonStrip.Row {
-    flex-direction: row;
-}
-
-.CCLanguageItemFormButtonStrip.Col {
-    flex-direction: column;
-}
-
-.CCLanguageItemFieldset:not(:disabled) .CCLanguageItemFormButtonStrip.ShowOnRead {
-    display: none;
-}
-
-.CCLanguageItemFieldset:disabled .CCLanguageItemFormButtonStrip.ShowOnRead {
-    display: flex;
-}
-
-.CCLanguageItemFieldset:not(:disabled) .CCLanguageItemFormButtonStrip.ShowOnEdit {
-    display: flex;
-}
-
-.CCLanguageItemFieldset:disabled .CCLanguageItemFormButtonStrip.ShowOnEdit {
-    display: none;
-}
-
-.CCLanguageItemFormButton {
-    width: 32px;
-    height: 32px;
-    background-color: var(--blacktranslucent90);
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    border-radius: 6px 6px 6px 6px;
-    border: none;
-    transition: all 0.3s ease;
-}
-
-.CCLanguageItemFormButton:not(.Disabled):hover {
-    background-color: var(--blacktranslucent80);
-}
-
-.CCLanguageItemFormButton.Disabled {
-    opacity: 0.5;
-}
-
-.CCLanguageItemFormButton.RedTint {
-    background-color: var(--redtranslucent80);
-}
-
-.CCLanguageItemFormButton.RedTint:hover {
-    background-color: var(--redtranslucent60);
-}
+    /** 
+     * Container - the outermost rendered element that acts as an anchor for all other CSS 
+     */
+    &.Container {
+        background-color: var(--whitetranslucent70);
+        border: 1px solid var(--blacktranslucent80);
+        border-radius: 10px 10px 10px 10px;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        min-height: 96px;
+        padding: 0px;
+    }
 
 
-.CCLanguageItemFormButton.ShadowRed {
-    background-color: transparent;
-    filter: brightness(0) saturate(100%) invert(46%) sepia(86%) saturate(4267%) hue-rotate(331deg) brightness(97%) contrast(87%);
-}
+    /** 
+     * Fieldset - Anchors read/edit mod styling logic through use of the 'disabled' attribute 
+     */
+    .Fieldset {
+        padding-top: 28px;
+        padding-right: 0px;
+        transition: all 0.5s;
+    }
 
-.CCLanguageItemFormButton.ShadowRed:hover {
-    background-color: var(--redtranslucent80);
-}
-
-.CCLanguageItemFormButton.ShowOnExampleHover {
-    transition: all 0.3s;
-    transition-behavior: allow-discrete;
-    opacity: 0.3;
-}
-
-.CCLanguageItemExample:hover .CCLanguageItemFormButton.ShowOnExampleHover {
-    display: flex;
-    opacity: 1;
-}
-
-.CCLanguageItemExample.Deleting {
-    height: 0px;
-    margin-bottom: 0px;
-}
-
-.CCLanguageItemFormButton.ShowOnContainerHover {
-    display: none;
-    opacity: 0;
-    transition: all 0.3s;
-    transition-behavior: allow-discrete;
-}
-
-.CCLanguageItemContainer:hover .CCLanguageItemFormButton.ShowOnContainerHover {
-    display: flex;
-    opacity: 1;
+    .Fieldset:disabled {
+        padding-top: 0px;
+        padding-right: 28px;
+    }
     
-}
+    /** 
+     * Buttonstrip - Group arrangement of interactive buttons for the form 
+     */
+    .FormButtonStrip {
+        top: 4px;
+        right: 4px;
+        width: auto;
+        height: auto;
+        display: flex;
+        flex-direction: row;
+        position: absolute;
+        gap: 4px;
+    }
 
-.CCLanguageItemFormButton.ShowOnEdit {
-    display: flex;
-}
+    .FormButtonStrip.Row {
+        flex-direction: row;
+    }
 
-.CCLanguageItemFieldset:disabled .CCLanguageItemFormButton.ShowOnEdit {
-    display: none;
-}
+    .FormButtonStrip.Col {
+        flex-direction: column;
+    }
 
-.CCLanguageItemFormButtonVerticalSpacer {
-    width: 32px;
-    height: 16px;
-    background-color: transparent;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    border: none;
-    overflow: hidden;
-    opacity: 0.3;
-}
+    .Fieldset:not(:disabled) .FormButtonStrip.ShowOnRead {
+        display: none;
+    }
 
-.CCLanguageItemFormButtonVerticalSpacer.ShowOnContainerHover {
-    display: none;
-    transition: all 0.3s;
-    opacity: 0;
-    transition-behavior: allow-discrete;
-}
+    .Fieldset:disabled .FormButtonStrip.ShowOnRead {
+        display: flex;
+    }
 
-.CCLanguageItemContainer:hover .CCLanguageItemFormButtonVerticalSpacer.ShowOnContainerHover {
-    display: flex;
-    opacity: 0.3;
-}
+    .Fieldset:not(:disabled) .FormButtonStrip.ShowOnEdit {
+        display: flex;
+    }
 
-.CCLanguageItemFormButtonIcon {
-    width: 20px;
-    height: 20px;
-    filter: brightness(0) saturate(100%) invert(0%) sepia(2%) saturate(0%) hue-rotate(189deg) brightness(96%) contrast(101%);
-}
-
-.CCLanguageItemGrid {
-    border-left: 2px solid var(--colourPrimary);
-    display: grid;
-    grid-template-columns: 1fr 99fr;
-    column-gap: 1rem;
-    row-gap: 0.3rem;
-    font-weight: 300;
-    transition: all 0.5s;
-}
-
-.CCLanguageItemGrid.Hide {
-    height: 0px;
-    margin: 0px;
-}
-
-.CCLanguageItemLabel {
-    color: var(--colourPrimaryDarker20);
-    font-weight: 400;
-    display: block;
-}
-
-.CCLanguageItemLabel.Hide {
-    display: none;
-}
+    .Fieldset:disabled .FormButtonStrip.ShowOnEdit {
+        display: none;
+    }
 
 
-.CCLanguageItemExamplesSectionBreak {
-    font-weight: 800;
-    color: var(--colourPrimaryDarker20);
-    display: flex;
-    flex-direction: row;
-    transition: all 0.5s;
-}
+    /** 
+     * FormButton - Standard format buttons 
+     */
+    .FormButton {
+        display: flex;
+        flex: 0 0 auto;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        border-radius: 6px 6px 6px 6px;
+        border: none;
+        transition: all 0.3s ease;
+    }
 
-.CCLanguageItemExamplesSectionBreak.Hide {
-    height: 0px;
-    overflow: hidden;
-    margin: 0px;
-}
+    .FormButton.Hide {
+        display: none;
+    }
 
-.CCLanguageItemExamplesHeader {
-    flex: 0 0 auto;
-    display: flex;
-    flex-direction: row;
-    border-bottom: 2px solid transparent;
-    transition: all 500ms;
-    width: 1px;
-}
+    .FormButton.Medium {
+        width: 32px;
+        height: 32px;
+    }
 
-.CCLanguageItemExamplesHeader.Expanded {
-    flex: 1 1 auto;
-    border-bottom: 2px solid var(--colourPrimary);
-    width: 100%;
-}
+    .FormButton.Small {
+        width: 26px;
+        height: 26px;
+    }
 
-.CCLanguageItemExamplesTitle {
-    font-weight: 400;
-    color: var(--colourPrimaryDarker20);
-    flex: 1 1 auto;
-    width: auto;
-    transition: all 500ms;
-}
+    .FormButtonIcon {
+        width: 20px;
+        height: 20px;
+        filter: brightness(0) saturate(100%) invert(0%) sepia(2%) saturate(0%) hue-rotate(189deg) brightness(96%) contrast(101%);
+    }
 
-.CCLanguageItemSectionButton {
-    flex: 0 0 auto;
-    height: 26px;
-    width: 0px;
-    opacity: 0;
-    border: none;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    transition: all 0.5s ease;
-    pointer-events: none;
-    background-color: transparent;
-    background-clip: content-box;
-    margin-right: 0px;
-    border-radius: 6px 6px 6px 6px;
-}
+    .FormButton.Disabled {
+        opacity: 0.5;
+    }
 
-.CCLanguageItemSectionButton.Show {
-    width: 26px;
-    opacity: 1;
-    pointer-events: all;
-    margin-right: 2px;
-}
+    /* BlackTint Version */
+    .FormButton.BlackTint.Disabled {
+        background-color: var(--blacktranslucent90);
+    }
 
-.CCLanguageItemSectionButton.Show:hover {
-    background-color: var(--blacktranslucent90);
-}
+    .FormButton.BlackTint:not(.Disabled) {
+        background-color: var(--blacktranslucent90);
+    }
+    
+    .FormButton.BlackTint:not(.Disabled):hover {
+        background-color: var(--blacktranslucent80);
+    }
 
-.CCLanguageItemSectionButton.Rotate180 {
-    transform: rotate(180deg);
-}
+    /* RedTint Version */
+    .FormButton.RedTint.Disabled {
+        background-color: var(--redtranslucent80);
+    }
 
-.CCLanguageItemExpandCollapseIcon {
-    width: 16px;
-    height: 16px;
-    filter: brightness(0) saturate(100%) invert(30%) sepia(46%) saturate(5149%) hue-rotate(138deg) brightness(93%) contrast(75%);
-    transition: all 500ms;
-}
+    .FormButton.RedTint:not(.Disabled) {
+        background-color: var(--redtranslucent80);
+    }
 
-.CCLanguageItemExamples {
-    display: none;
-    transition: all 0.5s;
-    transition-behavior: allow-discrete;
-    overflow: hidden;
-    height: 0px;
-}
+    .FormButton.RedTint:not(.Disabled):hover {
+        background-color: var(--redtranslucent60);
+    }
 
-.CCLanguageItemExamples.Show {
-    display: block;
-    height: auto;
-    @starting-style {
+    /* ShadowBlack Version */
+    .FormButton.ShadowBlack.Disabled {
+        background-color: transparent;
+        filter: brightness(0) saturate(100%) invert(16%) sepia(5%) saturate(0%) hue-rotate(296deg) brightness(103%) contrast(90%);
+    }
+
+    .FormButton.ShadowBlack:not(.Disabled) {
+        background-color: transparent;
+        filter: brightness(0) saturate(100%) invert(16%) sepia(5%) saturate(0%) hue-rotate(296deg) brightness(103%) contrast(90%);
+    }
+
+    .FormButton.ShadowBlack:not(.Disabled):hover {
+        background-color: var(--blacktranslucent90);
+        filter: brightness(0) saturate(100%) invert(0%) sepia(100%) saturate(7466%) hue-rotate(319deg) brightness(96%) contrast(103%);
+    }
+
+    /* ShadowRed Version */
+    .FormButton.ShadowRed.Disabled {
+        background-color: transparent;
+        filter: brightness(0) saturate(100%) invert(46%) sepia(86%) saturate(4267%) hue-rotate(331deg) brightness(97%) contrast(87%);
+    }
+
+    .FormButton.ShadowRed:not(.Disabled) {
+        background-color: transparent;
+        filter: brightness(0) saturate(100%) invert(46%) sepia(86%) saturate(4267%) hue-rotate(331deg) brightness(97%) contrast(87%);
+    }
+
+    .FormButton.ShadowRed:not(.Disabled):hover {
+        background-color: var(--redtranslucent80);
+    }
+
+    /* ShadowGreen Version */
+    .FormButton.ShadowGreenOnBlack.Disabled {
+        background-color: transparent;
+        filter: brightness(0) saturate(100%) invert(30%) sepia(46%) saturate(5149%) hue-rotate(138deg) brightness(93%) contrast(75%);
+    }
+
+    .FormButton.ShadowGreenOnBlack:not(.Disabled) {
+        background-color: transparent;
+        filter: brightness(0) saturate(100%) invert(30%) sepia(46%) saturate(5149%) hue-rotate(138deg) brightness(93%) contrast(75%);
+    }
+
+    .FormButton.ShadowGreenOnBlack:not(.Disabled):hover {
+        background-color: var(--blacktranslucent90);
+    }
+
+    /* Special case treatments */
+    .FormButton.ShowOnContainerHover {
+        display: none;
+        opacity: 0;
+        transition: all 0.3s;
+        transition-behavior: allow-discrete;
+    }
+
+    &.Container:hover .FormButton.ShowOnContainerHover {
+        display: flex;
+        opacity: 1;
+        @starting-style {
+            opacity: 0;
+        }    
+    }
+
+    .FormButton.StrengthenOnExampleHover {
+        transition: all 0.3s;
+        opacity: 0.3;
+        transition-behavior: allow-discrete;
+    }
+
+    /* !!!! TODO !!!! - Fix Item Example When I reach it */ 
+    .Example:hover .FormButton.StrengthenOnExampleHover {
+        display: flex;
+        opacity: 1;
+        @starting-style {
+            opacity: 0.3;
+        }
+    }
+
+    .FormButton.Rotate180 {
+        transform: rotate(180deg);
+    }
+
+
+    /**
+     * ButtonSpacer (Vertical & Horizontal) - Userd to add separation and grouping between buttons
+     */
+    .FormButtonStrip .Spacer {
+        background-color: transparent;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        border: none;
+        overflow: hidden;
+        opacity: 0.3;
+    }
+
+    .FormButtonStrip .Spacer.Vertical {
+        width: 32px;
+        height: 16px;
+    }
+
+    .FormButtonStrip .Spacer.Horizontal {
+        width: 16px;
+        height: 32px;
+    }
+
+    .FormButtonStrip .Spacer.ShowOnContainerHover {
+        display: none;
+        transition: all 0.3s;
+        opacity: 0;
+        transition-behavior: allow-discrete;
+    }
+
+    &.Container:hover .FormButtonStrip .Spacer.ShowOnContainerHover {
+        display: flex;
+        opacity: 0.3;
+        @starting-style {
+            opacity: 0;
+        }
+    }
+
+
+    /**
+     * Grids & Layouts
+     */
+    .FormGrid {
+        border-left: 2px solid var(--colourPrimary);
+        display: grid;
+        grid-template-columns: 1fr 99fr;
+        column-gap: 1rem;
+        row-gap: 0.3rem;
+        font-weight: 300;
+        transition: all 0.5s;
+    }
+
+    .FormGrid.Hide {
         height: 0px;
+        margin: 0px;
     }
-}
 
-.CCLanguageItemExample {
-    display: flex;
-    flex-direction: row;
-    border-left: 2px solid var(--colourPrimary);
-    font-weight: 300;
-    transition: all 0.5s;
-    transition-behavior: allow-discrete;
-    overflow: hidden;
-    height: auto;
-    @starting-style {
+    .FlexLayout {
+        display: flex;
+    }
+
+    .FlexLayout.Hide {
+        display: none;
+    }
+
+    .FlexLayout.Row {
+        flex-direction: row;
+    }
+
+    .FlexLayout.Row.Reverse {
+        flex-direction: row-reverse;
+    }
+
+    .FlexLayout.Col {
+        flex-direction: column;
+    }
+
+    .FlexLayout.Col.Reverse {
+        flex-direction: column-reverse;
+    }
+
+    .FlexLayout.JustifyEnd {
+        justify-content: end;
+    }
+
+
+    /**
+     * Labels
+     */
+    .GridLabel {
+        color: var(--colourPrimaryDarker20);
+        font-weight: 400;
+        display: block;
+    }
+
+    .GridLabel.Hide {
+        display: none;
+    }
+
+    .InputLabel {
+        margin-right: 0.5vw;
+        padding-left: 0px;
+        font-weight: 300;
+        display: block;
+        transition: all 0.5s;
+        transition-behavior: allow-discrete;
+        height: auto;
+        overflow: hidden;
+        opacity: 1;
+        @starting-style {
+            height: 0px;
+        }
+    }
+
+    .Fieldset:disabled .InputLabel {
+        display: none;
         height: 0px;
-    }
-}
+        opacity: 0;
+        @starting-style {
+            height: auto;
+        }
+        
+    } 
 
-.CCLanguageItemExample.Hide {
-    height: 0px;
-    margin: 0px;
-}
-
-.CCLanguageItemFlex {
-    display: flex;
-}
-
-.CCLanguageItemFlex.Hide {
-    display: none;
-}
-
-.CCLanguageItemFlex.Row {
-    flex-direction: row;
-}
-
-.CCLanguageItemFlex.Row.Reverse {
-    flex-direction: row-reverse;
-}
-
-.CCLanguageItemFlex.Col {
-    flex-direction: column;
-}
-
-.CCLanguageItemFlex.Col.Reverse {
-    flex-direction: column-reverse;
-}
-
-.CCLanguageItemFlex.JustifyEnd {
-    justify-content: end;
-}
-
-.CCLanguageItemInput {
-    display: block;
-    background: var(--whitetranslucent90);
-    border-radius: 10px 10px 10px 10px;
-    border: 1px solid var(--blacktranslucent80);
-    margin-bottom: 0.5vw;
-    margin-top: 0vw;
-    padding-left: 1vw;
-}
-
-.CCLanguageItemInput:disabled {
-    margin-bottom: -0.25vw;
-    margin-top: 0rem;
-    padding-left: 0rem;
-}
-
-.CCLanguageItemInput.LinkedHighlighter {
-    width: 25vw;
-}
-
-.CCLanguageItemInput.LinkedHighlighter:disabled {
-    border: 0px solid transparent;
-    background: transparent;
-    height: 0px;
-    border: 0px;
-    padding: 0px;
-    opacity: 1;
-}
-
-.CCLanguageItemInput.HideOnRead:disabled {
-    display: none;
-}
-
-.CCLanguageItemInput:focus {
-    border: 1px solid var(--blacktranslucent50);
-    outline: none;
-}
-
-.CCLanguageItemInput.Error {
-    background: var(--redtranslucent90);
-}
-
-.CCLanguageItemInputLabel {
-    margin-right: 0.5vw;
-    padding-left: 0px;
-    font-weight: 300;
-    display: block;
-    transition: all 0.5s;
-    transition-behavior: allow-discrete;
-    height: auto;
-    overflow: hidden;
-    opacity: 1;
-    @starting-style {
-        height: 0px;
-    }
-}
-
-/* --- Japanese Font Minimums --- */
-@media (width <= 800px) {
-    .CCLanguageItemInput {
-        margin-bottom: 0.25rem;
-        padding-left: 0.5rem;
+    /* --- Label Font Minimums --- */
+    @media (width <= 800px) {
+        .InputLabel {
+            margin-right: 0.25rem;
+        }
     }
 
-    .CCLanguageItemInput:disabled {
-        margin-bottom: -0.125rem;
+    /* --- Label Font Maximums --- */
+    @media (width >= 1200px) {
+        .InputLabel {
+            margin-right: 0.375rem;
+        }
+    }
+
+
+    /**
+     * Form Inputs
+     */
+    .ItemInput {
+        display: block;
+        background: var(--whitetranslucent90);
+        border-radius: 10px 10px 10px 10px;
+        border: 1px solid var(--blacktranslucent80);
+        margin-bottom: 0.5vw;
+        margin-top: 0vw;
+        padding-left: 1vw;
+    }
+
+    .ItemInput:disabled {
+        border: 0px solid transparent;
+        background: transparent;
+        margin-bottom: -0.25vw;
+        margin-top: 0rem;
         padding-left: 0rem;
     }
 
-    .CCLanguageItemInputLabel {
-        margin-right: 0.25rem;
-    }
-}
-
-/* --- Japanese Font Maximums --- */
-@media (width >= 1200px) {
-    .CCLanguageItemInput {
-        margin-bottom: 0.1875rem;
-        margin-top: 0rem;
-        padding-left: 0.75rem;
+    .ItemInput.LinkedHighlighter {
+        width: 25vw;
     }
 
-    .CCLanguageItemInput:disabled {
-        margin-bottom: -0.1875rem;
+    .ItemInput.LinkedHighlighter:disabled {
+        border: 0px solid transparent;
+        background: transparent;
+        height: 0px;
+        border: 0px;
+        padding: 0px;
+        opacity: 1;
     }
 
-    .CCLanguageItemInputLabel {
-        margin-right: 0.375rem;
+    .ItemInput.HideOnRead:disabled {
+        display: none;
     }
-}
 
-.CCLanguageItemFieldset:disabled .CCLanguageItemInputLabel {
-    display: none;
-    height: 0px;
-    opacity: 0;
-    @starting-style {
+    .ItemInput:focus {
+        border: 1px solid var(--blacktranslucent50);
+        outline: none;
+    }
+
+    .ItemInput.Error {
+        background: var(--redtranslucent90);
+    }
+
+    /* --- Input Font Minimums --- */
+    @media (width <= 800px) {
+        .ItemInput {
+            margin-bottom: 0.25rem;
+            padding-left: 0.5rem;
+        }
+
+        .ItemInput:disabled {
+            margin-bottom: -0.125rem;
+            padding-left: 0rem;
+        }
+    }
+
+    /* --- Input Font Maximums --- */
+    @media (width >= 1200px) {
+        .ItemInput {
+            margin-bottom: 0.1875rem;
+            margin-top: 0rem;
+            padding-left: 0.75rem;
+        }
+
+        .ItemInput:disabled {
+            margin-bottom: -0.1875rem;
+        }
+    }
+
+
+    /**
+     * Special Case - Read Only Presentation Elements
+     */
+    .Fieldset .ItemOutput {
+        display: none;
+    }
+
+    .Fieldset:disabled .ItemOutput {
+        display: block;
+    }
+
+    .ItemOutput span {
+        position: relative; /* To anchor the ::after below */
+    }
+
+    /* Underlining - When Off */
+    .ItemOutput span::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background-color: var(--colourSecondary);
+        opacity: 0;
+        transition: opacity 500ms, transform 500ms;
+        transform: scale(0);
+        transform-origin: center;
+    }
+
+    /* Underlining - When On */
+    .ItemOutput span.Underline::after {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+
+    /**
+     * Special Case - Examples UI
+     */
+    .ExamplesSectionBreak {
+        font-weight: 800;
+        color: var(--colourPrimaryDarker20);
+        display: flex;
+        flex-direction: row;
+        transition: all 0.5s;
+        opacity: 1;
+    }
+
+    .ExamplesSectionBreak.Hide {
+        height: 0px;
+        overflow: hidden;
+        margin: 0px;
+        opacity: 0;
+    }
+
+    .ExamplesHeader {
+        flex: 0 0 auto;
+        display: flex;
+        flex-direction: row;
+        border-bottom: 2px solid transparent;
+        transition: all 500ms;
+        width: 1px;
+    }
+
+    .ExamplesHeader.Expanded {
+        flex: 1 1 auto;
+        border-bottom: 2px solid var(--colourPrimary);
+        width: 100%;
+    }
+
+    .ExamplesTitle {
+        font-weight: 400;
+        color: var(--colourPrimaryDarker20);
+        flex: 1 1 auto;
+        width: auto;
+        transition: all 500ms;
+    }
+
+    .ExpandCollapseIcon {
+        width: 16px;
+        height: 16px;
+        filter: brightness(0) saturate(100%) invert(30%) sepia(46%) saturate(5149%) hue-rotate(138deg) brightness(93%) contrast(75%);
+        transition: all 500ms;
+    }
+
+    .Examples {
+        display: none;
+        transition: all 0.5s;
+        transition-behavior: allow-discrete;
+        overflow: hidden;
+        height: 0px;
+    }
+
+    .Examples.Show {
+        display: block;
         height: auto;
+        @starting-style {
+            height: 0px;
+        }
     }
-    
-} 
 
-.CCLanguageItemFieldset .CCLanguageItemOutput {
-    display: none;
-}
+    .Example {
+        display: flex;
+        flex-direction: row;
+        border-left: 2px solid var(--colourPrimary);
+        font-weight: 300;
+        transition: all 0.5s;
+        transition-behavior: allow-discrete;
+        overflow: hidden;
+        height: auto;
+        @starting-style {
+            height: 0px;
+        }
+    }
 
-.CCLanguageItemFieldset:disabled .CCLanguageItemOutput {
-    display: block;
-}
+    .Example.Hide {
+        height: 0px;
+        margin: 0px;
+    }
 
-.CCLanguageItemOutput span {
-    position: relative; /* To anchor the ::after below */
-}
+    .Example.Deleting {
+        height: 0px;
+        margin-bottom: 0px;
+    }
 
-.CCLanguageItemOutput span::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 2px;
-    background-color: var(--colourSecondary);
-    opacity: 0;
-    transition: opacity 500ms, transform 500ms;
-    transform: scale(0);
-    transform-origin: center;
-}
+    .ExampleInputs {
+        display: flex;
+        flex-direction: column;
+        flex: 1 1 auto;
+    }
 
-.CCLanguageItemOutput span.Underline::after {
-    opacity: 1;
-    transform: scale(1);
-}
+    .ExampleControls {
+        display: flex;
+        flex-direction: column;
+        flex: 0 0 auto;
+        justify-content: center;
+        transition: all 0.5s;
+        transition-behavior: allow-discrete;
+        width: auto;
+    }
 
-.CCLanguageItemExampleInputs {
-    display: flex;
-    flex-direction: column;
-    flex: 1 1 auto;
-}
-
-.CCLanguageItemExampleControls {
-    display: flex;
-    flex-direction: column;
-    flex: 0 0 auto;
-    justify-content: center;
-    transition: all 0.5s;
-    transition-behavior: allow-discrete;
-    width: auto;
-}
-
-.CCLanguageItemFieldset:disabled .CCLanguageItemExampleControls {
-    display: none;
-    width: 0px;
+    .Fieldset:disabled .ExampleControls {
+        display: none;
+        width: 0px;
+    }
 }
