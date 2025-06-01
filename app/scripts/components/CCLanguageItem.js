@@ -143,7 +143,7 @@ class CCLanguageItem extends CCBase {
                     <div class="FlexLayout Col">
                         <label class="InputLabel RomanXS">Kana</label>
                         <input class="ItemInput KanaXL NoBlockMargins HideOnRead" data-use="kana.input"></input>
-                        <p class="CCLanguageItemOutput KanaXL NoBlockMargins" data-use="kana.output"></p>
+                        <p class="ItemOutput KanaXL NoBlockMargins" data-use="kana.output"></p>
                         <div class="FlexLayout Row JustifyEnd">
                             <label class="InputLabel RomanXS">Linked Highlighting</label>
                             <input class="ItemInput RomanXS NoBlockMargins LinkedHighlighter" data-use="kana.highlighter-input"></input>
@@ -152,7 +152,7 @@ class CCLanguageItem extends CCBase {
                     <div class="FlexLayout Col">
                         <label class="InputLabel RomanXS">Romaji</label>              
                         <input class="ItemInput RomanXL NoBlockMargins HideOnRead" data-use="romaji.input"></input>                    
-                        <p class="CCLanguageItemOutput RomanXL NoBlockMargins" data-use="romaji.output"></p>
+                        <p class="ItemOutput RomanXL NoBlockMargins" data-use="romaji.output"></p>
                         <div class="FlexLayout Row JustifyEnd">
                             <label class="InputLabel RomanXS">Linked Highlighting</label>
                             <input class="ItemInput RomanXS NoBlockMargins LinkedHighlighter" data-use="romaji.highlighter-input"></input>
@@ -162,7 +162,7 @@ class CCLanguageItem extends CCBase {
                         <div class="GridLabel" data-use="meaning.grid-cell-1"><p class="RomanM NoBlockMargins">Meaning:</p></div>
                         <div class="FlexLayout Col" data-use="meaning.grid-cell-2">
                             <input class="ItemInput RomanM NoBlockMargins Font300 HideOnRead" data-use="meaning.input"></input>
-                            <p class="CCLanguageItemOutput RomanM Font300 NoBlockMargins" data-use="meaning.output"></p>
+                            <p class="ItemOutput RomanM Font300 NoBlockMargins" data-use="meaning.output"></p>
                             <div class="FlexLayout Row JustifyEnd">
                                 <label class="InputLabel RomanXS">Linked Highlighting</label>
                                 <input class="ItemInput RomanXS NoBlockMargins Font300 LinkedHighlighter" data-use="meaning.highlighter-input"></input>

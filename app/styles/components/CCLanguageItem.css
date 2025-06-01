@@ -370,7 +370,7 @@ cc-languageitem {
         background: var(--redtranslucent90);
     }
 
-    /* --- Japanese Font Minimums --- */
+    /* --- Input Font Minimums --- */
     @media (width <= 800px) {
         .ItemInput {
             margin-bottom: 0.25rem;
@@ -383,7 +383,7 @@ cc-languageitem {
         }
     }
 
-    /* --- Japanese Font Maximums --- */
+    /* --- Input Font Maximums --- */
     @media (width >= 1200px) {
         .ItemInput {
             margin-bottom: 0.1875rem;
@@ -394,6 +394,43 @@ cc-languageitem {
         .ItemInput:disabled {
             margin-bottom: -0.1875rem;
         }
+    }
+
+
+    /**
+     * Special Case - Output Only Elements
+     */
+    .Fieldset .ItemOutput {
+        display: none;
+    }
+
+    .Fieldset:disabled .ItemOutput {
+        display: block;
+    }
+
+    .ItemOutput span {
+        position: relative; /* To anchor the ::after below */
+    }
+
+    /* Underlining - When Off */
+    .ItemOutput span::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background-color: var(--colourSecondary);
+        opacity: 0;
+        transition: opacity 500ms, transform 500ms;
+        transform: scale(0);
+        transform-origin: center;
+    }
+
+    /* Underlining - When On */
+    .ItemOutput span.Underline::after {
+        opacity: 1;
+        transform: scale(1);
     }
 }
 
@@ -526,37 +563,6 @@ cc-languageitem {
 .CCLanguageItemExample.Hide {
     height: 0px;
     margin: 0px;
-}
-
-.CCLanguageItem .Fieldset .CCLanguageItemOutput {
-    display: none;
-}
-
-.CCLanguageItem .Fieldset:disabled .CCLanguageItemOutput {
-    display: block;
-}
-
-.CCLanguageItemOutput span {
-    position: relative; /* To anchor the ::after below */
-}
-
-.CCLanguageItemOutput span::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 2px;
-    background-color: var(--colourSecondary);
-    opacity: 0;
-    transition: opacity 500ms, transform 500ms;
-    transform: scale(0);
-    transform-origin: center;
-}
-
-.CCLanguageItemOutput span.Underline::after {
-    opacity: 1;
-    transform: scale(1);
 }
 
 .CCLanguageItemExampleInputs {
