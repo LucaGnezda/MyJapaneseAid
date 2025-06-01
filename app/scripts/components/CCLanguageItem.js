@@ -175,31 +175,31 @@ class CCLanguageItem extends CCBase {
                         <div class="GridLabel" data-use="notes.grid-cell-1"><p class="RomanM NoBlockMargins">Notes:</p></div>
                         <div class="FlexLayout Col" data-use="notes.grid-cell-2"><input class="ItemInput RomanM NoBlockMargins Font300" data-use="notes.input"></input></div>
                     </div>
-                    <div class="CCLanguageItemExamplesSectionBreak MarginTXL MarginBS">
-                        <div class="CCLanguageItemExamplesHeader" data-use="examples-header">
-                            <div class="CCLanguageItemExamplesTitle MarginRM" data-use="examples-header.title"><p class="RomanM NoBlockMargins">Examples</p></div>
-                            <div class="CCLanguageItemSectionButton Show" data-use="examples-header.expander"><img src="./app/assets/svg/arrow-down.svg" class="CCLanguageItemExpandCollapseIcon"></div>
-                            <div class="CCLanguageItemSectionButton Show" data-use="examples-header.add"><img src="./app/assets/svg/plus.svg" class="CCLanguageItemExpandCollapseIcon"></div>
+                    <div class="ExamplesSectionBreak MarginTXL MarginBS">
+                        <div class="ExamplesHeader" data-use="examples-header">
+                            <div class="ExamplesTitle MarginRM" data-use="examples-header.title"><p class="RomanM NoBlockMargins">Examples</p></div>
+                            <div class="FormButton ShadowGreenOnBlack Small" data-use="examples-header.expander"><img src="./app/assets/svg/arrow-down.svg" class="ExpandCollapseIcon"></div>
+                            <div class="FormButton ShadowGreenOnBlack Small" data-use="examples-header.add"><img src="./app/assets/svg/plus.svg" class="ExpandCollapseIcon"></div>
                         </div>
                     </div>
-                    <div class="CCLanguageItemExamples" data-use="examples-container">
+                    <div class="Examples" data-use="examples-container">
                     </div>
                     <div class="FormButtonStrip Col ShowOnRead">
-                        <div class="FormButton ShowOnContainerHover BlackTint" data-use="edit-button">
+                        <div class="FormButton ShowOnContainerHover BlackTint Medium" data-use="edit-button">
                             <img src="./app/assets/svg/pencil.svg" class="FormButtonIcon">
                         </div>
                         <div class="Spacer Vertical ShowOnContainerHover">
                             <img src="./app/assets/svg/minus.svg" class="FormButtonIcon">
                         </div>
-                        <div class="FormButton ShowOnContainerHover RedTint" data-use="delete-button">
+                        <div class="FormButton ShowOnContainerHover RedTint Medium" data-use="delete-button">
                             <img src="./app/assets/svg/trash.svg" class="FormButtonIcon">
                         </div>
                     </div>
                     <div class="FormButtonStrip Row ShowOnEdit">
-                        <div class="FormButton BlackTint" data-use="saveedit-button">
+                        <div class="FormButton BlackTint Medium" data-use="saveedit-button">
                             <img src="./app/assets/svg/check.svg" class="FormButtonIcon">
                         </div>
-                        <div class="FormButton BlackTint" data-use="canceledit-button">
+                        <div class="FormButton BlackTint Medium" data-use="canceledit-button">
                             <img src="./app/assets/svg/cross.svg" class="FormButtonIcon">
                         </div>
                     </div>
@@ -209,8 +209,8 @@ class CCLanguageItem extends CCBase {
     `;
 
     static #htmlExampleTemplate = `
-                        <div class="CCLanguageItemExample MarginBM PadLXL" data-use="example">
-                            <div class="CCLanguageItemExampleInputs PadRXL">
+                        <div class="Example MarginBM PadLXL" data-use="example">
+                            <div class="ExampleInputs PadRXL">
                                 <div class="FlexLayout Col">
                                     <label class="InputLabel RomanXS">Kana</label>
                                     <input class="ItemInput KanaS NoBlockMargins" data-use="example.kana.input" data-as="kana"></input>
@@ -224,9 +224,9 @@ class CCLanguageItem extends CCBase {
                                     <input class="ItemInput RomanS NoBlockMargins" data-use="example.meaning.input" data-as="meaning"></input>
                                 </div>
                             </div>
-                            <div class="CCLanguageItemExampleControls">
-                                <div class="FormButton ShadowRed StrengthenOnExampleHover" data-use="example.delete-button">
-                                    <img src="./app/assets/svg/trash.svg" class="CCLanguageItemFormButtonIcon">
+                            <div class="ExampleControls">
+                                <div class="FormButton ShadowRed StrengthenOnExampleHover Medium" data-use="example.delete-button">
+                                    <img src="./app/assets/svg/trash.svg" class="FormButtonIcon">
                                 </div>
                             </div>
                         </div>
@@ -437,9 +437,9 @@ class CCLanguageItem extends CCBase {
                 this.#elements.examplesHeader.parentNode.classList.remove("Hide");
 
                 this.#elements.examplesHeader.classList.remove("Expanded");
-                this.#elements.examplesExpander.classList.add("Show");
+                this.#elements.examplesExpander.classList.remove("Hide");
                 this.#elements.examplesExpander.classList.remove("Rotate180");
-                this.#elements.examplesAdd.classList.remove("Show");
+                this.#elements.examplesAdd.classList.add("Hide");
             }
             else {
                 /** @ts-ignore */ 
@@ -480,9 +480,9 @@ class CCLanguageItem extends CCBase {
             this.#elements.examplesHeader.parentNode.classList.remove("Hide");
 
             this.#elements.examplesHeader.classList.add("Expanded");
-            this.#elements.examplesExpander.classList.remove("Show");
+            this.#elements.examplesExpander.classList.add("Hide");
             this.#elements.examplesExpander.classList.add("Rotate180");
-            this.#elements.examplesAdd.classList.add("Show");
+            this.#elements.examplesAdd.classList.remove("Hide");
             this.#elements.examplesContainer.classList.add("Show");
 
             // Show everything in edit
