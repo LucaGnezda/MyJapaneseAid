@@ -43,7 +43,14 @@ class CCLanguageItemList extends CCBase {
     }
 
     static #htmlRootTemplate = `
-        <div class="CCLanguageItemContainer PadTBL PadLRXL" data-use="root-container">
+        <div class="CCLanguageItemList Container" data-use="root-container">
+            <div class="ListHeading"></div>
+            <div class="ListBody">
+                <div class="Section">
+                    <div class="SectionHeading"></div>
+                    <div class="SectionBody"></div>
+                </div>
+            </div>
         </div>
     `;
 
