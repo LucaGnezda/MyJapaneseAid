@@ -6,6 +6,17 @@
 /**
  * Typedefs
  * @typedef {{
+ *      root: HTMLDivElement?,
+ *      title: HTMLDivElement?,
+ *      subtitle: HTMLDivElement?,
+ *      body: HTMLDivElement?,
+ * }} CCLanguageItemListSection
+ * 
+ * @typedef {{
+ *      rootContainer: HTMLDivElement?,
+ *      listHeading: HTMLDivElement?,
+ *      listBody: HTMLDivElement?,
+ *      listSection: CCLanguageItemListSection[],
  * }} CCLanguageItemListElements
  * 
  * @typedef {{
@@ -26,6 +37,10 @@ class CCLanguageItemList extends CCBase {
      * @type {CCLanguageItemListElements}
      */
     #elements = {
+        rootContainer: null,
+        listHeading: null,
+        listBody: null,
+        listSection: [],
     }    
 
     /**
@@ -44,14 +59,24 @@ class CCLanguageItemList extends CCBase {
 
     static #htmlRootTemplate = `
         <div class="CCLanguageItemList Container" data-use="root-container">
-            <div class="ListHeading"></div>
-            <div class="ListBody">
-                <div class="Section">
-                    <div class="SectionHeading"></div>
-                    <div class="SectionBody"></div>
-                </div>
+            <div class="ListHeader">
+                <div class="ListTitle"><p class="RomanXL NoBlockMargins" data-use="list.title">List</p></div>
+                <div class="FormButton" data-use="list.add"><img src="./app/assets/svg/plus.svg" class="FormButtonIcon"></div>
+            </div>
+            <div class="ListBody" data-use="list.body">
             </div>
         </div>
+    `;
+
+    static #htmlSectionTemplate = `
+                <div class="Section" data-use="section">
+                    <div class="SectionHeader MarginTXL">
+                        <div class="SectionTitle MarginRXL"><p class="KanaXL NoBlockMargins" data-use="section.title"></p></div>
+                        <div class="SectionSubTitle"><p class="RomanL NoBlockMargins" data-use="section.subtitle"></p></div>
+                        <div class="FormButton ShadowGreenOnBlack Small"><img src="./app/assets/svg/arrow-down.svg" class="FormButtonSmallGreenIcon"></div>
+                    </div>
+                    <div class="SectionBody" data-use="section.body"></div>
+                </div>
     `;
 
 
@@ -83,9 +108,9 @@ class CCLanguageItemList extends CCBase {
 
         let fragment = getDOMFragmentFromString(CCLanguageItemList.#htmlRootTemplate);
 
-        this.#elements
-        this.#propertyBag
-        this.#attachedCallbacks
+        this.#elements.rootContainer = fragment.querySelector('[data-use="root-container"]');
+        this.#elements.listHeading = fragment.querySelector('[data-use="list.heading"]');
+        this.#elements.listBody = fragment.querySelector('[data-use="list.body"]');
 
         this.appendChild(fragment);
     }
@@ -107,6 +132,46 @@ class CCLanguageItemList extends CCBase {
      * Public methods
      */
     render() {
+
+    }
+
+
+    /** 
+     * @param {GojuonGrouping[]} obj 
+     * @returns
+    */
+    loadSections(obj) {
+
+        if (this.#elements.listBody) {
+        
+            for (let i = 0; i < obj.length; i++) {
+
+                let fragment = getDOMFragmentFromString(CCLanguageItemList.#htmlSectionTemplate);
+
+                /** @type {CCLanguageItemListSection} */
+                let section = {
+                    root: fragment.querySelector('[data-use="section"]'),
+                    title: fragment.querySelector('[data-use="section.title"]'),
+                    subtitle: fragment.querySelector('[data-use="section.subtitle"]'),
+                    body: fragment.querySelector('[data-use="section.body"]'),
+                };
+
+                if (section.title instanceof HTMLElement && section.subtitle instanceof HTMLElement) {
+                    section.title.innerText = obj[i].title || "";
+                    section.subtitle.innerText = obj[i].subTitle || "";
+                }
+                else {
+                    Log.fatal("Component has not been correctly initialised", "COMPONENT", this);
+                    return;
+                }
+
+                this.#elements.listBody.appendChild(fragment);
+                this.#elements.listSection.push(section);
+            }
+        }
+        else {
+            Log.fatal("Component has not been correctly initialised", "COMPONENT", this);
+        }
 
     }
 

@@ -13,6 +13,7 @@ cc-languageitem {
         border-radius: 10px 10px 10px 10px;
         display: flex;
         flex-direction: column;
+        flex: 1 0 auto;
         position: relative;
         min-height: 96px;
         padding: 0px;
@@ -26,163 +27,18 @@ cc-languageitem {
         padding-top: 28px;
         padding-right: 0px;
         transition: all 0.5s;
+        display: flex;
+        flex-direction: column;
     }
 
     .Fieldset:disabled {
         padding-top: 0px;
         padding-right: 28px;
     }
-    
-    /** 
-     * Buttonstrip - Group arrangement of interactive buttons for the form 
-     */
-    .FormButtonStrip {
-        top: 4px;
-        right: 4px;
-        width: auto;
-        height: auto;
-        display: flex;
-        flex-direction: row;
-        position: absolute;
-        gap: 4px;
-    }
-
-    .FormButtonStrip.Row {
-        flex-direction: row;
-    }
-
-    .FormButtonStrip.Col {
-        flex-direction: column;
-    }
-
-    .Fieldset:not(:disabled) .FormButtonStrip.ShowOnRead {
-        display: none;
-    }
-
-    .Fieldset:disabled .FormButtonStrip.ShowOnRead {
-        display: flex;
-    }
-
-    .Fieldset:not(:disabled) .FormButtonStrip.ShowOnEdit {
-        display: flex;
-    }
-
-    .Fieldset:disabled .FormButtonStrip.ShowOnEdit {
-        display: none;
-    }
-
 
     /** 
-     * FormButton - Standard format buttons 
+     * FormButton - Special case treatments
      */
-    .FormButton {
-        display: flex;
-        flex: 0 0 auto;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-        border-radius: 6px 6px 6px 6px;
-        border: none;
-        transition: all 0.3s ease;
-    }
-
-    .FormButton.Hide {
-        display: none;
-    }
-
-    .FormButton.Medium {
-        width: 32px;
-        height: 32px;
-    }
-
-    .FormButton.Small {
-        width: 26px;
-        height: 26px;
-    }
-
-    .FormButtonIcon {
-        width: 20px;
-        height: 20px;
-        filter: brightness(0) saturate(100%) invert(0%) sepia(2%) saturate(0%) hue-rotate(189deg) brightness(96%) contrast(101%);
-    }
-
-    .FormButton.Disabled {
-        opacity: 0.5;
-    }
-
-    /* BlackTint Version */
-    .FormButton.BlackTint.Disabled {
-        background-color: var(--blacktranslucent90);
-    }
-
-    .FormButton.BlackTint:not(.Disabled) {
-        background-color: var(--blacktranslucent90);
-    }
-    
-    .FormButton.BlackTint:not(.Disabled):hover {
-        background-color: var(--blacktranslucent80);
-    }
-
-    /* RedTint Version */
-    .FormButton.RedTint.Disabled {
-        background-color: var(--redtranslucent80);
-    }
-
-    .FormButton.RedTint:not(.Disabled) {
-        background-color: var(--redtranslucent80);
-    }
-
-    .FormButton.RedTint:not(.Disabled):hover {
-        background-color: var(--redtranslucent60);
-    }
-
-    /* ShadowBlack Version */
-    .FormButton.ShadowBlack.Disabled {
-        background-color: transparent;
-        filter: brightness(0) saturate(100%) invert(16%) sepia(5%) saturate(0%) hue-rotate(296deg) brightness(103%) contrast(90%);
-    }
-
-    .FormButton.ShadowBlack:not(.Disabled) {
-        background-color: transparent;
-        filter: brightness(0) saturate(100%) invert(16%) sepia(5%) saturate(0%) hue-rotate(296deg) brightness(103%) contrast(90%);
-    }
-
-    .FormButton.ShadowBlack:not(.Disabled):hover {
-        background-color: var(--blacktranslucent90);
-        filter: brightness(0) saturate(100%) invert(0%) sepia(100%) saturate(7466%) hue-rotate(319deg) brightness(96%) contrast(103%);
-    }
-
-    /* ShadowRed Version */
-    .FormButton.ShadowRed.Disabled {
-        background-color: transparent;
-        filter: brightness(0) saturate(100%) invert(46%) sepia(86%) saturate(4267%) hue-rotate(331deg) brightness(97%) contrast(87%);
-    }
-
-    .FormButton.ShadowRed:not(.Disabled) {
-        background-color: transparent;
-        filter: brightness(0) saturate(100%) invert(46%) sepia(86%) saturate(4267%) hue-rotate(331deg) brightness(97%) contrast(87%);
-    }
-
-    .FormButton.ShadowRed:not(.Disabled):hover {
-        background-color: var(--redtranslucent80);
-    }
-
-    /* ShadowGreen Version */
-    .FormButton.ShadowGreenOnBlack.Disabled {
-        background-color: transparent;
-        filter: brightness(0) saturate(100%) invert(30%) sepia(46%) saturate(5149%) hue-rotate(138deg) brightness(93%) contrast(75%);
-    }
-
-    .FormButton.ShadowGreenOnBlack:not(.Disabled) {
-        background-color: transparent;
-        filter: brightness(0) saturate(100%) invert(30%) sepia(46%) saturate(5149%) hue-rotate(138deg) brightness(93%) contrast(75%);
-    }
-
-    .FormButton.ShadowGreenOnBlack:not(.Disabled):hover {
-        background-color: var(--blacktranslucent90);
-    }
-
-    /* Special case treatments */
     .FormButton.ShowOnContainerHover {
         display: none;
         opacity: 0;
@@ -204,7 +60,6 @@ cc-languageitem {
         transition-behavior: allow-discrete;
     }
 
-    /* !!!! TODO !!!! - Fix Item Example When I reach it */ 
     .Example:hover .FormButton.StrengthenOnExampleHover {
         display: flex;
         opacity: 1;
@@ -213,50 +68,13 @@ cc-languageitem {
         }
     }
 
-    .FormButton.Rotate180 {
-        transform: rotate(180deg);
-    }
-
-
-    /**
-     * ButtonSpacer (Vertical & Horizontal) - Userd to add separation and grouping between buttons
-     */
-    .FormButtonStrip .Spacer {
-        background-color: transparent;
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-        border: none;
-        overflow: hidden;
-        opacity: 0.3;
-    }
-
-    .FormButtonStrip .Spacer.Vertical {
-        width: 32px;
-        height: 16px;
-    }
-
-    .FormButtonStrip .Spacer.Horizontal {
-        width: 16px;
-        height: 32px;
-    }
-
-    .FormButtonStrip .Spacer.ShowOnContainerHover {
-        display: none;
-        transition: all 0.3s;
-        opacity: 0;
-        transition-behavior: allow-discrete;
-    }
-
     &.Container:hover .FormButtonStrip .Spacer.ShowOnContainerHover {
-        display: flex;
-        opacity: 0.3;
-        @starting-style {
-            opacity: 0;
-        }
+    display: flex;
+    opacity: 0.3;
+    @starting-style {
+        opacity: 0;
     }
-
+}
 
     /**
      * Grids & Layouts
@@ -477,6 +295,7 @@ cc-languageitem {
         color: var(--colourPrimaryDarker20);
         display: flex;
         flex-direction: row;
+        flex: 1 0 auto;
         transition: all 0.5s;
         opacity: 1;
     }
@@ -509,13 +328,7 @@ cc-languageitem {
         flex: 1 1 auto;
         width: auto;
         transition: all 500ms;
-    }
-
-    .ExpandCollapseIcon {
-        width: 16px;
-        height: 16px;
-        filter: brightness(0) saturate(100%) invert(30%) sepia(46%) saturate(5149%) hue-rotate(138deg) brightness(93%) contrast(75%);
-        transition: all 500ms;
+        align-content: center;
     }
 
     .Examples {

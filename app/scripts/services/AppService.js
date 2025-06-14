@@ -10,37 +10,20 @@ class AppService {
 
         // Bootstrap
         ComponentRegistry.registerComponents();
-        AppService.InitialiseAppStore();
-        AppService.InitialiseAppEventProcessing();
         AppService.IndexKeyDOMElements();
-        AppService.InitialiseCoreEventBindings();
-
-        // Add Data to Store
+        AppService.InitialiseStore();
+        AppService.InitialiseDispatchers();
+        AppService.InitialiseCoreUI();
+        AppService.InitialiseComponents();
+        AppService.InitialiseBindings();
         AppService.LoadStore();
 
-        // Wire up the UI
-        AppService.InitialiseInteractiveContent();
+        // Add Data to Store and propogate it to components
+        AppService.LoadStore();
 
         // Do anything else you need
 
         Log.debug("AppService.Initialise - Complete", "APPSERVICE");
-    }
-
-    static InitialiseAppStore() {
-        // Create Store & Observables
-        App.store = new Store(NotificationMode.Default, NotificationStatus.Default);
-
-    }
-
-    static InitialiseAppEventProcessing() {
-        // Initialise event processing
-        App.dispatcher = new Dispatcher();
-        App.dispatcher.addDispatchHandler(new AppActionHandler(), "route");
-
-        // Now add your action handlers
-        // For example:
-        //    App.dispatcher.addDispatchHandler(new MyGameHandler(), "route");
-    
     }
 
     static IndexKeyDOMElements() {
@@ -53,13 +36,54 @@ class AppService {
         App.components.searchComponent = document.getElementById("TopNavSearch");
         // @ts-ignore
         App.components.testItem = document.getElementById("TestItem");
+        // @ts-ignore
+        App.components.testItemList = document.getElementById("TestList");
+    }
+
+    static InitialiseStore() {
+        // Create Store & Observables
+        App.store = new Store(NotificationMode.Default, NotificationStatus.Default);
 
     }
 
-    static InitialiseCoreEventBindings() {
+    static InitialiseDispatchers() {
+        // Initialise event processing
+        App.dispatcher = new Dispatcher();
+        App.dispatcher.addDispatchHandler(new AppActionHandler(), "route");
 
-        if (!App.dispatcher) {
-            Log.fatal("App Dispatcher must be initialised before Core Event Bindings", "", this);
+        // Now add your action handlers
+        // For example:
+        //    App.dispatcher.addDispatchHandler(new MyGameHandler(), "route");
+    
+    }
+
+    static InitialiseCoreUI() {
+
+        if (!App.dispatcher || !App.store) {
+            Log.fatal("Both the Store and Dispatcher must be initialised before Core UI", "", this)
+            return;
+        }
+
+        // Setup any non component DOM elements here.
+
+    }
+
+    static InitialiseComponents() {
+
+        if (!App.dispatcher || !App.store) {
+            Log.fatal("Both the Store and Dispatcher must be initialised before components", "", this)
+            return;
+        }
+
+        // Setup any non component DOM elements here.
+        App.components.testItemList?.loadSections(GojuonGroupingService.gojuonGroupings);
+
+    }
+
+    static InitialiseBindings() {
+
+        if (!App.dispatcher || !App.store) {
+            Log.fatal("Both the Store and Dispatcher must be initialised before Event Bindings", "", this);
             return;
         }
 
@@ -91,20 +115,6 @@ class AppService {
         //     App.store.MyHeros.add("Thor");
         //     App.store.MyHeros.Thor.observableData.weapon = "Mjölnir";
         
-    }
-
-    static InitialiseInteractiveContent() {
-
-        if (!App.dispatcher || !App.store) {
-            Log.fatal("Both the Store and Dispatcher must be initialised before interactive content", "", this)
-            return;
-        }
-
-        // Initalise and wire up the UI
-        // for example:
-        //    App.elements.MyComponent = document.createElement("cc-mycomponent");
-        //    App.elements.MyComponent.clickCallback = App.dispatcher.newEventDispatchCallback("Mycomponent_OnClick");
-
     }
 
 }
