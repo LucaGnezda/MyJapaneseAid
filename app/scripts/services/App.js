@@ -2,8 +2,12 @@
  * List of valid Demo Elements (to minimise indexing errors while coding)
  * @typedef {{
  *      searchComponent: CCSearch?,
- *      testItem: CCLanguageItem?
+ *      testItem: CCLanguageItem?,
+ *      testItemList: CCLanguageItemList?,
  * }} AppComponents
+ * 
+ * @typedef {{
+ * }} AppPropertyBag
  */
 
 /**
@@ -26,6 +30,14 @@ class App {
      */
     static dispatcher = null;
 
+    /**
+     * The elements that make up this component
+     * @type {AppPropertyBag}
+     */
+    static propertyBag = {
+        // Place variables here that act as global settings.
+    };
+
     // Referenced elements
     /**
      * @type {LimitedDictionary<AppElements, HTMLElement?>}
@@ -39,6 +51,7 @@ class App {
      */
     static components = {
         searchComponent: null,
-        testItem: null
+        testItem: null,
+        testItemList: null,
     };
 }

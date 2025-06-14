@@ -178,8 +178,8 @@ class CCLanguageItem extends CCBase {
                     <div class="ExamplesSectionBreak MarginTXL MarginBS">
                         <div class="ExamplesHeader" data-use="examples-header">
                             <div class="ExamplesTitle MarginRM" data-use="examples-header.title"><p class="RomanM NoBlockMargins">Examples</p></div>
-                            <div class="FormButton ShadowGreenOnBlack Small" data-use="examples-header.expander"><img src="./app/assets/svg/arrow-down.svg" class="ExpandCollapseIcon"></div>
-                            <div class="FormButton ShadowGreenOnBlack Small" data-use="examples-header.add"><img src="./app/assets/svg/plus.svg" class="ExpandCollapseIcon"></div>
+                            <div class="FormButton ShadowGreenOnBlack Small" data-use="examples-header.expander"><img src="./app/assets/svg/arrow-down.svg" class="FormButtonSmallGreenIcon"></div>
+                            <div class="FormButton ShadowGreenOnBlack Small" data-use="examples-header.add"><img src="./app/assets/svg/plus.svg" class="FormButtonSmallGreenIcon"></div>
                         </div>
                     </div>
                     <div class="Examples" data-use="examples-container">

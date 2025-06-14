@@ -1,1 +1,42 @@
-/* To Do */
+cc-languageitemlist {
+    display: contents;
+}
+
+.CCLanguageItemList {
+
+    /** 
+     * Container - the outermost rendered element that acts as an anchor for all other CSS 
+     */
+    &.Container {
+        display: flex;
+        flex-direction: column;
+        flex: 1 0 auto;
+    }
+
+    .ListHeader {
+        display: flex;
+        flex-direction: row;
+        align-items: baseline;
+        border-bottom: 2px solid var(--colourPrimary);
+    }
+
+    .ListTitle {
+        flex: 1 0 auto;
+    }
+
+    .SectionHeader {
+        display: flex;
+        flex-direction: row;
+        align-items: baseline;
+        border-bottom: 2px solid var(--colourPrimary);
+    }
+
+    .SectionTitle {
+        flex: 0 0 auto;
+    }
+
+    .SectionSubTitle {
+        flex: 1 0 auto;
+    }
+
+}
