@@ -2,8 +2,7 @@
  * List of valid Demo Elements (to minimise indexing errors while coding)
  * @typedef {{
  *      searchComponent: CCSearch?,
- *      testItem: CCLanguageItem?,
- *      testItemList: CCLanguageItemList?,
+ *      wordsList: CCLanguageItemList?,
  * }} AppComponents
  * 
  * @typedef {{
@@ -51,7 +50,6 @@ class App {
      */
     static components = {
         searchComponent: null,
-        testItem: null,
-        testItemList: null,
+        wordsList: null,
     };
 }

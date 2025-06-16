@@ -1,3 +1,31 @@
+.AppBackground {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 100vh;
+    width: 100vw;
+    background-image: url("../assets/svg/liquid-cheese.svg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin: 0px;
+    overflow: hidden;
+    opacity: 0.70;
+}
+
+.AppForeground {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    margin: 0px;
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw;
+    margin: 0px;
+    padding: 0px;
+    display: flex;
+    flex-direction: column;
+}
 
 .AppHeader {
     flex: 0 0 auto;
@@ -39,7 +67,7 @@
 }
 
 .AppTitle > span {
-    color: var(--colourPrimaryDarker40);
+    color: var(--colourPrimaryDarker10);
 }
 
 .AppBody {
@@ -179,6 +207,11 @@
 
 
 /* --- Equivalent English Fonts --- */
+.RomanXXL {
+    font-size: 3.6vw;
+    font-family: Geist;
+}
+
 .RomanXL {
     font-size: 2.2vw;
     font-family: Geist;
@@ -206,6 +239,11 @@
 
 /* --- Equivalent English Font Minimums --- */
 @media (width <= 800px) {
+    .RomanXXL {
+        font-size: 1.8rem;
+        font-family: Geist;
+    }
+
     .RomanXL {
         font-size: 1.1rem;
         font-family: Geist;
@@ -234,6 +272,11 @@
 
 /* --- Equivalent English Font Maximums --- */
 @media (width >= 1200px) {
+    .RomanXXL {
+        font-size: 2.75rem;
+        font-family: Geist;
+    }
+
     .RomanXL {
         font-size: 1.65rem;
         font-family: Geist;

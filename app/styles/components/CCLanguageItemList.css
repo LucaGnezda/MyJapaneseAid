@@ -22,6 +22,9 @@ cc-languageitemlist {
 
     .ListTitle {
         flex: 1 0 auto;
+        display: flex;
+        justify-content: center;
+        color: var(--colourPrimaryDarker10);
     }
 
     .SectionHeader {

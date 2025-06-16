@@ -41,6 +41,8 @@
  * }} CCLanguageItemElements
  * 
  * @typedef {{
+ *      gojuonKey: string?,
+ *      priorGojuonKey: string?,
  *      kana: string?,
  *      kanaHighlighterString: string?,
  *      romaji: string?,
@@ -115,6 +117,8 @@ class CCLanguageItem extends CCBase {
      * @type {CCLanguageItemPropertyBag}
      */
     #propertyBag = {
+        gojuonKey: null,
+        priorGojuonKey: null,
         kana: null,
         kanaHighlighterString: null,
         romaji: null,
@@ -127,6 +131,8 @@ class CCLanguageItem extends CCBase {
         examples: []
     }
 
+    #permanentEdit = false;
+
     /**
      * The elements that make up this component
      * @type {CCLanguageItemAttachedCallbacks}
@@ -137,7 +143,7 @@ class CCLanguageItem extends CCBase {
     }
 
     static #htmlRootTemplate = `
-        <div class="CCLanguageItem Container" data-use="root-container">
+        <div class="CCLanguageItem Container MarginBM" data-use="root-container">
             <form class="PadTBL PadLRXL">
                 <fieldset class="Fieldset" data-use="fieldset">
                     <div class="FlexLayout Col">
@@ -238,11 +244,6 @@ class CCLanguageItem extends CCBase {
      */
     constructor() {
         super();
-
-        // Allocate a guid
-        if (isEmptyOrNull(this.id)) {
-            this.id = crypto.randomUUID();
-        }
     }
 
 
@@ -251,6 +252,14 @@ class CCLanguageItem extends CCBase {
      */
     static get observedAttributes() {
         return [];
+    }
+
+    get kana() {
+        return this.#propertyBag.kana;
+    }
+
+    get gojuonKey() {
+        return this.#propertyBag.gojuonKey;
     }
 
 
@@ -619,7 +628,9 @@ class CCLanguageItem extends CCBase {
             this.#elements.examplesContainer) {
 
             // update the propertybag
+            this.#propertyBag.priorGojuonKey = this.#propertyBag.gojuonKey;
             this.#propertyBag.kana = this.#elements.kanaInput.value;
+            this.#propertyBag.gojuonKey = GojuonGroupingService.getGroupingFor(this.#propertyBag.kana)?.gojuonKey || null;
             this.#propertyBag.kanaHighlighterString = this.#elements.kanaHighlighterInput.value;
             this.#propertyBag.romaji = this.#elements.romajiInput.value;
             this.#propertyBag.romajiHighlighterString = this.#elements.romajiHighlighterInput.value;
@@ -665,15 +676,12 @@ class CCLanguageItem extends CCBase {
             this.#elements.literalInput && this.#elements.structureInput && this.#elements.notesInput &&
             this.#elements.examplesContainer) {
 
-            // Update CSS
-            this.#setUIForRead();
-
             // reset controls from the propertybag
             this.#elements.kanaInput.value = this.#propertyBag.kana || "";
             this.#elements.kanaHighlighterInput.value = this.#propertyBag.kanaHighlighterString || "";
             this.#elements.romajiInput.value = this.#propertyBag.romaji || "";
             this.#elements.romajiHighlighterInput.value = this.#propertyBag.romajiHighlighterString || "";
-            this.#elements.kanaInput.value = this.#propertyBag.meaning || "";
+            this.#elements.meaningInput.value = this.#propertyBag.meaning || "";
             this.#elements.meaningHighlighterInput.value = this.#propertyBag.meaningHighlighterString || "";
             this.#elements.literalInput.value = this.#propertyBag.literal || "";
             this.#elements.structureInput.value = this.#propertyBag.structure || "";
@@ -709,6 +717,9 @@ class CCLanguageItem extends CCBase {
                 this.#elements.examplesContainer.appendChild(fragment);
 
             }
+
+            // Update CSS
+            this.#setUIForRead();
         }
         else {
             Log.fatal("Component has not been correctly initialised", "COMPONENT", this);
@@ -888,10 +899,38 @@ class CCLanguageItem extends CCBase {
     }
 
     /**
+     * @param {CCLanguageItemPropertyBag} propertyBag 
+     * @returns
+     */
+    loadFromPropertyBag(propertyBag) {
+
+        // reset the local propertybag
+        this.#propertyBag.gojuonKey = GojuonGroupingService.getGroupingFor(propertyBag.kana || "")?.gojuonKey || null;
+        this.#propertyBag.priorGojuonKey = this.#propertyBag.gojuonKey;
+        this.#propertyBag.kana = propertyBag.kana || "";
+        this.#propertyBag.kanaHighlighterString = propertyBag.kanaHighlighterString || "";
+        this.#propertyBag.romaji = propertyBag.romaji || "";
+        this.#propertyBag.romajiHighlighterString = propertyBag.romajiHighlighterString || "";
+        this.#propertyBag.meaning = propertyBag.meaning || "";
+        this.#propertyBag.meaningHighlighterString = propertyBag.meaningHighlighterString || "";
+        this.#propertyBag.literal = propertyBag.literal || "";
+        this.#propertyBag.structure = propertyBag.structure || "";
+        this.#propertyBag.notes = propertyBag.notes || "";
+        this.#propertyBag.examples = propertyBag.examples || [];
+
+        // then rollback to apply the propertybag to the controls
+        this.#rollbackChanges();
+
+        // then regenerate the read state too
+        this.#regenerateHighlightableOutputs();
+
+    }
+
+    /**
      * @param {Function?} callback 
      * @returns
      */
-    attachDelectRequestCallback(callback) {
+    attachDeleteRequestCallback(callback) {
 
         if (callback != null && typeof callback === "function") {
             this.#attachedCallbacks.deleteRequestCallback = callback;
@@ -913,6 +952,16 @@ class CCLanguageItem extends CCBase {
         else {
             this.#attachedCallbacks.dataUpdateCallback = null;
         }
+    }
+
+    permanentEdit() {
+        Log.debug("Permanent Edit", "COMPONENT");
+        
+        this.#permanentEdit = true;
+
+        // Update CSS
+        this.#setUIForEdit();
+        this.isValid(true);
     }
 
 
@@ -954,13 +1003,17 @@ class CCLanguageItem extends CCBase {
         }
 
         // Update CSS
-        this.#setUIForRead();
+        if (!this.permanentEdit) {
+            this.#setUIForRead();
+        }
 
         // Update property bag
         this.#commitChanges();
 
-        // Build & set highlightable outputs 
-        this.#regenerateHighlightableOutputs();
+        // Build & set highlightable outputs
+        if (!this.permanentEdit) {
+            this.#regenerateHighlightableOutputs();
+        }
 
         // Fire callback if 
         if (this.#attachedCallbacks.dataUpdateCallback) {
@@ -968,8 +1021,9 @@ class CCLanguageItem extends CCBase {
             let event = {};
             event.originatingEvent = mouseEvent;
             event.originatingObject = mouseEvent.currentTarget;
+            event.originatingComponent = this;
+            event.originatingId = this.id;
             event.currentData = Object.assign({}, this.#propertyBag);
-
 
             this.#attachedCallbacks.dataUpdateCallback(event);
         }
@@ -1011,6 +1065,8 @@ class CCLanguageItem extends CCBase {
             let event = {};
             event.originatingEvent = mouseEvent;
             event.originatingObject = mouseEvent.currentTarget;
+            event.originatingComponent = this;
+            event.originatingId = this.id;
             event.currentData = Object.assign({}, this.#propertyBag);
 
 
