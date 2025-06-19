@@ -16,7 +16,6 @@ class AppService {
         AppService.InitialiseCoreUI();
         AppService.InitialiseComponents();
         AppService.InitialiseBindings();
-        AppService.LoadStore();
 
         // Add Data to Store and propogate it to components
         AppService.LoadStore();
@@ -35,9 +34,7 @@ class AppService {
         // @ts-ignore
         App.components.searchComponent = document.getElementById("TopNavSearch");
         // @ts-ignore
-        App.components.testItem = document.getElementById("TestItem");
-        // @ts-ignore
-        App.components.testItemList = document.getElementById("TestList");
+        App.components.wordsList = document.getElementById("WordsList");
     }
 
     static InitialiseStore() {
@@ -70,13 +67,13 @@ class AppService {
 
     static InitialiseComponents() {
 
-        if (!App.dispatcher || !App.store) {
+        if (!App.dispatcher || !App.store || !App.components.wordsList) {
             Log.fatal("Both the Store and Dispatcher must be initialised before components", "", this)
             return;
         }
 
         // Setup any non component DOM elements here.
-        App.components.testItemList?.loadSections(GojuonGroupingService.gojuonGroupings);
+        App.components.wordsList.title = "Words";
 
     }
 
@@ -95,10 +92,14 @@ class AppService {
             App.components.searchComponent.attachOnChangeDebouncedCallback(App.dispatcher.newEventDispatchCallback("App_ApplySearch"));
         }
 
-        if (App.components.testItem) {
-            App.components.testItem.attachDelectRequestCallback(App.dispatcher.newEventDispatchCallback("App_Item_DeleteRequest"));
-            App.components.testItem.attachDataUpdateCallback(App.dispatcher.newEventDispatchCallback("App_Item_DataUpdate"));
+        if (App.components.wordsList) {
+            App.components.wordsList.attachNewItemCallback(App.dispatcher.newEventDispatchCallback("App_Item_New"));
         }
+
+        // if (App.components.testItem) {
+        //     App.components.testItem.attachDelectRequestCallback(App.dispatcher.newEventDispatchCallback("App_Item_DeleteRequest"));
+        //     App.components.testItem.attachDataUpdateCallback(App.dispatcher.newEventDispatchCallback("App_Item_DataUpdate"));
+        // }
     }
 
     static LoadStore() {
@@ -107,6 +108,12 @@ class AppService {
             Log.fatal("App Store must be initialised before Store content can be loaded", "", this);
             return;
         }
+
+        App.store.addObservablesDictionary("Words");
+
+        GojuonGroupingService.gojuonGroupings.forEach((item) => {
+            App.store?.Words.add(item.gojuonKey);
+        });
 
         // Initialise the store's data structure
         // for example:

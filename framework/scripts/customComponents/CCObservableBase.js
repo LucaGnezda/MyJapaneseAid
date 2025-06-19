@@ -19,10 +19,6 @@ class CCObservableBase extends HTMLElement {
      */
     #dataListnerCallbackExtention = null;
 
-    /**
-     * @type {string}
-     */
-    id = "";
 
     /** @type {AbortController} #preDisposeController */
     #abortController = new AbortController();
@@ -37,8 +33,15 @@ class CCObservableBase extends HTMLElement {
      */
     constructor(state) {
         super();
+
+        // Allocate a guid
+        if (isEmptyOrNull(this.getAttribute("id"))) {
+            this.setAttribute("id", crypto.randomUUID());
+        }
+
         this.#state = state;
         this.observableData = state.dataProxy;
+
     }
 
     get dataChangedCallbackExtention() {

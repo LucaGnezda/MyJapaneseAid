@@ -60,18 +60,21 @@
         
     </head>
     <body onload="AppService.Initialise()" data-body>
-        <div class="AppHeader">
-            <div class="AppHeaderSpacer AlignLeft">
-                <div class="AppTitle"><span>My</span>Japanese<span>Aid</span></div>
+        <div class="AppBackground"></div>
+        <div class="AppForeground">
+            <div class="AppHeader">
+                <div class="AppHeaderSpacer AlignLeft">
+                    <div class="AppTitle"><span>My</span>Japanese<span>Aid</span></div>
+                </div>
+                <div class="AppHeaderControlSurface">
+                    <cc-search id="TopNavSearch"></cc-search>
+                </div>
+                <!-- <div class="AppHeaderSpacer"></div> -->
             </div>
-            <div class="AppHeaderControlSurface">
-                <cc-search id="TopNavSearch"></cc-search>
+            <div class="AppBody">
+                <!-- <cc-languageitem id="TestItem"></cc-languageitem>-->
+                <cc-languageitemList id="WordsList"></cc-languageitemlist>
             </div>
-            <!-- <div class="AppHeaderSpacer"></div> -->
-        </div>
-        <div class="AppBody">
-            <cc-languageitem id="TestItem"></cc-languageitem>
-            <cc-languageitemList id="TestList"></cc-languageitemlist>
         </div>
     </body>
 </html>

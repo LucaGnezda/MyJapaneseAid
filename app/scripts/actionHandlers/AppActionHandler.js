@@ -17,6 +17,10 @@ class AppActionHandler {
                 this.applySearch(action.payload);
                 break;
 
+            case "App_Item_DataUpdate":
+                this.itemUpdate(action.payload);
+                break;
+
             default:
                 // do nothing
         }
@@ -28,5 +32,13 @@ class AppActionHandler {
      */
     applySearch(payload) {
         Log.info(payload.searchString + " | " + payload.searchType + " | " + payload.searchScope, "HANDLER");
+    }
+
+    /**
+     * @param {*} payload 
+     * @returns {void}
+     */
+    itemUpdate(payload) {
+        payload;
     }
 }
