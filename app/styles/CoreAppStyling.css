@@ -1,0 +1,165 @@
+.AppBackground {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 100vh;
+    width: 100vw;
+    background-image: url("../assets/svg/liquid-cheese.svg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin: 0px;
+    overflow: hidden;
+    opacity: 0.70;
+}
+
+.AppForeground {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    margin: 0px;
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw;
+    margin: 0px;
+    padding: 0px;
+    display: flex;
+    flex-direction: column;
+    opacity: 1;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.AppForeground.Hide {
+    opacity: 0;
+}
+
+.PagesContainer {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    flex: 1 1 auto;
+    width: auto;
+}
+
+.Page {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    width: 100%;
+    height: 100%;
+    opacity: 1;
+    transition-property: left, opacity;
+    transition-duration: 0.5s, 0.4s;
+    transition-timing-function: ease-out, ease-in-out;
+    transition-delay: 0s, 0.1s;
+}
+
+.StageLeft {
+    top: 0px;
+    left: -100vw;
+    opacity: 0;
+    transition-property: left, opacity;
+    transition-duration: 0.5s, 0.4s;
+    transition-timing-function: ease-in, ease-in-out;
+    transition-delay: 0s, 0s;
+}
+
+.StageRight {
+    top: 0px;
+    left: 100vw;
+    opacity: 0;
+    transition-property: left, opacity;
+    transition-duration: 0.5s, 0.4s;
+    transition-timing-function: ease-in, ease-in-out;
+    transition-delay: 0s, 0s;
+}
+
+.AppTitle {
+    flex: 0 0 auto;
+    font-family: "Geist"; 
+    font-weight: 700;
+    font-size: 2.2vw;
+}
+
+.AppTitle > span {
+    color: var(--colourPrimaryDarker10);
+}
+
+@media (width <= 800px) {
+    .AppTitle {
+        font-size: 1.1rem;
+    }
+}
+
+@media (width >= 1200px) {
+    .AppTitle {
+        font-size: 1.65rem;
+    }
+}
+
+.PageControlStrip {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+.PageBody {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    max-height: 100%;
+    flex: 1 1 auto;
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+
+.LanguageNewFlyoutScroller {
+    height: auto;
+    max-height: 100%;
+    flex: 0 0 auto;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.LanguageNewFlyout {
+    height: 0px;
+    flex: 0 0 auto;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    transition: height 0.5s ease-in-out;
+}
+
+.LanguageNewFlyout.Show {
+    height: auto;
+}
+
+.FlyoutTitle {
+    flex: 1 0 auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    color: var(--colourPrimaryDarker10);
+    align-items: baseline;
+    border-bottom: 2px solid var(--colourPrimary);
+}
+
+.LanguageNewListScroller {
+    height: auto;
+    max-height: 100%;
+    flex: 1 1 auto;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.LanguageListBody {
+    height: auto;
+    flex: 1 1 auto;
+    overflow-x: hidden;
+    overflow-y: hidden;
+}

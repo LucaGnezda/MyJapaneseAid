@@ -17,7 +17,6 @@ cc-search {
         flex: 1 1 auto;
         flex-direction: row;    
         width: 30vmin;
-        max-width: 600px;
     }
 
     .SearchInput {
@@ -35,7 +34,7 @@ cc-search {
         font-family: "Geist"; 
         font-weight: 500;
         font-size: 0.95rem;
-        background: var(--whitetranslucent80);
+        background: var(--whitetranslucent70);
     }
 
     .SearchButtonSet {
@@ -52,7 +51,7 @@ cc-search {
         border-left: none;
         height: 30px;
         color: black;
-        background: var(--whitetranslucent80);
+        background: var(--whitetranslucent70);
         background-clip: content-box;
     }
 
@@ -72,13 +71,14 @@ cc-search {
         align-items: center;
         transition: all 0.3s ease;
         pointer-events: none;
-        background-color: var(--blacktranslucent90);
+        background-color: var(--colourSecondaryLighter60);
         background-clip: content-box;
         margin-right: 0px;
+        user-select: none;
     }
 
     .SearchButton:hover {
-        background-color: var(--blacktranslucent80);
+        background-color: var(--colourSecondaryLighter70);
     }
 
 
@@ -105,58 +105,5 @@ cc-search {
         width: 16px;
         height: 16px;
         filter: brightness(0) saturate(100%) invert(0%) sepia(2%) saturate(0%) hue-rotate(189deg) brightness(96%) contrast(101%);
-    }
-
-    .SearchFilters {
-        display: flex;
-        flex-direction: row;
-    }
-
-    .SearchFilter {
-        font-family: "Geist"; 
-        font-weight: 600;
-        font-size: 1.4vw;
-        margin-left: 2vw;
-        position: relative; /* To anchor the ::after below */
-        user-select: none;
-        -webkit-user-select: none; /* Non standard for Safari */
-    }
-
-    .SearchFilter::after {
-        content: '';
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        height: 2px;
-        background-color: var(--colourPrimary);
-        opacity: 0;
-        transition: opacity 500ms, transform 500ms;
-        transform: scale(0);
-        transform-origin: center;
-    }
-
-    .SearchFilter.Selected {
-        color: var(--colourPrimaryDarker20);
-    }
-
-    .SearchFilter.Selected::after {
-        opacity: 1;
-        transform: scale(1);
-    }
-
-
-    @media (width <= 800px) {
-        .SearchFilter {
-            margin-left: 0.9rem;
-            font-size: 0.7rem;
-        }
-    }
-
-    @media (width >= 1200px) {
-        .SearchFilter {
-            margin-left: 1.05rem;
-            font-size: 1rem;
-        }
     }
 }

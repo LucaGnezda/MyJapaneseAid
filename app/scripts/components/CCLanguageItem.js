@@ -7,7 +7,9 @@
  * Typedefs
  * @typedef {{
  *      rootContainer: HTMLDivElement?,
- *      fieldset: HTMLFieldSetElement?, 
+ *      fieldset: HTMLFieldSetElement?,
+ *      languageTypeInput: HTMLDivElement?, 
+ *      languageTypeOutput: HTMLDivElement?, 
  *      kanaInput: HTMLInputElement?,
  *      kanaHighlighterInput: HTMLInputElement?, 
  *      kanaOutput: HTMLDivElement?, 
@@ -41,8 +43,14 @@
  * }} CCLanguageItemElements
  * 
  * @typedef {{
+ *      languageTypeButtonStrip: CCButtonStrip?,
+ * }} CCLanguageItemSubComponents
+ * 
+ * @typedef {{
  *      gojuonKey: string?,
  *      priorGojuonKey: string?,
+ *      languageType: number?,
+ *      languageTypeLabel: string?,
  *      kana: string?,
  *      kanaHighlighterString: string?,
  *      romaji: string?,
@@ -63,7 +71,8 @@
  * 
  * @typedef {{
  *      deleteRequestCallback: Function?,
- *      dataUpdateCallback: Function?
+ *      updateCallback: Function?,
+ *      cancelCallback: Function?,
  * }} CCLanguageItemAttachedCallbacks
  */
 
@@ -80,6 +89,8 @@ class CCLanguageItem extends CCBase {
     #elements = {
         rootContainer: null,
         fieldset: null,
+        languageTypeInput: null,
+        languageTypeOutput: null,
         kanaInput: null,
         kanaHighlighterInput: null,
         kanaOutput: null,
@@ -110,7 +121,15 @@ class CCLanguageItem extends CCBase {
         examplesExpander: null,
         examplesAdd: null,
         examplesContainer: null
-    }    
+    }
+    
+    /**
+     * The elements that make up this component
+     * @type {CCLanguageItemSubComponents}
+     */
+    #subComponents = {
+        languageTypeButtonStrip: null,
+    }
 
     /**
      * The elements that make up this component
@@ -119,6 +138,8 @@ class CCLanguageItem extends CCBase {
     #propertyBag = {
         gojuonKey: null,
         priorGojuonKey: null,
+        languageType: null,
+        languageTypeLabel: null,
         kana: null,
         kanaHighlighterString: null,
         romaji: null,
@@ -132,6 +153,7 @@ class CCLanguageItem extends CCBase {
     }
 
     #permanentEdit = false;
+    #languageTypeLabels = ["Word", "Phrase", "Sentence"];
 
     /**
      * The elements that make up this component
@@ -139,29 +161,55 @@ class CCLanguageItem extends CCBase {
      */
     #attachedCallbacks = {
         deleteRequestCallback: null,
-        dataUpdateCallback: null
+        updateCallback: null,
+        cancelCallback: null,
     }
 
     static #htmlRootTemplate = `
         <div class="CCLanguageItem Container MarginBM" data-use="root-container">
             <form class="PadTBL PadLRXL">
-                <fieldset class="Fieldset" data-use="fieldset">
-                    <div class="FlexLayout Col">
-                        <label class="InputLabel RomanXS">Kana</label>
-                        <input class="ItemInput KanaXL NoBlockMargins HideOnRead" data-use="kana.input"></input>
-                        <p class="ItemOutput KanaXL NoBlockMargins" data-use="kana.output"></p>
-                        <div class="FlexLayout Row JustifyEnd">
-                            <label class="InputLabel RomanXS">Linked Highlighting</label>
-                            <input class="ItemInput RomanXS NoBlockMargins LinkedHighlighter" data-use="kana.highlighter-input"></input>
+                <fieldset class="Fieldset Padding" data-use="fieldset">
+                    <div class="FormButtonStrip TopLeft Row">
+                        <div class="ItemTypeInput" data-use="language.type.input"></div>
+                    </div>
+                    <div class="FormButtonStrip TopLeft Row">
+                        <div class="ItemTypeOutput PadTBXXS PadLRL RomanM" data-use="language.type.output">Hello</div>
+                    </div>
+                    <div class="FormButtonStrip TopRight Col ShowOnRead">
+                        <div class="FormButton ShowOnContainerHover BlackTint Medium" data-use="edit-button">
+                            <img src="./app/assets/svg/pencil.svg" class="FormButtonIcon">
+                        </div>
+                        <div class="Spacer Vertical ShowOnContainerHover">
+                            <img src="./app/assets/svg/minus.svg" class="FormButtonIcon">
+                        </div>
+                        <div class="FormButton ShowOnContainerHover RedTint Medium" data-use="delete-button">
+                            <img src="./app/assets/svg/trash.svg" class="FormButtonIcon">
+                        </div>
+                    </div>
+                    <div class="FormButtonStrip TopRight Row ShowOnEdit">
+                        <div class="FormButton BlackTint Medium" data-use="saveedit-button">
+                            <img src="./app/assets/svg/check.svg" class="FormButtonIcon">
+                        </div>
+                        <div class="FormButton BlackTint Medium" data-use="canceledit-button">
+                            <img src="./app/assets/svg/cross.svg" class="FormButtonIcon">
                         </div>
                     </div>
                     <div class="FlexLayout Col">
-                        <label class="InputLabel RomanXS">Romaji</label>              
+                        <label class="InputLabel RomanS">Kana</label>
+                        <input class="ItemInput KanaXL NoBlockMargins HideOnRead" data-use="kana.input"></input>
+                        <p class="ItemOutput KanaXL NoBlockMargins" data-use="kana.output"></p>
+                        <div class="FlexLayout Row JustifyEnd">
+                            <label class="InputLabel RomanS">Linked Highlighting</label>
+                            <input class="ItemInput RomanS NoBlockMargins LinkedHighlighter" data-use="kana.highlighter-input"></input>
+                        </div>
+                    </div>
+                    <div class="FlexLayout Col">
+                        <label class="InputLabel RomanS">Romaji</label>              
                         <input class="ItemInput RomanXL NoBlockMargins HideOnRead" data-use="romaji.input"></input>                    
                         <p class="ItemOutput RomanXL NoBlockMargins" data-use="romaji.output"></p>
                         <div class="FlexLayout Row JustifyEnd">
-                            <label class="InputLabel RomanXS">Linked Highlighting</label>
-                            <input class="ItemInput RomanXS NoBlockMargins LinkedHighlighter" data-use="romaji.highlighter-input"></input>
+                            <label class="InputLabel RomanS">Linked Highlighting</label>
+                            <input class="ItemInput RomanS NoBlockMargins LinkedHighlighter" data-use="romaji.highlighter-input"></input>
                         </div>  
                     </div>
                     <div class="FormGrid PadLL MarginTBM" data-use="translation-grid">
@@ -170,8 +218,8 @@ class CCLanguageItem extends CCBase {
                             <input class="ItemInput RomanM NoBlockMargins Font300 HideOnRead" data-use="meaning.input"></input>
                             <p class="ItemOutput RomanM Font300 NoBlockMargins" data-use="meaning.output"></p>
                             <div class="FlexLayout Row JustifyEnd">
-                                <label class="InputLabel RomanXS">Linked Highlighting</label>
-                                <input class="ItemInput RomanXS NoBlockMargins Font300 LinkedHighlighter" data-use="meaning.highlighter-input"></input>
+                                <label class="InputLabel RomanS">Linked Highlighting</label>
+                                <input class="ItemInput RomanS NoBlockMargins Font300 LinkedHighlighter" data-use="meaning.highlighter-input"></input>
                             </div>
                         </div>
                         <div class="GridLabel" data-use="literal.grid-cell-1"><p class="RomanM NoBlockMargins">Literal:</p></div>
@@ -190,25 +238,6 @@ class CCLanguageItem extends CCBase {
                     </div>
                     <div class="Examples" data-use="examples-container">
                     </div>
-                    <div class="FormButtonStrip Col ShowOnRead">
-                        <div class="FormButton ShowOnContainerHover BlackTint Medium" data-use="edit-button">
-                            <img src="./app/assets/svg/pencil.svg" class="FormButtonIcon">
-                        </div>
-                        <div class="Spacer Vertical ShowOnContainerHover">
-                            <img src="./app/assets/svg/minus.svg" class="FormButtonIcon">
-                        </div>
-                        <div class="FormButton ShowOnContainerHover RedTint Medium" data-use="delete-button">
-                            <img src="./app/assets/svg/trash.svg" class="FormButtonIcon">
-                        </div>
-                    </div>
-                    <div class="FormButtonStrip Row ShowOnEdit">
-                        <div class="FormButton BlackTint Medium" data-use="saveedit-button">
-                            <img src="./app/assets/svg/check.svg" class="FormButtonIcon">
-                        </div>
-                        <div class="FormButton BlackTint Medium" data-use="canceledit-button">
-                            <img src="./app/assets/svg/cross.svg" class="FormButtonIcon">
-                        </div>
-                    </div>
                 </fieldset>
             </form>
         </div>
@@ -218,15 +247,15 @@ class CCLanguageItem extends CCBase {
                         <div class="Example MarginBM PadLXL" data-use="example">
                             <div class="ExampleInputs PadRXL">
                                 <div class="FlexLayout Col">
-                                    <label class="InputLabel RomanXS">Kana</label>
+                                    <label class="InputLabel RomanS">Kana</label>
                                     <input class="ItemInput KanaS NoBlockMargins" data-use="example.kana.input" data-as="kana"></input>
                                 </div>
                                 <div class="FlexLayout Col">
-                                    <label class="InputLabel RomanXS">Romaji</label>
+                                    <label class="InputLabel RomanS">Romaji</label>
                                     <input class="ItemInput RomanS NoBlockMargins" data-use="example.romaji.input" data-as="romaji"></input>
                                 </div>
                                 <div class="FlexLayout Col">
-                                    <label class="InputLabel RomanXS">Meaning</label>
+                                    <label class="InputLabel RomanS">Meaning</label>
                                     <input class="ItemInput RomanS NoBlockMargins" data-use="example.meaning.input" data-as="meaning"></input>
                                 </div>
                             </div>
@@ -242,8 +271,14 @@ class CCLanguageItem extends CCBase {
     /**
      * Constructor
      */
-    constructor() {
-        super();
+    /** 
+     * @param {String | Boolean} id 
+     * @param {Boolean} useShadowDOM  
+     */
+    constructor(id = false, useShadowDOM = true) {
+        super(id);
+
+        this.#initialiseStructure();
     }
 
 
@@ -266,12 +301,14 @@ class CCLanguageItem extends CCBase {
     /**
      * Private Methods
      */
-    #initialiseUI() {
+    #initialiseStructure() {
 
         let fragment = getDOMFragmentFromString(CCLanguageItem.#htmlRootTemplate);
 
         this.#elements.rootContainer = fragment.querySelector('[data-use="root-container"]');
         this.#elements.fieldset = fragment.querySelector('[data-use="fieldset"]');
+        this.#elements.languageTypeInput = fragment.querySelector('[data-use="language.type.input"]');
+        this.#elements.languageTypeOutput = fragment.querySelector('[data-use="language.type.output"]');
         this.#elements.kanaInput = fragment.querySelector('[data-use="kana.input"]');
         this.#elements.kanaHighlighterInput = fragment.querySelector('[data-use="kana.highlighter-input"]');
         this.#elements.kanaOutput = fragment.querySelector('[data-use="kana.output"]');
@@ -303,10 +340,19 @@ class CCLanguageItem extends CCBase {
         this.#elements.examplesAdd = fragment.querySelector('[data-use="examples-header.add"]');
         this.#elements.examplesContainer = fragment.querySelector('[data-use="examples-container"]');
 
+        this.#subComponents.languageTypeButtonStrip = new CCButtonStrip(true, false);
+        this.#subComponents.languageTypeButtonStrip.setHorizontalLayout();
+        this.#subComponents.languageTypeButtonStrip.newButtonGroup(CCButtonStripGroupBehaviour.SingleSelectGroup);
+        this.#subComponents.languageTypeButtonStrip.addTextButton(this.#languageTypeLabels[0], null, true, "GreenTint");
+        this.#subComponents.languageTypeButtonStrip.addTextButton(this.#languageTypeLabels[1], null, false, "GreenTint");
+        this.#subComponents.languageTypeButtonStrip.addTextButton(this.#languageTypeLabels[2], null, false, "GreenTint");
+
+        this.#elements.languageTypeInput?.appendChild(this.#subComponents.languageTypeButtonStrip);
+
         this.appendChild(fragment);
     }
 
-    #initialiseElements() {
+    #initialiseBehaviour() {
         
         if (this.#elements.kanaInput && this.#elements.kanaHighlighterInput && this.#elements.kanaOutput && 
             this.#elements.romajiInput && this.#elements.romajiHighlighterInput && this.#elements.romajiOutput && 
@@ -346,7 +392,12 @@ class CCLanguageItem extends CCBase {
             this.#elements.romajiHighlighterInput.setAttribute("data-isvalid", "data-isvalid");
             this.#elements.meaningHighlighterInput.setAttribute("data-isvalid", "data-isvalid");
 
-            this.#setUIForRead();
+            if (this.#permanentEdit) {
+                this.#setUIForEdit();
+            }
+            else {
+                this.#setUIForRead();
+            }
         }
         else {
             Log.fatal("Component has not been correctly initialised", "COMPONENT", this);
@@ -621,7 +672,8 @@ class CCLanguageItem extends CCBase {
 
     #commitChanges() {
 
-        if (this.#elements.kanaOutput && this.#elements.kanaInput && this.#elements.kanaHighlighterInput &&
+        if (this.#subComponents.languageTypeButtonStrip  && this.#elements.languageTypeInput && this.#elements.languageTypeOutput &&
+            this.#elements.kanaOutput && this.#elements.kanaInput && this.#elements.kanaHighlighterInput &&
             this.#elements.romajiOutput && this.#elements.romajiInput && this.#elements.romajiHighlighterInput &&
             this.#elements.meaningOutput && this.#elements.meaningInput && this.#elements.meaningHighlighterInput &&
             this.#elements.literalInput && this.#elements.structureInput && this.#elements.notesInput &&
@@ -629,6 +681,8 @@ class CCLanguageItem extends CCBase {
 
             // update the propertybag
             this.#propertyBag.priorGojuonKey = this.#propertyBag.gojuonKey;
+            this.#propertyBag.languageType = this.#subComponents.languageTypeButtonStrip.getSelectedIndexForGroup(0) || 0;
+            this.#propertyBag.languageTypeLabel = this.#languageTypeLabels[this.#propertyBag.languageType];
             this.#propertyBag.kana = this.#elements.kanaInput.value;
             this.#propertyBag.gojuonKey = GojuonGroupingService.getGroupingFor(this.#propertyBag.kana)?.gojuonKey || null;
             this.#propertyBag.kanaHighlighterString = this.#elements.kanaHighlighterInput.value;
@@ -670,13 +724,15 @@ class CCLanguageItem extends CCBase {
 
     #rollbackChanges() {
 
-        if (this.#elements.kanaInput && this.#elements.kanaHighlighterInput && 
+        if (this.#subComponents.languageTypeButtonStrip &&
+            this.#elements.kanaInput && this.#elements.kanaHighlighterInput && 
             this.#elements.romajiInput && this.#elements.romajiHighlighterInput &&
             this.#elements.meaningInput && this.#elements.meaningHighlighterInput &&
             this.#elements.literalInput && this.#elements.structureInput && this.#elements.notesInput &&
             this.#elements.examplesContainer) {
 
             // reset controls from the propertybag
+            this.#subComponents.languageTypeButtonStrip.setSelectedIndexForGroup(0, this.#propertyBag.languageType);
             this.#elements.kanaInput.value = this.#propertyBag.kana || "";
             this.#elements.kanaHighlighterInput.value = this.#propertyBag.kanaHighlighterString || "";
             this.#elements.romajiInput.value = this.#propertyBag.romaji || "";
@@ -717,9 +773,6 @@ class CCLanguageItem extends CCBase {
                 this.#elements.examplesContainer.appendChild(fragment);
 
             }
-
-            // Update CSS
-            this.#setUIForRead();
         }
         else {
             Log.fatal("Component has not been correctly initialised", "COMPONENT", this);
@@ -904,25 +957,38 @@ class CCLanguageItem extends CCBase {
      */
     loadFromPropertyBag(propertyBag) {
 
-        // reset the local propertybag
-        this.#propertyBag.gojuonKey = GojuonGroupingService.getGroupingFor(propertyBag.kana || "")?.gojuonKey || null;
-        this.#propertyBag.priorGojuonKey = this.#propertyBag.gojuonKey;
-        this.#propertyBag.kana = propertyBag.kana || "";
-        this.#propertyBag.kanaHighlighterString = propertyBag.kanaHighlighterString || "";
-        this.#propertyBag.romaji = propertyBag.romaji || "";
-        this.#propertyBag.romajiHighlighterString = propertyBag.romajiHighlighterString || "";
-        this.#propertyBag.meaning = propertyBag.meaning || "";
-        this.#propertyBag.meaningHighlighterString = propertyBag.meaningHighlighterString || "";
-        this.#propertyBag.literal = propertyBag.literal || "";
-        this.#propertyBag.structure = propertyBag.structure || "";
-        this.#propertyBag.notes = propertyBag.notes || "";
-        this.#propertyBag.examples = propertyBag.examples || [];
+        if (this.#propertyBag && this.#subComponents && this.#subComponents.languageTypeButtonStrip && this.#elements.languageTypeOutput) {
 
-        // then rollback to apply the propertybag to the controls
-        this.#rollbackChanges();
+            // reset the local propertybag
+            this.#propertyBag.gojuonKey = GojuonGroupingService.getGroupingFor(propertyBag.kana || "")?.gojuonKey || null;
+            this.#propertyBag.priorGojuonKey = this.#propertyBag.gojuonKey;
+            this.#propertyBag.languageType = (propertyBag.languageType && propertyBag.languageType >=0 && propertyBag.languageType <= 2 ? propertyBag.languageType : 0);
+            this.#propertyBag.languageTypeLabel = this.#languageTypeLabels[this.#propertyBag.languageType];
+            this.#propertyBag.kana = propertyBag.kana || "";
+            this.#propertyBag.kanaHighlighterString = propertyBag.kanaHighlighterString || "";
+            this.#propertyBag.romaji = propertyBag.romaji || "";
+            this.#propertyBag.romajiHighlighterString = propertyBag.romajiHighlighterString || "";
+            this.#propertyBag.meaning = propertyBag.meaning || "";
+            this.#propertyBag.meaningHighlighterString = propertyBag.meaningHighlighterString || "";
+            this.#propertyBag.literal = propertyBag.literal || "";
+            this.#propertyBag.structure = propertyBag.structure || "";
+            this.#propertyBag.notes = propertyBag.notes || "";
+            this.#propertyBag.examples = propertyBag.examples || [];
 
-        // then regenerate the read state too
-        this.#regenerateHighlightableOutputs();
+            // then rollback to apply the propertybag to the controls
+            this.#rollbackChanges();
+
+            // set the type
+            this.#subComponents.languageTypeButtonStrip.setSelectedIndexForGroup(0, this.#propertyBag.languageType);
+
+            this.#elements.languageTypeOutput.innerText = this.#propertyBag.languageTypeLabel;
+
+            // then regenerate the read state too
+            this.#regenerateHighlightableOutputs();
+        }
+        else {
+            Log.fatal("Component has not been correctly initialised", "COMPONENT", this);
+        }
 
     }
 
@@ -944,13 +1010,27 @@ class CCLanguageItem extends CCBase {
      * @param {Function?} callback 
      * @returns
      */
-    attachDataUpdateCallback(callback) {
+    attachUpdateCallback(callback) {
         
         if (callback != null && typeof callback === "function") {
-            this.#attachedCallbacks.dataUpdateCallback = callback;
+            this.#attachedCallbacks.updateCallback = callback;
         }
         else {
-            this.#attachedCallbacks.dataUpdateCallback = null;
+            this.#attachedCallbacks.updateCallback = null;
+        }
+    }
+
+    /**
+     * @param {Function?} callback 
+     * @returns
+     */
+    attachCancelCallback(callback) {
+        
+        if (callback != null && typeof callback === "function") {
+            this.#attachedCallbacks.cancelCallback = callback;
+        }
+        else {
+            this.#attachedCallbacks.cancelCallback = null;
         }
     }
 
@@ -960,8 +1040,10 @@ class CCLanguageItem extends CCBase {
         this.#permanentEdit = true;
 
         // Update CSS
-        this.#setUIForEdit();
-        this.isValid(true);
+        if (this.isConnected){
+            this.#setUIForEdit();
+            this.isValid(true);
+        }
     }
 
 
@@ -970,8 +1052,7 @@ class CCLanguageItem extends CCBase {
      */
     connectedCallback() {
 
-        this.#initialiseUI();
-        this.#initialiseElements();
+        this.#initialiseBehaviour();
         this.render();
         Log.debug(`${this.constructor.name} connected to DOM`, "COMPONENT");
 
@@ -1002,21 +1083,23 @@ class CCLanguageItem extends CCBase {
             return;
         }
 
-        // Update CSS
-        if (!this.permanentEdit) {
-            this.#setUIForRead();
-        }
-
         // Update property bag
         this.#commitChanges();
 
-        // Build & set highlightable outputs
-        if (!this.permanentEdit) {
+        if (!this.#elements.languageTypeOutput || !this.#propertyBag.languageTypeLabel) {
+            Log.fatal("Component has not been correctly initialised", "COMPONENT", this);
+            return;
+        }
+
+        // Set Read, Build & set highlightable outputs
+        if (!this.#permanentEdit) {
+            this.#setUIForRead();
+            this.#elements.languageTypeOutput.innerText = this.#propertyBag.languageTypeLabel;
             this.#regenerateHighlightableOutputs();
         }
 
         // Fire callback if 
-        if (this.#attachedCallbacks.dataUpdateCallback) {
+        if (this.#attachedCallbacks.updateCallback) {
 
             let event = {};
             event.originatingEvent = mouseEvent;
@@ -1025,7 +1108,7 @@ class CCLanguageItem extends CCBase {
             event.originatingId = this.id;
             event.currentData = Object.assign({}, this.#propertyBag);
 
-            this.#attachedCallbacks.dataUpdateCallback(event);
+            this.#attachedCallbacks.updateCallback(event);
         }
     }
 
@@ -1037,7 +1120,33 @@ class CCLanguageItem extends CCBase {
     cancelCallback(mouseEvent) {
         Log.debug("Cancel", "COMPONENT");
 
+        // revert to whats in the propertybag
         this.#rollbackChanges();
+
+        if (!this.#elements.languageTypeOutput || !this.#propertyBag.languageTypeLabel) {
+            Log.fatal("Component has not been correctly initialised", "COMPONENT", this);
+            return;
+        }
+
+        // Set Read, Build & set highlightable outputs
+        if (!this.#permanentEdit) {
+            this.#setUIForRead();
+            this.#elements.languageTypeOutput.innerText = this.#propertyBag.languageTypeLabel;
+            this.#regenerateHighlightableOutputs();
+        }
+
+        // Fire callback if 
+        if (this.#attachedCallbacks.cancelCallback) {
+
+            let event = {};
+            event.originatingEvent = mouseEvent;
+            event.originatingObject = mouseEvent.currentTarget;
+            event.originatingComponent = this;
+            event.originatingId = this.id;
+            event.currentData = Object.assign({}, this.#propertyBag);
+
+            this.#attachedCallbacks.cancelCallback(event);
+        }
     }
 
     /**

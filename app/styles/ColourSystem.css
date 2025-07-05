@@ -1,0 +1,109 @@
+:root {
+
+    --colourPrimaryLighter90: #EAF7EF;
+    --colourPrimaryLighter80: #D4EFE0; 
+    --colourPrimaryLighter70: #BFE7D0; 
+    --colourPrimaryLighter60: #A9DFC0; 
+    --colourPrimaryLighter50: #94D7B1; 
+    --colourPrimaryLighter40: #7ECFA1; 
+    --colourPrimaryLighter30: #69C791; 
+    --colourPrimaryLighter20: #53BF81; 
+    --colourPrimaryLighter10: #3EB772;  
+    --colourPrimary: #28af62;                /* var(--colourGreen) */
+    --colourPrimaryDarker10: #249E58;
+    --colourPrimaryDarker20: #208C4E; 
+    --colourPrimaryDarker30: #1C7A45; 
+    --colourPrimaryDarker40: #18693B; 
+    --colourPrimaryDarker50: #145831; 
+    --colourPrimaryDarker60: #104627; 
+    --colourPrimaryDarker70: #0C341D; 
+    --colourPrimaryDarker80: #082314; 
+    --colourPrimaryDarker90: #04110A;
+
+    --colourSecondaryLighter90: #F4FEF5;
+    --colourSecondaryLighter80: #E9FEEB; 
+    --colourSecondaryLighter70: #DEFDE2; 
+    --colourSecondaryLighter60: #D3FDD8; 
+    --colourSecondaryLighter50: #C8FCCE; 
+    --colourSecondaryLighter40: #BDFBC4; 
+    --colourSecondaryLighter30: #B2FBBA; 
+    --colourSecondaryLighter20: #A7FAB1; 
+    --colourSecondaryLighter10: #9CFAA7;  
+    --colourSecondary: #91F99D;                /* var(--colourGreen) */
+    --colourSecondaryDarker10: #83E08D;
+    --colourSecondaryDarker20: #74C77E; 
+    --colourSecondaryDarker30: #66AE6E; 
+    --colourSecondaryDarker40: #57955E; 
+    --colourSecondaryDarker50: #497D4F; 
+    --colourSecondaryDarker60: #3A643F; 
+    --colourSecondaryDarker70: #2B4B2F; 
+    --colourSecondaryDarker80: #1D321F; 
+    --colourSecondaryDarker90: #0E1910;
+
+    --colourPrimaryDarker10Translucent90: #249E5819;
+    --colourPrimaryDarker10Translucent80: #249E5833;
+    --colourPrimaryDarker10Translucent70: #249E584C;
+    --colourPrimaryDarker10Translucent60: #249E5866;
+    --colourPrimaryDarker10Translucent50: #249E5880;
+
+    --colourSecondaryDarker10Translucent80: #83E08D33;
+    --colourSecondaryDarker10Translucent70: #83E08D4C;
+    --colourSecondaryDarker10Translucent60: #83E08D66;
+    --colourSecondaryDarker10Translucent50: #83E08D80;
+
+    --colourDarkTint: #a0e1a8;
+    --colourDarkTintDarker: #8fc995;
+
+    --colourRedTint: #bdd7a6;
+    --colourRedTintDarker: #c7b392;
+
+    --colourBlack90: #1a1a1a;
+    --colourBlack80: #333333; 
+    --colourBlack70: #4d4d4d; 
+    --colourBlack60: #666666; 
+    --colourBlack50: #808080; 
+    --colourWhite50: #808080;                  /* var(--greyscale) */
+    --colourWhite60: #999999; 
+    --colourWhite70: #b3b3b3;
+    --colourWhite80: #cccccc;
+    --colourWhite90: #e6e6e6;
+    
+    --blacktranslucent90: #0000001a;
+    --blacktranslucent80: #00000033;
+    --blacktranslucent70: #0000004d;
+    --blacktranslucent60: #00000066;
+    --blacktranslucent50: #00000080;      /* var(--blacktranslucent50) */
+    --blacktranslucent40: #00000099;
+    --blacktranslucent30: #000000b3;
+    --blacktranslucent20: #000000cc;
+    --blacktranslucent10: #000000e6;
+
+    --whitetranslucent90: #ffffff1a;
+    --whitetranslucent80: #ffffff33;
+    --whitetranslucent70: #ffffff4d;
+    --whitetranslucent60: #ffffff66;
+    --whitetranslucent50: #ffffff80;      /* var(--whitetranslucent50) */
+    --whitetranslucent40: #ffffff99;
+    --whitetranslucent30: #ffffffb3;
+    --whitetranslucent20: #ffffffcc;
+    --whitetranslucent10: #ffffffe6;
+
+    --redtranslucent90: #e748561a;
+    --redtranslucent80: #e7485633;
+    --redtranslucent70: #e748564d;
+    --redtranslucent60: #e7485666;
+    --redtranslucent50: #e7485680;      /* var(--redtranslucent50) */
+    --redtranslucent40: #e7485699;
+    --redtranslucent30: #e74856b3;
+    --redtranslucent20: #e74856cc;
+    --redtranslucent10: #e74856e6;
+    
+    --colourBlue: #238ddd;                 /* var(--colourBlue) */
+    --colourIce: #9cdcfe;                  /* var(--colourIce) */
+    --colourYellow: #fffdab;               /* var(--colourYellow) */
+    --colourRed: #e74856;                  /* var(--colourRed) */
+    --colourCharcoal: #323436;             /* var(--colourCharcoal) */
+    --colourDDDDarkSteelBlue: #3E5668;     /* var(--colourDDDDarkSteelBlue) */
+    --colourDDDTeal: #1BA5A6;              /* var(--colourDDDTeal) */
+    --colourDDDTan: #f3ebe0;               /* var(--colourDDDTan) */
+}

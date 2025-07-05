@@ -1,0 +1,74 @@
+cc-languageitem {
+    display: contents;
+}
+
+.CCTopNav {
+
+    /** 
+     * Container - the outermost rendered element that acts as an anchor for all other CSS 
+     */
+    &.Container {
+        display: flex;
+        flex-direction: row;
+        flex: 1 0 auto;
+        position: relative;
+        padding: 0px;
+    }
+
+    /** 
+     * Tabstrip - the tabs section of the top nav  
+     */
+    .Tabstrip {
+        display: flex;
+        flex-direction: row;
+        flex: 0 0 auto;
+        position: relative;
+    }
+
+    .Spacer {
+        flex: 0 0 auto;
+        width: 0px;
+        background-color: var(--whitetranslucent40);
+    }
+
+    .Spacer.Expandable {
+        flex: 1 0 auto;
+    }
+
+    .Tab {
+        border-left: 1px solid transparent;
+        border-top: 1px solid transparent;
+        border-right: 1px solid transparent;
+        border-bottom: 1px solid var(--blacktranslucent80);
+        background-color: var(--whitetranslucent40);
+        transition: all 0.3s ease;
+    }
+
+    .Tab.Selected {
+        border-left: 1px solid var(--blacktranslucent80);
+        border-top: 1px solid transparent;
+        border-right: 1px solid var(--blacktranslucent80);
+        border-bottom: 1px solid transparent;
+        background-color: transparent;
+        /*border-radius: 6px 6px 0px 0px;*/
+    }
+
+    .LeftEdgeContent {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        background-color: var(--whitetranslucent40);
+    }
+
+    .RightEdgeContent {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        background-color: var(--whitetranslucent50);
+    }
+
+    .Underline {
+        background-color: var(--whitetranslucent40);
+        border-bottom: 1px solid var(--blacktranslucent80);
+    }
+}

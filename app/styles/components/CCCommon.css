@@ -2,14 +2,22 @@
  * Buttonstrip - Group arrangement of interactive buttons for the form 
  */
 .FormButtonStrip {
-    top: 4px;
-    right: 4px;
     width: auto;
     height: auto;
     display: flex;
     flex-direction: row;
     position: absolute;
     gap: 4px;
+}
+
+.FormButtonStrip.TopLeft {
+    top: 4px;
+    left: 4px;
+}
+
+.FormButtonStrip.TopRight {
+    top: 4px;
+    right: 4px;
 }
 
 .FormButtonStrip.Row {
@@ -49,6 +57,7 @@
     border-radius: 6px 6px 6px 6px;
     border: none;
     transition: all 0.3s ease;
+    user-select: none;
 }
 
 .FormButton.Hide {
@@ -69,6 +78,7 @@
     width: 20px;
     height: 20px;
     filter: brightness(0) saturate(100%) invert(0%) sepia(2%) saturate(0%) hue-rotate(189deg) brightness(96%) contrast(101%);
+    user-select: none;
 }
 
 .FormButtonSmallGreenIcon {
@@ -76,6 +86,7 @@
     height: 16px;
     filter: brightness(0) saturate(100%) invert(30%) sepia(46%) saturate(5149%) hue-rotate(138deg) brightness(93%) contrast(75%);
     transition: all 500ms;
+    
 }
 
 .FormButton.Disabled {

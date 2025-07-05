@@ -1,0 +1,211 @@
+.Font100 {
+    font-weight: 100;
+}
+
+.Font200 {
+    font-weight: 200;
+}
+
+.Font300 {
+    font-weight: 300;
+}
+
+.Font400 {
+    font-weight: 400;
+}
+
+.Font500 {
+    font-weight: 500;
+}
+
+.Font600 {
+    font-weight: 600;
+}
+
+.Font700 {
+    font-weight: 700;
+}
+
+.Font800 {
+    font-weight: 800;
+}
+
+/* --- Japanese Fonts --- */
+.KanaXL {
+    font-size: 3vw;
+    font-family: Noto Sans JP;
+}
+
+.KanaL {
+    font-size: 2.6vw;
+    font-family: Noto Sans JP;
+}
+
+.KanaM {
+    font-size: 2.2vw;
+    font-family: Noto Sans JP;
+}
+
+.KanaS {
+    font-size: 1.9vw;
+    font-family: Noto Sans JP;
+}
+
+.KanaXS {
+    font-size: 1.6vw;
+    font-family: Noto Sans JP;
+}
+
+/* --- Japanese Font Minimums --- */
+@media (width <= 800px) {
+    .KanaXL {
+        font-size: 1.5rem;
+        font-family: Noto Sans JP;
+    }
+
+    .KanaL {
+        font-size: 1.3rem;
+        font-family: Noto Sans JP;
+    }
+
+    .KanaM{
+        font-size: 1.1rem;
+        font-family: Noto Sans JP;
+    }
+
+    .KanaS {
+        font-size: 0.95rem;
+        font-family: Noto Sans JP;
+    }
+
+    .KanaXS {
+        font-size: 0.8rem;
+        font-family: Noto Sans JP;
+    }
+}
+
+/* --- Japanese Font Maximums --- */
+@media (width >= 1200px) {
+    .KanaXL {
+        font-size: 2.25rem;
+        font-family: Noto Sans JP;
+    }
+
+    .KanaL {
+        font-size: 1.95rem;
+        font-family: Noto Sans JP;
+    }
+
+    .KanaM {
+        font-size: 1.65rem;
+        font-family: Noto Sans JP;
+    }
+
+    .KanaS {
+        font-size: 1.425rem;
+        font-family: Noto Sans JP;
+    }
+
+    .KanaXS {
+        font-size: 1.2rem;
+        font-family: Noto Sans JP;
+    }
+}
+
+
+/* --- Equivalent English Fonts --- */
+.RomanXXL {
+    font-size: 3.6vw;
+    font-family: Fredoka;
+}
+
+.RomanXL {
+    font-size: 2.2vw;
+    font-family: Fredoka;
+}
+
+.RomanL {
+    font-size: 1.9vw;
+    font-family: Fredoka;
+}
+
+.RomanM {
+    font-size: 1.6vw;
+    font-family: Fredoka;
+}
+
+.RomanS {
+    font-size: 1.4vw;
+    font-family: Fredoka;
+}
+
+.RomanXS {
+    font-size: 1.2vw;
+    font-family: Fredoka;
+}
+
+/* --- Equivalent English Font Minimums --- */
+@media (width <= 800px) {
+    .RomanXXL {
+        font-size: 1.8rem;
+        font-family: Fredoka;
+    }
+
+    .RomanXL {
+        font-size: 1.1rem;
+        font-family: Fredoka;
+    }
+
+    .RomanL {
+        font-size: 0.95rem;
+        font-family: Fredoka;
+    }
+
+    .RomanM {
+        font-size: 0.8rem;
+        font-family: Fredoka;
+    }
+
+    .RomanS {
+        font-size: 0.7rem;
+        font-family: Fredoka;
+    }
+
+    .RomanXS {
+        font-size: 0.6rem;
+        font-family: Fredoka;
+    }
+}
+
+/* --- Equivalent English Font Maximums --- */
+@media (width >= 1200px) {
+    .RomanXXL {
+        font-size: 2.75rem;
+        font-family: Fredoka;
+    }
+
+    .RomanXL {
+        font-size: 1.65rem;
+        font-family: Fredoka;
+    }
+
+    .RomanL {
+        font-size: 1.425rem;
+        font-family: Fredoka;
+    }
+
+    .RomanM {
+        font-size: 1.2rem;
+        font-family: Fredoka;
+    }
+
+    .RomanS {
+        font-size: 1.05rem;
+        font-family: Fredoka;
+    }
+
+    .RomanXS {
+        font-size: 0.9rem;
+        font-family: Fredoka;
+    }
+}

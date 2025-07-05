@@ -1,308 +1,3 @@
-.AppBackground {
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    height: 100vh;
-    width: 100vw;
-    background-image: url("../assets/svg/liquid-cheese.svg");
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    margin: 0px;
-    overflow: hidden;
-    opacity: 0.70;
-}
-
-.AppForeground {
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    margin: 0px;
-    overflow: hidden;
-    height: 100vh;
-    width: 100vw;
-    margin: 0px;
-    padding: 0px;
-    display: flex;
-    flex-direction: column;
-}
-
-.AppHeader {
-    flex: 0 0 auto;
-    height: 45px;
-    width:100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-}
-
-.AppHeaderSpacer {
-    display: flex;
-    flex-direction: row;
-    flex: 0 0 auto;
-    min-width: 0vw;
-    max-width: 15vw;
-    margin-left: 12px;
-}
-
-.AppHeaderControlSurface {
-    display: flex;
-    flex-direction: row;
-    flex: 1 1 auto;
-    width: auto;
-    margin-left: 12px;
-    margin-right: 12px;
-}
-
-.AppHeaderSpacer.AlignLeft {
-    justify-content: flex-start;
-}
-
-.AppTitle {
-    flex: 0 0 auto;
-    font-family: "Geist"; 
-    font-weight: 700;
-    font-size: 1.4vw;
-}
-
-.AppTitle > span {
-    color: var(--colourPrimaryDarker10);
-}
-
-.AppBody {
-    flex: 1 1 auto;
-    display: flex;
-    flex-direction: column;
-    overflow-x: hidden;
-    overflow-y: scroll;
-    padding: 12px;
-}
-
-@media (width <= 800px) {
-    .AppHeaderSpacer.AlignLeft {
-        display: none;
-    }
-}
-
-@media (width >= 1600px) {
-    .AppTitle {
-        font-size: 1.4rem;
-    }
-}
-
-.Font100 {
-    font-weight: 100;
-}
-
-.Font200 {
-    font-weight: 200;
-}
-
-.Font300 {
-    font-weight: 300;
-}
-
-.Font400 {
-    font-weight: 400;
-}
-
-.Font500 {
-    font-weight: 500;
-}
-
-.Font600 {
-    font-weight: 600;
-}
-
-.Font700 {
-    font-weight: 700;
-}
-
-.Font800 {
-    font-weight: 800;
-}
-
-/* --- Japanese Fonts --- */
-.KanaXL {
-    font-size: 3vw;
-    font-family: Noto Sans JP;
-}
-
-.KanaL {
-    font-size: 2.6vw;
-    font-family: Noto Sans JP;
-}
-
-.KanaM {
-    font-size: 2.2vw;
-    font-family: Noto Sans JP;
-}
-
-.KanaS {
-    font-size: 1.9vw;
-    font-family: Noto Sans JP;
-}
-
-.KanaXS {
-    font-size: 1.6vw;
-    font-family: Noto Sans JP;
-}
-
-/* --- Japanese Font Minimums --- */
-@media (width <= 800px) {
-    .KanaXL {
-        font-size: 1.5rem;
-        font-family: Noto Sans JP;
-    }
-
-    .KanaL {
-        font-size: 1.3rem;
-        font-family: Noto Sans JP;
-    }
-
-    .KanaM{
-        font-size: 1.1rem;
-        font-family: Noto Sans JP;
-    }
-
-    .KanaS {
-        font-size: 0.95rem;
-        font-family: Noto Sans JP;
-    }
-
-    .KanaXS {
-        font-size: 0.8rem;
-        font-family: Noto Sans JP;
-    }
-}
-
-/* --- Japanese Font Maximums --- */
-@media (width >= 1200px) {
-    .KanaXL {
-        font-size: 2.25rem;
-        font-family: Noto Sans JP;
-    }
-
-    .KanaL {
-        font-size: 1.95rem;
-        font-family: Noto Sans JP;
-    }
-
-    .KanaM {
-        font-size: 1.65rem;
-        font-family: Noto Sans JP;
-    }
-
-    .KanaS {
-        font-size: 1.425rem;
-        font-family: Noto Sans JP;
-    }
-
-    .KanaXS {
-        font-size: 1.2rem;
-        font-family: Noto Sans JP;
-    }
-}
-
-
-/* --- Equivalent English Fonts --- */
-.RomanXXL {
-    font-size: 3.6vw;
-    font-family: Geist;
-}
-
-.RomanXL {
-    font-size: 2.2vw;
-    font-family: Geist;
-}
-
-.RomanL {
-    font-size: 1.9vw;
-    font-family: Geist;
-}
-
-.RomanM {
-    font-size: 1.6vw;
-    font-family: Geist;
-}
-
-.RomanS {
-    font-size: 1.4vw;
-    font-family: Geist;
-}
-
-.RomanXS {
-    font-size: 1.2vw;
-    font-family: Geist;
-}
-
-/* --- Equivalent English Font Minimums --- */
-@media (width <= 800px) {
-    .RomanXXL {
-        font-size: 1.8rem;
-        font-family: Geist;
-    }
-
-    .RomanXL {
-        font-size: 1.1rem;
-        font-family: Geist;
-    }
-
-    .RomanL {
-        font-size: 0.95rem;
-        font-family: Geist;
-    }
-
-    .RomanM {
-        font-size: 0.8rem;
-        font-family: Geist;
-    }
-
-    .RomanS {
-        font-size: 0.7rem;
-        font-family: Geist;
-    }
-
-    .RomanXS {
-        font-size: 0.6rem;
-        font-family: Geist;
-    }
-}
-
-/* --- Equivalent English Font Maximums --- */
-@media (width >= 1200px) {
-    .RomanXXL {
-        font-size: 2.75rem;
-        font-family: Geist;
-    }
-
-    .RomanXL {
-        font-size: 1.65rem;
-        font-family: Geist;
-    }
-
-    .RomanL {
-        font-size: 1.425rem;
-        font-family: Geist;
-    }
-
-    .RomanM {
-        font-size: 1.2rem;
-        font-family: Geist;
-    }
-
-    .RomanS {
-        font-size: 1.05rem;
-        font-family: Geist;
-    }
-
-    .RomanXS {
-        font-size: 0.9rem;
-        font-family: Geist;
-    }
-}
-
 /* --- Dynamic Padding --- */
 /* XL Base = 12-18px @ 16 */
 .PadTXL {
@@ -457,6 +152,37 @@
 
 .PadXS {
     padding: 0.25vw;
+}
+
+/* XXS Base = 1-1.5px @ 16 */
+.PadTXXS {
+    padding-top: 0.125vw;
+}
+
+.PadBXXS {
+    padding-bottom: 0.125vw;
+}
+
+.PadTBXXS {
+    padding-top: 0.125vw;
+    padding-bottom: 125vw;
+}
+
+.PadLXXS {
+    padding-left: 0.125vw;
+}
+
+.PadRXXS {
+    padding-right: 0.125vw;
+}
+
+.PadLRXXS {
+    padding-left: 0.125vw;
+    padding-right: 0.125vw;
+}
+
+.PadXXS {
+    padding: 0.125vw;
 }
 
 /* No Padding */
@@ -642,8 +368,39 @@
         padding-right: 0.125rem;
     }
 
-    .PadXS {
+    .PadXXS {
         padding: 0.125rem;
+    }
+
+    /* XXS Base = 1px @ 16 */
+    .PadTXXS {
+        padding-top: 1px;
+    }
+
+    .PadBXXS {
+        padding-bottom: 1px;
+    }
+
+    .PadTBXXS {
+        padding-top: 1px;
+        padding-bottom: 1px;
+    }
+
+    .PadLXXS {
+        padding-left: 1px;
+    }
+
+    .PadRXXS {
+        padding-right: 1px;
+    }
+
+    .PadLRXXS {
+        padding-left: 1px;
+        padding-right: 1px;
+    }
+
+    .PadXXS {
+        padding: 1px;
     }
 }
 
@@ -801,6 +558,37 @@
 
     .PadXS {
         padding: 0.1875rem;
+    }
+
+    /* XXS Base = 1.5px @ 16 */
+    .PadTXXS {
+        padding-top: 1.5px;
+    }
+
+    .PadBXXS {
+        padding-bottom: 1.5px;
+    }
+
+    .PadTBXXS {
+        padding-top: 1.5px;
+        padding-bottom: 1.5px;
+    }
+
+    .PadLXXS {
+        padding-left: 1.5px;
+    }
+
+    .PadRXXS {
+        padding-right: 1.5px;
+    }
+
+    .PadLRXXS {
+        padding-left: 1.5px;
+        padding-right: 1.5px;
+    }
+
+    .PadXXS {
+        padding: 1.5px;
     }
 }
 

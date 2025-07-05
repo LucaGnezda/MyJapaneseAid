@@ -1,8 +1,12 @@
 /**
  * List of valid Demo Elements (to minimise indexing errors while coding)
  * @typedef {{
+ *      topNav: CCTopNav?,
  *      searchComponent: CCSearch?,
- *      wordsList: CCLanguageItemList?,
+ *      newItem: CCLanguageItem?,
+ *      languagePageControls: CCButtonStrip?,
+ *      languageList: CCLanguageItemList?,
+ *      languageListControls: CCButtonStrip?,
  * }} AppComponents
  * 
  * @typedef {{
@@ -42,14 +46,33 @@ class App {
      * @type {LimitedDictionary<AppElements, HTMLElement?>}
      */
     static elements = {
-        // Place variables here that hold references to elements you frequently need.
+        appForeground: null,
+        topNavContainer: null,
+        kanaPage: null,
+        kanaControls: null,
+        kanaPageBody: null,
+        languagePage: null,
+        languagePageControls: null,
+        languageNewFlyout: null,
+        languageListBody: null,
     };
 
     /**
      * @type {AppComponents}
      */
     static components = {
+        topNav: null,
         searchComponent: null,
-        wordsList: null,
+        newItem: null,
+        languagePageControls: null,
+        languageList: null,
+        languageListControls: null,
+    };
+
+    /**
+     * @type {LimitedDictionary<AppElements, HTMLElement?>}
+     */
+    static fragments = {
+        appTitle: null,
     };
 }

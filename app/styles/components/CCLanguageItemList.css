@@ -18,6 +18,7 @@ cc-languageitemlist {
         flex-direction: row;
         align-items: baseline;
         border-bottom: 2px solid var(--colourPrimary);
+        position: relative;
     }
 
     .ListTitle {
@@ -25,6 +26,15 @@ cc-languageitemlist {
         display: flex;
         justify-content: center;
         color: var(--colourPrimaryDarker10);
+    }
+
+    .ButtonStipContainer {
+        position: absolute;
+        top: 0px;
+        right: 0px;
+        display: flex;
+        flex-direction: row;
+        width: fit-content;
     }
 
     .SectionHeader {
