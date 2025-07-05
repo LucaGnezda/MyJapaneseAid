@@ -28,6 +28,14 @@ function isBoolean(value) {
 }
 
 /**
+ * @param {*} value 
+ * @returns {boolean}
+ */
+function isString(value) {
+    return (typeof value === 'string' || value instanceof String);
+}
+
+/**
  * Checks if a given string represents a valid CSS color.
  * E.g.: 'red', 'blue', 'aliceblue'...
  * @param {string} value 

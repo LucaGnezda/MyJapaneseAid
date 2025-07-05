@@ -9,11 +9,18 @@ class CCBase extends HTMLElement {
     /** @type {AbortController} #preDisposeController */
     #abortController = new AbortController();
 
-    constructor() {
+    /** 
+     * @param {String | Boolean} id 
+     */
+    constructor(id = false) {
         super();
 
-        // Allocate a guid
-        if (isEmptyOrNull(this.getAttribute("id"))) {
+        // set the id to nothing, a supplied id, or a generated guid
+        if (isString(id)) {
+            /** @ts-ignore */
+            this.setAttribute("id", id);
+        }
+        else if (id == true) {
             this.setAttribute("id", crypto.randomUUID());
         }
     }

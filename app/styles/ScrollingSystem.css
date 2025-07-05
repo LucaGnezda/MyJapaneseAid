@@ -1,0 +1,25 @@
+@property --ThumbColour {
+    syntax: "<color>";
+    inherits: true;
+    initial-value: transparent;
+}
+
+.CustomScroll {
+    scrollbar-gutter: stable;
+    transition: --ThumbColour 0.3s;
+    margin-left: 15px;
+}
+
+.CustomScroll:hover {
+    --ThumbColour: var(--colourPrimary);
+}
+
+.CustomScroll::-webkit-scrollbar {
+    width: 15px;
+}
+
+.CustomScroll::-webkit-scrollbar-thumb {
+    box-shadow: inset 0 0 10px 10px var(--ThumbColour);
+    border: solid 4px transparent;
+    border-radius: 10px;
+}

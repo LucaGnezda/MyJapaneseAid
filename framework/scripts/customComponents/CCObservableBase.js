@@ -29,13 +29,18 @@ class CCObservableBase extends HTMLElement {
     observableData;
     
     /**
+     * @param {String | Boolean} id 
      * @param {ObservableCore} state 
      */
-    constructor(state) {
+    constructor(id, state) {
         super();
 
-        // Allocate a guid
-        if (isEmptyOrNull(this.getAttribute("id"))) {
+        // set the id to nothing, a supplied id, or a generated guid
+        if (isString(id)) {
+            /** @ts-ignore */
+            this.setAttribute("id", id);
+        }
+        else if (id == true) {
             this.setAttribute("id", crypto.randomUUID());
         }
 

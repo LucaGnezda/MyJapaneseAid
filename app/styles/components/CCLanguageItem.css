@@ -9,7 +9,6 @@ cc-languageitem {
      */
     &.Container {
         background-color: var(--whitetranslucent70);
-        border: 1px solid var(--blacktranslucent80);
         border-radius: 10px 10px 10px 10px;
         display: flex;
         flex-direction: column;
@@ -24,16 +23,43 @@ cc-languageitem {
      * Fieldset - Anchors read/edit mod styling logic through use of the 'disabled' attribute 
      */
     .Fieldset {
-        padding-top: 28px;
-        padding-right: 0px;
-        transition: all 0.5s;
+        /*transition: all 0.5s;*/
         display: flex;
         flex-direction: column;
     }
 
-    .Fieldset:disabled {
-        padding-top: 0px;
-        padding-right: 28px;
+    .Fieldset.Padding {
+        padding-top: 4vw;
+        padding-right: 0px;
+    }
+
+    .Fieldset:disabled.Padding {
+        padding-top: 2px;
+        padding-right: 4vw;
+    }
+
+    @media (width <= 800px) {
+        .Fieldset.Padding {
+            padding-top: 32px;
+            padding-right: 0px;
+        }
+
+        .Fieldset:disabled.Padding {
+            padding-top: 16px;
+            padding-right: 32px;
+        }
+    }
+
+    @media (width >= 1000px) {
+        .Fieldset.Padding {
+            padding-top: 40px;
+            padding-right: 0px;
+        }
+
+        .Fieldset:disabled.Padding {
+            padding-top: 20px;
+            padding-right: 40px;
+        }
     }
 
     /** 
@@ -176,9 +202,30 @@ cc-languageitem {
     }
 
 
+
     /**
      * Form Inputs
      */
+    .ItemTypeInput {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .Fieldset:disabled .ItemTypeInput {
+        display: none;
+    }
+
+    .ItemTypeOutput {
+        display: flex;
+        flex-direction: row;
+        background-color: var(--colourPrimaryDarker10Translucent60);
+        border-radius: 10px;
+    }
+
+    .Fieldset:not(:disabled) .ItemTypeOutput {
+        display: none;
+    }
+
     .ItemInput {
         display: block;
         background: var(--whitetranslucent90);

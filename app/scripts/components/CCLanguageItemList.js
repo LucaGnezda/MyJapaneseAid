@@ -15,10 +15,8 @@
  * @typedef {{
  *      rootContainer: HTMLDivElement?,
  *      listTitle: HTMLDivElement?,
+ *      listControls: HTMLElement?,
  *      listBody: HTMLDivElement?,
- *      newSection: HTMLDivElement?,
- *      newSectionBody: HTMLDivElement?,
- *      newItem: CCLanguageItem?,
  *      listSection: Object.<String, CCLanguageItemListSection>,
  * }} CCLanguageItemListElements
  * 
@@ -26,7 +24,6 @@
  * }} CCLanguageItemListPropertyBag
  * 
  * @typedef {{
- *      newItemCallback: Function?,
  * }} CCLanguageItemListAttachedCallbacks
  */
 
@@ -43,10 +40,8 @@ class CCLanguageItemList extends CCBase {
     #elements = {
         rootContainer: null,
         listTitle: null,
+        listControls: null,
         listBody: null,
-        newSection: null,
-        newSectionBody: null,
-        newItem: null,
         listSection: {},
     }    
 
@@ -62,22 +57,13 @@ class CCLanguageItemList extends CCBase {
      * @type {CCLanguageItemListAttachedCallbacks}
      */
     #attachedCallbacks = {
-        newItemCallback: null,
     }
 
     static #htmlRootTemplate = `
         <div class="CCLanguageItemList Container" data-use="root-container">
             <div class="ListHeader">
                 <div class="ListTitle"><p class="RomanXXL NoBlockMargins" data-use="list.title">List</p></div>
-                <div class="FormButton BlackTint Medium" data-use="list.add"><img src="./app/assets/svg/plus.svg" class="FormButtonIcon"></div>
-            </div>
-            <div class="NewItemsBody" data-use="list.body">
-                <div class="Section" data-use="newsection">
-                    <div class="SectionHeader MarginTXL MarginBM">
-                        <div class="SectionTitle MarginRXL"><p class="KanaXL NoBlockMargins">New...</p></div>
-                    </div>
-                    <div class="SectionBody" data-use="newsection.body"></div>
-                </div>
+                <div class="ButtonStipContainer" data-use="list.controls"></div>
             </div>
             <div class="ListBody" data-use="list.body">
             </div>
@@ -95,22 +81,18 @@ class CCLanguageItemList extends CCBase {
                 </div>
     `;
 
-    static #htmlCardHolderTemplate = `
-                <div class="CardHolder" data-use="cardholder">
-                </div>
-`;
-
 
     /**
      * Constructor
      */
-    constructor() {
-        super();
+    /** 
+     * @param {String | Boolean} id 
+     * @param {Boolean} useShadowDOM  
+     */
+    constructor(id = false, useShadowDOM = true) {
+        super(id);
 
-        // Allocate a guid
-        if (isEmptyOrNull(this.id)) {
-            this.id = crypto.randomUUID();
-        }
+        this.#initialiseStructure();
     }
 
 
@@ -138,30 +120,24 @@ class CCLanguageItemList extends CCBase {
     /**
      * Private Methods
      */
-    #initialiseUI() {
+    #initialiseStructure() {
 
         let fragment = getDOMFragmentFromString(CCLanguageItemList.#htmlRootTemplate);
-        let newCard = new CCLanguageItem();
 
         this.#elements.rootContainer = fragment.querySelector('[data-use="root-container"]');
-        this.#elements.newSection = fragment.querySelector('[data-use="newsection"]');
-        this.#elements.newSectionBody = fragment.querySelector('[data-use="newsection.body"]');
-        this.#elements.newItem = newCard;
+        this.#elements.listControls = fragment.querySelector('[data-use="list.controls"]');
         this.#elements.listTitle = fragment.querySelector('[data-use="list.title"]');
         this.#elements.listBody = fragment.querySelector('[data-use="list.body"]');
 
-        this.#elements.newSectionBody?.appendChild(newCard);
+        this.#initialiseSections(GojuonGroupingService.gojuonGroupings);
 
         this.appendChild(fragment);
     }
 
     
-    #initialiseElements() {
+    #initialiseBehaviour() {
 
-        this.#initialiseSections(GojuonGroupingService.gojuonGroupings);
-
-        this.#elements.newItem?.permanentEdit();
-        this.#elements.newItem?.attachDataUpdateCallback(this.newItemCallback.bind(this));
+        // nothing to do
 
     }
 
@@ -219,18 +195,16 @@ class CCLanguageItemList extends CCBase {
     }
 
     /**
-     * @param {Function?} callback 
+     * @param {HTMLElement} element 
      * @returns
      */
-    attachNewItemCallback(callback) {
-        
-        if (callback != null && typeof callback === "function") {
-            this.#attachedCallbacks.newItemCallback = callback;
-        }
-        else {
-            this.#attachedCallbacks.newItemCallback = null;
+    AddControls(element) {
+        if (!this.#elements.listControls) {
+            Log.fatal("Component has not been correctly initialised", "COMPONENT", this);
+            return;
         }
 
+        this.#elements.listControls.replaceChildren(element);
     }
 
     /**
@@ -240,6 +214,24 @@ class CCLanguageItemList extends CCBase {
     resortGroups(...args) {
 
     } 
+    
+    /**
+     * @param {CCLanguageItemPropertyBag} payload 
+     * @returns
+     */
+    addItem(payload) {
+
+        if (!payload || !payload.gojuonKey) {
+            Log.error("A valid gojuonKey is needed", "COMPONENT");
+            return;
+        }
+
+         let newItem = new CCLanguageItem();
+         newItem.loadFromPropertyBag(payload);
+
+         this.#elements.listSection[payload.gojuonKey].body.appendChild(newItem);
+
+    }
 
     /**
      * @param {String} id 
@@ -266,8 +258,7 @@ class CCLanguageItemList extends CCBase {
      */
     connectedCallback() {
 
-        this.#initialiseUI();
-        this.#initialiseElements();
+        this.#initialiseBehaviour();
         this.render();
         Log.debug(`${this.constructor.name} connected to DOM`, "COMPONENT");
 
@@ -285,29 +276,5 @@ class CCLanguageItemList extends CCBase {
     attributeChangedCallback(name, oldValue, newValue) {
         this.render();
         Log.debug(`${this.constructor.name}, value ${name} changed from ${oldValue} to ${newValue}`, "COMPONENT");
-    }
-
-
-     /**
-     * @param {EventBase} event
-     */
-    newItemCallback(event) {
-
-        let newItem = new CCLanguageItem();
-    
-        this.#elements.listSection[event.currentData.gojuonKey].body.appendChild(newItem);
-
-        newItem.loadFromPropertyBag(event.currentData);
-
-        // Update to the newly created item
-        /** @ts-ignore */
-        event.originatingComponent = newItem;
-        /** @ts-ignore */
-        event.originatingId = newItem.id;
-
-        // Fire callback if 
-        if (this.#attachedCallbacks.newItemCallback) {
-            this.#attachedCallbacks.newItemCallback(event);
-        }
     }
 }
