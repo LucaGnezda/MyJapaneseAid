@@ -61,15 +61,15 @@ class CCSearch extends CCBase {
     static #htmlTemplate = `
         <div class="CCSearch Container" data-container>
             <div class="SearchControl">
-                <input type="text" class="SearchInput" data-searchinput>
-                <div class="SearchButtonSet">
-                    <div class="SearchButton Text" data-andbutton>and</div>
-                    <div class="SearchButton Text" data-orbutton>or</div>
-                    <div class="SearchButton" data-clearbutton>
+                <input type="text" class="SearchInput SizeH32 RomanL" data-searchinput>
+                <div class="SearchButtonSet SizeH32">
+                    <div class="SearchButton SizeH28 Text" data-andbutton>and</div>
+                    <div class="SearchButton SizeH28 Text" data-orbutton>or</div>
+                    <div class="SearchButton SizeH28" data-clearbutton>
                         <img src="./app/assets/svg/cross.svg" class="SearchIcon">
                     </div>
-                    <div class="SearchButton Show Last" data-searchbutton>
-                        <img src="./app/assets/svg/search.svg" class="SearchIcon">            
+                    <div class="SearchButton SizeH28 Show Last" data-searchbutton>
+                        <img src="./app/assets/svg/search.svg" class="SearchIcon SizeWH16">            
                     </div>
                 </div>
             </div>

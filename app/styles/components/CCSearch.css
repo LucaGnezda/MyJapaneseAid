@@ -27,13 +27,11 @@ cc-search {
         border-right: none;
         border-bottom: 1px solid var(--blacktranslucent80);
         border-left: 1px solid var(--blacktranslucent80);
-        height: 30px;
         width: 100%;
         color: black;
         text-align: start;
         font-family: "Geist"; 
-        font-weight: 500;
-        font-size: 0.95rem;
+        font-weight: 400;
         background: var(--whitetranslucent70);
     }
 
@@ -49,7 +47,6 @@ cc-search {
         border-right: 1px solid var(--blacktranslucent80);
         border-bottom: 1px solid var(--blacktranslucent80);
         border-left: none;
-        height: 30px;
         color: black;
         background: var(--whitetranslucent70);
         background-clip: content-box;
@@ -61,7 +58,6 @@ cc-search {
 
     .SearchButton {
         flex: 0 0 auto;
-        height: 26px;
         width: 0px;
         opacity: 0;
         border: none;
@@ -91,10 +87,28 @@ cc-search {
     }
 
     .SearchButton.Show {
-        width: 26px;
+        width: 3.5vw;
         opacity: 1;
         pointer-events: all;
         margin-right: 2px;
+    }
+
+    @media (width <= 800px) {
+        .SearchButton.Show {
+            width: 28px;
+            opacity: 1;
+            pointer-events: all;
+            margin-right: 2px;
+        }
+    }
+
+    @media (width >= 1000px) {
+        .SearchButton.Show {
+            width: 35px;
+            opacity: 1;
+            pointer-events: all;
+            margin-right: 2px;
+        }
     }
 
     .SearchButton.Last {
@@ -102,8 +116,6 @@ cc-search {
     }
 
     .SearchIcon {
-        width: 16px;
-        height: 16px;
         filter: brightness(0) saturate(100%) invert(0%) sepia(2%) saturate(0%) hue-rotate(189deg) brightness(96%) contrast(101%);
     }
 }

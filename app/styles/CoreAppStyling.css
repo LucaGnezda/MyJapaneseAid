@@ -94,9 +94,9 @@
     }
 }
 
-@media (width >= 1200px) {
+@media (width >= 1000px) {
     .AppTitle {
-        font-size: 1.65rem;
+        font-size: 1.375rem;
     }
 }
 
