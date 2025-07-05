@@ -166,32 +166,32 @@ class CCLanguageItem extends CCBase {
     }
 
     static #htmlRootTemplate = `
-        <div class="CCLanguageItem Container MarginBM" data-use="root-container">
+        <div class="CCLanguageItem Container ScaleHeight MarginBM" data-use="root-container">
             <form class="PadTBL PadLRXL">
                 <fieldset class="Fieldset Padding" data-use="fieldset">
-                    <div class="FormButtonStrip TopLeft Row">
+                    <div class="FormButtonStrip Gap TopLeft Row">
                         <div class="ItemTypeInput" data-use="language.type.input"></div>
                     </div>
-                    <div class="FormButtonStrip TopLeft Row">
+                    <div class="FormButtonStrip Gap TopLeft Row">
                         <div class="ItemTypeOutput PadTBXXS PadLRL RomanM" data-use="language.type.output">Hello</div>
                     </div>
-                    <div class="FormButtonStrip TopRight Col ShowOnRead">
-                        <div class="FormButton ShowOnContainerHover BlackTint Medium" data-use="edit-button">
-                            <img src="./app/assets/svg/pencil.svg" class="FormButtonIcon">
+                    <div class="FormButtonStrip Gap TopRight Col ShowOnRead">
+                        <div class="FormButton ShowOnContainerHover BlackTint SizeWH32" data-use="edit-button">
+                            <img src="./app/assets/svg/pencil.svg" class="FormButtonIcon SizeWH20">
                         </div>
-                        <div class="Spacer Vertical ShowOnContainerHover">
-                            <img src="./app/assets/svg/minus.svg" class="FormButtonIcon">
+                        <div class="Spacer SizeW32 SizeH16 ShowOnContainerHover">
+                            <img src="./app/assets/svg/minus.svg" class="FormButtonIcon SizeWH20">
                         </div>
-                        <div class="FormButton ShowOnContainerHover RedTint Medium" data-use="delete-button">
-                            <img src="./app/assets/svg/trash.svg" class="FormButtonIcon">
+                        <div class="FormButton ShowOnContainerHover RedTint SizeWH32" data-use="delete-button">
+                            <img src="./app/assets/svg/trash.svg" class="FormButtonIcon SizeWH20">
                         </div>
                     </div>
-                    <div class="FormButtonStrip TopRight Row ShowOnEdit">
-                        <div class="FormButton BlackTint Medium" data-use="saveedit-button">
-                            <img src="./app/assets/svg/check.svg" class="FormButtonIcon">
+                    <div class="FormButtonStrip Gap TopRight Row ShowOnEdit">
+                        <div class="FormButton BlackTint SizeWH32" data-use="saveedit-button">
+                            <img src="./app/assets/svg/check.svg" class="FormButtonIcon SizeWH20">
                         </div>
-                        <div class="FormButton BlackTint Medium" data-use="canceledit-button">
-                            <img src="./app/assets/svg/cross.svg" class="FormButtonIcon">
+                        <div class="FormButton BlackTint SizeWH32" data-use="canceledit-button">
+                            <img src="./app/assets/svg/cross.svg" class="FormButtonIcon SizeWH20">
                         </div>
                     </div>
                     <div class="FlexLayout Col">

@@ -460,7 +460,8 @@ class CCButtonStrip extends CCBase {
         button.classList.add("RomanM");
         button.classList.add("NoBlockMargins");
         button.classList.add("Font400");
-        button.classList.add("PadM");
+        button.classList.add("PadTBM");
+        button.classList.add("PadLRL");
         if (this.#propertyBag.groupBehaviour[currentGroup] == CCButtonStripGroupBehaviour.SelectableIndividual ||
             this.#propertyBag.groupBehaviour[currentGroup] == CCButtonStripGroupBehaviour.SingleSelectGroup ||
             this.#propertyBag.groupBehaviour[currentGroup] == CCButtonStripGroupBehaviour.MultiSelectGroup) {

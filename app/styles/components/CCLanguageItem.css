@@ -14,8 +14,23 @@ cc-languageitem {
         flex-direction: column;
         flex: 1 0 auto;
         position: relative;
-        min-height: 96px;
         padding: 0px;
+    }
+
+    &.Container.ScaleHeight {
+        min-height: 12vw;
+    }
+
+    @media (width <= 800px) {
+        &.Container.ScaleHeight {
+            min-height: 96px;
+        }
+    }
+
+    @media (width >= 1000px) {
+        &.Container.ScaleHeight {
+            min-height: 120px;
+        }
     }
 
 
@@ -34,7 +49,7 @@ cc-languageitem {
     }
 
     .Fieldset:disabled.Padding {
-        padding-top: 2px;
+        padding-top: 2vw;
         padding-right: 4vw;
     }
 
@@ -190,14 +205,14 @@ cc-languageitem {
     /* --- Label Font Minimums --- */
     @media (width <= 800px) {
         .InputLabel {
-            margin-right: 0.25rem;
+            margin-right: 4px;
         }
     }
 
     /* --- Label Font Maximums --- */
-    @media (width >= 1200px) {
+    @media (width >= 1000px) {
         .InputLabel {
-            margin-right: 0.375rem;
+            margin-right: 5px;
         }
     }
 
@@ -231,7 +246,7 @@ cc-languageitem {
         background: var(--whitetranslucent90);
         border-radius: 10px 10px 10px 10px;
         border: 1px solid var(--blacktranslucent80);
-        margin-bottom: 0.5vw;
+        margin-bottom: 0.25vw;
         margin-top: 0vw;
         padding-left: 1vw;
     }
@@ -273,26 +288,26 @@ cc-languageitem {
     /* --- Input Font Minimums --- */
     @media (width <= 800px) {
         .ItemInput {
-            margin-bottom: 0.25rem;
-            padding-left: 0.5rem;
+            margin-bottom: 2px;
+            padding-left: 8px;
         }
 
         .ItemInput:disabled {
-            margin-bottom: -0.125rem;
+            margin-bottom: -2px;
             padding-left: 0rem;
         }
     }
 
     /* --- Input Font Maximums --- */
-    @media (width >= 1200px) {
+    @media (width >= 1000px) {
         .ItemInput {
-            margin-bottom: 0.1875rem;
+            margin-bottom: 2.5px;
             margin-top: 0rem;
-            padding-left: 0.75rem;
+            padding-left: 10px;
         }
 
         .ItemInput:disabled {
-            margin-bottom: -0.1875rem;
+            margin-bottom: -2.5px;
         }
     }
 

@@ -7,7 +7,23 @@
     display: flex;
     flex-direction: row;
     position: absolute;
+}
+
+.FormButtonStrip.Gap {
+    gap: 0.5vw;
+}
+
+
+@media (width <= 800px) {
+    .FormButtonStrip.Gap {
     gap: 4px;
+}
+}
+
+@media (width >= 1000px) {
+    .FormButtonStrip.Gap {
+    gap: 5px;
+}
 }
 
 .FormButtonStrip.TopLeft {
@@ -75,8 +91,6 @@
 }
 
 .FormButtonIcon {
-    width: 20px;
-    height: 20px;
     filter: brightness(0) saturate(100%) invert(0%) sepia(2%) saturate(0%) hue-rotate(189deg) brightness(96%) contrast(101%);
     user-select: none;
 }
