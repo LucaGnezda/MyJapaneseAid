@@ -549,6 +549,120 @@
     }
 }
 
+
+/* --- Dynamic Offset --- */
+.OffsetT4 {
+    top: 0.5vw;
+}
+
+.OffsetL4 {
+    left: 0.5vw;
+}
+
+.OffsetB4 {
+    bottom: 0.5vw;
+}
+
+.OffsetR4 {
+    right: 0.5vw;
+}
+
+.OffsetTL4 {
+    top: 0.5vw;
+    left: 0.5vw;
+}
+
+.OffsetTR4 {
+    top: 0.5vw;
+    right: 0.5vw;
+}
+
+.OffsetBR4 {
+    bottom: 0.5vw;
+    right: 0.5vw;
+}
+
+.OffsetBL4 {
+    bottom: 0.5vw;
+    left: 0.5vw;
+}
+
+@media (width <= 800px) {
+    .OffsetT4 {
+        top: 4px;
+    }
+
+    .OffsetL4 {
+        left: 4px;
+    }
+
+    .OffsetB4 {
+        bottom: 4px;
+    }
+
+    .OffsetR4 {
+        right: 4px;
+    }
+
+    .OffsetTL4 {
+        top: 4px;
+        left: 4px;
+    }
+
+    .OffsetTR4 {
+        top: 4px;
+        right: 4px;
+    }
+
+    .OffsetBR4 {
+        bottom: 4px;
+        right: 4px;
+    }
+
+    .OffsetBL4 {
+        bottom: 4px;
+        left: 4px;
+    }
+}
+
+@media (width >= 1000px) {
+    .OffsetT4 {
+        top: 5px;
+    }
+
+    .OffsetL4 {
+        left: 5px;
+    }
+
+    .OffsetB4 {
+        bottom: 5px;
+    }
+
+    .OffsetR4 {
+        right: 5px;
+    }
+
+    .OffsetTL4 {
+        top: 5px;
+        left: 5px;
+    }
+
+    .OffsetTR4 {
+        top: 5px;
+        right: 5px;
+    }
+
+    .OffsetBR4 {
+        bottom: 5px;
+        right: 5px;
+    }
+
+    .OffsetBL4 {
+        bottom: 5px;
+        left: 5px;
+    }
+}
+
 /* --- Dynamic Padding --- */
 /* XL Base = 12-18px @ 16 */
 .PadTXL {

@@ -6,8 +6,8 @@
  */
 class CCBase extends HTMLElement {
 
-    /** @type {AbortController} #preDisposeController */
-    #abortController = new AbortController();
+    /** @type {AbortController | Null} #preDisposeController */
+    #abortController = null;
 
     /** 
      * @param {String | Boolean} id 
@@ -30,6 +30,12 @@ class CCBase extends HTMLElement {
      * getPreDisposeSignal
      */
     getPreDisposeSignal() {
+
+        // provision an abort controller if we don't already have one.
+        if (this.#abortController == null) {
+            this.#abortController = new AbortController();
+        }
+
         let { signal } = this.#abortController;
         return { signal };
     }
@@ -40,7 +46,13 @@ class CCBase extends HTMLElement {
      * Call this before releasing references to ensure event listeners and ourward facing object references are removed 
      */
     preDispose() {
-        this.#abortController.abort();
+        
+        if (this.#abortController) {
+            this.#abortController.abort();
+        }
+
+        // deprovision the abort controller so we can start afresh if reconnected to the DOM
+        this.#abortController = null;
     }
 }
 

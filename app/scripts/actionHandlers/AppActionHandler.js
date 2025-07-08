@@ -17,10 +17,6 @@ class AppActionHandler {
                 this.applySearch(action.payload);
                 break;
 
-            case "App_Item_DataUpdate":
-                this.itemUpdate(action.payload);
-                break;
-
             case "TopNav_KanaSelected":
                 this.pageToKana();
                 break;
@@ -41,6 +37,14 @@ class AppActionHandler {
                 this.cancelNewItem();
                 break;
 
+            case "ExistingItem_Update":
+                this.itemUpdate(action.payload);
+                break;
+
+            case "ExistingItem_DeleteRequest":
+                this.itemDelete();
+                break;
+
             default:
                 // do nothing
         }
@@ -59,7 +63,15 @@ class AppActionHandler {
      * @returns {void}
      */
     itemUpdate(payload) {
-        payload;
+        App.components.languageList?.moveItem(
+            payload.originatingId, 
+            payload.currentData.priorGojuonKey, 
+            payload.currentData.gojuonKey
+        );
+    }
+
+    itemDelete() {
+
     }
 
     pageToKana() {
@@ -84,7 +96,12 @@ class AppActionHandler {
      * @returns {void}
      */
     addToLanguageList(payload) {
-        App.components.languageList?.addItem(payload);
+        App.components.languageList?.addItem(
+            payload, 
+            App.dispatcher?.newEventDispatchCallback("ExistingItem_Update"),
+            null,
+            App.dispatcher?.newEventDispatchCallback("ExistingItem_DeleteRequest"),
+        );
     }
 
     cancelNewItem() {

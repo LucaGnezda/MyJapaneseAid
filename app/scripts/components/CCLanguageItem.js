@@ -71,7 +71,7 @@
  * 
  * @typedef {{
  *      deleteRequestCallback: Function?,
- *      updateCallback: Function?,
+ *      saveCallback: Function?,
  *      cancelCallback: Function?,
  * }} CCLanguageItemAttachedCallbacks
  */
@@ -161,7 +161,7 @@ class CCLanguageItem extends CCBase {
      */
     #attachedCallbacks = {
         deleteRequestCallback: null,
-        updateCallback: null,
+        saveCallback: null,
         cancelCallback: null,
     }
 
@@ -169,13 +169,13 @@ class CCLanguageItem extends CCBase {
         <div class="CCLanguageItem Container ScaleHeight MarginBM" data-use="root-container">
             <form class="PadTBL PadLRXL">
                 <fieldset class="Fieldset Padding" data-use="fieldset">
-                    <div class="FormButtonStrip Gap TopLeft Row">
+                    <div class="FormButtonStrip Gap OffsetTL4 Row">
                         <div class="ItemTypeInput" data-use="language.type.input"></div>
                     </div>
-                    <div class="FormButtonStrip Gap TopLeft Row">
+                    <div class="FormButtonStrip Gap OffsetTL4 Row">
                         <div class="ItemTypeOutput PadTBXXS PadLRL RomanM" data-use="language.type.output">Hello</div>
                     </div>
-                    <div class="FormButtonStrip Gap TopRight Col ShowOnRead">
+                    <div class="FormButtonStrip Gap OffsetTR4 Col ShowOnRead">
                         <div class="FormButton ShowOnContainerHover BlackTint SizeWH32" data-use="edit-button">
                             <img src="./app/assets/svg/pencil.svg" class="FormButtonIcon SizeWH20">
                         </div>
@@ -186,7 +186,7 @@ class CCLanguageItem extends CCBase {
                             <img src="./app/assets/svg/trash.svg" class="FormButtonIcon SizeWH20">
                         </div>
                     </div>
-                    <div class="FormButtonStrip Gap TopRight Row ShowOnEdit">
+                    <div class="FormButtonStrip Gap OffsetTR4 Row ShowOnEdit">
                         <div class="FormButton BlackTint SizeWH32" data-use="saveedit-button">
                             <img src="./app/assets/svg/check.svg" class="FormButtonIcon SizeWH20">
                         </div>
@@ -297,6 +297,18 @@ class CCLanguageItem extends CCBase {
         return this.#propertyBag.gojuonKey;
     }
 
+    get searchKey() {
+        return "| " + this.#propertyBag.kana + " | " + this.#propertyBag.romaji + " | " + this.#propertyBag.meaning + " |";
+    }
+
+    get romaji() {
+        return this.#propertyBag.romaji;
+    }
+
+    get meaning() {
+        return this.#propertyBag.meaning;
+    }
+
 
     /**
      * Private Methods
@@ -346,6 +358,9 @@ class CCLanguageItem extends CCBase {
         this.#subComponents.languageTypeButtonStrip.addTextButton(this.#languageTypeLabels[0], null, true, "GreenTint");
         this.#subComponents.languageTypeButtonStrip.addTextButton(this.#languageTypeLabels[1], null, false, "GreenTint");
         this.#subComponents.languageTypeButtonStrip.addTextButton(this.#languageTypeLabels[2], null, false, "GreenTint");
+
+        this.#propertyBag.languageType = 0;
+        this.#propertyBag.languageTypeLabel = this.#languageTypeLabels[this.#propertyBag.languageType];
 
         this.#elements.languageTypeInput?.appendChild(this.#subComponents.languageTypeButtonStrip);
 
@@ -684,7 +699,6 @@ class CCLanguageItem extends CCBase {
             this.#propertyBag.languageType = this.#subComponents.languageTypeButtonStrip.getSelectedIndexForGroup(0) || 0;
             this.#propertyBag.languageTypeLabel = this.#languageTypeLabels[this.#propertyBag.languageType];
             this.#propertyBag.kana = this.#elements.kanaInput.value;
-            this.#propertyBag.gojuonKey = GojuonGroupingService.getGroupingFor(this.#propertyBag.kana)?.gojuonKey || null;
             this.#propertyBag.kanaHighlighterString = this.#elements.kanaHighlighterInput.value;
             this.#propertyBag.romaji = this.#elements.romajiInput.value;
             this.#propertyBag.romajiHighlighterString = this.#elements.romajiHighlighterInput.value;
@@ -694,6 +708,7 @@ class CCLanguageItem extends CCBase {
             this.#propertyBag.structure = this.#elements.structureInput.value;
             this.#propertyBag.notes = this.#elements.notesInput.value;
             this.#propertyBag.examples = [];
+            this.#propertyBag.gojuonKey = GojuonGroupingService.getGroupingFor(this.#propertyBag.kana)?.gojuonKey || null;
 
             // Rebuild property bag examples
             for(let example of Array.from(this.#elements.examplesContainer.children)) {
@@ -1010,13 +1025,13 @@ class CCLanguageItem extends CCBase {
      * @param {Function?} callback 
      * @returns
      */
-    attachUpdateCallback(callback) {
+    attachSaveCallback(callback) {
         
         if (callback != null && typeof callback === "function") {
-            this.#attachedCallbacks.updateCallback = callback;
+            this.#attachedCallbacks.saveCallback = callback;
         }
         else {
-            this.#attachedCallbacks.updateCallback = null;
+            this.#attachedCallbacks.saveCallback = null;
         }
     }
 
@@ -1059,6 +1074,7 @@ class CCLanguageItem extends CCBase {
     }
     
     disconnectedCallback() {
+        this.preDispose();
         Log.debug(`${this.constructor.name} disconnected from DOM`, "COMPONENT");
     }
 
@@ -1099,7 +1115,7 @@ class CCLanguageItem extends CCBase {
         }
 
         // Fire callback if 
-        if (this.#attachedCallbacks.updateCallback) {
+        if (this.#attachedCallbacks.saveCallback) {
 
             let event = {};
             event.originatingEvent = mouseEvent;
@@ -1108,7 +1124,7 @@ class CCLanguageItem extends CCBase {
             event.originatingId = this.id;
             event.currentData = Object.assign({}, this.#propertyBag);
 
-            this.#attachedCallbacks.updateCallback(event);
+            this.#attachedCallbacks.saveCallback(event);
         }
     }
 
