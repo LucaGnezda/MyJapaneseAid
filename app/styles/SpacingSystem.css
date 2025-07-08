@@ -1,0 +1,1913 @@
+/* --- Dynamic Sizing --- */
+.SizeH64 {
+    height: 8vw;
+}
+
+.SizeWH64 {
+    width: 8vw;
+    height: 8vw;
+}
+
+.SizeW64 {
+    width: 8vw;
+}
+
+.SizeH48 {
+    height: 6vw;
+}
+
+.SizeWH48 {
+    width: 6vw;
+    height: 6vw;
+}
+
+.SizeW48 {
+    width: 6vw;
+}
+
+.SizeH40 {
+    height: 5vw;
+}
+
+.SizeWH48 {
+    width: 5vw;
+    height: 5vw;
+}
+
+.SizeW48 {
+    width: 5vw;
+}
+
+.SizeH32 {
+    height: 4vw;
+}
+
+.SizeWH32 {
+    width: 4vw;
+    height: 4vw;
+}
+
+.SizeW32 {
+    width: 4vw;
+}
+
+.SizeH28 {
+    height: 3.5vw;
+}
+
+.SizeWH28 {
+    width: 3.5vw;
+    height: 3.5vw;
+}
+
+.SizeW28 {
+    width: 3.5vw;
+}
+
+.SizeH24 {
+    height: 3vw;
+}
+
+.SizeWH24 {
+    width: 3vw;
+    height: 3vw;
+}
+
+.SizeW24 {
+    width: 3vw;
+}
+
+.SizeH20 {
+    height: 2.5vw;
+}
+
+.SizeWH20 {
+    width: 2.5vw;
+    height: 2.5vw;
+}
+
+.SizeW20 {
+    width: 2.5vw;
+}
+
+.SizeH16 {
+    height: 2vw;
+}
+
+.SizeWH16 {
+    width: 2vw;
+    height: 2vw;
+}
+
+.SizeW16 {
+    width: 2vw;
+}
+
+.SizeH12 {
+    height: 1.5vw;
+}
+
+.SizeWH12 {
+    width: 1.5vw;
+    height: 1.5vw;
+}
+
+.SizeW12 {
+    width: 1.5vw;
+}
+
+.SizeH8 {
+    height: 1vw;
+}
+
+.SizeWH8 {
+    width: 1vw;
+    height: 1vw;
+}
+
+.SizeW8 {
+    width: 1vw;
+}
+
+.SizeH6 {
+    height: 0.75vw;
+}
+
+.SizeWH6 {
+    width: 0.75vw;
+    height: 0.75vw;
+}
+
+.SizeW6 {
+    width: 0.75vw;
+}
+
+.SizeH4 {
+    height: 0.5vw;
+}
+
+.SizeWH4 {
+    width: 0.5vw;
+    height: 0.5vw;
+}
+
+.SizeW4 {
+    width: 0.5vw;
+}
+
+.SizeH2 {
+    height: 0.25vw;
+}
+
+.SizeWH2 {
+    width: 0.25vw;
+    height: 0.25vw;
+}
+
+.SizeW2 {
+    width: 0.25vw;
+}
+
+.SizeH1 {
+    height: 0.125vw;
+}
+
+.SizeWH1 {
+    width: 0.125vw;
+    height: 0.125vw;
+}
+
+.SizeW1 {
+    width: 0.125vw;
+}
+
+@media (width <= 800px) {
+    .SizeH64 {
+        height: 64px;
+    }
+
+    .SizeWH64 {
+        width: 64px;
+        height: 64px;
+    }
+
+    .SizeW64 {
+        width: 64px;
+    }
+
+    .SizeH48 {
+        height: 48px;
+    }
+
+    .SizeWH48 {
+        width: 48px;
+        height: 48px;
+    }
+
+    .SizeW48 {
+        width: 48px;
+    }
+
+    .SizeH40 {
+        height: 40px;
+    }
+
+    .SizeWH48 {
+        width: 40px;
+        height: 40px;
+    }
+
+    .SizeW48 {
+        width: 40px;
+    }
+
+    .SizeH32 {
+        height: 32px;
+    }
+
+    .SizeWH32 {
+        width: 32px;
+        height: 32px;
+    }
+
+    .SizeW32 {
+        width: 32px;
+    }
+
+    .SizeH28 {
+        height: 28px;
+    }
+
+    .SizeWH28 {
+        width: 28px;
+        height: 28px;
+    }
+
+    .SizeW28 {
+        width: 28px;
+    }
+    
+    .SizeH24 {
+        height: 24px;
+    }
+
+    .SizeWH24 {
+        width: 24px;
+        height: 24px;
+    }
+
+    .SizeW24 {
+        width: 24px;
+    }
+
+    .SizeH20 {
+        height: 20px;
+    }
+
+    .SizeWH20 {
+        width: 20px;
+        height: 20px;
+    }
+
+    .SizeW20 {
+        width: 20px;
+    }
+
+    .SizeH16 {
+        height: 16px;
+    }
+
+    .SizeWH16 {
+        width: 16px;
+        height: 16px;
+    }
+
+    .SizeW16 {
+        width: 16px;
+    }
+
+    .SizeH12 {
+        height: 12px;
+    }
+
+    .SizeWH12 {
+        width: 12px;
+        height: 12px;
+    }
+
+    .SizeW12 {
+        width: 12px;
+    }
+
+    .SizeH8 {
+        height: 8px;
+    }
+
+    .SizeWH8 {
+        width: 8px;
+        height: 8px;
+    }
+
+    .SizeW8 {
+        width: 8px;
+    }
+
+    .SizeH6 {
+        height: 6px;
+    }
+
+    .SizeWH6 {
+        width: 6px;
+        height: 6px;
+    }
+
+    .SizeW6 {
+        width: 6px;
+    }
+
+    .SizeH4 {
+        height: 4px;
+    }
+
+    .SizeWH4 {
+        width: 4px;
+        height: 4px;
+    }
+
+    .SizeW4 {
+        width: 4px;
+    }
+
+    .SizeH2 {
+        height: 2px;
+    }
+
+    .SizeWH2 {
+        width: 2px;
+        height: 2px;
+    }
+
+    .SizeW2 {
+        width: 2px;
+    }
+
+    .SizeH1 {
+        height: 1px;
+    }
+
+    .SizeWH1 {
+        width: 1px;
+        height: 1px;
+    }
+
+    .SizeW1 {
+        width: 1px;
+    }
+}
+
+@media (width >= 1000px) {
+    .SizeH64 {
+        height: 80px;
+    }
+
+    .SizeWH64 {
+        width: 80px;
+        height: 80px;
+    }
+
+    .SizeW64 {
+        width: 80px;
+    }
+
+    .SizeH48 {
+        height: 60px;
+    }
+
+    .SizeWH48 {
+        width: 60px;
+        height: 60px;
+    }
+
+    .SizeW48 {
+        width: 60px;
+    }
+
+    .SizeH40 {
+        height: 50px;
+    }
+
+    .SizeWH48 {
+        width: 50px;
+        height: 50px;
+    }
+
+    .SizeW48 {
+        width: 50px;
+    }
+
+    .SizeH32 {
+        height: 40px;
+    }
+
+    .SizeWH32 {
+        width: 40px;
+        height: 40px;
+    }
+
+    .SizeW32 {
+        width: 40px;
+    }
+
+    .SizeH28 {
+        height: 35px;
+    }
+
+    .SizeWH28 {
+        width: 35px;
+        height: 35px;
+    }
+
+    .SizeW28 {
+        width: 35px;
+    }
+
+    .SizeH24 {
+        height: 30px;
+    }
+
+    .SizeWH24 {
+        width: 30px;
+        height: 30px;
+    }
+
+    .SizeW24 {
+        width: 30px;
+    }
+
+    .SizeH20 {
+        height: 25px;
+    }
+
+    .SizeWH20 {
+        width: 25px;
+        height: 25px;
+    }
+
+    .SizeW20 {
+        width: 25px;
+    }
+
+    .SizeH16 {
+        height: 20px;
+    }
+
+    .SizeWH16 {
+        width: 20px;
+        height: 20px;
+    }
+
+    .SizeW16 {
+        width: 20px;
+    }
+
+    .SizeH12 {
+        height: 15px;
+    }
+
+    .SizeWH12 {
+        width: 15px;
+        height: 15px;
+    }
+
+    .SizeW12 {
+        width: 15px;
+    }
+
+    .SizeH8 {
+        height: 10px;
+    }
+
+    .SizeWH8 {
+        width: 10px;
+        height: 10px;
+    }
+
+    .SizeW8 {
+        width: 10px;
+    }
+
+    .SizeH6 {
+        height: 7.5px;
+    }
+
+    .SizeWH6 {
+        width: 7.5px;
+        height: 7.5px;
+    }
+
+    .SizeW6 {
+        width: 7.5px;
+    }
+
+    .SizeH4 {
+        height: 5px;
+    }
+
+    .SizeWH4 {
+        width: 5px;
+        height: 5px;
+    }
+
+    .SizeW4 {
+        width: 5px;
+    }
+
+    .SizeH2 {
+        height: 2.5px;
+    }
+
+    .SizeWH2 {
+        width: 2.5px;
+        height: 2.5px;
+    }
+
+    .SizeW2 {
+        width: 2.5px;
+    }
+
+    .SizeH1 {
+        height: 1.25px;
+    }
+
+    .SizeWH1 {
+        width: 1.25px;
+        height: 1.25px;
+    }
+
+    .SizeW1 {
+        width: 1.25px;
+    }
+}
+
+
+/* --- Dynamic Offset --- */
+.OffsetT4 {
+    top: 0.5vw;
+}
+
+.OffsetL4 {
+    left: 0.5vw;
+}
+
+.OffsetB4 {
+    bottom: 0.5vw;
+}
+
+.OffsetR4 {
+    right: 0.5vw;
+}
+
+.OffsetTL4 {
+    top: 0.5vw;
+    left: 0.5vw;
+}
+
+.OffsetTR4 {
+    top: 0.5vw;
+    right: 0.5vw;
+}
+
+.OffsetBR4 {
+    bottom: 0.5vw;
+    right: 0.5vw;
+}
+
+.OffsetBL4 {
+    bottom: 0.5vw;
+    left: 0.5vw;
+}
+
+@media (width <= 800px) {
+    .OffsetT4 {
+        top: 4px;
+    }
+
+    .OffsetL4 {
+        left: 4px;
+    }
+
+    .OffsetB4 {
+        bottom: 4px;
+    }
+
+    .OffsetR4 {
+        right: 4px;
+    }
+
+    .OffsetTL4 {
+        top: 4px;
+        left: 4px;
+    }
+
+    .OffsetTR4 {
+        top: 4px;
+        right: 4px;
+    }
+
+    .OffsetBR4 {
+        bottom: 4px;
+        right: 4px;
+    }
+
+    .OffsetBL4 {
+        bottom: 4px;
+        left: 4px;
+    }
+}
+
+@media (width >= 1000px) {
+    .OffsetT4 {
+        top: 5px;
+    }
+
+    .OffsetL4 {
+        left: 5px;
+    }
+
+    .OffsetB4 {
+        bottom: 5px;
+    }
+
+    .OffsetR4 {
+        right: 5px;
+    }
+
+    .OffsetTL4 {
+        top: 5px;
+        left: 5px;
+    }
+
+    .OffsetTR4 {
+        top: 5px;
+        right: 5px;
+    }
+
+    .OffsetBR4 {
+        bottom: 5px;
+        right: 5px;
+    }
+
+    .OffsetBL4 {
+        bottom: 5px;
+        left: 5px;
+    }
+}
+
+/* --- Dynamic Padding --- */
+/* XL Base = 12-18px @ 16 */
+.PadTXL {
+    padding-top: 1.5vw;
+}
+
+.PadBXL {
+    padding-bottom: 1.5vw;
+}
+
+.PadTBXL {
+    padding-top: 1.5vw;
+    padding-bottom: 1.5vw;
+}
+
+.PadLXL {
+    padding-left: 1.5vw;
+}
+
+.PadRXL {
+    padding-right: 1.5vw;
+}
+
+.PadLRXL {
+    padding-left: 1.5vw;
+    padding-right: 1.5vw;
+}
+
+.PadXL {
+    padding: 1.5vw;
+}
+
+/* L Base = 8-12px @ 16 */
+.PadTL {
+    padding-top: 1vw;
+}
+
+.PadBL {
+    padding-bottom: 1vw;
+}
+
+.PadTBL {
+    padding-top: 1vw;
+    padding-bottom: 1vw;
+}
+
+.PadLL {
+    padding-left: 1vw;
+}
+
+.PadRL {
+    padding-right: 1vw;
+}
+
+.PadLRL {
+    padding-left: 1vw;
+    padding-right: 1vw;
+}
+
+.PadL {
+    padding: 1vw;
+}
+
+/* M Base = 6-9px @ 16 */
+.PadTM {
+    padding-top: 0.75vw;
+}
+
+.PadBM {
+    padding-bottom: 0.75vw;
+}
+
+.PadTBM {
+    padding-top: 0.75vw;
+    padding-bottom: 0.75vw;
+}
+
+.PadLM {
+    padding-left: 0.75vw;
+}
+
+.PadRM {
+    padding-right: 0.75vw;
+}
+
+.PadLRM {
+    padding-left: 0.75vw;
+    padding-right: 0.75vw;
+}
+
+.PadM {
+    padding: 0.75vw;
+}
+
+/* S Base = 4-6px @ 16 */
+.PadTS {
+    padding-top: 0.5vw;
+}
+
+.PadBS {
+    padding-bottom: 0.5vw;
+}
+
+.PadTBS {
+    padding-top: 0.5vw;
+    padding-bottom: 0.5vw;
+}
+
+.PadLS {
+    padding-left: 0.5vw;
+}
+
+.PadRS {
+    padding-right: 0.5vw;
+}
+
+.PadLRS {
+    padding-left: 0.5vw;
+    padding-right: 0.5vw;
+}
+
+.PadS {
+    padding: 0.5vw;
+}
+
+/* XS Base = 2-3px @ 16 */
+.PadTXS {
+    padding-top: 0.25vw;
+}
+
+.PadBXS {
+    padding-bottom: 0.25vw;
+}
+
+.PadTBXS {
+    padding-top: 0.25vw;
+    padding-bottom: 0.25vw;
+}
+
+.PadLXS {
+    padding-left: 0.25vw;
+}
+
+.PadRXS {
+    padding-right: 0.25vw;
+}
+
+.PadLRXS {
+    padding-left: 0.25vw;
+    padding-right: 0.25vw;
+}
+
+.PadXS {
+    padding: 0.25vw;
+}
+
+/* XXS Base = 1-1.5px @ 16 */
+.PadTXXS {
+    padding-top: 0.125vw;
+}
+
+.PadBXXS {
+    padding-bottom: 0.125vw;
+}
+
+.PadTBXXS {
+    padding-top: 0.125vw;
+    padding-bottom: 0.125vw;
+}
+
+.PadLXXS {
+    padding-left: 0.125vw;
+}
+
+.PadRXXS {
+    padding-right: 0.125vw;
+}
+
+.PadLRXXS {
+    padding-left: 0.125vw;
+    padding-right: 0.125vw;
+}
+
+.PadXXS {
+    padding: 0.125vw;
+}
+
+/* No Padding */
+.NoPadT {
+    padding-top: 0px;
+}
+
+.NoPadB {
+    padding-bottom: 0px;
+}
+
+.NoPadTB {
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+
+.NoPadL {
+    padding-left: 0px;
+}
+
+.NoPadR {
+    padding-right: 0px;
+}
+
+.NoPadLR {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.NoPad {
+    padding: 0px;
+}
+
+@media (width <= 800px) {
+    /* XL Base = 12px @ 16 */
+    .PadTXL {
+        padding-top: 12px;
+    }
+
+    .PadBXL {
+        padding-bottom: 12px;
+    }
+
+    .PadTBXL {
+        padding-top: 12px;
+        padding-bottom: 12px;
+    }
+
+    .PadLXL {
+        padding-left: 12px;
+    }
+
+    .PadRXL {
+        padding-right: 12px;
+    }
+
+    .PadLRXL {
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+
+    .PadXL {
+        padding: 12px;
+    }
+
+    /* L Base = 8px @ 16 */
+    .PadTL {
+        padding-top: 8px;
+    }
+
+    .PadBL {
+        padding-bottom: 8px;
+    }
+
+    .PadTBL {
+        padding-top: 8px;
+        padding-bottom: 8px;
+    }
+
+    .PadLL {
+        padding-left: 8px;
+    }
+
+    .PadRL {
+        padding-right: 8px;
+    }
+
+    .PadLRL {
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+
+    .PadL {
+        padding: 8px;
+    }
+
+    /* M Base = 6px @ 16 */
+    .PadTM {
+        padding-top: 6px;
+    }
+
+    .PadBM {
+        padding-bottom: 6px;
+    }
+
+    .PadTBM {
+        padding-top: 6px;
+        padding-bottom: 6px;
+    }
+
+    .PadLM {
+        padding-left: 6px;
+    }
+
+    .PadRM {
+        padding-right: 6px;
+    }
+
+    .PadLRM {
+        padding-left: 6px;
+        padding-right: 6px;
+    }
+
+    .PadM {
+        padding: 6px;
+    }
+
+    /* S Base = 4px @ 16 */
+    .PadTS {
+        padding-top: 4px;
+    }
+
+    .PadBS {
+        padding-bottom: 4px;
+    }
+
+    .PadTBS {
+        padding-top: 4px;
+        padding-bottom: 4px;
+    }
+
+    .PadLS {
+        padding-left: 4px;
+    }
+
+    .PadRS {
+        padding-right: 4px;
+    }
+
+    .PadLRS {
+        padding-left: 4px;
+        padding-right: 4px;
+    }
+
+    .PadS {
+        padding: 4px;
+    }
+
+    /* XS Base = 2px @ 16 */
+    .PadTXS {
+        padding-top: 2px;
+    }
+
+    .PadBXS {
+        padding-bottom: 2px;
+    }
+
+    .PadTBXS {
+        padding-top: 2px;
+        padding-bottom: 2px;
+    }
+
+    .PadLXS {
+        padding-left: 2px;
+    }
+
+    .PadRXS {
+        padding-right: 2px;
+    }
+
+    .PadLRXS {
+        padding-left: 2px;
+        padding-right: 2px;
+    }
+
+    .PadXXS {
+        padding: 2px;
+    }
+
+    /* XXS Base = 1px @ 16 */
+    .PadTXXS {
+        padding-top: 1px;
+    }
+
+    .PadBXXS {
+        padding-bottom: 1px;
+    }
+
+    .PadTBXXS {
+        padding-top: 1px;
+        padding-bottom: 1px;
+    }
+
+    .PadLXXS {
+        padding-left: 1px;
+    }
+
+    .PadRXXS {
+        padding-right: 1px;
+    }
+
+    .PadLRXXS {
+        padding-left: 1px;
+        padding-right: 1px;
+    }
+
+    .PadXXS {
+        padding: 1px;
+    }
+}
+
+@media (width >= 1000px) {
+    /* XL Base = 15px @ 16 */
+    .PadTXL {
+        padding-top: 15px;
+    }
+
+    .PadBXL {
+        padding-bottom: 15px;
+    }
+
+    .PadTBXL {
+        padding-top: 15px;
+        padding-bottom: 15px;
+    }
+
+    .PadLXL {
+        padding-left: 15px;
+    }
+
+    .PadRXL {
+        padding-right: 15px;
+    }
+
+    .PadLRXL {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    .PadXL {
+        padding: 15px;
+    }
+
+    /* L Base = 10px @ 16 */
+    .PadTL {
+        padding-top: 10px;
+    }
+
+    .PadBL {
+        padding-bottom: 10px;
+    }
+
+    .PadTBL {
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+
+    .PadLL {
+        padding-left: 10px;
+    }
+
+    .PadRL {
+        padding-right: 10px;
+    }
+
+    .PadLRL {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    .PadL {
+        padding: 10px;
+    }
+
+    /* M Base = 7.5px @ 16 */
+    .PadTM {
+        padding-top: 7.5px;
+    }
+
+    .PadBM {
+        padding-bottom: 7.5px;
+    }
+
+    .PadTBM {
+        padding-top: 7.5px;
+        padding-bottom: 7.5px;
+    }
+
+    .PadLM {
+        padding-left: 7.5px;
+    }
+
+    .PadRM {
+        padding-right: 7.5px;
+    }
+
+    .PadLRM {
+        padding-left: 7.5px;
+        padding-right: 7.5px;
+    }
+
+    .PadM {
+        padding: 7.5px;
+    }
+
+    /* S Base = 5px @ 16 */
+    .PadTS {
+        padding-top: 5px;
+    }
+
+    .PadBS {
+        padding-bottom: 5px;
+    }
+
+    .PadTBS {
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+
+    .PadLS {
+        padding-left: 5px;
+    }
+
+    .PadRS {
+        padding-right: 5px;
+    }
+
+    .PadLRS {
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+
+    .PadS {
+        padding: 5px;
+    }
+
+    /* XS Base = 2.5px @ 16 */
+    .PadTXS {
+        padding-top: 2.5px;
+    }
+
+    .PadBXS {
+        padding-bottom: 2.5px;
+    }
+
+    .PadTBXS {
+        padding-top: 2.5px;
+        padding-bottom: 2.5px;
+    }
+
+    .PadLXS {
+        padding-left: 2.5px;
+    }
+
+    .PadRXS {
+        padding-right: 2.5px;
+    }
+
+    .PadLRXS {
+        padding-left: 2.5px;
+        padding-right: 2.5px;
+    }
+
+    .PadXS {
+        padding: 2.5px;
+    }
+
+    /* XXS Base = 1.25px @ 16 */
+    .PadTXXS {
+        padding-top: 1.25px;
+    }
+
+    .PadBXXS {
+        padding-bottom: 1.25px;
+    }
+
+    .PadTBXXS {
+        padding-top: 1.25px;
+        padding-bottom: 1.25px;
+    }
+
+    .PadLXXS {
+        padding-left: 1.25px;
+    }
+
+    .PadRXXS {
+        padding-right: 1.25px;
+    }
+
+    .PadLRXXS {
+        padding-left: 1.25px;
+        padding-right: 1.25px;
+    }
+
+    .PadXXS {
+        padding: 1.25px;
+    }
+}
+
+.NoBlockMargins {
+    margin-block-start: 0px;
+    margin-block-end: 0px;
+}
+
+/* Dynamic KanaMargins */
+.KanaXLMargin {
+    margin-bottom: -0.3vw;
+    margin-top: -0.3vw;
+}
+
+.KanaLMargin {
+    margin-bottom: -0.26vw;
+    margin-top: -0.26vw;
+}
+
+.KanaMMargin {
+    margin-bottom: -0.22vw;
+    margin-top: -0.22vw;
+}
+
+.KanaSMargin {
+    margin-bottom: -0.19vw;
+    margin-top: -0.19vw;
+}
+
+.KanaXSMargin {
+    margin-bottom: -0.16vw;
+    margin-top: -0.16vw;
+}
+
+/* --- Japanese Font Minimums --- */
+@media (width <= 800px) {
+    .KanaXLMargin {
+        margin-bottom: -2.4px;
+        margin-top: -2.4px;
+    }
+
+    .KanaLMargin {
+        margin-bottom: -2.08px;
+        margin-top: -2.08px;
+    }
+
+    .KanaMMargin {
+        margin-bottom: -1.76px;
+        margin-top: -1.76px;
+    }
+
+    .KanaSMargin {
+        margin-bottom: -1.52px;
+        margin-top: -1.52px;
+    }
+
+    .KanaXSMargin {
+        margin-bottom: -1.28px;
+        margin-top: -1.28px;
+    }
+}
+
+/* --- Japanese Font Maximums --- */
+@media (width >= 1000px) {
+    .KanaXLMargin {
+        margin-bottom: -3px;
+        margin-top: -3px;
+    }
+
+    .KanaLMargin {
+        margin-bottom: -2.6px;
+        margin-top: -2.6px;
+    }
+
+    .KanaMMargin {
+        margin-bottom: -2.2px;
+        margin-top: -2.2px;
+    }
+
+    .KanaSMargin {
+        margin-bottom: -1.9px;
+        margin-top: -1.9px;
+    }
+
+    .KanaXSMargin {
+        margin-bottom: -1.6px;
+        margin-top: -1.6px;
+    }
+}
+
+
+/* --- Dynamic Margins --- */
+/* XL Base = 12-18px @ 16 */
+.MarginTXL {
+    margin-top: 1.5vw;
+}
+
+.MarginBXL {
+    margin-bottom: 1.5vw;
+}
+
+.MarginTBXL {
+    margin-top: 1.5vw;
+    margin-bottom: 1.5vw;
+}
+
+.MarginLXL {
+    margin-left: 1.5vw;
+}
+
+.MarginRXL {
+    margin-right: 1.5vw;
+}
+
+.MarginLRXL {
+    margin-left: 1.5vw;
+    margin-right: 1.5vw;
+}
+
+.MarginXL {
+    padding: 1.5vw;
+}
+
+/* L Base = 8-12px @ 16 */
+.MarginTL {
+    margin-top: 1vw;
+}
+
+.MarginBL {
+    margin-bottom: 1vw;
+}
+
+.MarginTBL {
+    margin-top: 1vw;
+    margin-bottom: 1vw;
+}
+
+.MarginLL {
+    margin-left: 1vw;
+}
+
+.MarginRL {
+    margin-right: 1vw;
+}
+
+.MarginLRL {
+    margin-left: 1vw;
+    margin-right: 1vw;
+}
+
+.MarginL {
+    padding: 1vw;
+}
+
+/* M Base = 6-9px @ 16 */
+.MarginTM {
+    margin-top: 0.75vw;
+}
+
+.MarginBM {
+    margin-bottom: 0.75vw;
+}
+
+.MarginTBM {
+    margin-top: 0.75vw;
+    margin-bottom: 0.75vw;
+}
+
+.MarginLM {
+    margin-left: 0.75vw;
+}
+
+.MarginRM {
+    margin-right: 0.75vw;
+}
+
+.MarginLRM {
+    margin-left: 0.75vw;
+    margin-right: 0.75vw;
+}
+
+.MarginM {
+    padding: 0.75vw;
+}
+
+/* S Base = 4-6px @ 16 */
+.MarginTS {
+    margin-top: 0.5vw;
+}
+
+.MarginBS {
+    margin-bottom: 0.5vw;
+}
+
+.MarginTBS {
+    margin-top: 0.5vw;
+    margin-bottom: 0.5vw;
+}
+
+.MarginLS {
+    margin-left: 0.5vw;
+}
+
+.MarginRS {
+    margin-right: 0.5vw;
+}
+
+.MarginLRS {
+    margin-left: 0.5vw;
+    margin-right: 0.5vw;
+}
+
+.MarginS {
+    padding: 0.5vw;
+}
+
+/* XS Base = 2-3px @ 16 */
+.MarginTXS {
+    margin-top: 0.25vw;
+}
+
+.MarginBXS {
+    margin-bottom: 0.25vw;
+}
+
+.MarginTBXS {
+    margin-top: 0.25vw;
+    margin-bottom: 0.25vw;
+}
+
+.MarginLXS {
+    margin-left: 0.25vw;
+}
+
+.MarginRXS {
+    margin-right: 0.25vw;
+}
+
+.MarginLRXS {
+    margin-left: 0.25vw;
+    margin-right: 0.25vw;
+}
+
+.MarginXS {
+    padding: 0.25vw;
+}
+
+/* XXS Base = 1-1.25px @ 16 */
+.MarginTXS {
+    margin-top: 0.25vw;
+}
+
+.MarginBXS {
+    margin-bottom: 0.25vw;
+}
+
+.MarginTBXS {
+    margin-top: 0.25vw;
+    margin-bottom: 0.25vw;
+}
+
+.MarginLXS {
+    margin-left: 0.25vw;
+}
+
+.MarginRXS {
+    margin-right: 0.25vw;
+}
+
+.MarginLRXS {
+    margin-left: 0.25vw;
+    margin-right: 0.25vw;
+}
+
+.MarginXS {
+    padding: 0.25vw;
+}
+
+.MarginXXS {
+    padding: 0.125vw;
+}
+
+@media (width <= 800px) {
+    /* XL Base = 12px @ 16 */
+    .MarginTXL {
+        margin-top: 12px;
+    }
+
+    .MarginBXL {
+        margin-bottom: 12px;
+    }
+
+    .MarginTBXL {
+        margin-top: 12px;
+        margin-bottom: 12px;
+    }
+
+    .MarginLXL {
+        margin-left: 12px;
+    }
+
+    .MarginRXL {
+        margin-right: 12px;
+    }
+
+    .MarginLRXL {
+        margin-left: 12px;
+        margin-right: 12px;
+    }
+
+    .MarginXL {
+        padding: 12px;
+    }
+
+    /* L Base = 8px @ 16 */
+    .MarginTL {
+        margin-top: 8px;
+    }
+
+    .MarginBL {
+        margin-bottom: 8px;
+    }
+
+    .MarginTBL {
+        margin-top: 8px;
+        margin-bottom: 8px;
+    }
+
+    .MarginLL {
+        margin-left: 8px;
+    }
+
+    .MarginRL {
+        margin-right: 8px;
+    }
+
+    .MarginLRL {
+        margin-left: 8px;
+        margin-right: 8px;
+    }
+
+    .MarginL {
+        padding: 8px;
+    }
+
+    /* M Base = 6px @ 16 */
+    .MarginTM {
+        margin-top: 6px;
+    }
+
+    .MarginBM {
+        margin-bottom: 6px;
+    }
+
+    .MarginTBM {
+        margin-top: 6px;
+        margin-bottom: 6px;
+    }
+
+    .MarginLM {
+        margin-left: 6px;
+    }
+
+    .MarginRM {
+        margin-right: 6px;
+    }
+
+    .MarginLRM {
+        margin-left: 6px;
+        margin-right: 6px;
+    }
+
+    .MarginM {
+        padding: 6px;
+    }
+
+    /* S Base = 4px @ 16 */
+    .MarginTS {
+        margin-top: 4px;
+    }
+
+    .MarginBS {
+        margin-bottom: 4px;
+    }
+
+    .MarginTBS {
+        margin-top: 4px;
+        margin-bottom: 4px;
+    }
+
+    .MarginLS {
+        margin-left: 4px;
+    }
+
+    .MarginRS {
+        margin-right: 4px;
+    }
+
+    .MarginLRS {
+        margin-left: 4px;
+        margin-right: 4px;
+    }
+
+    .MarginS {
+        padding: 4px;
+    }
+
+    /* XS Base = 2px @ 16 */
+    .MarginTXS {
+        margin-top: 2px;
+    }
+
+    .MarginBXS {
+        margin-bottom: 2px;
+    }
+
+    .MarginTBXS {
+        margin-top: 2px;
+        margin-bottom: 2px;
+    }
+
+    .MarginLXS {
+        margin-left: 2px;
+    }
+
+    .MarginRXS {
+        margin-right: 2px;
+    }
+
+    .MarginLRXS {
+        margin-left: 2px;
+        margin-right: 2px;
+    }
+
+    .MarginXS {
+        padding: 2px;
+    }
+
+    /* XXS Base = 1px @ 16 */
+    .MarginTXXS {
+        margin-top: 1px;
+    }
+
+    .MarginBXXS {
+        margin-bottom: 1px;
+    }
+
+    .MarginTBXXS {
+        margin-top: 1px;
+        margin-bottom: 1px;
+    }
+
+    .MarginLXXS {
+        margin-left: 1px;
+    }
+
+    .MarginRXXS {
+        margin-right: 1px;
+    }
+
+    .MarginLRXXS {
+        margin-left: 1px;
+        margin-right: 1px;
+    }
+
+    .MarginXXS {
+        padding: 1px;
+    }
+}
+
+@media (width >= 1000px) {
+    /* XL Base = 15px @ 16 */
+    .MarginTXL {
+        margin-top: 15px;
+    }
+
+    .MarginBXL {
+        margin-bottom: 15px;
+    }
+
+    .MarginTBXL {
+        margin-top: 15px;
+        margin-bottom: 15px;
+    }
+
+    .MarginLXL {
+        margin-left: 15px;
+    }
+
+    .MarginRXL {
+        margin-right: 15px;
+    }
+
+    .MarginLRXL {
+        margin-left: 15px;
+        margin-right: 15px;
+    }
+
+    .MarginXL {
+        padding: 15px;
+    }
+
+    /* L Base = 10px @ 16 */
+    .MarginTL {
+        margin-top: 10px;
+    }
+
+    .MarginBL {
+        margin-bottom: 10px;
+    }
+
+    .MarginTBL {
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+
+    .MarginLL {
+        margin-left: 10px;
+    }
+
+    .MarginRL {
+        margin-right: 10px;
+    }
+
+    .MarginLRL {
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+
+    .MarginL {
+        padding: 10px;
+    }
+
+    /* M Base = 7.5px @ 16 */
+    .MarginTM {
+        margin-top: 7.5px;
+    }
+
+    .MarginBM {
+        margin-bottom: 7.5px;
+    }
+
+    .MarginTBM {
+        margin-top: 7.5px;
+        margin-bottom: 7.5px;
+    }
+
+    .MarginLM {
+        margin-left: 7.5px;
+    }
+
+    .MarginRM {
+        margin-right: 7.5px;
+    }
+
+    .MarginLRM {
+        margin-left: 7.5px;
+        margin-right: 7.5px;
+    }
+
+    .MarginM {
+        padding: 7.5px;
+    }
+
+    /* S Base = 5px @ 16 */
+    .MarginTS {
+        margin-top: 5px;
+    }
+
+    .MarginBS {
+        margin-bottom: 5px;
+    }
+
+    .MarginTBS {
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+
+    .MarginLS {
+        margin-left: 5px;
+    }
+
+    .MarginRS {
+        margin-right: 5px;
+    }
+
+    .MarginLRS {
+        margin-left: 5px;
+        margin-right: 5px;
+    }
+
+    .MarginS {
+        padding: 0.25rem;
+    }
+
+    /* XS Base = 2.5px @ 16 */
+    .MarginTXS {
+        margin-top: 2.5px;
+    }
+
+    .MarginBXS {
+        margin-bottom: 2.5px;
+    }
+
+    .MarginTBXS {
+        margin-top: 2.5px;
+        margin-bottom: 2.5px;
+    }
+
+    .MarginLXS {
+        margin-left: 2.5px;
+    }
+
+    .MarginRXS {
+        margin-right: 2.5px;
+    }
+
+    .MarginLRXS {
+        margin-left: 2.5px;
+        margin-right: 2.5px;
+    }
+
+    .MarginXS {
+        padding: 2.5px;
+    }
+
+    /* XS Base = 1.25px @ 16 */
+    .MarginTXXS {
+        margin-top: 1.25px;
+    }
+
+    .MarginBXXS {
+        margin-bottom: 1.25px;
+    }
+
+    .MarginTBXXS {
+        margin-top: 1.25px;
+        margin-bottom: 1.25px;
+    }
+
+    .MarginLXXS {
+        margin-left: 1.25px;
+    }
+
+    .MarginRXXS {
+        margin-right: 1.25px;
+    }
+
+    .MarginLRXXS {
+        margin-left: 1.25px;
+        margin-right: 1.25px;
+    }
+
+    .MarginXXS {
+        padding: 1.25px;
+    }
+}

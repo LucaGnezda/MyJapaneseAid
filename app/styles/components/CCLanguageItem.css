@@ -1,0 +1,456 @@
+cc-languageitem {
+    display: contents;
+}
+
+.CCLanguageItem {
+
+    /** 
+     * Container - the outermost rendered element that acts as an anchor for all other CSS 
+     */
+    &.Container {
+        background-color: var(--whitetranslucent70);
+        border-radius: 10px 10px 10px 10px;
+        display: flex;
+        flex-direction: column;
+        flex: 1 0 auto;
+        position: relative;
+        padding: 0px;
+    }
+
+    &.Container.ScaleHeight {
+        min-height: 12vw;
+    }
+
+    @media (width <= 800px) {
+        &.Container.ScaleHeight {
+            min-height: 96px;
+        }
+    }
+
+    @media (width >= 1000px) {
+        &.Container.ScaleHeight {
+            min-height: 120px;
+        }
+    }
+
+
+    /** 
+     * Fieldset - Anchors read/edit mod styling logic through use of the 'disabled' attribute 
+     */
+    .Fieldset {
+        /*transition: all 0.5s;*/
+        display: flex;
+        flex-direction: column;
+    }
+
+    .Fieldset.Padding {
+        padding-top: 4vw;
+        padding-right: 0px;
+    }
+
+    .Fieldset:disabled.Padding {
+        padding-top: 2vw;
+        padding-right: 4vw;
+    }
+
+    @media (width <= 800px) {
+        .Fieldset.Padding {
+            padding-top: 32px;
+            padding-right: 0px;
+        }
+
+        .Fieldset:disabled.Padding {
+            padding-top: 16px;
+            padding-right: 32px;
+        }
+    }
+
+    @media (width >= 1000px) {
+        .Fieldset.Padding {
+            padding-top: 40px;
+            padding-right: 0px;
+        }
+
+        .Fieldset:disabled.Padding {
+            padding-top: 20px;
+            padding-right: 40px;
+        }
+    }
+
+    /** 
+     * FormButton - Special case treatments
+     */
+    .FormButton.ShowOnContainerHover {
+        display: none;
+        opacity: 0;
+        transition: all 0.3s;
+        transition-behavior: allow-discrete;
+    }
+
+    &.Container:hover .FormButton.ShowOnContainerHover {
+        display: flex;
+        opacity: 1;
+        @starting-style {
+            opacity: 0;
+        }    
+    }
+
+    .FormButton.StrengthenOnExampleHover {
+        transition: all 0.3s;
+        opacity: 0.3;
+        transition-behavior: allow-discrete;
+    }
+
+    .Example:hover .FormButton.StrengthenOnExampleHover {
+        display: flex;
+        opacity: 1;
+        @starting-style {
+            opacity: 0.3;
+        }
+    }
+
+    &.Container:hover .FormButtonStrip .Spacer.ShowOnContainerHover {
+    display: flex;
+    opacity: 0.3;
+    @starting-style {
+        opacity: 0;
+    }
+}
+
+    /**
+     * Grids & Layouts
+     */
+    .FormGrid {
+        border-left: 2px solid var(--colourPrimary);
+        display: grid;
+        grid-template-columns: 1fr 99fr;
+        column-gap: 1rem;
+        row-gap: 0.3rem;
+        font-weight: 300;
+        transition: all 0.5s;
+    }
+
+    .FormGrid.Hide {
+        height: 0px;
+        margin: 0px;
+    }
+
+    .FlexLayout {
+        display: flex;
+    }
+
+    .FlexLayout.Hide {
+        display: none;
+    }
+
+    .FlexLayout.Row {
+        flex-direction: row;
+    }
+
+    .FlexLayout.Row.Reverse {
+        flex-direction: row-reverse;
+    }
+
+    .FlexLayout.Col {
+        flex-direction: column;
+    }
+
+    .FlexLayout.Col.Reverse {
+        flex-direction: column-reverse;
+    }
+
+    .FlexLayout.JustifyEnd {
+        justify-content: end;
+    }
+
+
+    /**
+     * Labels
+     */
+    .GridLabel {
+        color: var(--colourPrimaryDarker20);
+        font-weight: 400;
+        display: block;
+    }
+
+    .GridLabel.Hide {
+        display: none;
+    }
+
+    .InputLabel {
+        margin-right: 0.5vw;
+        padding-left: 0px;
+        font-weight: 300;
+        display: block;
+        transition: all 0.5s;
+        transition-behavior: allow-discrete;
+        height: auto;
+        overflow: hidden;
+        opacity: 1;
+        @starting-style {
+            height: 0px;
+        }
+    }
+
+    .Fieldset:disabled .InputLabel {
+        display: none;
+        height: 0px;
+        opacity: 0;
+        @starting-style {
+            height: auto;
+        }
+        
+    } 
+
+    /* --- Label Font Minimums --- */
+    @media (width <= 800px) {
+        .InputLabel {
+            margin-right: 4px;
+        }
+    }
+
+    /* --- Label Font Maximums --- */
+    @media (width >= 1000px) {
+        .InputLabel {
+            margin-right: 5px;
+        }
+    }
+
+
+
+    /**
+     * Form Inputs
+     */
+    .ItemTypeInput {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .Fieldset:disabled .ItemTypeInput {
+        display: none;
+    }
+
+    .ItemTypeOutput {
+        display: flex;
+        flex-direction: row;
+        background-color: var(--colourPrimaryDarker10Translucent60);
+        border-radius: 10px;
+    }
+
+    .Fieldset:not(:disabled) .ItemTypeOutput {
+        display: none;
+    }
+
+    .ItemInput {
+        display: block;
+        background: var(--whitetranslucent90);
+        border-radius: 10px 10px 10px 10px;
+        border: 1px solid var(--blacktranslucent80);
+        margin-bottom: 0.25vw;
+        margin-top: 0vw;
+        padding-left: 1vw;
+    }
+
+    .ItemInput:disabled {
+        border: 0px solid transparent;
+        background: transparent;
+        margin-bottom: -0.25vw;
+        margin-top: 0rem;
+        padding-left: 0rem;
+    }
+
+    .ItemInput.LinkedHighlighter {
+        width: 25vw;
+    }
+
+    .ItemInput.LinkedHighlighter:disabled {
+        border: 0px solid transparent;
+        background: transparent;
+        height: 0px;
+        border: 0px;
+        padding: 0px;
+        opacity: 1;
+    }
+
+    .ItemInput.HideOnRead:disabled {
+        display: none;
+    }
+
+    .ItemInput:focus {
+        border: 1px solid var(--blacktranslucent50);
+        outline: none;
+    }
+
+    .ItemInput.Error {
+        background: var(--redtranslucent90);
+    }
+
+    /* --- Input Font Minimums --- */
+    @media (width <= 800px) {
+        .ItemInput {
+            margin-bottom: 2px;
+            padding-left: 8px;
+        }
+
+        .ItemInput:disabled {
+            margin-bottom: -2px;
+            padding-left: 0rem;
+        }
+    }
+
+    /* --- Input Font Maximums --- */
+    @media (width >= 1000px) {
+        .ItemInput {
+            margin-bottom: 2.5px;
+            margin-top: 0rem;
+            padding-left: 10px;
+        }
+
+        .ItemInput:disabled {
+            margin-bottom: -2.5px;
+        }
+    }
+
+
+    /**
+     * Special Case - Read Only Presentation Elements
+     */
+    .Fieldset .ItemOutput {
+        display: none;
+    }
+
+    .Fieldset:disabled .ItemOutput {
+        display: block;
+    }
+
+    .ItemOutput span {
+        position: relative; /* To anchor the ::after below */
+    }
+
+    /* Underlining - When Off */
+    .ItemOutput span::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background-color: var(--colourSecondary);
+        opacity: 0;
+        transition: opacity 500ms, transform 500ms;
+        transform: scale(0);
+        transform-origin: center;
+    }
+
+    /* Underlining - When On */
+    .ItemOutput span.Underline::after {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+
+    /**
+     * Special Case - Examples UI
+     */
+    .ExamplesSectionBreak {
+        font-weight: 800;
+        color: var(--colourPrimaryDarker20);
+        display: flex;
+        flex-direction: row;
+        flex: 1 0 auto;
+        transition: all 0.5s;
+        opacity: 1;
+    }
+
+    .ExamplesSectionBreak.Hide {
+        height: 0px;
+        overflow: hidden;
+        margin: 0px;
+        opacity: 0;
+    }
+
+    .ExamplesHeader {
+        flex: 0 0 auto;
+        display: flex;
+        flex-direction: row;
+        border-bottom: 2px solid transparent;
+        transition: all 500ms;
+        width: 1px;
+    }
+
+    .ExamplesHeader.Expanded {
+        flex: 1 1 auto;
+        border-bottom: 2px solid var(--colourPrimary);
+        width: 100%;
+    }
+
+    .ExamplesTitle {
+        font-weight: 400;
+        color: var(--colourPrimaryDarker20);
+        flex: 1 1 auto;
+        width: auto;
+        transition: all 500ms;
+        align-content: center;
+    }
+
+    .Examples {
+        display: none;
+        transition: all 0.5s;
+        transition-behavior: allow-discrete;
+        overflow: hidden;
+        height: 0px;
+    }
+
+    .Examples.Show {
+        display: block;
+        height: auto;
+        @starting-style {
+            height: 0px;
+        }
+    }
+
+    .Example {
+        display: flex;
+        flex-direction: row;
+        border-left: 2px solid var(--colourPrimary);
+        font-weight: 300;
+        transition: all 0.5s;
+        transition-behavior: allow-discrete;
+        overflow: hidden;
+        height: auto;
+        @starting-style {
+            height: 0px;
+        }
+    }
+
+    .Example.Hide {
+        height: 0px;
+        margin: 0px;
+    }
+
+    .Example.Deleting {
+        height: 0px;
+        margin-bottom: 0px;
+    }
+
+    .ExampleInputs {
+        display: flex;
+        flex-direction: column;
+        flex: 1 1 auto;
+    }
+
+    .ExampleControls {
+        display: flex;
+        flex-direction: column;
+        flex: 0 0 auto;
+        justify-content: center;
+        transition: all 0.5s;
+        transition-behavior: allow-discrete;
+        width: auto;
+    }
+
+    .Fieldset:disabled .ExampleControls {
+        display: none;
+        width: 0px;
+    }
+}

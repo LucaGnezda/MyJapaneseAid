@@ -1,0 +1,270 @@
+cc-buttonstrip {
+    display: contents;
+}
+
+.CCButtonStrip {
+
+    /** 
+     * Container - the outermost rendered element that acts as an anchor for all other CSS 
+     */
+    &.Container {
+        display: flex;
+        margin-left: 0px;
+        margin-right: 0px;
+        align-items: center;
+        gap: 8px;
+        transition: all 0.5s ease-in-out;
+        transition-behavior: allow-discrete;
+        opacity: 1;
+    }
+
+    &.Container.Horizontal {
+        flex-direction: row;
+        width: 100%;
+        height: auto;
+        max-width: 1000px;
+    }
+
+    &.Container.Vertical {
+        flex-direction: column;
+        width: auto;
+        height: 100%;
+        max-height: 1000px;
+    }
+
+    &.Container.AsIndividualActions {
+        gap: 4px;
+    }
+
+    &.Container.AsSet {
+        gap: 0px;
+    }
+
+    &.Container.Hide {
+        opacity: 0;
+        display: none;
+    }
+
+    &.Container.Show {
+        @starting-style {
+            opacity: 0;
+        }
+    }
+
+    /** 
+     * Group & Buttons
+     */
+    .Group {
+        display: flex;
+        height: fit-content;
+        border-radius: 6px 6px 6px 6px;
+        overflow: hidden;
+    }
+
+    .Group.Custom {
+        border-radius: 0px 0px 0px 0px;
+        flex: 1 1 auto;
+        width: fit-content;
+        height: fit-content;
+    }
+
+    &.Container.Horizontal .Group {
+        flex-direction: row;
+    }
+
+    &.Container.Vertical .Group {
+        flex-direction: column;
+    }
+
+    .RowContents {
+        flex-direction: row;
+    }
+
+    .ColumnContents {
+        flex-direction: column;
+    }
+
+    .Button {
+        background-color: var(--colourSecondaryLighter60);
+        color: black;
+        display: flex;
+        min-width: 20px;
+        min-height: 20px;
+        height: fit-content;
+        user-select: none;
+        opacity: 1;
+    }
+
+    .Button:not(:last-child) {
+        border-right: 1px solid var(--blacktranslucent80);
+    }
+
+    .Button:hover {
+        background-color: var(--colourSecondaryLighter70);
+    }
+
+    .Button.Deselected {
+        opacity: 0.5;
+    }
+
+    .Button.Deselected:hover {
+        opacity: 0.6;
+    }
+
+    .Button.DarkTint {
+        background-color: var(--colourDarkTint);
+    }
+
+    .Button.DarkTint:hover {
+        background-color: var(--colourDarkTintDarker);
+    }
+
+    .Button.DarkTint.Deselected {
+        background-color: var(--colourDarkTint);
+        opacity: 0.4;
+    }
+
+    .Button.DarkTint.Deselected:hover {
+        background-color: var(--colourDarkTintDarker);
+        opacity: 0.4;
+    }
+
+    .Button.RedTint {
+        background-color: var(--colourRedTint);
+    }
+
+    .Button.RedTint:hover {
+        background-color: var(--colourRedTintDarker);
+    }
+
+    .Button.RedTint.Deselected {
+        background-color: var(--colourRedTint);
+        opacity: 0.5;
+    }
+
+    .Button.RedTint.Deselected:hover {
+        background-color: var(--colourRedTintDarker);
+        opacity: 0.5;
+    }
+
+    .Button.GreenTint {
+        background-color: var(--colourPrimaryDarker10Translucent60);
+    }
+
+    .Button.GreenTint:hover {
+        background-color: var(--colourPrimaryDarker10Translucent50);
+    }
+
+    .Button.GreenTint.Deselected {
+        background-color: var(--colourPrimaryDarker10Translucent90);
+        color: black;
+        opacity: 1;
+    }
+
+    .Button.GreenTint.Deselected:hover {
+        background-color: var(--colourPrimaryDarker10Translucent80);
+        color: black;
+        opacity: 1;
+    }
+
+    .Button span {
+        align-items: center;
+        display: flex;
+        height: 2.5vw;
+    }
+
+    .Button img {
+        width: 2.5vw;
+        height: 2.5vw;
+        filter: brightness(0) saturate(100%) invert(0%) sepia(2%) saturate(0%) hue-rotate(189deg) brightness(96%) contrast(101%);
+    }
+
+    .Spacer {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        opacity: 0.3;
+    }
+
+    .Spacer img {
+        width: 3.75vw;
+        height: 3.75vw;
+        filter: brightness(0) saturate(100%) invert(0%) sepia(2%) saturate(0%) hue-rotate(189deg) brightness(96%) contrast(101%);
+    }
+
+    &.Container.Horizontal .Spacer {
+        width: 0.625vw;
+        height: 3.75vw;
+    }
+
+    &.Container.Vertical .Spacer {
+        width: 3.75vw;
+        height: 0.625vw;
+    }
+
+    &.Container.Horizontal .Spacer img {
+        transform: rotate(90deg);
+    }
+
+    .RedTint {
+        background-color: var(--colourSecondaryLighter60);
+    }
+
+
+    /** 
+     * Scaling Limits
+     */
+    @media (width <= 800px) {
+        .Button span {
+            height: 20px;
+        }
+
+        .Button img {
+            width: 20px;
+            height: 20px;
+        }
+
+        .Spacer img {
+            width: 30px;
+            height: 30px;
+        }
+
+        &.Container.Horizontal .Spacer {
+            width: 5px;
+            height: 30px;
+        }
+
+        &.Container.Vertical .Spacer {
+            width: 30px;
+            height: 5px;
+        }
+    }
+
+    @media (width >= 960px) {
+        .Button span {
+            height: 24px;
+        }
+
+        .Button img {
+            width: 24px;
+            height: 24px;
+        }
+
+        .Spacer img {
+            width: 36px;
+            height: 36px;
+        }
+
+        &.Container.Horizontal .Spacer {
+            width: 6px;
+            height: 36px;
+        }
+
+        &.Container.Vertical .Spacer {
+            width: 36px;
+            height: 6px;
+        }
+    }
+
+}

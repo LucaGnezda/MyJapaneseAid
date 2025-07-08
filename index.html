@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline';" />
+
+        <!-- Styles -->
+        <link rel="stylesheet" type="text/css" href="./app/assets/fonts/Fonts.css">
+
+        <link rel="stylesheet" type="text/css" href="./app/styles/BaseStyling.css">
+        <link rel="stylesheet" type="text/css" href="./app/styles/CoreAppStyling.css">
+        <link rel="stylesheet" type="text/css" href="./app/styles/ColourSystem.css">
+        <link rel="stylesheet" type="text/css" href="./app/styles/FontSystem.css">
+        <link rel="stylesheet" type="text/css" href="./app/styles/ScrollingSystem.css">
+        <link rel="stylesheet" type="text/css" href="./app/styles/SpacingSystem.css">
+
+        <link rel="stylesheet" type="text/css" href="./app/styles/components/CCButtonStrip.css">
+        <link rel="stylesheet" type="text/css" href="./app/styles/components/CCCommon.css">
+        <link rel="stylesheet" type="text/css" href="./app/styles/components/CCSearch.css">
+        <link rel="stylesheet" type="text/css" href="./app/styles/components/CCLanguageItem.css">
+        <link rel="stylesheet" type="text/css" href="./app/styles/components/CCLanguageItemList.css">
+        <link rel="stylesheet" type="text/css" href="./app/styles/components/CCTopNav.css">
+
+        <!-- Framework -->
+        <script defer src="./framework/scripts/customComponents/CCBase.js"></script>
+        <script defer src="./framework/scripts/customComponents/CCObservableBase.js"></script>
+
+        <script defer src="./framework/scripts/fluxPattern/Action.js"></script>
+        <script defer src="./framework/scripts/fluxPattern/Dispatcher.js"></script>
+        <script defer src="./framework/scripts/fluxPattern/Store.js"></script>
+
+        <script defer src="./framework/scripts/observables/ObservableEnums.js"></script>
+        <script defer src="./framework/scripts/observables/Observable.js"></script>
+        <script defer src="./framework/scripts/observables/ObservableCore.js"></script>
+        <script defer src="./framework/scripts/observables/ObservableDataEvent.js"></script>
+        <script defer src="./framework/scripts/observables/ObservablesDictionary.js"></script>
+
+        <script defer src="./framework/scripts/logging/LoggingEnums.js"></script>
+        <script defer src="./framework/scripts/logging/Log.js"></script>
+
+        <script defer src="./framework/scripts/helpers/Helpers.js"></script>
+
+        <!-- Enums -->
+        <!-- Add your project specific enumeration types here -->
+
+        <!-- ActionHandlers -->
+        <script defer src="./app/scripts/actionHandlers/AppActionHandler.js"></script>
+
+        <!-- Bindings -->
+        <!-- Add your project specific component binding callbacks here -->
+
+        <!-- Components -->
+         <script defer src="./app/scripts/components/CCButtonStrip.js"></script>
+        <script defer src="./app/scripts/components/CCSearch.js"></script>
+        <script defer src="./app/scripts/components/CCLanguageItem.js"></script>
+        <script defer src="./app/scripts/components/CCLanguageItemList.js"></script>
+        <script defer src="./app/scripts/components/CCTopNav.js"></script>
+        
+
+        <!-- Services -->
+        <script defer src="./app/scripts/services/App.js"></script>
+        <script defer src="./app/scripts/services/AppBootstrappingService.js"></script>
+        <script defer src="./app/scripts/services/ComponentRegistry.js"></script>
+        <script defer src="./app/scripts/services/GojuonGroupingService.js"></script>
+        <script defer src="./app/scripts/services/UnicodeService.js"></script>
+
+        <!-- Helpers -->
+        
+        
+    </head>
+    <body onload="AppBootstrappingService.Initialise()" data-body>
+        <div class="AppBackground"></div>
+        <div class="AppForeground Hide" id="AppForeground">
+            <div class="TopNavContainer" id="TopNavContainer"></div>
+            <div class="PagesContainer">
+                <div class="Page StageLeft" id="KanaPage">
+                    <div class="PageControlStrip PadTBS" id="KanaControls"></div>
+                    <div class="PageBody CustomScroll PadLRXL" id="KanaPageBody"></div>
+                </div>
+                <div class="Page" id="LanguagePage">
+                    <div class="PageControlStrip PadTBS" id="LanguagePageControls"></div>
+                    <div class="PageBody">
+                        <div class="LanguageNewFlyoutScroller CustomScroll">
+                            <div class="LanguageNewFlyout" id="LanguageNewFlyout">
+                                <div class="FlyoutTitle MarginBS"><p class="RomanXXL NoBlockMargins" data-use="list.title">New Item</p></div>
+                            </div>
+                        </div>
+                        <div class="LanguageNewListScroller CustomScroll">
+                            <div class="LanguageListBody" id="LanguageListBody">
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--
+            <div class="AppHeader">
+                <div class="AppHeaderSpacer AlignLeft">
+                    <div class="AppTitle"><span>My</span>Japanese<span>Aid</span></div>
+                </div>
+                <div class="AppHeaderControlSurface">
+                    <cc-search id="TopNavSearch"></cc-search>
+                </div>
+                <div class="AppHeaderSpacer"></div>
+            </div>
+            -->
+        </div>
+
+        <!-- Please note this content will be absorbs and removed from the DOM on load -->
+        <data value="HTMLFragments" style="display: none;">
+            <!-- App Title -->
+            <data value="AppTitle">
+                <div class="AppTitle Font600 PadLRXL"><span>My</span>Japanese<span>Aid</span></div>
+            </data>
+        </data>
+    </body>
+</html>

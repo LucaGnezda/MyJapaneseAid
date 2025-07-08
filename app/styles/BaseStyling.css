@@ -1,0 +1,29 @@
+:root {
+    interpolate-size: allow-keywords;        /* to allow transitions from auto, Yay! */
+}
+
+body {
+    background-color: #FFFFFF;
+    margin: 0px;
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw;
+    position: relative;
+}
+
+fieldset {
+    outline: none;
+    border: none;
+    padding: 0px;
+    margin: 0px;
+}
+
+input:disabled {
+    background-color: transparent;
+    border: none;
+    color: black;
+}
+
+input:read-only:focus {
+    outline: none;
+}
