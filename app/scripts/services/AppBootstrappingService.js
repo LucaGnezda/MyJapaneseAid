@@ -139,7 +139,7 @@ class AppBootstrappingService {
         if (App.elements.languageNewFlyout) {
             App.components.newItem = new CCLanguageItem(true, false);
             App.components.newItem.permanentEdit();
-            App.components.newItem.attachUpdateCallback(App.dispatcher.newEventDispatchCallback("NewItem_Confirm"));
+            App.components.newItem.attachSaveCallback(App.dispatcher.newEventDispatchCallback("NewItem_Confirm"));
             App.components.newItem.attachCancelCallback(App.dispatcher.newEventDispatchCallback("NewItem_Cancel"));
 
             App.elements.languageNewFlyout.appendChild(App.components.newItem);
