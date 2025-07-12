@@ -52,4 +52,8 @@ cc-languageitemlist {
         flex: 1 0 auto;
     }
 
+    .SectionBody.Hide {
+        display: none;
+    }
+
 }

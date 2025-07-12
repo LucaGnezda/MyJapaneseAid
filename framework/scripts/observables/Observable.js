@@ -124,10 +124,10 @@ class Observable {
 
     /**
      * Emits notifications for the observable
-     * @param {boolean} force
+     * @param {boolean} [force]
      * @returns {void}
      */
-    emitNotifications(force) {
+    emitNotifications(force = false) {
         this.#state.emitNotifications(force);
     }
 }

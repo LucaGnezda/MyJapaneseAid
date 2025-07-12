@@ -50,6 +50,7 @@
  *      gojuonKey: string?,
  *      priorGojuonKey: string?,
  *      languageType: number?,
+ *      languageTypeBitmask: number?,
  *      languageTypeLabel: string?,
  *      kana: string?,
  *      kanaHighlighterString: string?,
@@ -139,6 +140,7 @@ class CCLanguageItem extends CCBase {
         gojuonKey: null,
         priorGojuonKey: null,
         languageType: null,
+        languageTypeBitmask: null,
         languageTypeLabel: null,
         kana: null,
         kanaHighlighterString: null,
@@ -309,6 +311,10 @@ class CCLanguageItem extends CCBase {
         return this.#propertyBag.meaning;
     }
 
+    get typeBitmask() {
+        return this.#propertyBag.languageTypeBitmask;
+    }
+
 
     /**
      * Private Methods
@@ -360,6 +366,7 @@ class CCLanguageItem extends CCBase {
         this.#subComponents.languageTypeButtonStrip.addTextButton(this.#languageTypeLabels[2], null, false, "GreenTint");
 
         this.#propertyBag.languageType = 0;
+        this.#propertyBag.languageTypeBitmask = (this.#propertyBag.languageType);
         this.#propertyBag.languageTypeLabel = this.#languageTypeLabels[this.#propertyBag.languageType];
 
         this.#elements.languageTypeInput?.appendChild(this.#subComponents.languageTypeButtonStrip);
@@ -697,6 +704,7 @@ class CCLanguageItem extends CCBase {
             // update the propertybag
             this.#propertyBag.priorGojuonKey = this.#propertyBag.gojuonKey;
             this.#propertyBag.languageType = this.#subComponents.languageTypeButtonStrip.getSelectedIndexForGroup(0) || 0;
+            this.#propertyBag.languageTypeBitmask = 1 << this.#propertyBag.languageType;
             this.#propertyBag.languageTypeLabel = this.#languageTypeLabels[this.#propertyBag.languageType];
             this.#propertyBag.kana = this.#elements.kanaInput.value;
             this.#propertyBag.kanaHighlighterString = this.#elements.kanaHighlighterInput.value;
@@ -935,7 +943,15 @@ class CCLanguageItem extends CCBase {
      * Public methods
      */
     render() {
+        
+    }
 
+    show() {
+        this.#elements.rootContainer?.classList.remove("Hide");
+    }
+
+    hide() {
+        this.#elements.rootContainer?.classList.add("Hide");
     }
 
     /**
@@ -978,6 +994,7 @@ class CCLanguageItem extends CCBase {
             this.#propertyBag.gojuonKey = GojuonGroupingService.getGroupingFor(propertyBag.kana || "")?.gojuonKey || null;
             this.#propertyBag.priorGojuonKey = this.#propertyBag.gojuonKey;
             this.#propertyBag.languageType = (propertyBag.languageType && propertyBag.languageType >=0 && propertyBag.languageType <= 2 ? propertyBag.languageType : 0);
+            this.#propertyBag.languageTypeBitmask = 1 << this.#propertyBag.languageType;
             this.#propertyBag.languageTypeLabel = this.#languageTypeLabels[this.#propertyBag.languageType];
             this.#propertyBag.kana = propertyBag.kana || "";
             this.#propertyBag.kanaHighlighterString = propertyBag.kanaHighlighterString || "";

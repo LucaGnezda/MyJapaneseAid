@@ -70,7 +70,7 @@ class CCTopNav extends CCBase {
     `;
 
     static #htmlTabTemplate = `
-        <div class="Tab RomanXL PadLRXL PadBS Font400" data-use="tab"></div>
+        <div class="Tab RomanXL PadLRXL PadTS PadBM Font400" data-use="tab"></div>
     `;
 
 
