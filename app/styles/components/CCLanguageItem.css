@@ -17,6 +17,10 @@ cc-languageitem {
         padding: 0px;
     }
 
+    &.Container.Hide {
+        display: none;
+    }
+
     &.Container.ScaleHeight {
         min-height: 12vw;
     }

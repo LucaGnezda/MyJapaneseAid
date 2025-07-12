@@ -21,6 +21,7 @@ class AppBootstrappingService {
 
         // Add Data to Store and propogate it to components
         AppBootstrappingService.loadStore();
+        AppBootstrappingService.attachStoreSubscribers();
 
         // Do anything else you need
 
@@ -89,7 +90,7 @@ class AppBootstrappingService {
 
     static initialiseStore() {
         // Create Store & Observables
-        App.store = new Store(NotificationMode.Default, NotificationStatus.Default);
+        App.store = new Store(NotificationMode.ObjectNotifyOnEmit, NotificationStatus.Default);
 
     }
 
@@ -124,13 +125,14 @@ class AppBootstrappingService {
 
         if (App.elements.languagePageControls) {
             App.components.searchComponent = new CCSearch(true, false);
+            App.components.searchComponent.attachOnChangeDebouncedCallback(App.dispatcher.newEventDispatchCallback("LanguagePageControls_ApplySearch"));
 
             App.components.languagePageControls = new CCButtonStrip(true, false);
             App.components.languagePageControls.setHorizontalLayout();
             App.components.languagePageControls.newButtonGroup(CCButtonStripGroupBehaviour.MultiSelectGroup);
-            App.components.languagePageControls.addTextButton("Words", null, true);
-            App.components.languagePageControls.addTextButton("Phrases", null, true);
-            App.components.languagePageControls.addTextButton("Sentences", null, true);
+            App.components.languagePageControls.addTextButton("Words", App.dispatcher.newEventDispatchCallback("LanguagePageControls_ApplyLanguageTypeFilter"), true);
+            App.components.languagePageControls.addTextButton("Phrases", App.dispatcher.newEventDispatchCallback("LanguagePageControls_ApplyLanguageTypeFilter"), true);
+            App.components.languagePageControls.addTextButton("Sentences", App.dispatcher.newEventDispatchCallback("LanguagePageControls_ApplyLanguageTypeFilter"), true);
             App.components.languagePageControls.addCustomComponent(App.components.searchComponent);
 
             App.elements.languagePageControls.appendChild(App.components.languagePageControls);
@@ -149,11 +151,11 @@ class AppBootstrappingService {
             App.components.languageListControls = new CCButtonStrip(true, false);
             App.components.languageListControls.setHorizontalLayout();
             App.components.languageListControls.newButtonGroup(CCButtonStripGroupBehaviour.StatelessIndividual);
-            App.components.languageListControls.addImageButton("./app/assets/svg/plus.svg", App.dispatcher.newEventDispatchCallback("LanguageControls_NewItem"));
+            App.components.languageListControls.addImageButton("./app/assets/svg/plus.svg", App.dispatcher.newEventDispatchCallback("LanguageListControls_NewItem"));
 
             App.components.languageList = new CCLanguageItemList(true, false);
             App.components.languageList.title = "Language Dictionary";
-            App.components.languageList.AddControls(App.components.languageListControls);
+            App.components.languageList.addControls(App.components.languageListControls);
 
             App.elements.languageListBody.appendChild(App.components.languageList);
         }
@@ -170,10 +172,15 @@ class AppBootstrappingService {
             return;
         }
 
-        App.store.addObservablesDictionary("Words");
+        App.store.addObservable("searchState");
+        App.store.addObservablesDictionary("words");
+
+        App.store.searchState.observableData.typeFilterBitmask = App.components.languagePageControls?.getSelectionBitmaskForGroup(0);
+        App.store.searchState.observableData.searchString = "";
+        App.store.searchState.observableData.searchType = null;
 
         GojuonGroupingService.gojuonGroupings.forEach((item) => {
-            App.store?.Words.add(item.gojuonKey);
+            App.store?.words.add(item.gojuonKey);
         });
 
         // Initialise the store's data structure
@@ -183,6 +190,17 @@ class AppBootstrappingService {
         //     App.store.MyHeros.add("Thor");
         //     App.store.MyHeros.Thor.observableData.weapon = "Mjölnir";
         
+    }
+
+    static attachStoreSubscribers() {
+
+        if (!App.store) {
+            Log.fatal("App Store must be initialised before Store content can be loaded", "", this);
+            return;
+        }
+
+        App.store.searchState.addSubscriber(App.components.languageList, store_SearchState_OnDataChange);
+
     }
 
 }

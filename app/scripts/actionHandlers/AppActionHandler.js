@@ -13,8 +13,12 @@ class AppActionHandler {
         Log.debug(`${this.constructor.name} processing event ${action.type}`, "HANDLER");
 
         switch (action.type) {
-            case "App_ApplySearch":
+            case "LanguagePageControls_ApplySearch":
                 this.applySearch(action.payload);
+                break;
+
+            case "LanguagePageControls_ApplyLanguageTypeFilter":
+                this.applyFilter(action.payload);
                 break;
 
             case "TopNav_KanaSelected":
@@ -25,7 +29,7 @@ class AppActionHandler {
                 this.pageToLanguage();
                 break;
 
-            case "LanguageControls_NewItem":
+            case "LanguageListControls_NewItem":
                 this.showLanguageNewFlyout();
                 break;
 
@@ -55,7 +59,24 @@ class AppActionHandler {
      * @returns {void}
      */
     applySearch(payload) {
-        Log.info(payload.searchString + " | " + payload.searchType + " | " + payload.searchScope, "HANDLER");
+        Log.info(payload.searchString + " | " + payload.searchType, "HANDLER");
+        if (App.store){
+            App.store.searchState.observableData.searchString = payload.searchString;
+            App.store.searchState.observableData.searchType = payload.searchType;
+            App.store.emitNotifications();
+        }
+    }
+
+    /**
+     * @param {*} payload 
+     * @returns {void}
+     */
+    applyFilter(payload) {
+        Log.info(payload.groupSelectionStates, "HANDLER");
+        if (App.store){
+            App.store.searchState.observableData.typeFilterBitmask = payload.groupSelectionBitmask;
+            App.store.emitNotifications();
+        }
     }
 
     /**

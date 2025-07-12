@@ -320,6 +320,29 @@ class CCButtonStrip extends CCBase {
 
     /** 
      * @param {Number | Null} groupIndex
+     * @returns {Number | Null}  
+     */
+    #getSelectedBitmask(groupIndex){
+
+        if (groupIndex == null || this.#propertyBag.groupBehaviour[groupIndex] == null) {
+            // if invalid indexes return null
+            return null;
+        }
+
+        let result = 0;
+
+        for (let i = 0; i < this.#elements.buttons[groupIndex].length; i++) {
+            if (this.#elements.buttons[groupIndex][i].classList.contains("Selected")) {
+                result += 1 << i;
+            }
+        }
+
+        return result;
+
+    }
+
+    /** 
+     * @param {Number | Null} groupIndex
      * @param {Number | Null} buttonIndex
      * @returns {Function | Null}  
      */
@@ -635,6 +658,14 @@ class CCButtonStrip extends CCBase {
 
     /** 
      * @param {Number | Null} groupIndex
+     * @returns {Number | Null}  
+     */
+    getSelectionBitmaskForGroup(groupIndex) {
+        return this.#getSelectedBitmask(groupIndex);
+    }
+
+    /** 
+     * @param {Number | Null} groupIndex
      * @param {Number | Null} selectedButton
      * @returns 
      */
@@ -676,6 +707,7 @@ class CCButtonStrip extends CCBase {
         let buttonDisplayName = mouseEvent.currentTarget.getAttribute("data-button.displayname");
         let buttonSelectionState = this.#setAndGetSelectionState(groupIndex, buttonIndex);
         let groupSelectionState = this.#getAllSelectionStates(groupIndex);
+        let groupSelectionBitmask = this.#getSelectedBitmask(groupIndex);
         let callback = this.#getCallback(groupIndex, buttonIndex);
 
         if (callback) {
@@ -688,6 +720,7 @@ class CCButtonStrip extends CCBase {
                 displayName: buttonDisplayName,
                 selectionState: buttonSelectionState,
                 groupSelectionStates: groupSelectionState,
+                groupSelectionBitmask: groupSelectionBitmask,
             };
 
             /** @ts-ignore */
