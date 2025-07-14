@@ -371,13 +371,13 @@ class CCLanguageItemList extends CCBase {
      * @param {Function | Null} [cancelCallback]
      * @param {Function | Null} [deleteRequestCallback]
      * @param {String | Null} [id]
-     * @returns
+     * @returns {String | Null}
      */
     addItem(payload, saveCallback = null, cancelCallback = null, deleteRequestCallback = null, id = null) {
 
         if (!payload || !payload.gojuonKey) {
             Log.error("A valid gojuonKey is needed", "COMPONENT");
-            return;
+            return null;
         }
 
         let newItem = new CCLanguageItem((id != null ? id : true), false);

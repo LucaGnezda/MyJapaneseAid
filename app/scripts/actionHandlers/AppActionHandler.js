@@ -49,6 +49,38 @@ class AppActionHandler {
                 this.itemDelete(action.payload);
                 break;
 
+            case "App_Welcome":
+                this.startWelcomeFlow();
+                break;
+
+            case "Welcome_Page1_Next":
+                this.welcomePage1Next();
+                break;
+
+            case "Welcome_Page2_Back":
+                this.welcomePage2Back();
+                break;
+
+            case "Welcome_Page2_Yes":
+                this.welcomePage2Yes();
+                break;
+
+            case "Welcome_Page2_No":
+                this.welcomePage2No();
+                break;
+
+            case "Welcome_Page3_Back":
+                this.welcomePage3Back();
+                break;
+
+            case "Welcome_Page3_Starter":
+                this.welcomePage3Starter();
+                break;
+
+            case "Welcome_Page3_Empty":
+                this.welcomePage3Empty();
+                break;
+
             default:
                 // do nothing
         }
@@ -139,15 +171,67 @@ class AppActionHandler {
             null,
             App.dispatcher?.newEventDispatchCallback("ExistingItem_DeleteRequest"),
         );
-        App.persistentStorageService?.upsert(
-            payload.currentData.gojuonKey, 
-            newId, 
-            payload.currentData
-        );
+        if (newId) {
+            App.persistentStorageService?.upsert(
+                payload.currentData.gojuonKey, 
+                newId, 
+                payload.currentData
+            );
+        }
+        else {
+            Log.error("Failed to create item", "HANDLER");
+        }
     }
 
     cancelNewItem() {
         App.elements.languageNewFlyout?.classList.remove("Show");
         App.components.languageListControls?.show();
+    }
+
+    startWelcomeFlow() {
+        App.elements.appForeground?.classList.add("Hide");
+        App.elements.welcomeModal?.classList.add("Show");
+    }
+
+    welcomePage1Next() {
+        App.elements.welcomeModalPage1?.classList.add("StageLeft");
+        App.elements.welcomeModalPage2?.classList.remove("StageRight");
+    }
+
+    welcomePage2Back() {
+        App.elements.welcomeModalPage1?.classList.remove("StageLeft");
+        App.elements.welcomeModalPage2?.classList.add("StageRight");
+    }
+
+    welcomePage2Yes() {
+        App.elements.welcomeModalPage2?.classList.add("StageLeft");
+        App.elements.welcomeModalPage3?.classList.remove("StageRight");
+    }
+
+    welcomePage2No() {
+        history.back();
+    }
+
+    welcomePage3Back() {
+        App.elements.welcomeModalPage2?.classList.remove("StageLeft");
+        App.elements.welcomeModalPage3?.classList.add("StageRight");
+    }
+
+    welcomePage3Starter() {
+
+        AppBootstrappingService.initialiseLocalCacheDatabase();
+        AppBootstrappingService.addStarterContent();
+        AppBootstrappingService.loadFromPersistentStorage();
+
+        App.elements.appForeground?.classList.remove("Hide");
+        App.elements.welcomeModal?.classList.remove("Show");
+    }
+
+    welcomePage3Empty() {
+
+        AppBootstrappingService.initialiseLocalCacheDatabase();
+
+        App.elements.appForeground?.classList.remove("Hide");
+        App.elements.welcomeModal?.classList.remove("Show");
     }
 }

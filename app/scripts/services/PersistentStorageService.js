@@ -181,6 +181,13 @@ class PersistentStorageService {
     /**
      * Public Methods
      */
+    isConnected() {
+        if (!this.#databaseName || !this.#databaseRoot) {
+            return false;
+        }
+        return true;
+    }
+
     /**
      * @param {String} databaseName
      * @param {Boolean} [initialiseIfNotExists]

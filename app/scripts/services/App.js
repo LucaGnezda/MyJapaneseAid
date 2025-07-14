@@ -61,6 +61,17 @@ class App {
         languagePageControls: null,
         languageNewFlyout: null,
         languageListBody: null,
+        welcomeModal: null,
+        welcomeModalPage1: null,
+        welcomeModalPage2: null,
+        welcomeModalPage3: null,
+        welcomeModalPage1Next: null,
+        welcomeModalPage2Back: null,
+        welcomeModalPage2Yes: null,
+        welcomeModalPage2No: null,
+        welcomeModalPage3Back: null,
+        welcomeModalPage3Starter: null,
+        welcomeModalPage3Empty: null,
     };
 
     /**

@@ -24,8 +24,16 @@ class AppBootstrappingService {
         AppBootstrappingService.loadStore();
         AppBootstrappingService.attachStoreSubscribers();
 
-        // Load from persistent storage
-        AppBootstrappingService.loadFromPersistentStorage();
+        // First time flow
+        if (App.persistentStorageService && !App.persistentStorageService.isConnected()) {
+            AppBootstrappingService.initialiseWelcomeUX();
+            App.dispatcher?.dispatch(new Action("App_Welcome", null));
+        }
+        else {
+            // Load from persistent storage
+            AppBootstrappingService.initialiseLocalCacheDatabase();
+            AppBootstrappingService.loadFromPersistentStorage();
+        }
 
         Log.debug("AppService.Initialise - Complete", "APPSERVICE");
     }
@@ -46,6 +54,17 @@ class AppBootstrappingService {
             {id: "LanguagePageControls", objProperty: "languagePageControls"},
             {id: "LanguageNewFlyout", objProperty: "languageNewFlyout"},
             {id: "LanguageListBody", objProperty: "languageListBody"},
+            {id: "AppWelcome", objProperty: "welcomeModal"},
+            {id: "AppWelcomePage1", objProperty: "welcomeModalPage1"},
+            {id: "AppWelcomePage2", objProperty: "welcomeModalPage2"},
+            {id: "AppWelcomePage3", objProperty: "welcomeModalPage3"},
+            {id: "AppWelcomePage1Next", objProperty: "welcomeModalPage1Next"},
+            {id: "AppWelcomePage2Back", objProperty: "welcomeModalPage2Back"},
+            {id: "AppWelcomePage2Yes", objProperty: "welcomeModalPage2Yes"},
+            {id: "AppWelcomePage2No", objProperty: "welcomeModalPage2No"},
+            {id: "AppWelcomePage3Back", objProperty: "welcomeModalPage3Back"},
+            {id: "AppWelcomePage3Starter", objProperty: "welcomeModalPage3Starter"},
+            {id: "AppWelcomePage3Empty", objProperty: "welcomeModalPage3Empty"},
         ]
 
         for (let m of mapping) {
@@ -110,10 +129,8 @@ class AppBootstrappingService {
     static initialisePersistentStorageService() {
 
         App.persistentStorageService = new PersistentStorageService();
-        if (!App.persistentStorageService.connect("MyJapaneseAid")) {
-            App.persistentStorageService.connect("MyJapaneseAid", true);
-            App.persistentStorageService.newTable(...GojuonGroupingService.gojuonGroupings.map(x => x.gojuonKey));
-        };
+        App.persistentStorageService.connect("MyJapaneseAid");
+
     }
 
     static initialiseUX() {
@@ -188,13 +205,6 @@ class AppBootstrappingService {
         App.store.searchState.observableData.typeFilterBitmask = App.components.languagePageControls?.getSelectionBitmaskForGroup(0);
         App.store.searchState.observableData.searchString = "";
         App.store.searchState.observableData.searchType = null;
-
-        // Initialise the store's data structure
-        // for example:
-        //     App.store.addObservablesDictionary("MyHeros");
-        //
-        //     App.store.MyHeros.add("Thor");
-        //     App.store.MyHeros.Thor.observableData.weapon = "Mjölnir";
         
     }
 
@@ -206,6 +216,39 @@ class AppBootstrappingService {
         }
 
         App.store.searchState.addSubscriber(App.components.languageList, store_SearchState_OnDataChange);
+
+    }
+
+    static initialiseWelcomeUX() {
+
+        if (!App.dispatcher) {
+            Log.fatal("The Store, Dispatcher and DOM indexing must be initialised before Core UI", "", this)
+            return;
+        }
+
+        if (App.elements.welcomeModalPage1Next) { App.elements.welcomeModalPage1Next.addEventListener("click", App.dispatcher.newEventDispatchCallback("Welcome_Page1_Next")); }
+        if (App.elements.welcomeModalPage2Back) { App.elements.welcomeModalPage2Back.addEventListener("click", App.dispatcher.newEventDispatchCallback("Welcome_Page2_Back")); }
+        if (App.elements.welcomeModalPage2Yes) { App.elements.welcomeModalPage2Yes.addEventListener("click", App.dispatcher.newEventDispatchCallback("Welcome_Page2_Yes")); }
+        if (App.elements.welcomeModalPage2No) { App.elements.welcomeModalPage2No.addEventListener("click", App.dispatcher.newEventDispatchCallback("Welcome_Page2_No")); }
+        if (App.elements.welcomeModalPage3Back) { App.elements.welcomeModalPage3Back.addEventListener("click", App.dispatcher.newEventDispatchCallback("Welcome_Page3_Back")); }
+        if (App.elements.welcomeModalPage3Starter) { App.elements.welcomeModalPage3Starter.addEventListener("click", App.dispatcher.newEventDispatchCallback("Welcome_Page3_Starter")); }
+        if (App.elements.welcomeModalPage3Empty) { App.elements.welcomeModalPage3Empty.addEventListener("click", App.dispatcher.newEventDispatchCallback("Welcome_Page3_Empty")); }
+    }
+
+    static initialiseLocalCacheDatabase() {
+
+        if (!App.persistentStorageService) {
+            Log.fatal("The Persistent Storage Service, must be initialised before initialising the database", "", this)
+            return;
+        }
+
+        if (!App.persistentStorageService.connect("MyJapaneseAid")) {
+            App.persistentStorageService.connect("MyJapaneseAid", true);
+            App.persistentStorageService.newTable(...GojuonGroupingService.gojuonGroupings.map(x => x.gojuonKey));
+        }
+    }
+
+    static addStarterContent() {
 
     }
 

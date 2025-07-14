@@ -17,7 +17,6 @@
     position: absolute;
     top: 0px;
     left: 0px;
-    margin: 0px;
     overflow: hidden;
     height: 100vh;
     width: 100vw;
@@ -162,4 +161,63 @@
     flex: 1 1 auto;
     overflow-x: hidden;
     overflow-y: hidden;
+}
+
+.AppModal {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    overflow: hidden;
+    height: 100vh;
+    width: 100%;
+    margin: 0px;
+    padding: 0px;
+    display: none;
+    flex-direction: column;
+    opacity: 0;
+    transition-property: opacity, background-color, backdrop-filter;
+    transition-duration: 0.5s;
+    transition-timing-function: ease-in-out;
+    transition-behavior: allow-discrete;
+    background-color: var(--whitetranslucent70);
+    backdrop-filter: none;
+}
+
+.AppModal.Show {
+    opacity: 1;
+    backdrop-filter: blur(10px);
+    display: flex;
+    flex-direction: column;
+
+    @starting-style {
+         opacity: 0;
+         backdrop-filter: none;
+    }
+}
+
+.AppWelcomePages {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.Page .PageContent {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 10%;
+    padding-right: 10%;
+    height: 100%;
+    transform: translateY(-5%);
+}
+
+.Page .Title {
+    align-self: center;
+    color: var(--colourPrimaryDarker10);
+}
+
+.AppModalButtonStrip {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
 }
