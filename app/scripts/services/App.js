@@ -34,6 +34,12 @@ class App {
     static dispatcher = null;
 
     /**
+     * @static
+     * @type {PersistentStorageService?}
+     */
+    static persistentStorageService = null;
+
+    /**
      * The elements that make up this component
      * @type {AppPropertyBag}
      */

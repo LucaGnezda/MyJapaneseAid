@@ -34,7 +34,7 @@ class AppActionHandler {
                 break;
 
             case "NewItem_Confirm":
-                this.addToLanguageList(action.payload.currentData);
+                this.ItemInsert(action.payload);
                 break;
 
             case "NewItem_Cancel":
@@ -46,7 +46,7 @@ class AppActionHandler {
                 break;
 
             case "ExistingItem_DeleteRequest":
-                this.itemDelete();
+                this.itemDelete(action.payload);
                 break;
 
             default:
@@ -89,10 +89,26 @@ class AppActionHandler {
             payload.currentData.priorGojuonKey, 
             payload.currentData.gojuonKey
         );
+        App.persistentStorageService?.upsert(
+            payload.currentData.gojuonKey, 
+            payload.originatingId, 
+            payload.currentData
+        );
     }
 
-    itemDelete() {
-
+    /**
+     * @param {*} payload 
+     * @returns {void}
+     */
+    itemDelete(payload) {
+        App.components.languageList?.removeItem(
+            payload.originatingId,
+            payload.currentData.priorGojuonKey
+        );
+        App.persistentStorageService?.delete(
+            payload.currentData.gojuonKey, 
+            payload.originatingId, 
+        );
     }
 
     pageToKana() {
@@ -113,15 +129,20 @@ class AppActionHandler {
     }
 
     /**
-     * @param {CCLanguageItemPropertyBag} payload 
+     * @param {*} payload 
      * @returns {void}
      */
-    addToLanguageList(payload) {
-        App.components.languageList?.addItem(
-            payload, 
+    ItemInsert(payload) {
+        let newId = App.components.languageList?.addItem(
+            payload.currentData, 
             App.dispatcher?.newEventDispatchCallback("ExistingItem_Update"),
             null,
             App.dispatcher?.newEventDispatchCallback("ExistingItem_DeleteRequest"),
+        );
+        App.persistentStorageService?.upsert(
+            payload.currentData.gojuonKey, 
+            newId, 
+            payload.currentData
         );
     }
 

@@ -370,16 +370,17 @@ class CCLanguageItemList extends CCBase {
      * @param {Function | Null} [saveCallback]
      * @param {Function | Null} [cancelCallback]
      * @param {Function | Null} [deleteRequestCallback]
+     * @param {String | Null} [id]
      * @returns
      */
-    addItem(payload, saveCallback = null, cancelCallback = null, deleteRequestCallback = null) {
+    addItem(payload, saveCallback = null, cancelCallback = null, deleteRequestCallback = null, id = null) {
 
         if (!payload || !payload.gojuonKey) {
             Log.error("A valid gojuonKey is needed", "COMPONENT");
             return;
         }
 
-        let newItem = new CCLanguageItem(true, false);
+        let newItem = new CCLanguageItem((id != null ? id : true), false);
         newItem.loadFromPropertyBag(payload);
         if (saveCallback) { newItem.attachSaveCallback(saveCallback); }
         if (cancelCallback) { newItem.attachCancelCallback(cancelCallback); }
@@ -402,6 +403,8 @@ class CCLanguageItemList extends CCBase {
         this.#propertyBag.listSection[payload.gojuonKey].subComponents[newItem.id] = newItem;
         this.#propertyBag.listSection[payload.gojuonKey].subComponentsSearchKeys[newItem.id] = {searchKey: newItem.searchKey, typeBitmask: newItem.typeBitmask}
         this.#propertyBag.listSection[payload.gojuonKey].subComponentsOrderKeys[newItem.id] = newItem.kana;
+
+        return newItem.id;
 
     }
 
@@ -452,7 +455,10 @@ class CCLanguageItemList extends CCBase {
      * @returns
      */
     removeItem(id, fromGroup) {
-
+        this.#propertyBag.listSection[fromGroup].subComponents[id].remove();
+        delete this.#propertyBag.listSection[fromGroup].subComponents[id];
+        delete this.#propertyBag.listSection[fromGroup].subComponentsSearchKeys[id];
+        delete this.#propertyBag.listSection[fromGroup].subComponentsOrderKeys[id];
     }
 
     /**

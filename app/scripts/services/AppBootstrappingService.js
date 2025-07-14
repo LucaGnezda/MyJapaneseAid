@@ -15,6 +15,7 @@ class AppBootstrappingService {
         AppBootstrappingService.loadFragementsFromDOMData("HTMLFragments");
         AppBootstrappingService.initialiseStore();
         AppBootstrappingService.initialiseDispatchers();
+        AppBootstrappingService.initialisePersistentStorageService();
 
         // Build and initialise the UX
         AppBootstrappingService.initialiseUX();
@@ -23,7 +24,8 @@ class AppBootstrappingService {
         AppBootstrappingService.loadStore();
         AppBootstrappingService.attachStoreSubscribers();
 
-        // Do anything else you need
+        // Load from persistent storage
+        AppBootstrappingService.loadFromPersistentStorage();
 
         Log.debug("AppService.Initialise - Complete", "APPSERVICE");
     }
@@ -105,6 +107,15 @@ class AppBootstrappingService {
     
     }
 
+    static initialisePersistentStorageService() {
+
+        App.persistentStorageService = new PersistentStorageService();
+        if (!App.persistentStorageService.connect("MyJapaneseAid")) {
+            App.persistentStorageService.connect("MyJapaneseAid", true);
+            App.persistentStorageService.newTable(...GojuonGroupingService.gojuonGroupings.map(x => x.gojuonKey));
+        };
+    }
+
     static initialiseUX() {
 
         if (!App.dispatcher || !App.store || !Object.values(App.elements).every(x => x != null)) {
@@ -173,15 +184,10 @@ class AppBootstrappingService {
         }
 
         App.store.addObservable("searchState");
-        App.store.addObservablesDictionary("words");
 
         App.store.searchState.observableData.typeFilterBitmask = App.components.languagePageControls?.getSelectionBitmaskForGroup(0);
         App.store.searchState.observableData.searchString = "";
         App.store.searchState.observableData.searchType = null;
-
-        GojuonGroupingService.gojuonGroupings.forEach((item) => {
-            App.store?.words.add(item.gojuonKey);
-        });
 
         // Initialise the store's data structure
         // for example:
@@ -200,6 +206,39 @@ class AppBootstrappingService {
         }
 
         App.store.searchState.addSubscriber(App.components.languageList, store_SearchState_OnDataChange);
+
+    }
+
+    static loadFromPersistentStorage() {
+
+        if (!App.persistentStorageService) {
+            Log.fatal("Persistent Storage Service must be initialised before content can be loaded", "", this);
+            return;
+        }
+
+        let sections = GojuonGroupingService.gojuonGroupings.map(x => x.gojuonKey);
+
+        for (let section of sections) {
+
+            App.persistentStorageService.newTableCursor(section);
+            
+            let id = App.persistentStorageService.readCurrentKeyFromCursor();
+            let item = App.persistentStorageService.readNextFromCursor();
+
+            while (id != null && item != null) {
+
+                App.components.languageList?.addItem(
+                    item, 
+                    App.dispatcher?.newEventDispatchCallback("ExistingItem_Update"),
+                    null,
+                    App.dispatcher?.newEventDispatchCallback("ExistingItem_DeleteRequest"),
+                    id
+                );
+
+                id = App.persistentStorageService.readCurrentKeyFromCursor();
+                item = App.persistentStorageService.readNextFromCursor();
+            }
+        }
 
     }
 
