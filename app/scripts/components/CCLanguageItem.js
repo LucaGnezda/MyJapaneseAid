@@ -300,11 +300,28 @@ class CCLanguageItem extends CCBase {
     }
 
     get searchKey() {
-        return "| " + this.#propertyBag.kana + " | " + this.#propertyBag.romaji + " | " + this.#propertyBag.meaning + " |";
+        return "| " + this.#propertyBag.kana + " | " + this.#propertyBag.romaji + " | " + this.simpleromaji + " | " + this.#propertyBag.meaning + " |";
     }
 
     get romaji() {
         return this.#propertyBag.romaji;
+    }
+
+    get simpleromaji() {
+        if (!this.#propertyBag.romaji) {
+            return null;
+        }
+        return this.#propertyBag.romaji
+            .replaceAll(String.fromCharCode(256),"A")
+            .replaceAll(String.fromCharCode(257),"a")
+            .replaceAll(String.fromCharCode(274),"E")
+            .replaceAll(String.fromCharCode(275),"e")
+            .replaceAll(String.fromCharCode(298),"I")
+            .replaceAll(String.fromCharCode(299),"i")
+            .replaceAll(String.fromCharCode(332),"O")
+            .replaceAll(String.fromCharCode(333),"o")
+            .replaceAll(String.fromCharCode(362),"U")
+            .replaceAll(String.fromCharCode(363),"u");
     }
 
     get meaning() {
@@ -938,6 +955,34 @@ class CCLanguageItem extends CCBase {
         }
     }
 
+    /**
+     * @param {InputEvent & {currentTarget:HTMLInputElement}} event 
+     */
+    #replaceRomajiLongSound(event) {
+
+        let isVowel = /^[aeiouAEIOU]$/;
+
+        if (event.inputType == "insertText" && 
+            event.data == "-" && 
+            event.currentTarget && 
+            event.currentTarget.selectionStart && 
+            event.currentTarget.selectionStart >= 2 &&
+            isVowel.test(event.currentTarget.value.charAt(event.currentTarget.selectionStart - 2))) {
+            
+            event.currentTarget.value = event.currentTarget.value
+                .replaceAll("A-", String.fromCharCode(256))
+                .replaceAll("a-", String.fromCharCode(257))
+                .replaceAll("E-", String.fromCharCode(274))
+                .replaceAll("e-", String.fromCharCode(275))
+                .replaceAll("I-", String.fromCharCode(298))
+                .replaceAll("i-", String.fromCharCode(299))
+                .replaceAll("O-", String.fromCharCode(332))
+                .replaceAll("o-", String.fromCharCode(333))
+                .replaceAll("U-", String.fromCharCode(362))
+                .replaceAll("u-", String.fromCharCode(363));
+        }
+    }
+
 
     /**
      * Public methods
@@ -1234,6 +1279,7 @@ class CCLanguageItem extends CCBase {
     validateRomajiCallback(event) {
         Log.debug("Romaji Change", "COMPONENT");
 
+        this.#replaceRomajiLongSound(event);
         this.#validateNotNull(event.currentTarget);
         this.#validateForm();
 

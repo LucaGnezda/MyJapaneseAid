@@ -183,6 +183,32 @@
     transform: rotate(180deg);
 }
 
+.FormButton.Large {
+    display: flex;
+    flex-direction: row;
+    display: flex;
+    flex-direction: row;
+    flex: 0 0 auto;
+    width: auto;
+}
+
+.FormButton.Large.Green {
+    color: var(--colourPrimaryLighter80);
+    background-color: var(--colourPrimaryDarker10);
+}
+
+.FormButton.Large.ShadowGreen {
+    color: var(--colourPrimaryDarker10);
+    background-color: var(--colourPrimaryDarker10Translucent90);
+}
+
+.FormButton.FormButton.Large.Green .Icon {
+    filter: brightness(0) saturate(100%) invert(93%) sepia(14%) saturate(269%) hue-rotate(90deg) brightness(102%) contrast(88%);
+}
+
+.FormButton.FormButton.Large.ShadowGreen .Icon {
+    filter: brightness(0) saturate(100%) invert(53%) sepia(15%) saturate(2029%) hue-rotate(93deg) brightness(90%) contrast(85%);
+}
 
 /**
  * ButtonSpacer (Vertical & Horizontal) - Used to add separation and grouping between buttons
