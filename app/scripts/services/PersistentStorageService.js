@@ -316,4 +316,9 @@ class PersistentStorageService {
         this.#upsertTableIndex(tableName);
         this.#deleteStoredObject(tableName, id)
     }
+
+    exportStorageToClipboard() {
+        /** @ts-ignore */
+        copy(JSON.stringify(localStorage));
+    }
 }

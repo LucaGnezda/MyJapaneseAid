@@ -249,7 +249,19 @@ class AppBootstrappingService {
     }
 
     static addStarterContent() {
-
+        for (let key in starterData) {
+            /** @ts-ignore - Yes JSDoc ... you can index an object by string */
+            let contents = JSON.parse(starterData[key]);
+            if (!Array.isArray(contents) && typeof contents == 'object' && contents.hasOwnProperty("kana")) {
+                contents.kana = UnicodeService.demunge(contents.kana);
+                contents.romaji = UnicodeService.demunge(contents.romaji);
+                localStorage.setItem(key, JSON.stringify(contents));
+            }
+            else {
+                /** @ts-ignore - Yes JSDoc ... you can index an object by string */
+                localStorage.setItem(key, starterData[key]);
+            }
+        }
     }
 
     static loadFromPersistentStorage() {

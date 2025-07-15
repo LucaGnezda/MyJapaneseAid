@@ -219,8 +219,8 @@ class AppActionHandler {
 
     welcomePage3Starter() {
 
-        AppBootstrappingService.initialiseLocalCacheDatabase();
         AppBootstrappingService.addStarterContent();
+        AppBootstrappingService.initialisePersistentStorageService();
         AppBootstrappingService.loadFromPersistentStorage();
 
         App.elements.appForeground?.classList.remove("Hide");
