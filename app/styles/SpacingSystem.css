@@ -550,6 +550,28 @@
 }
 
 
+/* --- Dynamic Gap --- */
+.Gap8 {
+    gap: 1vw;
+}
+
+.Gap16 {
+    gap: 2vw;
+}
+
+@media (width <= 800px) {
+    .Gap8 {
+        top: 16px;
+    }
+}
+
+@media (width >= 1000px) {
+    .Gap8 {
+        top: 20px;
+    }
+}
+
+
 /* --- Dynamic Offset --- */
 .OffsetT4 {
     top: 0.5vw;
