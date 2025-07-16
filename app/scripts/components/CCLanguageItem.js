@@ -383,7 +383,7 @@ class CCLanguageItem extends CCBase {
         this.#subComponents.languageTypeButtonStrip.addTextButton(this.#languageTypeLabels[2], null, false, "GreenTint");
 
         this.#propertyBag.languageType = 0;
-        this.#propertyBag.languageTypeBitmask = (this.#propertyBag.languageType);
+        this.#propertyBag.languageTypeBitmask = 1 << this.#propertyBag.languageType;
         this.#propertyBag.languageTypeLabel = this.#languageTypeLabels[this.#propertyBag.languageType];
 
         this.#elements.languageTypeInput?.appendChild(this.#subComponents.languageTypeButtonStrip);
@@ -1025,6 +1025,34 @@ class CCLanguageItem extends CCBase {
             Log.fatal("Component has not been correctly initialised", "COMPONENT", this);
         }
         return false;
+    }
+
+    clearAll() {
+        /** @type {CCLanguageItemPropertyBag} */
+        let propertyBag = {
+            gojuonKey: "",
+            priorGojuonKey: "",
+            languageType: 0,
+            languageTypeBitmask: 1,
+            languageTypeLabel: this.#languageTypeLabels[0],
+            kana: "",
+            kanaHighlighterString: "",
+            romaji: "",
+            romajiHighlighterString: "",
+            meaning: "",
+            meaningHighlighterString: "",
+            literal: "",
+            structure: "",
+            notes: "",
+            examples: [],
+        }
+
+        this.loadFromPropertyBag(propertyBag);
+
+        if (this.#elements.romajiInput){
+            this.#elements.romajiInput.classList.remove("Error");
+            this.#elements.romajiInput.setAttribute("data-isvalid", "data-isvalid");
+        }
     }
 
     /**

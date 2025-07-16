@@ -165,12 +165,16 @@ class AppActionHandler {
      * @returns {void}
      */
     ItemInsert(payload) {
+
+        // Add to list
         let newId = App.components.languageList?.addItem(
             payload.currentData, 
             App.dispatcher?.newEventDispatchCallback("ExistingItem_Update"),
             null,
             App.dispatcher?.newEventDispatchCallback("ExistingItem_DeleteRequest"),
         );
+
+        // Save to local store
         if (newId) {
             App.persistentStorageService?.upsert(
                 payload.currentData.gojuonKey, 
@@ -181,6 +185,13 @@ class AppActionHandler {
         else {
             Log.error("Failed to create item", "HANDLER");
         }
+
+        // Reset new
+        App.components.newItem?.clearAll();
+
+        // Hide new
+        App.elements.languageNewFlyout?.classList.remove("Show");
+        App.components.languageListControls?.show();
     }
 
     cancelNewItem() {
