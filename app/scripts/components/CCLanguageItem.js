@@ -300,7 +300,7 @@ class CCLanguageItem extends CCBase {
     }
 
     get searchKey() {
-        return "| " + this.#propertyBag.kana + " | " + this.#propertyBag.romaji + " | " + this.simpleromaji + " | " + this.#propertyBag.meaning + " |";
+        return "| " + this.#propertyBag.kana + " | " + this.#propertyBag.romaji?.toLowerCase() + " | " + this.simpleromaji?.toLowerCase() + " | " + this.#propertyBag.meaning?.toLowerCase() + " |";
     }
 
     get romaji() {
