@@ -487,7 +487,7 @@ class CCLanguageItemList extends CCBase {
                 searchRequestId: this.#propertyBag.searchRequestId,
                 lookFor: {
                     typeFilterBitmask: typeFilterBitmask,
-                    searchString: searchString,
+                    searchString: searchString.toLowerCase(),
                     searchType: searchType,
                 },
                 withinSection: property,
