@@ -37,6 +37,10 @@ cc-languageitemlist {
         width: fit-content;
     }
 
+    .Section.Hide {
+        display: none;
+    }
+
     .SectionHeader {
         display: flex;
         flex-direction: row;
