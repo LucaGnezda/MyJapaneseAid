@@ -121,6 +121,12 @@ class AppActionHandler {
             payload.currentData.priorGojuonKey, 
             payload.currentData.gojuonKey
         );
+        if (payload.currentData.gojuonKey != payload.currentData.priorGojuonKey) {
+            App.persistentStorageService?.delete(
+                payload.currentData.priorGojuonKey, 
+                payload.originatingId, 
+            );
+        }
         App.persistentStorageService?.upsert(
             payload.currentData.gojuonKey, 
             payload.originatingId, 

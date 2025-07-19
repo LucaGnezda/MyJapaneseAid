@@ -109,7 +109,7 @@ class CCLanguageItemList extends CCBase {
     `;
 
     static #htmlSectionTemplate = `
-                <div class="Section" data-use="section">
+                <div class="Section Hide" data-use="section">
                     <div class="SectionHeader MarginTXL MarginBM">
                         <div class="SectionTitle MarginRXL"><p class="KanaXL NoBlockMargins" data-use="section.title"></p></div>
                         <div class="SectionSubTitle"><p class="RomanL NoBlockMargins" data-use="section.subtitle"></p></div>
@@ -404,6 +404,8 @@ class CCLanguageItemList extends CCBase {
         this.#propertyBag.listSection[payload.gojuonKey].subComponentsSearchKeys[newItem.id] = {searchKey: newItem.searchKey, typeBitmask: newItem.typeBitmask}
         this.#propertyBag.listSection[payload.gojuonKey].subComponentsOrderKeys[newItem.id] = newItem.kana;
 
+        this.#elements.listSection[payload.gojuonKey].root.classList.remove("Hide");
+
         return newItem.id;
 
     }
@@ -445,6 +447,11 @@ class CCLanguageItemList extends CCBase {
             delete this.#propertyBag.listSection[fromGroup].subComponents[id];
             delete this.#propertyBag.listSection[fromGroup].subComponentsSearchKeys[id];
             delete this.#propertyBag.listSection[fromGroup].subComponentsOrderKeys[id];
+
+            if (Object.keys(this.#propertyBag.listSection[fromGroup].subComponents).length == 0) {
+                this.#elements.listSection[fromGroup].root.classList.add("Hide");
+            }
+            this.#elements.listSection[toGroup].root.classList.remove("Hide");
         }
 
     }
@@ -459,6 +466,10 @@ class CCLanguageItemList extends CCBase {
         delete this.#propertyBag.listSection[fromGroup].subComponents[id];
         delete this.#propertyBag.listSection[fromGroup].subComponentsSearchKeys[id];
         delete this.#propertyBag.listSection[fromGroup].subComponentsOrderKeys[id];
+
+        if (Object.keys(this.#propertyBag.listSection[fromGroup].subComponents).length == 0) {
+            this.#elements.listSection[fromGroup].root.classList.add("Hide");
+        }
     }
 
     /**
@@ -478,6 +489,8 @@ class CCLanguageItemList extends CCBase {
         this.#searchService.purgeBacklog();
         this.#propertyBag.searchRequestId = crypto.randomUUID();
 
+        searchString = searchString.toLowerCase();
+
         for (let property in this.#propertyBag.listSection) {
 
             let searchIndex = this.#propertyBag.listSection[property];
@@ -487,7 +500,7 @@ class CCLanguageItemList extends CCBase {
                 searchRequestId: this.#propertyBag.searchRequestId,
                 lookFor: {
                     typeFilterBitmask: typeFilterBitmask,
-                    searchString: searchString.toLowerCase(),
+                    searchString: searchString,
                     searchType: searchType,
                 },
                 withinSection: property,
@@ -546,10 +559,10 @@ class CCLanguageItemList extends CCBase {
         let result = event.data.result
 
         if (event.data.matchedCount <= 0) {
-            this.#elements.listSection[section].body.classList.add("Hide");
+            this.#elements.listSection[section].root.classList.add("Hide");
         }
         else {
-            this.#elements.listSection[section].body.classList.remove("Hide");
+            this.#elements.listSection[section].root.classList.remove("Hide");
 
             for (let key in result) {
 

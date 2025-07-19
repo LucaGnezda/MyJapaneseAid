@@ -294,7 +294,6 @@ class AppBootstrappingService {
                 item = App.persistentStorageService.readNextFromCursor();
             }
         }
-
     }
 
 }
