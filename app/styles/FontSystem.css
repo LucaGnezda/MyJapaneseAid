@@ -105,85 +105,85 @@
 
 /* --- Equivalent English Fonts --- */
 .RomanXXL {
-    font-size: 3.6vw;
+    font-size: 4vw;
     font-family: Linotte;
 }
 
 .RomanXL {
-    font-size: 2.2vw;
+    font-size: 2.6vw;
     font-family: Linotte;
 }
 
 .RomanL {
-    font-size: 1.9vw;
+    font-size: 2.2vw;
     font-family: Linotte;
 }
 
 .RomanM {
-    font-size: 1.6vw;
+    font-size: 1.9vw;
     font-family: Linotte;
 }
 
 .RomanS {
-    font-size: 1.4vw;
+    font-size: 1.6vw;
     font-family: Linotte;
 }
 
 .RomanXS {
-    font-size: 1.2vw;
+    font-size: 1.4vw;
     font-family: Linotte;
 }
 
 /* --- Equivalent English Font Minimums --- */
 @media (width <= 800px) {
     .RomanXXL {
-        font-size: 1.8rem;
+        font-size: 2rem;
     }
 
     .RomanXL {
-        font-size: 1.1rem;
+        font-size: 1.3rem;
     }
 
     .RomanL {
-        font-size: 0.95rem;
+        font-size: 1.1rem;
     }
 
     .RomanM {
-        font-size: 0.8rem;
+        font-size: 0.95rem;
     }
 
     .RomanS {
-        font-size: 0.7rem;
+        font-size: 0.8rem;
     }
 
     .RomanXS {
-        font-size: 0.6rem;
+        font-size: 0.7rem;
     }
 }
 
 /* --- Equivalent English Font Maximums --- */
 @media (width >= 1000px) {
     .RomanXXL {
-        font-size: 2.25rem;
+        font-size: 2.5rem;
     }
 
     .RomanXL {
-        font-size: 1.375rem;
+        font-size: 1.625rem;
     }
 
     .RomanL {
-        font-size: 1.1875rem;
+        font-size: 1.375rem;
     }
 
     .RomanM {
-        font-size: 1rem;
+        font-size: 1.1875rem;
     }
 
     .RomanS {
-        font-size: 0.875rem;
+        font-size: 1rem;
     }
 
     .RomanXS {
-        font-size: 0.75rem;
+        font-size: 0.875rem;
     }
 }

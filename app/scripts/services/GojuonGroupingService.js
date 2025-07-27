@@ -68,6 +68,7 @@ class GojuonGroupingService {
         {"gojuonKey":"wa", "startsWith":"わ", "isOther": false, "index": 44, "title":"わ", "subTitle":"wa"},
         {"gojuonKey":"wo", "startsWith":"を", "isOther": false, "index": 45, "title":"を", "subTitle":"wo(o)"},
         {"gojuonKey":"nn", "startsWith":"ん", "isOther": false, "index": 46, "title":"ん", "subTitle":"n"},
+        {"gojuonKey":"kanji", "startsWith":"ゞ", "isOther": false, "index": 46, "title":"漢字", "subTitle":"kanji"},
     ];
 
     /** @type {Number} */

@@ -9,6 +9,7 @@
  *      root: HTMLDivElement?,
  *      title: HTMLDivElement?,
  *      subtitle: HTMLDivElement?,
+ *      button: HTMLDivElement?,
  *      body: HTMLDivElement?,
  * }} CCLanguageItemListSectionElements
  *
@@ -113,7 +114,7 @@ class CCLanguageItemList extends CCBase {
                     <div class="SectionHeader MarginTXL MarginBM">
                         <div class="SectionTitle MarginRXL"><p class="KanaXL NoBlockMargins" data-use="section.title"></p></div>
                         <div class="SectionSubTitle"><p class="RomanL NoBlockMargins" data-use="section.subtitle"></p></div>
-                        <div class="FormButton ShadowGreenOnBlack Small"><img src="./app/assets/svg/arrow-down.svg" class="FormButtonSmallGreenIcon"></div>
+                        <div class="FormButton ShadowGreenOnBlack Small" data-use="section.expander"><img src="./app/assets/svg/arrow-down.svg" class="FormButtonSmallGreenIcon"></div>
                     </div>
                     <div class="SectionBody" data-use="section.body"></div>
                 </div>
@@ -254,8 +255,12 @@ class CCLanguageItemList extends CCBase {
     
     #initialiseBehaviour() {
 
-        // nothing to do
-
+        for (let s in this.#elements.listSection) {
+            let button = this.#elements.listSection[s].button;
+            if (button) {
+                button.addEventListener("click", this.expanderClickCallback.bind(this), this.getPreDisposeSignal());
+            }
+        }
     }
 
     /** 
@@ -277,8 +282,13 @@ class CCLanguageItemList extends CCBase {
                         root: fragment.querySelector('[data-use="section"]'),
                         title: fragment.querySelector('[data-use="section.title"]'),
                         subtitle: fragment.querySelector('[data-use="section.subtitle"]'),
+                        button: fragment.querySelector('[data-use="section.expander"]'),
                         body: fragment.querySelector('[data-use="section.body"]'),
                     };
+
+                    if (sectionElements.button) {
+                        sectionElements.button.setAttribute("data-section", obj[i].gojuonKey);
+                    }
 
                     if (sectionElements.title instanceof HTMLElement && sectionElements.subtitle instanceof HTMLElement) {
                         sectionElements.title.innerText = obj[i].title || "";
@@ -571,6 +581,24 @@ class CCLanguageItemList extends CCBase {
                 }
                 else {
                     this.#propertyBag.listSection[section].subComponents[key].hide();
+                }
+            }
+        }
+    }
+
+    /**
+     * @param {MouseEvent & {currentTarget:HTMLElement}} event 
+     */
+    expanderClickCallback(event) {
+        Log.debug(`${this.constructor.name}, list body click captured`, "COMPONENT");
+
+        if (event.currentTarget) {
+            let section = event.currentTarget.getAttribute("data-section");
+
+            if (section) {
+                this.#elements.listSection[section].body.classList.toggle("Hide");
+                if (event.currentTarget.firstChild instanceof HTMLImageElement) {
+                    event.currentTarget.firstChild?.classList.toggle("Rotate180");
                 }
             }
         }

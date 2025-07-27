@@ -2,6 +2,8 @@
  * List of valid Demo Elements (to minimise indexing errors while coding)
  * @typedef {{
  *      topNav: CCTopNav?,
+ *      kanaPageControls: CCButtonStrip?,
+ *      kana: CCKana?,
  *      searchComponent: CCSearch?,
  *      newItem: CCLanguageItem?,
  *      languagePageControls: CCButtonStrip?,
@@ -55,12 +57,13 @@ class App {
         appForeground: null,
         topNavContainer: null,
         kanaPage: null,
-        kanaControls: null,
+        kanaPageControls: null,
         kanaPageBody: null,
         languagePage: null,
         languagePageControls: null,
         languageNewFlyout: null,
         languageListBody: null,
+        settingsPage: null,
         welcomeModal: null,
         welcomeModalPage1: null,
         welcomeModalPage2: null,
@@ -79,6 +82,8 @@ class App {
      */
     static components = {
         topNav: null,
+        kanaPageControls: null,
+        kana: null,
         searchComponent: null,
         newItem: null,
         languagePageControls: null,

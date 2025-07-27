@@ -551,6 +551,10 @@
 
 
 /* --- Dynamic Gap --- */
+.Gap2 {
+    gap: 0.25vw;
+}
+
 .Gap8 {
     gap: 1vw;
 }
@@ -560,13 +564,29 @@
 }
 
 @media (width <= 800px) {
+    .Gap2 {
+        gap: 2px;
+    }
+
     .Gap8 {
+        top: 8px;
+    }
+    
+    .Gap16 {
         top: 16px;
     }
 }
 
 @media (width >= 1000px) {
+    .Gap2 {
+        gap: 2.5px;
+    }
+    
     .Gap8 {
+        top: 10px;
+    }
+
+    .Gap16 {
         top: 20px;
     }
 }

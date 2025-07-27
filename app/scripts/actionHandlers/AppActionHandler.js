@@ -29,6 +29,30 @@ class AppActionHandler {
                 this.pageToLanguage();
                 break;
 
+            case "KanaPageControls_ShowHiragana":
+                this.showHiragana();
+                break;
+
+            case "KanaPageControls_ShowKatakana":
+                this.showKatakana();
+                break;
+
+            case "KanaPageControls_SimpleLayout":
+                this.useSimpleKanaLayout();
+                break;
+
+            case "KanaPageControls_QuadrantLayout":
+                this.useQuadrantKanaLayout();
+                break;
+
+            case "KanaPageControls_SectionLayout":
+                this.useSectionKanaLayout();
+                break;
+
+            case "KanaPageControls_GojuonLayout":
+                this.useGojuonKanaLayout();
+                break;
+
             case "LanguageListControls_NewItem":
                 this.showLanguageNewFlyout();
                 break;
@@ -81,6 +105,10 @@ class AppActionHandler {
                 this.welcomePage3Empty();
                 break;
 
+            case "TopNav_SettingsSelected":
+                this.pageToSettings();
+                break;
+            
             default:
                 // do nothing
         }
@@ -152,13 +180,52 @@ class AppActionHandler {
     pageToKana() {
         App.elements.kanaPage?.classList.remove("StageLeft");
         App.elements.kanaPage?.classList.remove("StageRight");
+        App.elements.languagePage?.classList.remove("StageLeft");
         App.elements.languagePage?.classList.add("StageRight");
+        App.elements.settingsPage?.classList.remove("StageLeft");
+        App.elements.settingsPage?.classList.add("StageRight");
     }
 
     pageToLanguage() {
         App.elements.kanaPage?.classList.add("StageLeft");
+        App.elements.kanaPage?.classList.remove("StageRight");
         App.elements.languagePage?.classList.remove("StageLeft");
         App.elements.languagePage?.classList.remove("StageRight");
+        App.elements.settingsPage?.classList.remove("StageLeft");
+        App.elements.settingsPage?.classList.add("StageRight");
+    }
+
+    pageToSettings() {
+        App.elements.kanaPage?.classList.add("StageLeft");
+        App.elements.kanaPage?.classList.remove("StageRight");
+        App.elements.languagePage?.classList.add("StageLeft");
+        App.elements.languagePage?.classList.remove("StageRight");
+        App.elements.settingsPage?.classList.remove("StageLeft");
+        App.elements.settingsPage?.classList.remove("StageRight");
+    }
+
+    showHiragana() {
+        App.components.kana?.setHiragana();
+    }
+
+    showKatakana() {
+        App.components.kana?.setKatakana();
+    }
+
+    useSimpleKanaLayout() {
+        App.components.kana?.setLayout(0);
+    }
+
+    useQuadrantKanaLayout() {
+        App.components.kana?.setLayout(1);
+    }
+
+    useSectionKanaLayout() {
+        App.components.kana?.setLayout(2);
+    }
+
+    useGojuonKanaLayout() {
+        App.components.kana?.setLayout(3);
     }
 
     showLanguageNewFlyout() {

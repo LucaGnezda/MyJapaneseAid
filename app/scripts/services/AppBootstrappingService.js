@@ -48,12 +48,13 @@ class AppBootstrappingService {
             {id: "AppForeground", objProperty: "appForeground"},
             {id: "TopNavContainer", objProperty: "topNavContainer"},
             {id: "KanaPage", objProperty: "kanaPage"},
-            {id: "KanaControls", objProperty: "kanaControls"},
+            {id: "KanaPageControls", objProperty: "kanaPageControls"},
             {id: "KanaPageBody", objProperty: "kanaPageBody"},
             {id: "LanguagePage", objProperty: "languagePage"},
             {id: "LanguagePageControls", objProperty: "languagePageControls"},
             {id: "LanguageNewFlyout", objProperty: "languageNewFlyout"},
             {id: "LanguageListBody", objProperty: "languageListBody"},
+            {id: "SettingsPage", objProperty: "settingsPage"},
             {id: "AppWelcome", objProperty: "welcomeModal"},
             {id: "AppWelcomePage1", objProperty: "welcomeModalPage1"},
             {id: "AppWelcomePage2", objProperty: "welcomeModalPage2"},
@@ -144,11 +145,34 @@ class AppBootstrappingService {
             App.components.topNav = new CCTopNav(true, false);
             App.components.topNav.addTab("Kana", App.dispatcher.newEventDispatchCallback("TopNav_KanaSelected"));
             App.components.topNav.addTab("Language", App.dispatcher.newEventDispatchCallback("TopNav_LanguageSelected"));
+            App.components.topNav.addImageTab("./app/assets/svg/settings.svg", App.dispatcher.newEventDispatchCallback("TopNav_SettingsSelected"));
             App.components.topNav.setExpandableSpacing(true, false);
             App.components.topNav.setLeftContent(App.fragments.appTitle);
             App.components.topNav.selectIndex(1);
 
             App.elements.topNavContainer.appendChild(App.components.topNav);
+        }
+
+        if (App.elements.kanaPageControls) {
+            App.components.kanaPageControls = new CCButtonStrip(true, false);
+            App.components.kanaPageControls.setHorizontalLayout();
+            App.components.kanaPageControls.newButtonGroup(CCButtonStripGroupBehaviour.SingleSelectGroup);
+            App.components.kanaPageControls.addTextButton("Hiragana", App.dispatcher.newEventDispatchCallback("KanaPageControls_ShowHiragana"), true);
+            App.components.kanaPageControls.addTextButton("Katakana", App.dispatcher.newEventDispatchCallback("KanaPageControls_ShowKatakana"), false);
+            App.components.kanaPageControls.addSpacer();
+            App.components.kanaPageControls.newButtonGroup(CCButtonStripGroupBehaviour.SingleSelectGroup);
+            App.components.kanaPageControls.addImageButton("./app/assets/svg/square.svg", App.dispatcher.newEventDispatchCallback("KanaPageControls_SimpleLayout"), true);
+            App.components.kanaPageControls.addImageButton("./app/assets/svg/grid.svg", App.dispatcher.newEventDispatchCallback("KanaPageControls_QuadrantLayout"), false);
+            App.components.kanaPageControls.addImageButton("./app/assets/svg/rows.svg", App.dispatcher.newEventDispatchCallback("KanaPageControls_SectionLayout"), false);
+            App.components.kanaPageControls.addImageButton("./app/assets/svg/table.svg", App.dispatcher.newEventDispatchCallback("KanaPageControls_GojuonLayout"), false);
+
+            App.elements.kanaPageControls.appendChild(App.components.kanaPageControls);
+        }
+        
+        if (App.elements.kanaPageBody) {
+            App.components.kana = new CCKana(true, false);
+
+            App.elements.kanaPageBody.appendChild(App.components.kana);
         }
 
         if (App.elements.languagePageControls) {
