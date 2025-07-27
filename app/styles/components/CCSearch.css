@@ -30,7 +30,7 @@ cc-search {
         width: 100%;
         color: black;
         text-align: start;
-        font-family: "Geist"; 
+        font-family: "Linotte"; 
         font-weight: 400;
         background: var(--whitetranslucent70);
     }
@@ -79,7 +79,7 @@ cc-search {
 
 
     .SearchButton.Text {
-        font-family: "Geist"; 
+        font-family: "Linotte"; 
         font-weight: 500;
         font-size: 0.7rem;
         user-select: none;

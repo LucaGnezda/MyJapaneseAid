@@ -16,9 +16,10 @@
 
         <link rel="stylesheet" type="text/css" href="./app/styles/components/CCButtonStrip.css">
         <link rel="stylesheet" type="text/css" href="./app/styles/components/CCCommon.css">
-        <link rel="stylesheet" type="text/css" href="./app/styles/components/CCSearch.css">
+        <link rel="stylesheet" type="text/css" href="./app/styles/components/CCKana.css">
         <link rel="stylesheet" type="text/css" href="./app/styles/components/CCLanguageItem.css">
         <link rel="stylesheet" type="text/css" href="./app/styles/components/CCLanguageItemList.css">
+        <link rel="stylesheet" type="text/css" href="./app/styles/components/CCSearch.css">
         <link rel="stylesheet" type="text/css" href="./app/styles/components/CCTopNav.css">
 
         <!-- Framework -->
@@ -51,9 +52,10 @@
 
         <!-- Components -->
         <script defer src="./app/scripts/components/CCButtonStrip.js"></script>
-        <script defer src="./app/scripts/components/CCSearch.js"></script>
+        <script defer src="./app/scripts/components/CCKana.js"></script>
         <script defer src="./app/scripts/components/CCLanguageItem.js"></script>
         <script defer src="./app/scripts/components/CCLanguageItemList.js"></script>
+        <script defer src="./app/scripts/components/CCSearch.js"></script>
         <script defer src="./app/scripts/components/CCTopNav.js"></script>
         
 
@@ -65,6 +67,7 @@
         <script defer src="./app/scripts/services/MultithreadingService.js"></script>
         <script defer src="./app/scripts/services/PersistentStorageService.js"></script>
         <script defer src="./app/scripts/services/UnicodeService.js"></script>
+        
 
         <!-- Helpers -->
 
@@ -79,8 +82,10 @@
             <div class="TopNavContainer" id="TopNavContainer"></div>
             <div class="PagesContainer">
                 <div class="Page StageLeft" id="KanaPage">
-                    <div class="PageControlStrip PadTBS" id="KanaControls"></div>
-                    <div class="PageBody CustomScroll PadLRXL" id="KanaPageBody"></div>
+                    <div class="PageControlStrip PadTBS" id="KanaPageControls"></div>
+                    <div class="PageBody">
+                        <div class="KanaScroller CustomScroll" id="KanaPageBody"></div>
+                    </div>
                 </div>
                 <div class="Page" id="LanguagePage">
                     <div class="PageControlStrip PadTBS" id="LanguagePageControls"></div>
@@ -95,7 +100,8 @@
                             </div>
                         </div>
                     </div>
-                    </div>
+                </div>
+                <div class="Page" id="SettingsPage">
                 </div>
             </div>
         </div>
@@ -108,7 +114,7 @@
                         <div class="RomanXL MarginBXL">MyJapaneseAid is a simple tool to help you build a personal repository of Japanese words, phrases and sentences you learn. It uses your local browser cache as a datastore, meaning nothing is transmitted over the internet.</div>
                         <div class="RomanXL MarginBXL">This is a personal project. You are welcome to use it, but I cannot commit to any form of support or bugfixing if you run into issues.</div>
                         <div class="AppModalButtonStrip Gap16 PadTXL">
-                            <div class="FormButton Large Green PadLRXL PadTBS Gap8 RomanXL" id="AppWelcomePage1Next"><span>Ok, cool</span><img src="./app/assets/svg/check.svg" class="Icon SizeWH24"></div>
+                            <div class="FormButton Large Green PadLRXL PadTBS Gap16 RomanXL" id="AppWelcomePage1Next"><span>Ok, cool</span><img src="./app/assets/svg/check.svg" class="Icon SizeWH24"></div>
                         </div>
                     </div>
                 </div>
@@ -117,9 +123,9 @@
                         <div class="Title RomanXXL MarginBXL">Use of browser cache...</div>
                         <div class="RomanXL MarginBXL">Allow MyJapaneseAid to access your web browser's cache to store data between sessions.</div>
                         <div class="AppModalButtonStrip Gap16 PadTXL">
-                            <div class="FormButton Large ShadowGreen PadLRS PadTBS Gap8 RomanXL" id="AppWelcomePage2Back"><img src="./app/assets/svg/chevron-left.svg" class="Icon SizeWH24"></div>
-                            <div class="FormButton Large Green PadLRXL PadTBS Gap8 RomanXL" id="AppWelcomePage2Yes"><span>Yes, go ahead</span><img src="./app/assets/svg/check.svg" class="Icon SizeWH24"></div>
-                            <div class="FormButton Large ShadowGreen PadLRXL PadTBS Gap8 RomanXL" id="AppWelcomePage2No"><span>No, exit</span><img src="./app/assets/svg/cross.svg" class="Icon SizeWH24"></div>
+                            <div class="FormButton Large ShadowGreen PadLRS PadTBS Gap16 RomanXL" id="AppWelcomePage2Back"><img src="./app/assets/svg/chevron-left.svg" class="Icon SizeWH24"></div>
+                            <div class="FormButton Large Green PadLRXL PadTBS Gap16 RomanXL" id="AppWelcomePage2Yes"><span>Yes, go ahead</span><img src="./app/assets/svg/check.svg" class="Icon SizeWH24"></div>
+                            <div class="FormButton Large ShadowGreen PadLRXL PadTBS Gap16 RomanXL" id="AppWelcomePage2No"><span>No, exit</span><img src="./app/assets/svg/cross.svg" class="Icon SizeWH24"></div>
                         </div>
                     </div>
                 </div>
@@ -128,9 +134,9 @@
                         <div class="Title RomanXXL MarginBXL">Starter content...</div>
                         <div class="RomanXL MarginBXL">Would you prefer a few starter words, phrases and sentences, or a empty datastore?</div>
                         <div class="AppModalButtonStrip Gap16 PadTXL">
-                            <div class="FormButton Large ShadowGreen PadLRS PadTBS Gap8 RomanXL" id="AppWelcomePage3Back"><img src="./app/assets/svg/chevron-left.svg" class="Icon SizeWH24"></div>
-                            <div class="FormButton Large Green PadLRXL PadTBS Gap8 RomanXL" id="AppWelcomePage3Starter"><span>Starter content</span></div>
-                            <div class="FormButton Large Green PadLRXL PadTBS Gap8 RomanXL" id="AppWelcomePage3Empty"><span>An empty datastore</span></div>
+                            <div class="FormButton Large ShadowGreen PadLRS PadTBS Gap16 RomanXL" id="AppWelcomePage3Back"><img src="./app/assets/svg/chevron-left.svg" class="Icon SizeWH24"></div>
+                            <div class="FormButton Large Green PadLRXL PadTBS Gap16 RomanXL" id="AppWelcomePage3Starter"><span>Starter content</span></div>
+                            <div class="FormButton Large Green PadLRXL PadTBS Gap16 RomanXL" id="AppWelcomePage3Empty"><span>An empty datastore</span></div>
                         </div>
                     </div>
                 </div>

@@ -298,6 +298,10 @@ class PersistentStorageService {
      * @param {Object} data
      */
     upsert(tableName, id, data) {
+        // create the table too if it doesn't already exist
+        if (!this.#tableIndexes[tableName]) {
+            this.newTable(tableName);
+        }
         if (!this.#tableIndexes[tableName].includes(id)) {
             this.#tableIndexes[tableName].push(id);
         }

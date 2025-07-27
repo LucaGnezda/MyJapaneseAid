@@ -210,6 +210,10 @@
     filter: brightness(0) saturate(100%) invert(53%) sepia(15%) saturate(2029%) hue-rotate(93deg) brightness(90%) contrast(85%);
 }
 
+.FormButton img.Rotate180 {
+    transform: rotate(180deg);
+}
+
 /**
  * ButtonSpacer (Vertical & Horizontal) - Used to add separation and grouping between buttons
  */

@@ -56,8 +56,15 @@ cc-languageitemlist {
         flex: 1 0 auto;
     }
 
+    .SectionBody {
+        transition: all 0.5s ease-in-out;
+        overflow: hidden;
+        opacity: 1;
+    }
+
     .SectionBody.Hide {
-        display: none;
+        height: 0px;
+        opacity: 0;
     }
 
 }

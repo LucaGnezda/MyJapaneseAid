@@ -249,16 +249,16 @@ class CCLanguageItem extends CCBase {
                         <div class="Example MarginBM PadLXL" data-use="example">
                             <div class="ExampleInputs PadRXL">
                                 <div class="FlexLayout Col">
-                                    <label class="InputLabel RomanS">Kana</label>
+                                    <label class="InputLabel Font300 RomanS">Kana</label>
                                     <input class="ItemInput KanaS NoBlockMargins" data-use="example.kana.input" data-as="kana"></input>
                                 </div>
                                 <div class="FlexLayout Col">
-                                    <label class="InputLabel RomanS">Romaji</label>
-                                    <input class="ItemInput RomanS NoBlockMargins" data-use="example.romaji.input" data-as="romaji"></input>
+                                    <label class="InputLabel Font300 RomanS">Romaji</label>
+                                    <input class="ItemInput Font300 RomanS NoBlockMargins" data-use="example.romaji.input" data-as="romaji"></input>
                                 </div>
                                 <div class="FlexLayout Col">
-                                    <label class="InputLabel RomanS">Meaning</label>
-                                    <input class="ItemInput RomanS NoBlockMargins" data-use="example.meaning.input" data-as="meaning"></input>
+                                    <label class="InputLabel Font300 RomanS">Meaning</label>
+                                    <input class="ItemInput Font300 RomanS NoBlockMargins" data-use="example.meaning.input" data-as="meaning"></input>
                                 </div>
                             </div>
                             <div class="ExampleControls">
