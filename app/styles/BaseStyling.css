@@ -27,3 +27,7 @@ input:disabled {
 input:read-only:focus {
     outline: none;
 }
+
+input[type="file"].Hide {
+  display: none;
+}

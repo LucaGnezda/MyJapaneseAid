@@ -109,3 +109,15 @@
     --colourDDDTeal: #1BA5A6;              /* var(--colourDDDTeal) */
     --colourDDDTan: #f3ebe0;               /* var(--colourDDDTan) */
 }
+
+.RedForeground {
+    color: var(--colourRed);
+}
+
+.OrangeForeground {
+    color: var(--colourOrange);
+}
+
+.GreenForeground {
+    color: var(--colourPrimaryDarker10);
+}

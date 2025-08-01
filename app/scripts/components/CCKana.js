@@ -253,7 +253,7 @@ class CCKana extends CCBase {
     static #htmlRootTemplate = `
         <div class="CCKana Container" data-use="root-container">
             <div class="TableHeader MarginBL">
-                <div class="TableTitle"><p class="RomanXXL NoBlockMargins" data-use="table.title">Hiragana / Katakana</p></div>
+                <div class="TableTitle"><p class="RomanXXXL NoBlockMargins" data-use="table.title">Hiragana / Katakana</p></div>
             </div>
             <div class="TableContainer Gap2" data-use="table.container"></div>
         </div>

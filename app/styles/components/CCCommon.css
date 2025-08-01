@@ -76,10 +76,6 @@
     user-select: none;
 }
 
-.FormButton.Hide {
-    display: none;
-}
-
 .FormButton.Medium {
     width: 32px;
     height: 32px;
@@ -186,8 +182,6 @@
 .FormButton.Large {
     display: flex;
     flex-direction: row;
-    display: flex;
-    flex-direction: row;
     flex: 0 0 auto;
     width: auto;
 }
@@ -202,11 +196,38 @@
     background-color: var(--colourPrimaryDarker10Translucent90);
 }
 
+.FormButton.Large.ShadowRed {
+    color: var(--colourRed);
+    background-color: var(--redtranslucent80);
+}
+
+.FormButton.Large.Red {
+    color: white;
+    background-color: var(--colourRed);
+}
+
+.FormButton.Large.Orange {
+    color: white;
+    background-color: var(--colourOrange);
+}
+
 .FormButton.FormButton.Large.Green .Icon {
     filter: brightness(0) saturate(100%) invert(93%) sepia(14%) saturate(269%) hue-rotate(90deg) brightness(102%) contrast(88%);
 }
 
+.FormButton.FormButton.Large.Red .Icon {
+    filter: brightness(0) saturate(100%) invert(93%) sepia(14%) saturate(269%) hue-rotate(90deg) brightness(102%) contrast(88%);
+}
+
+.FormButton.FormButton.Large.Orange .Icon {
+    filter: brightness(0) saturate(100%) invert(93%) sepia(14%) saturate(269%) hue-rotate(90deg) brightness(102%) contrast(88%);
+}
+
 .FormButton.FormButton.Large.ShadowGreen .Icon {
+    filter: brightness(0) saturate(100%) invert(53%) sepia(15%) saturate(2029%) hue-rotate(93deg) brightness(90%) contrast(85%);
+}
+
+.FormButton.FormButton.Large.ShadowRed .Icon {
     filter: brightness(0) saturate(100%) invert(53%) sepia(15%) saturate(2029%) hue-rotate(93deg) brightness(90%) contrast(85%);
 }
 
@@ -243,4 +264,8 @@
     transition: all 0.3s;
     opacity: 0;
     transition-behavior: allow-discrete;
+}
+
+.FormButton.Hide {
+    display: none;
 }

@@ -101,7 +101,7 @@ class CCLanguageItemList extends CCBase {
     static #htmlRootTemplate = `
         <div class="CCLanguageItemList Container" data-use="root-container">
             <div class="ListHeader">
-                <div class="ListTitle"><p class="RomanXXL NoBlockMargins" data-use="list.title">List</p></div>
+                <div class="ListTitle"><p class="RomanXXXL NoBlockMargins" data-use="list.title">List</p></div>
                 <div class="ButtonStipContainer" data-use="list.controls"></div>
             </div>
             <div class="ListBody" data-use="list.body">
@@ -410,11 +410,11 @@ class CCLanguageItemList extends CCBase {
         moveToGroupBody.insertBefore(newItem, moveAfterComponent);
 
         // Update indexes
-        this.#propertyBag.listSection[payload.gojuonKey].subComponents[newItem.id] = newItem;
-        this.#propertyBag.listSection[payload.gojuonKey].subComponentsSearchKeys[newItem.id] = {searchKey: newItem.searchKey, typeBitmask: newItem.typeBitmask}
-        this.#propertyBag.listSection[payload.gojuonKey].subComponentsOrderKeys[newItem.id] = newItem.kana;
+        this.#propertyBag.listSection[toGroup].subComponents[newItem.id] = newItem;
+        this.#propertyBag.listSection[toGroup].subComponentsSearchKeys[newItem.id] = {searchKey: newItem.searchKey, typeBitmask: newItem.typeBitmask}
+        this.#propertyBag.listSection[toGroup].subComponentsOrderKeys[newItem.id] = newItem.kana;
 
-        this.#elements.listSection[payload.gojuonKey].root.classList.remove("Hide");
+        this.#elements.listSection[toGroup].root.classList.remove("Hide");
 
         return newItem.id;
 
@@ -432,7 +432,8 @@ class CCLanguageItemList extends CCBase {
 
         // If the list's indexed kana matches the newly saved object
         if (this.#propertyBag.listSection[fromGroup].subComponentsOrderKeys[id] == compponentToMove.kana) {
-            // nothing meaningful changed from an ordering perspective, so we can just return
+            // nothing has hanged from an ordering perspective, so just update the search keys and return
+            this.#propertyBag.listSection[toGroup].subComponentsSearchKeys[id] = {searchKey: compponentToMove.searchKey, typeBitmask: compponentToMove.typeBitmask}
             return;
         }
 

@@ -321,6 +321,17 @@ class PersistentStorageService {
         this.#deleteStoredObject(tableName, id)
     }
 
+    deleteAllKeysForThisDatabase() {
+        if (this.isConnected()) {
+
+            let allLocalStorageKeys = Object.keys(localStorage);
+            let toPurge = allLocalStorageKeys.filter((key) => key.startsWith(this.#databaseName));
+            for (let key of toPurge) {
+                localStorage.removeItem(key);
+            }
+        }
+    }
+
     exportStorageToClipboard() {
         /** @ts-ignore */
         copy(JSON.stringify(localStorage));

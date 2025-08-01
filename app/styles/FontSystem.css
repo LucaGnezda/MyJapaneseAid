@@ -30,6 +30,10 @@
     font-weight: 800;
 }
 
+.Italic {
+    font-style: italic;
+}
+
 /* --- Japanese Fonts --- */
 .KanaXL {
     font-size: 3vw;
@@ -104,8 +108,13 @@
 
 
 /* --- Equivalent English Fonts --- */
-.RomanXXL {
+.RomanXXXL {
     font-size: 4vw;
+    font-family: Linotte;
+}
+
+.RomanXXL {
+    font-size: 3.2vw;
     font-family: Linotte;
 }
 
@@ -136,8 +145,12 @@
 
 /* --- Equivalent English Font Minimums --- */
 @media (width <= 800px) {
-    .RomanXXL {
+    .RomanXXXL {
         font-size: 2rem;
+    }
+
+    .RomanXXL {
+        font-size: 1.6rem;
     }
 
     .RomanXL {
@@ -163,8 +176,12 @@
 
 /* --- Equivalent English Font Maximums --- */
 @media (width >= 1000px) {
-    .RomanXXL {
+    .RomanXXXL {
         font-size: 2.5rem;
+    }
+
+    .RomanXXL {
+        font-size: 2rem;
     }
 
     .RomanXL {

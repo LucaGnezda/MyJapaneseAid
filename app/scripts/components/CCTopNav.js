@@ -187,7 +187,7 @@ class CCTopNav extends CCBase {
         if (fragment.firstElementChild) {
             let img = document.createElement("img");
             img.src = imageSrc;
-            img.classList.add("SizeWH24");
+            img.classList.add("SizeWH20");
 
             fragment.firstElementChild.appendChild(img);
 

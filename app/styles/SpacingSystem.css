@@ -29,12 +29,12 @@
     height: 5vw;
 }
 
-.SizeWH48 {
+.SizeWH40 {
     width: 5vw;
     height: 5vw;
 }
 
-.SizeW48 {
+.SizeW40 {
     width: 5vw;
 }
 
@@ -212,12 +212,12 @@
         height: 40px;
     }
 
-    .SizeWH48 {
+    .SizeWH40 {
         width: 40px;
         height: 40px;
     }
 
-    .SizeW48 {
+    .SizeW40 {
         width: 40px;
     }
 
@@ -396,12 +396,12 @@
         height: 50px;
     }
 
-    .SizeWH48 {
+    .SizeWH40 {
         width: 50px;
         height: 50px;
     }
 
-    .SizeW48 {
+    .SizeW40 {
         width: 50px;
     }
 
