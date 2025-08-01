@@ -33,6 +33,7 @@ class AppBootstrappingService {
             // Load from persistent storage
             AppBootstrappingService.initialiseLocalCacheDatabase();
             AppBootstrappingService.loadFromPersistentStorage();
+            //App.dispatcher?.dispatch(new Action("App_UpdateCountDisplay", null));
         }
 
         Log.debug("AppService.Initialise - Complete", "APPSERVICE");
@@ -55,6 +56,16 @@ class AppBootstrappingService {
             {id: "LanguageNewFlyout", objProperty: "languageNewFlyout"},
             {id: "LanguageListBody", objProperty: "languageListBody"},
             {id: "SettingsPage", objProperty: "settingsPage"},
+            {id: "SettingsWordcount", objProperty: "settingsPageWordCount"},
+            {id: "SettingsPhrasecount", objProperty: "settingsPagePhraseCount"},
+            {id: "SettingsSentencecount", objProperty: "settingsPageSentenceCount"},
+            {id: "SettingsTotalcount", objProperty: "settingsPageTotalCount"},
+            {id: "AppSettingsDeleteData", objProperty: "settingsPageDeleteAllDataInitial"},
+            {id: "AppSettingsDeleteDataConfirm", objProperty: "settingsPageDeleteAllDataConfirm"},
+            {id: "AppSettingsDeleteDataCancel", objProperty: "settingsPageDeleteAllDataCancel"},
+            {id: "AppSettingsDeleteImport", objProperty: "settingsPageDeleteImport"},
+            {id: "AppSettingsAdditiveImport", objProperty: "settingsPageAdditiveImport"},
+            {id: "AppSettingsExport", objProperty: "settingsPageExport"},
             {id: "AppWelcome", objProperty: "welcomeModal"},
             {id: "AppWelcomePage1", objProperty: "welcomeModalPage1"},
             {id: "AppWelcomePage2", objProperty: "welcomeModalPage2"},
@@ -65,6 +76,7 @@ class AppBootstrappingService {
             {id: "AppWelcomePage2No", objProperty: "welcomeModalPage2No"},
             {id: "AppWelcomePage3Back", objProperty: "welcomeModalPage3Back"},
             {id: "AppWelcomePage3Starter", objProperty: "welcomeModalPage3Starter"},
+            {id: "AppWelcomePage3Empty", objProperty: "welcomeModalPage3Empty"},
             {id: "AppWelcomePage3Empty", objProperty: "welcomeModalPage3Empty"},
         ]
 
@@ -212,6 +224,21 @@ class AppBootstrappingService {
             App.elements.languageListBody.appendChild(App.components.languageList);
         }
 
+        if (App.elements.settingsPageDeleteAllDataInitial &&
+            App.elements.settingsPageDeleteAllDataConfirm &&
+            App.elements.settingsPageDeleteAllDataCancel &&
+            App.elements.settingsPageDeleteImport &&
+            App.elements.settingsPageAdditiveImport &&
+            App.elements.settingsPageExport) {
+
+            App.elements.settingsPageDeleteAllDataInitial.addEventListener("click", App.dispatcher.newEventDispatchCallback("Settings_DeleteAllDataAction"));
+            App.elements.settingsPageDeleteAllDataConfirm.addEventListener("click", App.dispatcher.newEventDispatchCallback("Settings_DeleteAllDataConfirmed"));
+            App.elements.settingsPageDeleteAllDataCancel.addEventListener("click", App.dispatcher.newEventDispatchCallback("Settings_DeleteAllDataCancelled"));
+            App.elements.settingsPageDeleteImport.addEventListener("click", App.dispatcher.newEventDispatchCallback("Settings_DeleteImportAction"));
+            App.elements.settingsPageAdditiveImport.addEventListener("click", App.dispatcher.newEventDispatchCallback("Settings_AdditiveImportAction"));
+            App.elements.settingsPageExport.addEventListener("click", App.dispatcher.newEventDispatchCallback("Settings_ExportAction"));
+        }
+
         if (App.elements.appForeground) {
             App.elements.appForeground.classList.remove("Hide");
         }
@@ -272,18 +299,82 @@ class AppBootstrappingService {
         }
     }
 
-    static addStarterContent() {
+    /**
+     * @param {Object} partlyDecodedJSONObject
+     * @returns {Boolean} 
+     */
+    static validateObjectForLoading(partlyDecodedJSONObject) {
+
         for (let key in starterData) {
             /** @ts-ignore - Yes JSDoc ... you can index an object by string */
-            let contents = JSON.parse(starterData[key]);
-            if (!Array.isArray(contents) && typeof contents == 'object' && contents.hasOwnProperty("kana")) {
-                contents.kana = UnicodeService.demunge(contents.kana);
-                contents.romaji = UnicodeService.demunge(contents.romaji);
-                localStorage.setItem(key, JSON.stringify(contents));
+            let contents = JSON.parse(partlyDecodedJSONObject[key]);
+
+            if (Array.isArray(contents) && contents.every(element => typeof element === 'string')) {
+                Log.info(`File contents key ${key} is a valid table index`, "");
+            }
+            else if (typeof contents == 'object' && contents.hasOwnProperty("tables") && Array.isArray(contents.tables) && contents.tables.every((/** @type {String} */ element) => typeof element === 'string')) {
+                Log.info(`File contents key ${key} is a valid db index`, "");
+            }
+            else if (
+                typeof contents == 'object' &&
+                contents.hasOwnProperty("gojuonKey") && (typeof contents.gojuonKey === "string" || contents.gojuonKey instanceof String) &&
+                contents.hasOwnProperty("priorGojuonKey") && (typeof contents.priorGojuonKey === "string" || contents.priorGojuonKey instanceof String || contents.priorGojuonKey == null) &&
+                contents.hasOwnProperty("languageType") && typeof contents.languageType === "number" &&
+                contents.hasOwnProperty("languageTypeBitmask") && typeof contents.languageTypeBitmask === "number" &&
+                contents.hasOwnProperty("languageTypeLabel") && (typeof contents.languageTypeLabel === "string" || contents.languageTypeLabel instanceof String) &&
+                contents.hasOwnProperty("kana") && (typeof contents.kana === "string" || contents.kana instanceof String) &&
+                contents.hasOwnProperty("kanaHighlighterString") && (typeof contents.kanaHighlighterString === "string" || contents.kanaHighlighterString instanceof String) &&
+                contents.hasOwnProperty("romaji") && (typeof contents.romaji === "string" || contents.romaji instanceof String) &&
+                contents.hasOwnProperty("romajiHighlighterString") && (typeof contents.romajiHighlighterString === "string" || contents.romajiHighlighterString instanceof String) &&
+                contents.hasOwnProperty("meaning") && (typeof contents.meaning === "string" || contents.meaning instanceof String) &&
+                contents.hasOwnProperty("meaningHighlighterString") && (typeof contents.meaningHighlighterString === "string" || contents.meaningHighlighterString instanceof String) &&
+                contents.hasOwnProperty("literal") && (typeof contents.literal === "string" || contents.literal instanceof String) &&
+                contents.hasOwnProperty("structure") && (typeof contents.structure === "string" || contents.structure instanceof String) &&
+                contents.hasOwnProperty("notes") && (typeof contents.notes === "string" || contents.notes instanceof String) &&
+                contents.hasOwnProperty("examples") && Array.isArray(contents.examples)) {
+                
+                Log.info(`File contents key ${key} is a valid item`, "");
             }
             else {
+                Log.error(`Unexpected file contents found in key ${key}, unable to load file`, "");
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * @param {Object} partlyDecodedJSONObject
+     * @param {Boolean} [demunge] 
+     */
+    static loadFromObject(partlyDecodedJSONObject, demunge = false) {
+        for (let key in starterData) {
+            /** @ts-ignore - Yes JSDoc ... you can index an object by string */
+            let contents = JSON.parse(partlyDecodedJSONObject[key]);
+            if (!Array.isArray(contents) && typeof contents == 'object' && contents.hasOwnProperty("kana")) {
+                if (demunge) {
+                    contents.kana = UnicodeService.demunge(contents.kana);
+                    contents.romaji = UnicodeService.demunge(contents.romaji);
+
+                    for (let egKey in contents.examples) {
+                        contents.examples[egKey].kana = UnicodeService.demunge(contents.examples[egKey].kana);
+                    }
+                }
+                localStorage.setItem(key, JSON.stringify(contents));
+            }
+            else if (!Array.isArray(contents) && typeof contents == 'object' && contents.hasOwnProperty("tables") && Array.isArray(contents.tables)) {
+                /** @ts-ignore - Yes parse handles null */
+                let currentDBIndex = JSON.parse(localStorage.getItem(key)) || [];
+                currentDBIndex.tables = [...new Set([...currentDBIndex.tables, ...contents.tables])]
+            }
+            else {
+
+                /** @ts-ignore - Yes parse handles null */
+                let currentTableIndex = JSON.parse(localStorage.getItem(key)) || [];
+                currentTableIndex = [...new Set([...currentTableIndex, ...contents])]
+
                 /** @ts-ignore - Yes JSDoc ... you can index an object by string */
-                localStorage.setItem(key, starterData[key]);
+                localStorage.setItem(key, JSON.stringify(currentTableIndex));
             }
         }
     }

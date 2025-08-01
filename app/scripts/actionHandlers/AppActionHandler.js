@@ -73,6 +73,34 @@ class AppActionHandler {
                 this.itemDelete(action.payload);
                 break;
 
+            case "TopNav_SettingsSelected":
+                this.pageToSettings();
+                break;
+
+            case "Settings_DeleteAllDataAction":
+                this.settingsDeleteAllDataInitialAction();
+                break;
+
+            case "Settings_DeleteAllDataConfirmed":
+                this.settingsDeleteAllDataConfirmed();
+                break;   
+
+            case "Settings_DeleteAllDataCancelled":
+                this.settingsDeleteAllDataCancelled();
+                break;   
+
+            case "Settings_DeleteImportAction":
+                this.settingsImport(true);
+                break;
+
+            case "Settings_AdditiveImportAction":
+                this.settingsImport(false);
+                break;
+
+            case "Settings_ExportAction":
+                this.settingsExport();
+                break;
+
             case "App_Welcome":
                 this.startWelcomeFlow();
                 break;
@@ -105,8 +133,8 @@ class AppActionHandler {
                 this.welcomePage3Empty();
                 break;
 
-            case "TopNav_SettingsSelected":
-                this.pageToSettings();
+            case "App_UpdateCountDisplay":
+                this.updateCountDisplay();
                 break;
             
             default:
@@ -272,6 +300,77 @@ class AppActionHandler {
         App.components.languageListControls?.show();
     }
 
+    settingsDeleteAllDataInitialAction() {
+        App.elements.settingsPageDeleteAllDataInitial?.classList.add("Hide");
+        App.elements.settingsPageDeleteAllDataConfirm?.classList.remove("Hide");
+        App.elements.settingsPageDeleteAllDataCancel?.classList.remove("Hide");
+    }
+    
+    settingsDeleteAllDataConfirmed() {
+        App.persistentStorageService?.deleteAllKeysForThisDatabase();
+        location.reload();
+    }
+    
+    settingsDeleteAllDataCancelled() {
+        App.elements.settingsPageDeleteAllDataInitial?.classList.remove("Hide");
+        App.elements.settingsPageDeleteAllDataConfirm?.classList.add("Hide");
+        App.elements.settingsPageDeleteAllDataCancel?.classList.add("Hide");
+    }
+
+    /**
+     * @param {Boolean} [deleteCurrentDataFirst] 
+     * @returns 
+     */
+    async settingsImport(deleteCurrentDataFirst = false) {
+
+        let openPickerOptions = {
+            startIn: "downloads",
+            excludeAcceptAllOption: true,
+            multiple: false,
+            types: [{
+                description: 'JSON Files',
+                accept: {
+                    'application/json': ['.json'],
+                },
+            }],
+        };
+        
+        let objectContents = await FilesystemAccessService.readEntireFileAsObject(openPickerOptions);
+        
+        if (objectContents == null) {
+            return;
+        }
+        if (!AppBootstrappingService.validateObjectForLoading(objectContents)){
+            return;
+        }
+
+        if (deleteCurrentDataFirst) {
+            App.persistentStorageService?.deleteAllKeysForThisDatabase();
+        }
+
+        AppBootstrappingService.initialiseLocalCacheDatabase();
+        AppBootstrappingService.loadFromObject(objectContents);
+        location.reload();
+    }
+
+    async settingsExport() {
+        let d = new Date();
+        let timestamp = d.toISOString().split("T")[0];
+        let suggestedFilename = `MyJapaneseAid LocalDB Export ${timestamp}.json`;
+        let savePickerOptions = {
+            startIn: "downloads",
+            suggestedName: suggestedFilename,
+            types: [{
+                description: 'JSON Files',
+                accept: {
+                    'application/json': ['.json'],
+                },
+            }],
+        };
+
+        await FilesystemAccessService.writeObjectAsEntireFile(savePickerOptions, localStorage);
+    }
+
     startWelcomeFlow() {
         App.elements.appForeground?.classList.add("Hide");
         App.elements.welcomeModal?.classList.add("Show");
@@ -303,19 +402,24 @@ class AppActionHandler {
 
     welcomePage3Starter() {
 
-        AppBootstrappingService.addStarterContent();
-        AppBootstrappingService.initialisePersistentStorageService();
-        AppBootstrappingService.loadFromPersistentStorage();
+        AppBootstrappingService.initialiseLocalCacheDatabase();
+        AppBootstrappingService.loadFromObject(starterData, true);
+
+        location.reload();
+    }
+
+    welcomePage3Empty() {
+
+        App.persistentStorageService?.deleteAllKeysForThisDatabase();
+        AppBootstrappingService.initialiseLocalCacheDatabase();
 
         App.elements.appForeground?.classList.remove("Hide");
         App.elements.welcomeModal?.classList.remove("Show");
     }
 
-    welcomePage3Empty() {
-
-        AppBootstrappingService.initialiseLocalCacheDatabase();
-
-        App.elements.appForeground?.classList.remove("Hide");
-        App.elements.welcomeModal?.classList.remove("Show");
+    updateCountDisplay() {
+        /** @type {HTMLDivElement} */ (App.elements.settingsPageWordCount).innerText = App.propertyBag.wordCount.toString();
+        /** @type {HTMLDivElement} */ (App.elements.settingsPagePhraseCount).innerText = App.propertyBag.phraseCount.toString();
+        /** @type {HTMLDivElement} */ (App.elements.settingsPageSentenceCount).innerText = App.propertyBag.sentenceCount.toString();
     }
 }

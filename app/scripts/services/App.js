@@ -12,6 +12,9 @@
  * }} AppComponents
  * 
  * @typedef {{
+ *      wordCount: Number,
+ *      phraseCount: Number,
+ *      sentenceCount: Number,
  * }} AppPropertyBag
  */
 
@@ -47,6 +50,9 @@ class App {
      */
     static propertyBag = {
         // Place variables here that act as global settings.
+        wordCount: 0,
+        phraseCount: 0,
+        sentenceCount: 0,
     };
 
     // Referenced elements
@@ -64,6 +70,16 @@ class App {
         languageNewFlyout: null,
         languageListBody: null,
         settingsPage: null,
+        settingsPageWordCount: null,
+        settingsPagePhraseCount: null,
+        settingsPageSentenceCount: null,
+        settingsPageTotalCount: null,
+        settingsPageDeleteAllDataInitial: null,
+        settingsPageDeleteAllDataConfirm: null,
+        settingsPageDeleteAllDataCancel: null,
+        settingsPageDeleteImport: null,
+        settingsPageAdditiveImport: null,
+        settingsPageExport: null,
         welcomeModal: null,
         welcomeModalPage1: null,
         welcomeModalPage2: null,

@@ -76,6 +76,21 @@
     transition-delay: 0s, 0s;
 }
 
+.Page .PageHeader {
+        display: flex;
+        flex-direction: row;
+        align-items: baseline;
+        border-bottom: 2px solid var(--colourPrimary);
+        position: relative;
+    }
+
+.Page .PageTitle {
+    flex: 1 0 auto;
+    display: flex;
+    justify-content: center;
+    color: var(--colourPrimaryDarker10);
+}
+
 .AppTitle {
     flex: 0 0 auto;
     font-family: "Linotte"; 
@@ -118,15 +133,7 @@
     overflow-y: hidden;
 }
 
-.KanaScroller {
-    height: auto;
-    max-height: 100%;
-    flex: 1 1 auto;
-    overflow-x: hidden;
-    overflow-y: auto;
-}
-
-.LanguageNewFlyoutScroller {
+.PageScroller {
     height: auto;
     max-height: 100%;
     flex: 0 0 auto;
@@ -154,14 +161,6 @@
     color: var(--colourPrimaryDarker10);
     align-items: baseline;
     border-bottom: 2px solid var(--colourPrimary);
-}
-
-.LanguageNewListScroller {
-    height: auto;
-    max-height: 100%;
-    flex: 1 1 auto;
-    overflow-x: hidden;
-    overflow-y: auto;
 }
 
 .LanguageListBody {
@@ -209,7 +208,7 @@
     height: 100%;
 }
 
-.Page .PageContent {
+.Page .ModalContent {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -219,8 +218,20 @@
     transform: translateY(-5%);
 }
 
-.Page .Title {
+.Page .PageContent {
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    height: 100%;
+}
+
+.Page .ModalTitle {
     align-self: center;
+    color: var(--colourPrimaryDarker10);
+}
+
+.Page .SettingsTitle {
+    align-self: left;
     color: var(--colourPrimaryDarker10);
 }
 
@@ -228,4 +239,18 @@
     display: flex;
     flex-direction: row;
     justify-content: center;
+}
+
+.SettingsActionGroup {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.SettingsActionGroup.Row {
+    flex-direction: row;
+}
+
+.SettingsActionGroup.Column {
+    flex-direction: column;
 }
