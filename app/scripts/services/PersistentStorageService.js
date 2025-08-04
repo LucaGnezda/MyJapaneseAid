@@ -1,7 +1,8 @@
 /**
  * Typedefs
  * @typedef {{
- *      tables: Array<String>,
+ *      schemaversion: String,
+ *      lastmodified: Date,
  * }} PSSDatabaseRoot
  */
 
@@ -19,23 +20,28 @@ class PersistentStorageService {
      * @type {String}
      */
     #databaseName = "";
+
     /**
      * @type {PSSDatabaseRoot | Null}
      */
     #databaseRoot = null;
-    /**
-     * @type {Object.<String, Array<String>>}
-     */
-    #tableIndexes = {};
+    
     /**
      * @type {String | Null}
      */
     #cursorTable = null;
+    
+    /**
+     * @type {Array<String> | Null}
+     */
+    #cursorKeys = null;
+
     /**
      * @type {Number | Null}
      */
     #cursorIndex = null;
-
+    
+    #expectedSchemaVersion = "PersistenceStorageServiceV2Schema";
 
     /**
      * Constructor
@@ -48,6 +54,9 @@ class PersistentStorageService {
     /**
      * Getters/Setters
      */
+    get lastmodified () {
+        return this.#databaseRoot?.lastmodified;
+    }
 
 
     /**
@@ -58,21 +67,31 @@ class PersistentStorageService {
      * @param {*} obj
      */
     #isValidDatabase(obj) {
+        
         if (obj &&
             typeof obj === 'object' && 
-            obj.hasOwnProperty('tables') && 
-            Array.isArray(obj.tables) &&
-            obj.tables.every(/** @param {String} x */ x => typeof x === 'string')) {
+            obj.hasOwnProperty('schemaversion') && 
+            obj.schemaversion == this.#expectedSchemaVersion &&
+            obj.hasOwnProperty('lastmodified') && 
+            /** @ts-ignore - Yes this is ok for this purpose */
+            !isNaN(new Date(obj.lastmodified))) {
             return true;
         }
         return false;
+    }
+
+    #updateLastModified() {
+        if (this.#databaseRoot) {
+            this.#databaseRoot.lastmodified = new Date();
+            localStorage.setItem(this.#databaseName, JSON.stringify(this.#databaseRoot));
+        }
     }
 
     /**
      * @param {String} key
      * @return {Object | Null} obj
      */
-    #select(key) {
+    #selectAsObject(key) {
         let json = localStorage.getItem(key);
         if (json) {
             return JSON.parse(json);
@@ -86,7 +105,7 @@ class PersistentStorageService {
      */
     #selectStoredObject(tableName, id) {
         if (this.#databaseName.length > 0) {
-            return this.#select(`${this.#databaseName}.${tableName}.${id}`);
+            return this.#selectAsObject(`${this.#databaseName}.${tableName}.${id}`);
         }
         return null;
     }
@@ -94,11 +113,8 @@ class PersistentStorageService {
     /**
      * @param {String} tableName
      */
-    #selectTableIndex(tableName) {
-        if (this.#databaseName.length > 0) {
-            return this.#select(`${this.#databaseName}.${tableName}`);
-        }
-        return null;
+    #selectTableKeys(tableName) {
+        return Object.keys(localStorage).filter((key) => key.startsWith(`${this.#databaseName}.${tableName}`));
     }
 
     /**
@@ -106,7 +122,7 @@ class PersistentStorageService {
      */
     #selectDatabase(databaseName = this.#databaseName) {
         if (databaseName.length > 0) {
-            return this.#select(databaseName);
+            return this.#selectAsObject(databaseName);
         }
         return null;
     }
@@ -115,10 +131,11 @@ class PersistentStorageService {
      * @param {String} key
      * @param {Object} obj
      */
-    #upsert(key, obj) {
+    #upsertStringifiedObject(key, obj) {
         let json = JSON.stringify(obj);
         if (json){
             localStorage.setItem(key, json);
+            this.#updateLastModified();
         }
     }
 
@@ -129,25 +146,8 @@ class PersistentStorageService {
      */
     #upsertStoredObject(tableName, id, obj) {
         if (this.#databaseName.length > 0) {
-            return this.#upsert(`${this.#databaseName}.${tableName}.${id}`, obj);
+            return this.#upsertStringifiedObject(`${this.#databaseName}.${tableName}.${id}`, obj);
         }
-    }
-
-    /**
-     * @param {String} tableName
-     */
-    #upsertTableIndex(tableName) {
-        if (this.#databaseName.length > 0) {
-            return this.#upsert(`${this.#databaseName}.${tableName}`, this.#tableIndexes[tableName]);
-        }
-        return null;
-    }
-
-    #upsertDatabase() {
-        if (this.#databaseRoot && this.#databaseName.length > 0) {
-            return this.#upsert(this.#databaseName, this.#databaseRoot);
-        }
-        return null;
     }
 
     /**
@@ -155,6 +155,7 @@ class PersistentStorageService {
      */
     #delete(key) {
         localStorage.removeItem(key);
+        this.#updateLastModified();
     }
 
     /**
@@ -165,16 +166,6 @@ class PersistentStorageService {
         if (this.#databaseName.length > 0) {
             return this.#delete(`${this.#databaseName}.${tableName}.${id}`);
         }
-    }
-
-    /**
-     * @param {String} tableName
-     */
-    #deleteTableIndex(tableName) {
-        if (this.#databaseName.length > 0) {
-            return this.#delete(`${this.#databaseName}.${tableName}`);
-        }
-        return null;
     }
 
 
@@ -200,6 +191,7 @@ class PersistentStorageService {
          */
         let databaseRoot = /** @type {PSSDatabaseRoot} */ (this.#selectDatabase(databaseName));
         if (this.#isValidDatabase(databaseRoot)) {
+            databaseRoot.lastmodified = new Date(databaseRoot.lastmodified);
             this.#databaseName = databaseName;
             this.#databaseRoot = databaseRoot;
         }
@@ -207,40 +199,19 @@ class PersistentStorageService {
 
             this.#databaseName = databaseName;
             this.#databaseRoot = {
-                tables: [],
+                schemaversion: this.#expectedSchemaVersion,
+                lastmodified: new Date(),
             }
 
-            this.#upsert(databaseName, this.#databaseRoot);
+            this.#upsertStringifiedObject(databaseName, this.#databaseRoot);
         }
         else {
             this.#databaseName = "";
             this.#databaseRoot = null;
-            this.#tableIndexes = {};
             return false;
         }
 
-        for (let t of this.#databaseRoot.tables) {
-            this.#tableIndexes[t] = this.#selectTableIndex(t);
-        }
-
         return true;
-    }
-
-    /**
-     * @param {...String} tableNames
-     */
-    newTable(...tableNames) {
-
-        for (let tableName of tableNames) {
-            if (this.#tableIndexes[tableName] == null) {
-                this.#tableIndexes[tableName] = [];
-            }
-            this.#upsertTableIndex(tableName);
-            if (!this.#databaseRoot?.tables.includes(tableName)) {
-                this.#databaseRoot?.tables.push(tableName);
-            }
-            this.#upsertDatabase();
-        }
     }
 
     /**
@@ -253,23 +224,30 @@ class PersistentStorageService {
 
     /**
      * @param {String} tableName
+     * @returns {Boolean}
      */
     newTableCursor(tableName) {
-        if (this.#databaseRoot?.tables.includes(tableName)) {
-            this.#cursorTable = tableName;
-            this.#cursorIndex = 0;
+
+        let keys = this.#selectTableKeys(tableName);
+
+        if (keys.length == 0) {
+            return false;
         }
+        this.#cursorTable = tableName;
+        this.#cursorKeys = keys;
+        this.#cursorIndex = 0;
+        return true;
     }
 
     /**
      * @returns {String | Null}
      */
     readCurrentKeyFromCursor() {
-        if (this.#cursorTable == null || this.#cursorIndex == null || this.#cursorIndex == this.#tableIndexes[this.#cursorTable].length) {
+        if (this.#cursorTable == null || this.#cursorKeys == null || this.#cursorIndex == null || this.#cursorIndex >= this.#cursorKeys.length) {
             return null;
         }
 
-        return this.#tableIndexes[this.#cursorTable][this.#cursorIndex];
+        return this.#cursorKeys[this.#cursorIndex].split(".")[2];
     }
 
     /**
@@ -277,13 +255,13 @@ class PersistentStorageService {
      */
     readNextFromCursor() {
 
-        if (this.#cursorTable == null || this.#cursorIndex == null || this.#cursorIndex == this.#tableIndexes[this.#cursorTable].length) {
+        if (this.#cursorTable == null || this.#cursorKeys == null || this.#cursorIndex == null || this.#cursorIndex >= this.#cursorKeys.length) {
             this.#cursorTable = null;
             this.#cursorIndex = null;
             return null;
         }
 
-        let id = this.#tableIndexes[this.#cursorTable][this.#cursorIndex];
+        let id = this.#cursorKeys[this.#cursorIndex].split(".")[2];
 
         let item = this.#selectStoredObject(this.#cursorTable, id);
 
@@ -298,14 +276,6 @@ class PersistentStorageService {
      * @param {Object} data
      */
     upsert(tableName, id, data) {
-        // create the table too if it doesn't already exist
-        if (!this.#tableIndexes[tableName]) {
-            this.newTable(tableName);
-        }
-        if (!this.#tableIndexes[tableName].includes(id)) {
-            this.#tableIndexes[tableName].push(id);
-        }
-        this.#upsertTableIndex(tableName);
         this.#upsertStoredObject(tableName, id, data);
     }
 
@@ -314,26 +284,42 @@ class PersistentStorageService {
      * @param {String} id
      */
     delete(tableName, id) {
-        if (this.#tableIndexes[tableName].includes(id)) {
-            this.#tableIndexes[tableName] = this.#tableIndexes[tableName].filter(/** @param {String} x */x => x != id);
-        }
-        this.#upsertTableIndex(tableName);
         this.#deleteStoredObject(tableName, id)
     }
 
     deleteAllKeysForThisDatabase() {
         if (this.isConnected()) {
-
-            let allLocalStorageKeys = Object.keys(localStorage);
-            let toPurge = allLocalStorageKeys.filter((key) => key.startsWith(this.#databaseName));
+            let toPurge = Object.keys(localStorage).filter((key) => key.startsWith(this.#databaseName));
             for (let key of toPurge) {
                 localStorage.removeItem(key);
             }
         }
     }
 
+    /**
+     * @returns {Object | Null}
+     */
+    getExportableData() {
+        if (this.isConnected()) {
+            return (
+                Object.keys(localStorage)
+                .filter(key => key.startsWith(this.#databaseName))
+                .reduce(
+                    (obj, key) => {
+                        /** @ts-ignore - yes this is ok JSDoc, because we know we're working with valid keys we've used before */
+                        obj[key]=localStorage[key]; 
+                        return obj;
+                    }, {}
+                )
+            )
+        }
+        else {
+            return null;
+        }
+    }
+
     exportStorageToClipboard() {
         /** @ts-ignore */
-        copy(JSON.stringify(localStorage));
+        copy(this.getExportableData());
     }
 }

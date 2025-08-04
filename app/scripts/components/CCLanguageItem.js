@@ -52,6 +52,7 @@
  *      languageType: number?,
  *      languageTypeBitmask: number?,
  *      languageTypeLabel: string?,
+ *      priorLanguageType: number?,
  *      kana: string?,
  *      kanaHighlighterString: string?,
  *      romaji: string?,
@@ -63,6 +64,20 @@
  *      notes: string?,
  *      examples: CCLanguageItemPropertyBagExample[];
  * }} CCLanguageItemPropertyBag
+ * 
+ * @typedef {{
+ *      languageType: number?,
+ *      kana: string?,
+ *      kanaHighlighterString: string?,
+ *      romaji: string?,
+ *      romajiHighlighterString: string?,
+ *      meaning: string?,
+ *      meaningHighlighterString: string?,
+ *      literal: string?,
+ *      structure: string?,
+ *      notes: string?,
+ *      examples: CCLanguageItemPropertyBagExample[];
+ * }} CCLanguageItemSimplifiedPropertyBag
  * 
  * @typedef {{
  *      kana: string?,
@@ -142,6 +157,7 @@ class CCLanguageItem extends CCBase {
         languageType: null,
         languageTypeBitmask: null,
         languageTypeLabel: null,
+        priorLanguageType: null,
         kana: null,
         kanaHighlighterString: null,
         romaji: null,
@@ -297,6 +313,10 @@ class CCLanguageItem extends CCBase {
 
     get gojuonKey() {
         return this.#propertyBag.gojuonKey;
+    }
+
+    get priorGojuonKey() {
+        return this.#propertyBag.priorGojuonKey;
     }
 
     get searchKey() {
@@ -720,6 +740,7 @@ class CCLanguageItem extends CCBase {
 
             // update the propertybag
             this.#propertyBag.priorGojuonKey = this.#propertyBag.gojuonKey;
+            this.#propertyBag.priorLanguageType = this.#propertyBag.languageType;
             this.#propertyBag.languageType = this.#subComponents.languageTypeButtonStrip.getSelectedIndexForGroup(0) || 0;
             this.#propertyBag.languageTypeBitmask = 1 << this.#propertyBag.languageType;
             this.#propertyBag.languageTypeLabel = this.#languageTypeLabels[this.#propertyBag.languageType];
@@ -983,7 +1004,6 @@ class CCLanguageItem extends CCBase {
         }
     }
 
-
     /**
      * Public methods
      */
@@ -1035,6 +1055,7 @@ class CCLanguageItem extends CCBase {
             languageType: 0,
             languageTypeBitmask: 1,
             languageTypeLabel: this.#languageTypeLabels[0],
+            priorLanguageType: 0,
             kana: "",
             kanaHighlighterString: "",
             romaji: "",
@@ -1056,7 +1077,22 @@ class CCLanguageItem extends CCBase {
     }
 
     /**
-     * @param {CCLanguageItemPropertyBag} propertyBag 
+     * @returns {CCLanguageItemSimplifiedPropertyBag} 
+     */
+    getSimplifiedPropertybag() {
+        
+        let propertyBag = JSON.parse(JSON.stringify(this.#propertyBag));
+        delete propertyBag.gojuonKey;
+        delete propertyBag.priorGojuonKey;
+        delete propertyBag.languageTypeBitmask;
+        delete propertyBag.languageTypeLabel;
+        delete propertyBag.priorLanguageType;
+
+        return propertyBag;
+    }
+
+    /**
+     * @param {CCLanguageItemSimplifiedPropertyBag} propertyBag 
      * @returns
      */
     loadFromPropertyBag(propertyBag) {
@@ -1069,6 +1105,7 @@ class CCLanguageItem extends CCBase {
             this.#propertyBag.languageType = (propertyBag.languageType && propertyBag.languageType >=0 && propertyBag.languageType <= 2 ? propertyBag.languageType : 0);
             this.#propertyBag.languageTypeBitmask = 1 << this.#propertyBag.languageType;
             this.#propertyBag.languageTypeLabel = this.#languageTypeLabels[this.#propertyBag.languageType];
+            this.#propertyBag.priorLanguageType = propertyBag.languageType;
             this.#propertyBag.kana = propertyBag.kana || "";
             this.#propertyBag.kanaHighlighterString = propertyBag.kanaHighlighterString || "";
             this.#propertyBag.romaji = propertyBag.romaji || "";

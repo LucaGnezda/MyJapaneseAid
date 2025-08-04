@@ -5,6 +5,13 @@ cc-kana {
 .CCKana {
 
     /** 
+     * Container 
+     */
+    &.Container {
+        
+    }
+    
+    /** 
      * Title 
      */
     .TableHeader {
@@ -25,6 +32,12 @@ cc-kana {
     /** 
      * Table  
      */
+    .TableContainerOuter {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
     .TableContainer {
         display: grid;
     }
@@ -47,6 +60,11 @@ cc-kana {
     .TableContainer.Layout3 {
         grid-template-columns: repeat(2, 0.5fr) repeat(5, 1fr);
         grid-template-rows: 0.5fr repeat(28, 1fr);
+    }
+
+    .TableContainer.Layout4 {
+        grid-template-columns: 0.5fr repeat(8, 1fr);
+        grid-template-rows: repeat(2, 0.5fr) repeat(14, 1fr);
     }
 
     /** 
@@ -258,6 +276,10 @@ cc-kana {
         grid-column-end: span 5;
     }
 
+    .W8 {
+        grid-column-end: span 8;
+    }
+
     .H2 {
         grid-row-end: span 2;
     }
@@ -280,6 +302,14 @@ cc-kana {
 
     .H11 {
         grid-row-end: span 11;
+    }
+
+    .H15 {
+        grid-row-end: span 15;
+    }
+
+    .H26 {
+        grid-row-end: span 26;
     }
 
     /** 
@@ -346,7 +376,7 @@ cc-kana {
     .Hiragana {
         display: flex;
         justify-content: center;
-        position: relative;
+        position: absolute;
         width: 100%;
         top: 0px;
         left: 0px;
@@ -365,7 +395,7 @@ cc-kana {
     .Katakana {
         display: flex;
         justify-content: center;
-        position: absolute;
+        position: relative;
         width: 100%;
         top: 0px;
         left: 0px;

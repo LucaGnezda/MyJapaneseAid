@@ -376,7 +376,7 @@ class CCLanguageItemList extends CCBase {
     }
     
     /**
-     * @param {CCLanguageItemPropertyBag} payload 
+     * @param {CCLanguageItemSimplifiedPropertyBag} payload 
      * @param {Function | Null} [saveCallback]
      * @param {Function | Null} [cancelCallback]
      * @param {Function | Null} [deleteRequestCallback]
@@ -385,8 +385,8 @@ class CCLanguageItemList extends CCBase {
      */
     addItem(payload, saveCallback = null, cancelCallback = null, deleteRequestCallback = null, id = null) {
 
-        if (!payload || !payload.gojuonKey) {
-            Log.error("A valid gojuonKey is needed", "COMPONENT");
+        if (!payload) {
+            Log.error("Data is needed in order to add an item", "COMPONENT");
             return null;
         }
 

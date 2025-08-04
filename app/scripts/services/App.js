@@ -74,6 +74,8 @@ class App {
         settingsPagePhraseCount: null,
         settingsPageSentenceCount: null,
         settingsPageTotalCount: null,
+        settingsPageLastModifiedDate: null,
+        settingsPageLastModifiedTime: null,
         settingsPageDeleteAllDataInitial: null,
         settingsPageDeleteAllDataConfirm: null,
         settingsPageDeleteAllDataCancel: null,
