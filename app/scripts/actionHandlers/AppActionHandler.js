@@ -53,6 +53,9 @@ class AppActionHandler {
                 this.useGojuonKanaLayout();
                 break;
 
+            case "KanaPageControls_ForeignSoundExceptions":
+                this.useForeignSoundExceptionsLayout();
+
             case "LanguageListControls_NewItem":
                 this.showLanguageNewFlyout();
                 break;
@@ -78,27 +81,27 @@ class AppActionHandler {
                 break;
 
             case "Settings_DeleteAllDataAction":
-                this.settingsDeleteAllDataInitialAction();
+                this.deleteAllDataInitialAction();
                 break;
 
             case "Settings_DeleteAllDataConfirmed":
-                this.settingsDeleteAllDataConfirmed();
+                this.deleteAllDataConfirmed();
                 break;   
 
             case "Settings_DeleteAllDataCancelled":
-                this.settingsDeleteAllDataCancelled();
+                this.deleteAllDataCancelled();
                 break;   
 
             case "Settings_DeleteImportAction":
-                this.settingsImport(true);
+                this.importFromFile(true);
                 break;
 
             case "Settings_AdditiveImportAction":
-                this.settingsImport(false);
+                this.importFromFile(false);
                 break;
 
             case "Settings_ExportAction":
-                this.settingsExport();
+                this.exportToFile();
                 break;
 
             case "App_Welcome":
@@ -134,7 +137,7 @@ class AppActionHandler {
                 break;
 
             case "App_UpdateCountDisplay":
-                this.updateCountDisplay();
+                this.updateStatistics();
                 break;
             
             default:
@@ -171,23 +174,55 @@ class AppActionHandler {
      * @param {*} payload 
      * @returns {void}
      */
+    ItemInsert(payload) {
+
+        // Add to list
+        let newId = App.components.languageList?.addItem(
+            payload.currentData, 
+            App.dispatcher?.newEventDispatchCallback("ExistingItem_Update"),
+            null,
+            App.dispatcher?.newEventDispatchCallback("ExistingItem_DeleteRequest"),
+        );
+
+        // Save to local store
+        if (newId) {
+            App.persistentStorageService?.upsert(
+                "LanguageItems", 
+                newId, 
+                payload.originatingComponent.getSimplifiedPropertybag(),
+            );
+        }
+        else {
+            Log.error("Failed to create item", "HANDLER");
+        }
+
+        // Reset and hide the component we used to initially enter the data
+        App.components.newItem?.clearAll();
+        App.elements.languageNewFlyout?.classList.remove("Show");
+        App.components.languageListControls?.show();
+
+        this.updateCounters(null, payload.currentData.languageType);
+        this.updateStatistics();
+    }
+
+
+    /**
+     * @param {*} payload 
+     * @returns {void}
+     */
     itemUpdate(payload) {
         App.components.languageList?.moveItem(
             payload.originatingId, 
             payload.currentData.priorGojuonKey, 
             payload.currentData.gojuonKey
         );
-        if (payload.currentData.gojuonKey != payload.currentData.priorGojuonKey) {
-            App.persistentStorageService?.delete(
-                payload.currentData.priorGojuonKey, 
-                payload.originatingId, 
-            );
-        }
         App.persistentStorageService?.upsert(
-            payload.currentData.gojuonKey, 
+            "LanguageItems", 
             payload.originatingId, 
-            payload.currentData
+            payload.originatingComponent.getSimplifiedPropertybag(),
         );
+        this.updateCounters(payload.currentData.priorLanguageType, payload.currentData.languageType);
+        this.updateStatistics();
     }
 
     /**
@@ -200,9 +235,11 @@ class AppActionHandler {
             payload.currentData.priorGojuonKey
         );
         App.persistentStorageService?.delete(
-            payload.currentData.gojuonKey, 
+            "LanguageItems", 
             payload.originatingId, 
         );
+        this.updateCounters(payload.currentData.languageType, null);
+        this.updateStatistics();
     }
 
     pageToKana() {
@@ -256,43 +293,13 @@ class AppActionHandler {
         App.components.kana?.setLayout(3);
     }
 
+    useForeignSoundExceptionsLayout() {
+        App.components.kana?.setLayout(4);
+    }
+
     showLanguageNewFlyout() {
         App.elements.languageNewFlyout?.classList.add("Show");
         App.components.languageListControls?.hide();
-    }
-
-    /**
-     * @param {*} payload 
-     * @returns {void}
-     */
-    ItemInsert(payload) {
-
-        // Add to list
-        let newId = App.components.languageList?.addItem(
-            payload.currentData, 
-            App.dispatcher?.newEventDispatchCallback("ExistingItem_Update"),
-            null,
-            App.dispatcher?.newEventDispatchCallback("ExistingItem_DeleteRequest"),
-        );
-
-        // Save to local store
-        if (newId) {
-            App.persistentStorageService?.upsert(
-                payload.currentData.gojuonKey, 
-                newId, 
-                payload.currentData
-            );
-        }
-        else {
-            Log.error("Failed to create item", "HANDLER");
-        }
-
-        // Reset new
-        App.components.newItem?.clearAll();
-
-        // Hide new
-        App.elements.languageNewFlyout?.classList.remove("Show");
-        App.components.languageListControls?.show();
     }
 
     cancelNewItem() {
@@ -300,18 +307,18 @@ class AppActionHandler {
         App.components.languageListControls?.show();
     }
 
-    settingsDeleteAllDataInitialAction() {
+    deleteAllDataInitialAction() {
         App.elements.settingsPageDeleteAllDataInitial?.classList.add("Hide");
         App.elements.settingsPageDeleteAllDataConfirm?.classList.remove("Hide");
         App.elements.settingsPageDeleteAllDataCancel?.classList.remove("Hide");
     }
     
-    settingsDeleteAllDataConfirmed() {
+    deleteAllDataConfirmed() {
         App.persistentStorageService?.deleteAllKeysForThisDatabase();
         location.reload();
     }
     
-    settingsDeleteAllDataCancelled() {
+    deleteAllDataCancelled() {
         App.elements.settingsPageDeleteAllDataInitial?.classList.remove("Hide");
         App.elements.settingsPageDeleteAllDataConfirm?.classList.add("Hide");
         App.elements.settingsPageDeleteAllDataCancel?.classList.add("Hide");
@@ -321,7 +328,7 @@ class AppActionHandler {
      * @param {Boolean} [deleteCurrentDataFirst] 
      * @returns 
      */
-    async settingsImport(deleteCurrentDataFirst = false) {
+    async importFromFile(deleteCurrentDataFirst = false) {
 
         let openPickerOptions = {
             startIn: "downloads",
@@ -337,9 +344,12 @@ class AppActionHandler {
         
         let objectContents = await FilesystemAccessService.readEntireFileAsObject(openPickerOptions);
         
+        // Abandon if not an object
         if (objectContents == null) {
             return;
         }
+
+        // Abandon if the object does not match the expected schema 
         if (!AppBootstrappingService.validateObjectForLoading(objectContents)){
             return;
         }
@@ -353,9 +363,9 @@ class AppActionHandler {
         location.reload();
     }
 
-    async settingsExport() {
+    async exportToFile() {
         let d = new Date();
-        let timestamp = d.toISOString().split("T")[0];
+        let timestamp = `${d.getFullYear()}-${(d.getMonth() + 1).toString().padStart(2, "0")}-${d.getDate().toString().padStart(2, "0")}`;
         let suggestedFilename = `MyJapaneseAid LocalDB Export ${timestamp}.json`;
         let savePickerOptions = {
             startIn: "downloads",
@@ -368,7 +378,14 @@ class AppActionHandler {
             }],
         };
 
-        await FilesystemAccessService.writeObjectAsEntireFile(savePickerOptions, localStorage);
+        let exportableData = App.persistentStorageService?.getExportableData();
+
+        if (exportableData) {
+            await FilesystemAccessService.writeObjectAsEntireFile(savePickerOptions, exportableData);
+        }
+        else {
+            Log.error("No exportable data was returned from the FilesystemAccessService", "HANDLER");
+        }
     }
 
     startWelcomeFlow() {
@@ -417,9 +434,50 @@ class AppActionHandler {
         App.elements.welcomeModal?.classList.remove("Show");
     }
 
-    updateCountDisplay() {
+    /**
+     * @param {Number | Null} fromLanguageType 
+     * @param {Number | Null} toLanguageType 
+     */
+    updateCounters(fromLanguageType, toLanguageType) {
+        if (fromLanguageType != null && Number.isInteger(fromLanguageType)) {
+            switch(fromLanguageType) {
+                case 0:
+                    App.propertyBag.wordCount--;
+                    break;
+                case 1:
+                    App.propertyBag.phraseCount--;
+                    break;
+                case 2:
+                    App.propertyBag.sentenceCount--;
+                    break;
+                default:
+                    // Do nothing
+            }
+        }
+
+        if (toLanguageType != null && Number.isInteger(toLanguageType)) {
+            switch(toLanguageType) {
+                case 0:
+                    App.propertyBag.wordCount++;
+                    break;
+                case 1:
+                    App.propertyBag.phraseCount++;
+                    break;
+                case 2:
+                    App.propertyBag.sentenceCount++;
+                    break;
+                default:
+                    // Do nothing
+            }
+        }
+    }
+
+    updateStatistics() {
         /** @type {HTMLDivElement} */ (App.elements.settingsPageWordCount).innerText = App.propertyBag.wordCount.toString();
         /** @type {HTMLDivElement} */ (App.elements.settingsPagePhraseCount).innerText = App.propertyBag.phraseCount.toString();
         /** @type {HTMLDivElement} */ (App.elements.settingsPageSentenceCount).innerText = App.propertyBag.sentenceCount.toString();
+        /** @type {HTMLDivElement} */ (App.elements.settingsPageTotalCount).innerText = (App.propertyBag.wordCount + App.propertyBag.phraseCount + App.propertyBag.sentenceCount).toString();
+        /** @type {HTMLDivElement} */ (App.elements.settingsPageLastModifiedDate).innerText = App.persistentStorageService?.lastmodified?.toDateString() || "#";
+        /** @type {HTMLDivElement} */ (App.elements.settingsPageLastModifiedTime).innerText = App.persistentStorageService?.lastmodified?.toLocaleTimeString() || "#";
     }
 }

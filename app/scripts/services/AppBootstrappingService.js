@@ -6,7 +6,7 @@ class AppBootstrappingService {
 
     static Initialise() {
 
-        Log.setLoggingLevel(LogLevel.Trace);
+        Log.setLoggingLevel(LogLevel.Infomation);
         Log.debug("AppService.Initialise - Begin", "APPSERVICE");
 
         // Bootstrap
@@ -33,7 +33,7 @@ class AppBootstrappingService {
             // Load from persistent storage
             AppBootstrappingService.initialiseLocalCacheDatabase();
             AppBootstrappingService.loadFromPersistentStorage();
-            //App.dispatcher?.dispatch(new Action("App_UpdateCountDisplay", null));
+            App.dispatcher?.dispatch(new Action("App_UpdateCountDisplay", null));
         }
 
         Log.debug("AppService.Initialise - Complete", "APPSERVICE");
@@ -60,6 +60,8 @@ class AppBootstrappingService {
             {id: "SettingsPhrasecount", objProperty: "settingsPagePhraseCount"},
             {id: "SettingsSentencecount", objProperty: "settingsPageSentenceCount"},
             {id: "SettingsTotalcount", objProperty: "settingsPageTotalCount"},
+            {id: "SettingsLastModifiedDate", objProperty: "settingsPageLastModifiedDate"},
+            {id: "SettingsLastModifiedTime", objProperty: "settingsPageLastModifiedTime"},
             {id: "AppSettingsDeleteData", objProperty: "settingsPageDeleteAllDataInitial"},
             {id: "AppSettingsDeleteDataConfirm", objProperty: "settingsPageDeleteAllDataConfirm"},
             {id: "AppSettingsDeleteDataCancel", objProperty: "settingsPageDeleteAllDataCancel"},
@@ -177,6 +179,7 @@ class AppBootstrappingService {
             App.components.kanaPageControls.addImageButton("./app/assets/svg/grid.svg", App.dispatcher.newEventDispatchCallback("KanaPageControls_QuadrantLayout"), false);
             App.components.kanaPageControls.addImageButton("./app/assets/svg/rows.svg", App.dispatcher.newEventDispatchCallback("KanaPageControls_SectionLayout"), false);
             App.components.kanaPageControls.addImageButton("./app/assets/svg/table.svg", App.dispatcher.newEventDispatchCallback("KanaPageControls_GojuonLayout"), false);
+            App.components.kanaPageControls.addImageButton("./app/assets/svg/alert-triangle.svg", App.dispatcher.newEventDispatchCallback("KanaPageControls_ForeignSoundExceptions"), false);
 
             App.elements.kanaPageControls.appendChild(App.components.kanaPageControls);
         }
@@ -295,7 +298,6 @@ class AppBootstrappingService {
 
         if (!App.persistentStorageService.connect("MyJapaneseAid")) {
             App.persistentStorageService.connect("MyJapaneseAid", true);
-            App.persistentStorageService.newTable(...GojuonGroupingService.gojuonGroupings.map(x => x.gojuonKey));
         }
     }
 
@@ -305,40 +307,47 @@ class AppBootstrappingService {
      */
     static validateObjectForLoading(partlyDecodedJSONObject) {
 
-        for (let key in starterData) {
-            /** @ts-ignore - Yes JSDoc ... you can index an object by string */
-            let contents = JSON.parse(partlyDecodedJSONObject[key]);
+        let contents, key
 
-            if (Array.isArray(contents) && contents.every(element => typeof element === 'string')) {
-                Log.info(`File contents key ${key} is a valid table index`, "");
+        try {
+            for (key in partlyDecodedJSONObject) {
+                /** @ts-ignore - Yes JSDoc ... you can index an object by string */
+                contents = JSON.parse(partlyDecodedJSONObject[key]);
+
+                if (
+                    contents && typeof contents === 'object' && 
+                    contents.hasOwnProperty('schemaversion') && (typeof contents.schemaversion === "string" || contents.schemaversion instanceof String) &&
+                    contents.hasOwnProperty('lastmodified') 
+                    /** @ts-ignore - Yes this is ok for this purpose */
+                    /*!isNaN(new Date(contents.lastmodified))*/) {
+                    
+                    Log.info(`File contents key ${key} is a valid database definition`, "");
+                }
+                else if (
+                    typeof contents == 'object' &&
+                    contents.hasOwnProperty("languageType") && typeof contents.languageType === "number" &&
+                    contents.hasOwnProperty("kana") && (typeof contents.kana === "string" || contents.kana instanceof String) &&
+                    contents.hasOwnProperty("kanaHighlighterString") && (typeof contents.kanaHighlighterString === "string" || contents.kanaHighlighterString instanceof String) &&
+                    contents.hasOwnProperty("romaji") && (typeof contents.romaji === "string" || contents.romaji instanceof String) &&
+                    contents.hasOwnProperty("romajiHighlighterString") && (typeof contents.romajiHighlighterString === "string" || contents.romajiHighlighterString instanceof String) &&
+                    contents.hasOwnProperty("meaning") && (typeof contents.meaning === "string" || contents.meaning instanceof String) &&
+                    contents.hasOwnProperty("meaningHighlighterString") && (typeof contents.meaningHighlighterString === "string" || contents.meaningHighlighterString instanceof String) &&
+                    contents.hasOwnProperty("literal") && (typeof contents.literal === "string" || contents.literal instanceof String) &&
+                    contents.hasOwnProperty("structure") && (typeof contents.structure === "string" || contents.structure instanceof String) &&
+                    contents.hasOwnProperty("notes") && (typeof contents.notes === "string" || contents.notes instanceof String) &&
+                    contents.hasOwnProperty("examples") && Array.isArray(contents.examples)) {
+                    
+                    Log.info(`File contents key ${key} is a valid item`, "");
+                }
+                else {
+                    Log.error(`Unexpected contents found within key ${key}, unable to load file`, "");
+                    return false;
+                }
             }
-            else if (typeof contents == 'object' && contents.hasOwnProperty("tables") && Array.isArray(contents.tables) && contents.tables.every((/** @type {String} */ element) => typeof element === 'string')) {
-                Log.info(`File contents key ${key} is a valid db index`, "");
-            }
-            else if (
-                typeof contents == 'object' &&
-                contents.hasOwnProperty("gojuonKey") && (typeof contents.gojuonKey === "string" || contents.gojuonKey instanceof String) &&
-                contents.hasOwnProperty("priorGojuonKey") && (typeof contents.priorGojuonKey === "string" || contents.priorGojuonKey instanceof String || contents.priorGojuonKey == null) &&
-                contents.hasOwnProperty("languageType") && typeof contents.languageType === "number" &&
-                contents.hasOwnProperty("languageTypeBitmask") && typeof contents.languageTypeBitmask === "number" &&
-                contents.hasOwnProperty("languageTypeLabel") && (typeof contents.languageTypeLabel === "string" || contents.languageTypeLabel instanceof String) &&
-                contents.hasOwnProperty("kana") && (typeof contents.kana === "string" || contents.kana instanceof String) &&
-                contents.hasOwnProperty("kanaHighlighterString") && (typeof contents.kanaHighlighterString === "string" || contents.kanaHighlighterString instanceof String) &&
-                contents.hasOwnProperty("romaji") && (typeof contents.romaji === "string" || contents.romaji instanceof String) &&
-                contents.hasOwnProperty("romajiHighlighterString") && (typeof contents.romajiHighlighterString === "string" || contents.romajiHighlighterString instanceof String) &&
-                contents.hasOwnProperty("meaning") && (typeof contents.meaning === "string" || contents.meaning instanceof String) &&
-                contents.hasOwnProperty("meaningHighlighterString") && (typeof contents.meaningHighlighterString === "string" || contents.meaningHighlighterString instanceof String) &&
-                contents.hasOwnProperty("literal") && (typeof contents.literal === "string" || contents.literal instanceof String) &&
-                contents.hasOwnProperty("structure") && (typeof contents.structure === "string" || contents.structure instanceof String) &&
-                contents.hasOwnProperty("notes") && (typeof contents.notes === "string" || contents.notes instanceof String) &&
-                contents.hasOwnProperty("examples") && Array.isArray(contents.examples)) {
-                
-                Log.info(`File contents key ${key} is a valid item`, "");
-            }
-            else {
-                Log.error(`Unexpected file contents found in key ${key}, unable to load file`, "");
-                return false;
-            }
+        }
+        catch {
+            Log.error(`Unexpected contents found within key ${key}, unable to load file`, "");
+            return false;
         }
         return true;
     }
@@ -348,10 +357,10 @@ class AppBootstrappingService {
      * @param {Boolean} [demunge] 
      */
     static loadFromObject(partlyDecodedJSONObject, demunge = false) {
-        for (let key in starterData) {
+        for (let key in partlyDecodedJSONObject) {
             /** @ts-ignore - Yes JSDoc ... you can index an object by string */
             let contents = JSON.parse(partlyDecodedJSONObject[key]);
-            if (!Array.isArray(contents) && typeof contents == 'object' && contents.hasOwnProperty("kana")) {
+            if (typeof contents == 'object' && contents.hasOwnProperty("kana") && contents.hasOwnProperty("romaji")) {
                 if (demunge) {
                     contents.kana = UnicodeService.demunge(contents.kana);
                     contents.romaji = UnicodeService.demunge(contents.romaji);
@@ -361,20 +370,6 @@ class AppBootstrappingService {
                     }
                 }
                 localStorage.setItem(key, JSON.stringify(contents));
-            }
-            else if (!Array.isArray(contents) && typeof contents == 'object' && contents.hasOwnProperty("tables") && Array.isArray(contents.tables)) {
-                /** @ts-ignore - Yes parse handles null */
-                let currentDBIndex = JSON.parse(localStorage.getItem(key)) || [];
-                currentDBIndex.tables = [...new Set([...currentDBIndex.tables, ...contents.tables])]
-            }
-            else {
-
-                /** @ts-ignore - Yes parse handles null */
-                let currentTableIndex = JSON.parse(localStorage.getItem(key)) || [];
-                currentTableIndex = [...new Set([...currentTableIndex, ...contents])]
-
-                /** @ts-ignore - Yes JSDoc ... you can index an object by string */
-                localStorage.setItem(key, JSON.stringify(currentTableIndex));
             }
         }
     }
@@ -386,29 +381,41 @@ class AppBootstrappingService {
             return;
         }
 
-        let sections = GojuonGroupingService.gojuonGroupings.map(x => x.gojuonKey);
+        App.persistentStorageService.newTableCursor("LanguageItems");
+        
+        let i = 0;
+        let id = App.persistentStorageService.readCurrentKeyFromCursor();
+        let item = App.persistentStorageService.readNextFromCursor();
 
-        for (let section of sections) {
+        while (id != null) {
+            App.components.languageList?.addItem(
+                item, 
+                App.dispatcher?.newEventDispatchCallback("ExistingItem_Update"),
+                null,
+                App.dispatcher?.newEventDispatchCallback("ExistingItem_DeleteRequest"),
+                id
+            );
 
-            App.persistentStorageService.newTableCursor(section);
-            
-            let id = App.persistentStorageService.readCurrentKeyFromCursor();
-            let item = App.persistentStorageService.readNextFromCursor();
-
-            while (id != null && item != null) {
-
-                App.components.languageList?.addItem(
-                    item, 
-                    App.dispatcher?.newEventDispatchCallback("ExistingItem_Update"),
-                    null,
-                    App.dispatcher?.newEventDispatchCallback("ExistingItem_DeleteRequest"),
-                    id
-                );
-
-                id = App.persistentStorageService.readCurrentKeyFromCursor();
-                item = App.persistentStorageService.readNextFromCursor();
+            if (!item) {
+                console.log("Help!");
             }
+
+            switch(item.languageType) {
+                case 0:
+                    App.propertyBag.wordCount++;
+                    break;
+                case 1:
+                    App.propertyBag.phraseCount++;
+                    break;
+                case 2:
+                    App.propertyBag.sentenceCount++;
+                    break;
+                default:
+                    // Do nothing
+            }
+
+            id = App.persistentStorageService.readCurrentKeyFromCursor();
+            item = App.persistentStorageService.readNextFromCursor();
         }
     }
-
 }
