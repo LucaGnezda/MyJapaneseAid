@@ -569,11 +569,11 @@
     }
 
     .Gap8 {
-        top: 8px;
+        gap: 8px;
     }
     
     .Gap16 {
-        top: 16px;
+        gap: 16px;
     }
 }
 
@@ -583,11 +583,11 @@
     }
     
     .Gap8 {
-        top: 10px;
+        gap: 10px;
     }
 
     .Gap16 {
-        top: 20px;
+        gap: 20px;
     }
 }
 

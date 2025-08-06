@@ -68,6 +68,7 @@ class AppBootstrappingService {
             {id: "AppSettingsDeleteImport", objProperty: "settingsPageDeleteImport"},
             {id: "AppSettingsAdditiveImport", objProperty: "settingsPageAdditiveImport"},
             {id: "AppSettingsExport", objProperty: "settingsPageExport"},
+            {id: "TipsPage", objProperty: "tipsPage"},
             {id: "AppWelcome", objProperty: "welcomeModal"},
             {id: "AppWelcomePage1", objProperty: "welcomeModalPage1"},
             {id: "AppWelcomePage2", objProperty: "welcomeModalPage2"},
@@ -160,6 +161,7 @@ class AppBootstrappingService {
             App.components.topNav.addTab("Kana", App.dispatcher.newEventDispatchCallback("TopNav_KanaSelected"));
             App.components.topNav.addTab("Language", App.dispatcher.newEventDispatchCallback("TopNav_LanguageSelected"));
             App.components.topNav.addImageTab("./app/assets/svg/settings.svg", App.dispatcher.newEventDispatchCallback("TopNav_SettingsSelected"));
+            App.components.topNav.addImageTab("./app/assets/svg/question.svg", App.dispatcher.newEventDispatchCallback("TopNav_HelpSelected"));
             App.components.topNav.setExpandableSpacing(true, false);
             App.components.topNav.setLeftContent(App.fragments.appTitle);
             App.components.topNav.selectIndex(1);

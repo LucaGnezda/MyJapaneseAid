@@ -28,6 +28,13 @@ input:read-only:focus {
     outline: none;
 }
 
-input[type="file"].Hide {
-  display: none;
+textarea {
+    resize: none;
+    field-sizing: content;
+}
+
+textarea:disabled {
+    background-color: transparent;
+    border: none;
+    color: black;
 }

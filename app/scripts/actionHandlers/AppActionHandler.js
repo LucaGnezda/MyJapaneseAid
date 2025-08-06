@@ -80,6 +80,10 @@ class AppActionHandler {
                 this.pageToSettings();
                 break;
 
+            case "TopNav_HelpSelected":
+                this.pageToTips();
+                break;
+
             case "Settings_DeleteAllDataAction":
                 this.deleteAllDataInitialAction();
                 break;
@@ -249,6 +253,8 @@ class AppActionHandler {
         App.elements.languagePage?.classList.add("StageRight");
         App.elements.settingsPage?.classList.remove("StageLeft");
         App.elements.settingsPage?.classList.add("StageRight");
+        App.elements.tipsPage?.classList.remove("StageLeft");
+        App.elements.tipsPage?.classList.add("StageRight");
     }
 
     pageToLanguage() {
@@ -258,6 +264,8 @@ class AppActionHandler {
         App.elements.languagePage?.classList.remove("StageRight");
         App.elements.settingsPage?.classList.remove("StageLeft");
         App.elements.settingsPage?.classList.add("StageRight");
+        App.elements.tipsPage?.classList.remove("StageLeft");
+        App.elements.tipsPage?.classList.add("StageRight");
     }
 
     pageToSettings() {
@@ -267,6 +275,19 @@ class AppActionHandler {
         App.elements.languagePage?.classList.remove("StageRight");
         App.elements.settingsPage?.classList.remove("StageLeft");
         App.elements.settingsPage?.classList.remove("StageRight");
+        App.elements.tipsPage?.classList.remove("StageLeft");
+        App.elements.tipsPage?.classList.add("StageRight");
+    }
+
+    pageToTips() {
+        App.elements.kanaPage?.classList.add("StageLeft");
+        App.elements.kanaPage?.classList.remove("StageRight");
+        App.elements.languagePage?.classList.add("StageLeft");
+        App.elements.languagePage?.classList.remove("StageRight");
+        App.elements.settingsPage?.classList.add("StageLeft");
+        App.elements.settingsPage?.classList.remove("StageRight");
+        App.elements.tipsPage?.classList.remove("StageLeft");
+        App.elements.tipsPage?.classList.remove("StageRight");
     }
 
     showHiragana() {
@@ -420,7 +441,7 @@ class AppActionHandler {
     welcomePage3Starter() {
 
         AppBootstrappingService.initialiseLocalCacheDatabase();
-        AppBootstrappingService.loadFromObject(starterData, true);
+        AppBootstrappingService.loadFromObject(starterData);
 
         location.reload();
     }
