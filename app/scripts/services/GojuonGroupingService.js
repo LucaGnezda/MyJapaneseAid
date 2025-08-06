@@ -97,13 +97,13 @@ class GojuonGroupingService {
             
             GojuonGroupingService.#gojuonGroupings.forEach((item) => {
                 // Do all just in case we eventually include Japanese Characters there
-                let gojuonKey = UnicodeService.demunge(item.gojuonKey);
+                let gojuonKey = item.gojuonKey; //UnicodeService.demunge(item.gojuonKey);
 
                 if (gojuonKey != null) {
                     item.gojuonKey = gojuonKey;
-                    item.startsWith = UnicodeService.demunge(item.startsWith?item.startsWith:"");
-                    item.title = UnicodeService.demunge(item.title?item.title:"");
-                    item.subTitle = UnicodeService.demunge(item.subTitle?item.subTitle:"");
+                    item.startsWith = item.startsWith?item.startsWith:""; //UnicodeService.demunge(item.startsWith?item.startsWith:"");
+                    item.title = item.title?item.title:""; //UnicodeService.demunge(item.title?item.title:"");
+                    item.subTitle = item.subTitle?item.subTitle:""; //UnicodeService.demunge(item.subTitle?item.subTitle:"");
                 }
             });
 

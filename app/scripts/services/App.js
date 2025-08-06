@@ -82,6 +82,7 @@ class App {
         settingsPageDeleteImport: null,
         settingsPageAdditiveImport: null,
         settingsPageExport: null,
+        tipsPage: null,
         welcomeModal: null,
         welcomeModalPage1: null,
         welcomeModalPage2: null,

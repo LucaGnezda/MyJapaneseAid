@@ -86,8 +86,8 @@ class CCKana extends CCBase {
             { label: "monographs", layoutCSS: [[], ["R3", "C1", "H11", "VerticalText", "RomanXL", "Font400"],["R2", "C1", "H11", "VerticalText", "RomanXL", "Font400"],[]]},
             { label: "diacritics", layoutCSS: [[], ["R14", "C1", "H5", "VerticalText", "RomanXL", "Font400"],["R13", "C1", "H5", "VerticalText", "RomanXL", "Font400"],[]]},
             { label: "diacritic digraphs", layoutCSS: [[], [],["R26", "C1", "H5", "VerticalText", "RomanXL", "Font400"],[]]},
-            { label: "katakana extended sounds", layoutCSS: [[],[],[],[],["R1", "C2","W8", "RomanXL", "Font400"]]},
-            { label: "used in loanwords and foreign names to match sounds", layoutCSS: [[],[],[],[],["R3", "C1","H15", "VerticalText", "RomanXL", "Font400"]]},
+            { label: "extended katakana sounds", layoutCSS: [[],[],[],[],["R1", "C2","W8", "RomanXL", "Font400"]]},
+            { label: "used in loanwords and foreign names (to emulate foreign sounds)", layoutCSS: [[],[],[],[],["R3", "C1","H15", "VerticalText", "RomanXL", "Font400"]]},
             { label: "a", layoutCSS: [["R1", "C2", "RomanXL", "Font400"],["R2", "C3", "RomanXL", "Font400"],["R1", "C3", "W3", "RomanXL", "Font400"],["R1", "C3", "RomanXL", "Font400"],["R2", "C2", "RomanXL", "Font400"]]},
             { label: "i", layoutCSS: [["R1", "C3", "RomanXL", "Font400"],["R2", "C4", "RomanXL", "Font400"],["R1", "C6", "W3", "RomanXL", "Font400"],["R1", "C4", "RomanXL", "Font400"],["R2", "C3", "RomanXL", "Font400"]]},
             { label: "u", layoutCSS: [["R1", "C4", "RomanXL", "Font400"],["R2", "C5", "RomanXL", "Font400"],["R1", "C9", "W3", "RomanXL", "Font400"],["R1", "C5", "RomanXL", "Font400"],["R2", "C4", "RomanXL", "Font400"]]},
@@ -370,12 +370,12 @@ class CCKana extends CCBase {
         // First time only initialisation
         if (!CCKana.#dataTemplateInitialised) {
             for (let e of CCKana.#dataTemplate.headings) {
-                e.label = UnicodeService.demunge(e.label) || "";
+                //e.label = UnicodeService.demunge(e.label) || "";
             }
             for (let e of CCKana.#dataTemplate.kana) {
-                e.romaji = UnicodeService.demunge(e.romaji) || "";
-                e.hiragana = UnicodeService.demunge(e.hiragana) || "";
-                e.katakana = UnicodeService.demunge(e.katakana) || "";
+                //e.romaji = UnicodeService.demunge(e.romaji) || "";
+                //e.hiragana = UnicodeService.demunge(e.hiragana) || "";
+                //e.katakana = UnicodeService.demunge(e.katakana) || "";
             }
             CCKana.#dataTemplateInitialised = true;
         }

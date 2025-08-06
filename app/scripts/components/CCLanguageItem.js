@@ -241,11 +241,11 @@ class CCLanguageItem extends CCBase {
                             </div>
                         </div>
                         <div class="GridLabel" data-use="literal.grid-cell-1"><p class="RomanM NoBlockMargins">Literal:</p></div>
-                        <div class="FlexLayout Col" data-use="literal.grid-cell-2"><input class="ItemInput RomanM NoBlockMargins Font300" data-use="literal.input"></input></div>
+                        <div class="FlexLayout Col" data-use="literal.grid-cell-2"><textarea spellcheck="false" class="ItemInput RomanM NoBlockMargins Font300" data-use="literal.input"></textarea></div>
                         <div class="GridLabel"  data-use="structure.grid-cell-1"><p class="RomanM NoBlockMargins">Structure:</p></div>
-                        <div class="FlexLayout Col" data-use="structure.grid-cell-2"><input class="ItemInput RomanM NoBlockMargins Font300" data-use="structure.input"></input></div>
+                        <div class="FlexLayout Col" data-use="structure.grid-cell-2"><textarea spellcheck="false" class="ItemInput RomanM NoBlockMargins Font300" data-use="structure.input"></textarea></div>
                         <div class="GridLabel" data-use="notes.grid-cell-1"><p class="RomanM NoBlockMargins">Notes:</p></div>
-                        <div class="FlexLayout Col" data-use="notes.grid-cell-2"><input class="ItemInput RomanM NoBlockMargins Font300" data-use="notes.input"></input></div>
+                        <div class="FlexLayout Col" data-use="notes.grid-cell-2"><textarea spellcheck="false" class="ItemInput RomanM NoBlockMargins Font300" data-use="notes.input"></textarea></div>
                     </div>
                     <div class="ExamplesSectionBreak MarginTXL MarginBS">
                         <div class="ExamplesHeader" data-use="examples-header">
@@ -266,15 +266,15 @@ class CCLanguageItem extends CCBase {
                             <div class="ExampleInputs PadRXL">
                                 <div class="FlexLayout Col">
                                     <label class="InputLabel Font300 RomanS">Kana</label>
-                                    <input class="ItemInput KanaS NoBlockMargins" data-use="example.kana.input" data-as="kana"></input>
+                                    <textarea spellcheck="false" class="ItemInput KanaS NoBlockMargins" data-use="example.kana.input" data-as="kana"></textarea>
                                 </div>
                                 <div class="FlexLayout Col">
                                     <label class="InputLabel Font300 RomanS">Romaji</label>
-                                    <input class="ItemInput Font300 RomanS NoBlockMargins" data-use="example.romaji.input" data-as="romaji"></input>
+                                    <textarea spellcheck="false" class="ItemInput Font300 RomanS NoBlockMargins" data-use="example.romaji.input" data-as="romaji"></textarea>
                                 </div>
                                 <div class="FlexLayout Col">
                                     <label class="InputLabel Font300 RomanS">Meaning</label>
-                                    <input class="ItemInput Font300 RomanS NoBlockMargins" data-use="example.meaning.input" data-as="meaning"></input>
+                                    <textarea spellcheck="false" class="ItemInput Font300 RomanS NoBlockMargins" data-use="example.meaning.input" data-as="meaning"></textarea>
                                 </div>
                             </div>
                             <div class="ExampleControls">
@@ -445,6 +445,7 @@ class CCLanguageItem extends CCBase {
             this.#elements.examplesAdd.addEventListener("click", this.examplesAddCallback.bind(this), this.getPreDisposeSignal());
 
             this.#elements.examplesContainer.addEventListener("click", this.exampleClickCallback.bind(this), this.getPreDisposeSignal());
+            this.#elements.examplesContainer.addEventListener("input", this.exampleChangeCallback.bind(this), this.getPreDisposeSignal());
 
             this.#elements.romajiInput.setAttribute("data-isvalid", "data-isvalid");
             this.#elements.kanaHighlighterInput.setAttribute("data-isvalid", "data-isvalid");
@@ -524,6 +525,10 @@ class CCLanguageItem extends CCBase {
                 this.#elements.notesGridCell2.classList.remove("Hide");
             }
 
+            this.#elements.literalInput.setAttribute("spellcheck", "false");
+            this.#elements.structureInput.setAttribute("spellcheck", "false");
+            this.#elements.notesInput.setAttribute("spellcheck", "false");
+
             // Hide if no content to show
             let foundExample = false;
 
@@ -533,7 +538,7 @@ class CCLanguageItem extends CCBase {
 
                     let foundContent = false;
 
-                    for(let input of Array.from(example.querySelectorAll("input"))) {
+                    for(let input of Array.from(example.querySelectorAll("textarea"))) {
 
                         if (input.value.trim().length == 0) {
                             input.parentElement?.classList.add("Hide");
@@ -542,6 +547,8 @@ class CCLanguageItem extends CCBase {
                             foundContent = true;
                             foundExample = true;
                         }
+
+                        input.setAttribute("spellcheck", "false");
                     }
 
                     if (!foundContent) {
@@ -579,6 +586,7 @@ class CCLanguageItem extends CCBase {
             this.#elements.literalGridCell1 && this.#elements.literalGridCell2 && 
             this.#elements.structureGridCell1 && this.#elements.structureGridCell2 &&
             this.#elements.notesGridCell1 && this.#elements.notesGridCell2 &&
+            this.#elements.literalInput && this.#elements.structureInput && this.#elements.notesInput &&
             this.#elements.examplesHeader && this.#elements.examplesExpander && 
             this.#elements.examplesAdd && this.#elements.examplesContainer) {
 
@@ -595,6 +603,10 @@ class CCLanguageItem extends CCBase {
             this.#elements.notesGridCell1.classList.remove("Hide");
             this.#elements.notesGridCell2.classList.remove("Hide");
 
+            this.#elements.literalInput.setAttribute("spellcheck", "true");
+            this.#elements.structureInput.setAttribute("spellcheck", "true");
+            this.#elements.notesInput.setAttribute("spellcheck", "true");
+
             /** @ts-ignore */ 
             this.#elements.examplesHeader.parentNode.classList.remove("Hide");
 
@@ -609,9 +621,10 @@ class CCLanguageItem extends CCBase {
 
                 if (example instanceof HTMLDivElement && example.getAttribute("data-use")=="example") {
 
-                    for(let input of Array.from(example.querySelectorAll("input"))) {
+                    for(let input of Array.from(example.querySelectorAll("textarea"))) {
 
                         input.parentElement?.classList.remove("Hide");
+                        input.setAttribute("spellcheck", "true");
                     }
 
                     example.classList.remove("Hide");
@@ -764,11 +777,11 @@ class CCLanguageItem extends CCBase {
                     let propertyBagExample = {};
                     
                     /** @type {HTMLInputElement | ?} */
-                    let kana = example.querySelector("input[data-as='kana']");
+                    let kana = example.querySelector("textarea[data-as='kana']");
                     /** @type {HTMLInputElement | ?} */
-                    let romaji = example.querySelector("input[data-as='romaji']");
+                    let romaji = example.querySelector("textarea[data-as='romaji']");
                     /** @type {HTMLInputElement | ?} */
-                    let meaning = example.querySelector("input[data-as='meaning']");
+                    let meaning = example.querySelector("textarea[data-as='meaning']");
 
                     propertyBagExample.kana = kana?.value;
                     propertyBagExample.romaji = romaji?.value;
@@ -814,19 +827,19 @@ class CCLanguageItem extends CCBase {
                 let fragment = getDOMFragmentFromString(CCLanguageItem.#htmlExampleTemplate);
 
                 /** @type {HTMLInputElement | ?} */
-                let kana = fragment.querySelector("input[data-use='example.kana.input']");
+                let kana = fragment.querySelector("textarea[data-use='example.kana.input']");
                 if (kana) {
                     kana.value = propertyBagExample.kana;
                 }
 
                 /** @type {HTMLInputElement | ?} */
-                let romaji = fragment.querySelector("input[data-use='example.romaji.input']");
+                let romaji = fragment.querySelector("textarea[data-use='example.romaji.input']");
                 if (romaji) {
                     romaji.value = propertyBagExample.romaji;
                 }
 
                 /** @type {HTMLInputElement | ?} */
-                let meaning = fragment.querySelector("input[data-use='example.meaning.input']");
+                let meaning = fragment.querySelector("textarea[data-use='example.meaning.input']");
                 if (meaning) {
                     meaning.value = propertyBagExample.meaning;
                 }
@@ -977,7 +990,7 @@ class CCLanguageItem extends CCBase {
     }
 
     /**
-     * @param {InputEvent & {currentTarget:HTMLInputElement}} event 
+     * @param {InputEvent & {target:HTMLInputElement}} event 
      */
     #replaceRomajiLongSound(event) {
 
@@ -985,12 +998,12 @@ class CCLanguageItem extends CCBase {
 
         if (event.inputType == "insertText" && 
             event.data == "-" && 
-            event.currentTarget && 
-            event.currentTarget.selectionStart && 
-            event.currentTarget.selectionStart >= 2 &&
-            isVowel.test(event.currentTarget.value.charAt(event.currentTarget.selectionStart - 2))) {
+            event.target && 
+            event.target.selectionStart && 
+            event.target.selectionStart >= 2 &&
+            isVowel.test(event.target.value.charAt(event.target.selectionStart - 2))) {
             
-            event.currentTarget.value = event.currentTarget.value
+            event.target.value = event.target.value
                 .replaceAll("A-", String.fromCharCode(256))
                 .replaceAll("a-", String.fromCharCode(257))
                 .replaceAll("E-", String.fromCharCode(274))
@@ -1439,6 +1452,18 @@ class CCLanguageItem extends CCBase {
                 }, 500);
 
             }
+        }
+    }
+
+    /**
+     * @param {Event & {currentTarget:HTMLElement} |?} event 
+     * @returns
+     */
+    exampleChangeCallback(event) {
+        Log.debug("Example Change", "COMPONENT");
+
+        if (event.target.getAttribute("data-use") == "example.romaji.input") {
+            this.#replaceRomajiLongSound(event);
         }
     }
 }

@@ -133,14 +133,6 @@
     overflow-y: hidden;
 }
 
-.PageScroller {
-    height: auto;
-    max-height: 100%;
-    flex: 0 0 auto;
-    overflow-x: hidden;
-    overflow-y: auto;
-}
-
 .LanguageNewFlyout {
     height: 0px;
     flex: 0 0 auto;
