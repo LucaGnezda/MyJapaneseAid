@@ -155,7 +155,7 @@ class CCSearch extends CCBase {
                 originatingEvent: triggerEvent,
                 originatingObject: this,
                 searchType: this.#propertyBag.searchType,
-                searchString: this.#elements.searchInputElement.value.trim()
+                searchString: this.#elements.searchInputElement.value.replace(/\s+/g, ' ').trim()
             };
 
             if (useDebounce) {

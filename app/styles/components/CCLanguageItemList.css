@@ -37,6 +37,10 @@ cc-languageitemlist {
         width: fit-content;
     }
 
+    .Section.Hide {
+        display: none;
+    }
+
     .SectionHeader {
         display: flex;
         flex-direction: row;
@@ -50,6 +54,17 @@ cc-languageitemlist {
 
     .SectionSubTitle {
         flex: 1 0 auto;
+    }
+
+    .SectionBody {
+        transition: all 0.5s ease-in-out;
+        overflow: hidden;
+        opacity: 1;
+    }
+
+    .SectionBody.Hide {
+        height: 0px;
+        opacity: 0;
     }
 
 }

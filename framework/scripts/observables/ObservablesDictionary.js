@@ -91,9 +91,9 @@ class ObservablesDictionary {
 
     /**
      * Emits notification for all observables, optionally forcing emission
-     * @param {boolean} isForced 
+     * @param {boolean} [isForced] 
      */
-    emitNotifications(isForced) {
+    emitNotifications(isForced = false) {
         for (var property in this) {
             if (typeof this.#getObservable(property).emitNotifications !== "undefined") {
                 this.#getObservable(property).emitNotifications(isForced);

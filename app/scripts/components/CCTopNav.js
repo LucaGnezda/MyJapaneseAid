@@ -70,8 +70,13 @@ class CCTopNav extends CCBase {
     `;
 
     static #htmlTabTemplate = `
-        <div class="Tab RomanXL PadLRXL PadBS Font400" data-use="tab"></div>
+        <div class="Tab RomanXL PadLRXL PadTS PadBM Font400" data-use="tab"></div>
     `;
+
+    static #htmlImageTabTemplate = `
+        <div class="Tab PadLRXL PadTM PadBS" data-use="imagetab"></div>
+    `;
+
 
 
     /**
@@ -156,6 +161,37 @@ class CCTopNav extends CCBase {
         if (fragment.firstElementChild) {
             this.#elements.tabs[tabIndex] = fragment.firstElementChild;
             this.#elements.tabs[tabIndex].innerText = displayName;
+            this.#elements.tabs[tabIndex].setAttribute("data-tabIndex", tabIndex);
+            this.#elements.tabstrip.appendChild(fragment);
+
+            this.#attachedCallbacks.tabCallbacks[tabIndex] = onClickCallback;
+        }
+
+    }
+
+    /**
+     * @param {String} imageSrc 
+     * @param {Function} onClickCallback
+     * @returns
+     */
+    addImageTab(imageSrc, onClickCallback) {
+
+        if (!this.#elements.tabstrip) {
+            Log.fatal("Component has not been correctly initialised", "COMPONENT", this);
+            return;
+        }
+        
+        let fragment = getDOMFragmentFromString(CCTopNav.#htmlImageTabTemplate);
+        let tabIndex = "Tab" + Object.keys(this.#elements.tabs).length.toString();
+
+        if (fragment.firstElementChild) {
+            let img = document.createElement("img");
+            img.src = imageSrc;
+            img.classList.add("SizeWH20");
+
+            fragment.firstElementChild.appendChild(img);
+
+            this.#elements.tabs[tabIndex] = fragment.firstElementChild;
             this.#elements.tabs[tabIndex].setAttribute("data-tabIndex", tabIndex);
             this.#elements.tabstrip.appendChild(fragment);
 

@@ -13,6 +13,7 @@ class ComponentRegistry {
         
         // Register your components here...
         customElements.define("cc-buttonstrip", CCButtonStrip);
+        customElements.define("cc-kana", CCKana);
         customElements.define("cc-search", CCSearch);
         customElements.define("cc-languageitem", CCLanguageItem);
         customElements.define("cc-languageitemlist", CCLanguageItemList);    

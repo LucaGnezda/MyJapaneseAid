@@ -44,7 +44,7 @@ class GojuonGroupingService {
         {"gojuonKey":"to", "startsWith":"と", "isOther": false, "index": 20, "title":"と", "subTitle":"to, do"},
         {"gojuonKey":"na", "startsWith":"な", "isOther": false, "index": 21, "title":"な", "subTitle":"na"},
         {"gojuonKey":"ni", "startsWith":"に", "isOther": false, "index": 22, "title":"に", "subTitle":"ni, nya, nyu, nyo"},
-        {"gojuonKey":"nu", "startsWith":"に", "isOther": false, "index": 23, "title":"ぬ", "subTitle":"nu"},
+        {"gojuonKey":"nu", "startsWith":"ぬ", "isOther": false, "index": 23, "title":"ぬ", "subTitle":"nu"},
         {"gojuonKey":"ne", "startsWith":"ね", "isOther": false, "index": 24, "title":"ね", "subTitle":"ne"},
         {"gojuonKey":"no", "startsWith":"の", "isOther": false, "index": 25, "title":"の", "subTitle":"no"},
         {"gojuonKey":"ha", "startsWith":"は", "isOther": false, "index": 26, "title":"は", "subTitle":"ha, ba, pa"},
@@ -68,6 +68,7 @@ class GojuonGroupingService {
         {"gojuonKey":"wa", "startsWith":"わ", "isOther": false, "index": 44, "title":"わ", "subTitle":"wa"},
         {"gojuonKey":"wo", "startsWith":"を", "isOther": false, "index": 45, "title":"を", "subTitle":"wo(o)"},
         {"gojuonKey":"nn", "startsWith":"ん", "isOther": false, "index": 46, "title":"ん", "subTitle":"n"},
+        {"gojuonKey":"kanji", "startsWith":"ゞ", "isOther": false, "index": 46, "title":"漢字", "subTitle":"kanji"},
     ];
 
     /** @type {Number} */
@@ -96,13 +97,13 @@ class GojuonGroupingService {
             
             GojuonGroupingService.#gojuonGroupings.forEach((item) => {
                 // Do all just in case we eventually include Japanese Characters there
-                let gojuonKey = UnicodeService.demunge(item.gojuonKey);
+                let gojuonKey = item.gojuonKey; //UnicodeService.demunge(item.gojuonKey);
 
                 if (gojuonKey != null) {
                     item.gojuonKey = gojuonKey;
-                    item.startsWith = UnicodeService.demunge(item.startsWith?item.startsWith:"");
-                    item.title = UnicodeService.demunge(item.title?item.title:"");
-                    item.subTitle = UnicodeService.demunge(item.subTitle?item.subTitle:"");
+                    item.startsWith = item.startsWith?item.startsWith:""; //UnicodeService.demunge(item.startsWith?item.startsWith:"");
+                    item.title = item.title?item.title:""; //UnicodeService.demunge(item.title?item.title:"");
+                    item.subTitle = item.subTitle?item.subTitle:""; //UnicodeService.demunge(item.subTitle?item.subTitle:"");
                 }
             });
 

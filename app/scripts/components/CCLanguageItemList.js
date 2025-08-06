@@ -9,12 +9,18 @@
  *      root: HTMLDivElement?,
  *      title: HTMLDivElement?,
  *      subtitle: HTMLDivElement?,
+ *      button: HTMLDivElement?,
  *      body: HTMLDivElement?,
  * }} CCLanguageItemListSectionElements
- * 
+ *
+ * @typedef {{
+ *      searchKey: String,
+ *      typeBitmask: Number,
+ * }} CCLanguageItemListSearchKeys
+ *  
  * @typedef {{
  *      subComponents: Object.<String, CCLanguageItem>,
- *      subComponentsSearchKeys: Object.<String, String>,
+ *      subComponentsSearchKeys: Object.<String, CCLanguageItemListSearchKeys>,
  *      subComponentsOrderKeys: Object.<String, String>,
  * }} CCLanguageItemListSectionProperties
  * 
@@ -28,11 +34,29 @@
  * 
  * @typedef {{
  *      listSection: Object.<String, CCLanguageItemListSectionProperties>,
+ *      searchRequestId: String,
  * }} CCLanguageItemListPropertyBag
  *  
  * @typedef {{
  * }} CCLanguageItemListAttachedCallbacks
+ * 
+ * @typedef {{
+ *      typeFilterBitmask: Number,
+ *      searchString: String,
+ *      searchType: String,
+ * }} CCLanguageItemListRequestResultLookfor
+ * 
+ * @typedef {{
+ *      searchRequestId: String,
+ *      lookFor: CCLanguageItemListRequestResultLookfor,
+ *      withinSection: String,
+ *      searchSpace: Object.<String, CCLanguageItemListSearchKeys>,
+ *      result: Object.<String, Boolean>,
+ *      matchedCount: Number,
+ *      totalCount: Number,
+ * }} CCLanguageItemListRequestResult
  */
+
 
 class CCLanguageItemList extends CCBase {
 
@@ -58,6 +82,7 @@ class CCLanguageItemList extends CCBase {
      */
     #propertyBag = {
         listSection: {},
+        searchRequestId: "",
     }
 
     /**
@@ -67,10 +92,16 @@ class CCLanguageItemList extends CCBase {
     #attachedCallbacks = {
     }
 
+    /**
+     * The elements that make up this component
+     * @type {MultithreadingService | Null}
+     */
+    #searchService = null;
+
     static #htmlRootTemplate = `
         <div class="CCLanguageItemList Container" data-use="root-container">
             <div class="ListHeader">
-                <div class="ListTitle"><p class="RomanXXL NoBlockMargins" data-use="list.title">List</p></div>
+                <div class="ListTitle"><p class="RomanXXXL NoBlockMargins" data-use="list.title">List</p></div>
                 <div class="ButtonStipContainer" data-use="list.controls"></div>
             </div>
             <div class="ListBody" data-use="list.body">
@@ -79,15 +110,85 @@ class CCLanguageItemList extends CCBase {
     `;
 
     static #htmlSectionTemplate = `
-                <div class="Section" data-use="section">
+                <div class="Section Hide" data-use="section">
                     <div class="SectionHeader MarginTXL MarginBM">
                         <div class="SectionTitle MarginRXL"><p class="KanaXL NoBlockMargins" data-use="section.title"></p></div>
                         <div class="SectionSubTitle"><p class="RomanL NoBlockMargins" data-use="section.subtitle"></p></div>
-                        <div class="FormButton ShadowGreenOnBlack Small"><img src="./app/assets/svg/arrow-down.svg" class="FormButtonSmallGreenIcon"></div>
+                        <div class="FormButton ShadowGreenOnBlack Small" data-use="section.expander"><img src="./app/assets/svg/arrow-down.svg" class="FormButtonSmallGreenIcon"></div>
                     </div>
                     <div class="SectionBody" data-use="section.body"></div>
                 </div>
     `;
+
+    static #workerCode = URL.createObjectURL(new Blob([ '(',
+
+        function(){
+
+            self.onmessage = (event) => {
+
+                let response = event.data;
+                let searchterms;
+
+                response.matchedCount = 0;
+
+                if (response.lookFor.searchType != null) {
+                    searchterms = response.lookFor.searchString.split(" ");
+                }
+                else {
+                    searchterms = [];
+                    searchterms[0] = response.lookFor.searchString;
+                }
+
+                for (let key in response.searchSpace) {
+
+                    // First make sure it matech the type filter, exit current iteration early if not.
+                    if ((response.searchSpace[key].typeBitmask & response.lookFor.typeFilterBitmask) == 0) {
+                        response.result[key] = false;
+                        continue;
+                    }
+                    else if (response.lookFor.searchString.length == 0) {
+                        response.result[key] = true;
+                        response.matchedCount += 1;
+                        continue;
+                    }
+
+                    let match;
+
+                    if (response.lookFor.searchType == "or") {
+
+                        match = false;
+
+                        for (let term of searchterms) {
+                            if (response.searchSpace[key].searchKey.includes(term)) {
+                                match = true;
+                                break;
+                            }
+                        }
+                    }
+                    else { // "and" or null (single word)
+
+                        match = true;
+
+                        for (let term of searchterms) {
+                            if (!response.searchSpace[key].searchKey.includes(term)) {
+                                match = false;
+                                break;
+                            }
+                        }
+                    }
+                    
+                    response.result[key] = match;
+                    if (match) {
+                        response.matchedCount += 1;
+                    }
+                }
+
+                self.postMessage(response);
+            }
+
+        }.toString(),
+
+    ')()' ], { type: 'application/javascript' } ) );
 
 
     /**
@@ -101,6 +202,7 @@ class CCLanguageItemList extends CCBase {
         super(id);
 
         this.#initialiseStructure();
+        this.#provisionSearchWorkers();
     }
 
 
@@ -142,11 +244,23 @@ class CCLanguageItemList extends CCBase {
         this.appendChild(fragment);
     }
 
+
+    #provisionSearchWorkers() {
+
+        this.#searchService = new MultithreadingService(4);
+        this.#searchService.provisionWorkers(CCLanguageItemList.#workerCode, this.applyResultsCallback.bind(this));
+
+    }
+
     
     #initialiseBehaviour() {
 
-        // nothing to do
-
+        for (let s in this.#elements.listSection) {
+            let button = this.#elements.listSection[s].button;
+            if (button) {
+                button.addEventListener("click", this.expanderClickCallback.bind(this), this.getPreDisposeSignal());
+            }
+        }
     }
 
     /** 
@@ -168,8 +282,13 @@ class CCLanguageItemList extends CCBase {
                         root: fragment.querySelector('[data-use="section"]'),
                         title: fragment.querySelector('[data-use="section.title"]'),
                         subtitle: fragment.querySelector('[data-use="section.subtitle"]'),
+                        button: fragment.querySelector('[data-use="section.expander"]'),
                         body: fragment.querySelector('[data-use="section.body"]'),
                     };
+
+                    if (sectionElements.button) {
+                        sectionElements.button.setAttribute("data-section", obj[i].gojuonKey);
+                    }
 
                     if (sectionElements.title instanceof HTMLElement && sectionElements.subtitle instanceof HTMLElement) {
                         sectionElements.title.innerText = obj[i].title || "";
@@ -247,7 +366,7 @@ class CCLanguageItemList extends CCBase {
      * @param {HTMLElement} element 
      * @returns
      */
-    AddControls(element) {
+    addControls(element) {
         if (!this.#elements.listControls) {
             Log.fatal("Component has not been correctly initialised", "COMPONENT", this);
             return;
@@ -255,30 +374,23 @@ class CCLanguageItemList extends CCBase {
 
         this.#elements.listControls.replaceChildren(element);
     }
-
-    /**
-     * @param {...String} args 
-     * @returns
-     */
-    resortGroups(...args) {
-
-    } 
     
     /**
-     * @param {CCLanguageItemPropertyBag} payload 
+     * @param {CCLanguageItemSimplifiedPropertyBag} payload 
      * @param {Function | Null} [saveCallback]
      * @param {Function | Null} [cancelCallback]
      * @param {Function | Null} [deleteRequestCallback]
-     * @returns
+     * @param {String | Null} [id]
+     * @returns {String | Null}
      */
-    addItem(payload, saveCallback = null, cancelCallback = null, deleteRequestCallback = null) {
+    addItem(payload, saveCallback = null, cancelCallback = null, deleteRequestCallback = null, id = null) {
 
-        if (!payload || !payload.gojuonKey) {
-            Log.error("A valid gojuonKey is needed", "COMPONENT");
-            return;
+        if (!payload) {
+            Log.error("Data is needed in order to add an item", "COMPONENT");
+            return null;
         }
 
-        let newItem = new CCLanguageItem(true, false);
+        let newItem = new CCLanguageItem((id != null ? id : true), false);
         newItem.loadFromPropertyBag(payload);
         if (saveCallback) { newItem.attachSaveCallback(saveCallback); }
         if (cancelCallback) { newItem.attachCancelCallback(cancelCallback); }
@@ -298,9 +410,13 @@ class CCLanguageItemList extends CCBase {
         moveToGroupBody.insertBefore(newItem, moveAfterComponent);
 
         // Update indexes
-        this.#propertyBag.listSection[payload.gojuonKey].subComponents[newItem.id] = newItem;
-        this.#propertyBag.listSection[payload.gojuonKey].subComponentsSearchKeys[newItem.id] = newItem.searchKey;
-        this.#propertyBag.listSection[payload.gojuonKey].subComponentsOrderKeys[newItem.id] = newItem.kana;
+        this.#propertyBag.listSection[toGroup].subComponents[newItem.id] = newItem;
+        this.#propertyBag.listSection[toGroup].subComponentsSearchKeys[newItem.id] = {searchKey: newItem.searchKey, typeBitmask: newItem.typeBitmask}
+        this.#propertyBag.listSection[toGroup].subComponentsOrderKeys[newItem.id] = newItem.kana;
+
+        this.#elements.listSection[toGroup].root.classList.remove("Hide");
+
+        return newItem.id;
 
     }
 
@@ -316,7 +432,8 @@ class CCLanguageItemList extends CCBase {
 
         // If the list's indexed kana matches the newly saved object
         if (this.#propertyBag.listSection[fromGroup].subComponentsOrderKeys[id] == compponentToMove.kana) {
-            // nothing meaningful changed from an ordering perspective, so we can just return
+            // nothing has hanged from an ordering perspective, so just update the search keys and return
+            this.#propertyBag.listSection[toGroup].subComponentsSearchKeys[id] = {searchKey: compponentToMove.searchKey, typeBitmask: compponentToMove.typeBitmask}
             return;
         }
 
@@ -333,11 +450,19 @@ class CCLanguageItemList extends CCBase {
         moveToGroupBody.insertBefore(compponentToMove, moveAfterComponent);
 
         // Update indexes
-        this.#propertyBag.listSection[toGroup].subComponentsOrderKeys[id] = compponentToMove.kana;
         this.#propertyBag.listSection[toGroup].subComponents[id] = compponentToMove;
+        this.#propertyBag.listSection[toGroup].subComponentsSearchKeys[id] = {searchKey: compponentToMove.searchKey, typeBitmask: compponentToMove.typeBitmask}
+        this.#propertyBag.listSection[toGroup].subComponentsOrderKeys[id] = compponentToMove.kana;
+        
         if (fromGroup != toGroup) {
+            delete this.#propertyBag.listSection[fromGroup].subComponents[id];
+            delete this.#propertyBag.listSection[fromGroup].subComponentsSearchKeys[id];
             delete this.#propertyBag.listSection[fromGroup].subComponentsOrderKeys[id];
-            delete this.#propertyBag.listSection[fromGroup].subComponents[id]
+
+            if (Object.keys(this.#propertyBag.listSection[fromGroup].subComponents).length == 0) {
+                this.#elements.listSection[fromGroup].root.classList.add("Hide");
+            }
+            this.#elements.listSection[toGroup].root.classList.remove("Hide");
         }
 
     }
@@ -348,8 +473,60 @@ class CCLanguageItemList extends CCBase {
      * @returns
      */
     removeItem(id, fromGroup) {
+        this.#propertyBag.listSection[fromGroup].subComponents[id].remove();
+        delete this.#propertyBag.listSection[fromGroup].subComponents[id];
+        delete this.#propertyBag.listSection[fromGroup].subComponentsSearchKeys[id];
+        delete this.#propertyBag.listSection[fromGroup].subComponentsOrderKeys[id];
 
+        if (Object.keys(this.#propertyBag.listSection[fromGroup].subComponents).length == 0) {
+            this.#elements.listSection[fromGroup].root.classList.add("Hide");
+        }
     }
+
+    /**
+     * @param {Number} typeFilterBitmask
+     * @param {String} searchString
+     * @param {String} searchType  
+     * @returns
+     */
+    executeSearch(typeFilterBitmask, searchString, searchType) {
+        Log.debug(`${this.constructor.name} Searching list`, "COMPONENT");
+
+        if (!this.#searchService){
+            Log.fatal("Component has not been correctly initialised", "COMPONENT", this);
+            return;
+        }
+
+        this.#searchService.purgeBacklog();
+        this.#propertyBag.searchRequestId = crypto.randomUUID();
+
+        searchString = searchString.toLowerCase();
+
+        for (let property in this.#propertyBag.listSection) {
+
+            let searchIndex = this.#propertyBag.listSection[property];
+
+            /** @type {CCLanguageItemListRequestResult} */
+            let requestPayload = {
+                searchRequestId: this.#propertyBag.searchRequestId,
+                lookFor: {
+                    typeFilterBitmask: typeFilterBitmask,
+                    searchString: searchString,
+                    searchType: searchType,
+                },
+                withinSection: property,
+                searchSpace: searchIndex.subComponentsSearchKeys,
+                result: {},
+                matchedCount: -1,
+                totalCount: searchIndex.length,
+            }
+
+            this.#searchService.request(requestPayload);
+            Log.debug(`${this.constructor.name} request sent ${this.#searchService.availableWorkerCount} of ${this.#searchService.workerCount} workers available`, "COMPONENT");
+
+        }
+        
+    } 
 
 
     /**
@@ -376,5 +553,55 @@ class CCLanguageItemList extends CCBase {
     attributeChangedCallback(name, oldValue, newValue) {
         this.render();
         Log.debug(`${this.constructor.name}, value ${name} changed from ${oldValue} to ${newValue}`, "COMPONENT");
+    }
+
+    /**
+     * @param {MessageEvent} event
+     */
+    applyResultsCallback(event) {
+        Log.debug(`${this.constructor.name}, Applying ressults to section ${event.data.withinSection}`, "COMPONENT");
+
+        // Ignore jobs returning outdated search results.
+        if (event.data.searchRequestId != this.#propertyBag.searchRequestId) {
+            return;
+        }
+
+        let section = event.data.withinSection
+        let result = event.data.result
+
+        if (event.data.matchedCount <= 0) {
+            this.#elements.listSection[section].root.classList.add("Hide");
+        }
+        else {
+            this.#elements.listSection[section].root.classList.remove("Hide");
+
+            for (let key in result) {
+
+                if (result[key]) {
+                    this.#propertyBag.listSection[section].subComponents[key].show();
+                }
+                else {
+                    this.#propertyBag.listSection[section].subComponents[key].hide();
+                }
+            }
+        }
+    }
+
+    /**
+     * @param {MouseEvent & {currentTarget:HTMLElement}} event 
+     */
+    expanderClickCallback(event) {
+        Log.debug(`${this.constructor.name}, list body click captured`, "COMPONENT");
+
+        if (event.currentTarget) {
+            let section = event.currentTarget.getAttribute("data-section");
+
+            if (section) {
+                this.#elements.listSection[section].body.classList.toggle("Hide");
+                if (event.currentTarget.firstChild instanceof HTMLImageElement) {
+                    event.currentTarget.firstChild?.classList.toggle("Rotate180");
+                }
+            }
+        }
     }
 }

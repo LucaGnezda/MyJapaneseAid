@@ -44,6 +44,10 @@ cc-languageitem {
         transition: all 0.3s ease;
     }
 
+    .Tab img {
+        filter: brightness(0) saturate(100%) invert(0%) sepia(2%) saturate(0%) hue-rotate(189deg) brightness(96%) contrast(101%);
+    }
+
     .Tab.Selected {
         border-left: 1px solid var(--blacktranslucent80);
         border-top: 1px solid transparent;

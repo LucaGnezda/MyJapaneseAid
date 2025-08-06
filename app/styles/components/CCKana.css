@@ -1,0 +1,419 @@
+cc-kana {
+    display: contents;
+}
+
+.CCKana {
+
+    /** 
+     * Container 
+     */
+    &.Container {
+        
+    }
+    
+    /** 
+     * Title 
+     */
+    .TableHeader {
+        display: flex;
+        flex-direction: row;
+        align-items: baseline;
+        border-bottom: 2px solid var(--colourPrimary);
+        position: relative;
+    }
+
+    .TableTitle {
+        flex: 1 0 auto;
+        display: flex;
+        justify-content: center;
+        color: var(--colourPrimaryDarker10);
+    }
+
+    /** 
+     * Table  
+     */
+    .TableContainerOuter {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .TableContainer {
+        display: grid;
+    }
+
+    .TableContainer.Layout0 {
+        grid-template-columns: 0.5fr repeat(5, 1fr);
+        grid-template-rows: 0.5fr repeat(11, 1fr);
+    }
+
+    .TableContainer.Layout1 {
+        grid-template-columns: repeat(2, 0.5fr) repeat(8, 1fr);
+        grid-template-rows: repeat(2, 0.5fr) repeat(16, 1fr);
+    }
+
+    .TableContainer.Layout2 {
+        grid-template-columns: repeat(2, 1.5fr) repeat(15, 1fr);
+        grid-template-rows: 0.5fr repeat(16, 1fr) 0.5fr repeat(12, 1fr);
+    }
+
+    .TableContainer.Layout3 {
+        grid-template-columns: repeat(2, 0.5fr) repeat(5, 1fr);
+        grid-template-rows: 0.5fr repeat(28, 1fr);
+    }
+
+    .TableContainer.Layout4 {
+        grid-template-columns: 0.5fr repeat(8, 1fr);
+        grid-template-rows: repeat(2, 0.5fr) repeat(14, 1fr);
+    }
+
+    /** 
+     * Rows 
+     */
+    .R1 {
+        grid-row-start: 1;
+    }
+
+    .R2 {
+        grid-row-start: 2;
+    }
+
+    .R3 {
+        grid-row-start: 3;
+    }
+
+    .R4 {
+        grid-row-start: 4;
+    }
+
+    .R5 {
+        grid-row-start: 5;
+    }
+
+    .R6 {
+        grid-row-start: 6;
+    }
+
+    .R7 {
+        grid-row-start: 7;
+    }
+
+    .R8 {
+        grid-row-start: 8;
+    }
+
+    .R9 {
+        grid-row-start: 9;
+    }
+
+    .R10 {
+        grid-row-start: 10;
+    }
+
+    .R11 {
+        grid-row-start: 11;
+    }
+
+    .R12 {
+        grid-row-start: 12;
+    }
+
+    .R13 {
+        grid-row-start: 13;
+    }
+
+    .R14 {
+        grid-row-start: 14;
+    }
+
+    .R15 {
+        grid-row-start: 15;
+    }
+
+    .R16 {
+        grid-row-start: 16;
+    }
+
+    .R17 {
+        grid-row-start: 17;
+    }
+
+    .R18 {
+        grid-row-start: 18;
+    }
+
+    .R19 {
+        grid-row-start: 19;
+    }
+
+    .R20 {
+        grid-row-start: 20;
+    }
+
+    .R21 {
+        grid-row-start: 21;
+    }
+
+    .R22 {
+        grid-row-start: 22;
+    }
+
+    .R23 {
+        grid-row-start: 23;
+    }
+
+    .R24 {
+        grid-row-start: 24;
+    }
+
+    .R25 {
+        grid-row-start: 25;
+    }
+
+    .R26 {
+        grid-row-start: 26;
+    }
+
+    .R27 {
+        grid-row-start: 27;
+    }
+
+    .R28 {
+        grid-row-start: 28;
+    }
+
+    .R29 {
+        grid-row-start: 29;
+    }
+
+    .R30 {
+        grid-row-start: 30;
+    }
+
+    .R31 {
+        grid-row-start: 31;
+    }
+
+    /** 
+     * Columns 
+     */
+    .C1 {
+        grid-column-start: 1;
+    }
+
+    .C2 {
+        grid-column-start: 2;
+    }
+
+    .C3 {
+        grid-column-start: 3;
+    }
+
+    .C4 {
+        grid-column-start: 4;
+    }
+
+    .C5 {
+        grid-column-start: 5;
+    }
+
+    .C6 {
+        grid-column-start: 6;
+    }
+
+    .C7 {
+        grid-column-start: 7;
+    }
+
+    .C8 {
+        grid-column-start: 8;
+    }
+
+    .C9 {
+        grid-column-start: 9;
+    }
+
+    .C10 {
+        grid-column-start: 10;
+    }
+
+    .C11 {
+        grid-column-start: 11;
+    }
+
+    .C12 {
+        grid-column-start: 12;
+    }
+
+    .C13 {
+        grid-column-start: 13;
+    }
+
+    .C14 {
+        grid-column-start: 14;
+    }
+
+    .C15 {
+        grid-column-start: 15;
+    }
+
+    /** 
+     * Width & Height
+     */
+    .W1 {
+        grid-column-end: span 1;
+    }
+
+    .W2 {
+        grid-column-end: span 2;
+    }
+
+    .W3 {
+        grid-column-end: span 3;
+    }
+
+    .W5 {
+        grid-column-end: span 5;
+    }
+
+    .W8 {
+        grid-column-end: span 8;
+    }
+
+    .H2 {
+        grid-row-end: span 2;
+    }
+
+    .H4 {
+        grid-row-end: span 4;
+    }
+
+    .H5 {
+        grid-row-end: span 5;
+    }
+
+    .H6 {
+        grid-row-end: span 6;
+    }
+
+    .H7 {
+        grid-row-end: span 7;
+    }
+
+    .H11 {
+        grid-row-end: span 11;
+    }
+
+    .H15 {
+        grid-row-end: span 15;
+    }
+
+    .H26 {
+        grid-row-end: span 26;
+    }
+
+    /** 
+     * Cell Formatting 
+     */
+    .CellHeading {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: var(--whitetranslucent80);
+        border-radius: 6px;
+        opacity: 1;
+    }
+
+    .CellHeading.VerticalText {
+        writing-mode: vertical-rl;
+    }
+
+    .CellHeading.Hide {
+        display: none;
+        opacity: 0;
+    }
+
+    .Monograph {
+        display: flex;
+        border-radius: 6px;
+        border: 1px solid var(--colourPrimaryDarker10);
+    }
+
+    .Digraph {
+        display: flex;
+        border-radius: 6px;
+        border: 1px solid var(--colourBlue);
+    }
+
+    .Diacritic {
+        display: flex;
+        border-radius: 6px;
+        border: 1px solid var(--colourRed);
+    }
+
+    .DiacriticDigraph {
+        display: flex;
+        border-radius: 6px;
+        border: 1px solid var(--colourPurple);
+    }
+
+    .KanaCell {
+        display: flex;
+        flex-direction: column;
+        opacity: 1;
+    }
+
+    .KanaCell.Hide {
+        display: none;
+        opacity: 0;
+    }
+
+    .Kana {
+        position: relative;
+        overflow: hidden;
+    }
+
+    .Hiragana {
+        display: flex;
+        justify-content: center;
+        position: absolute;
+        width: 100%;
+        top: 0px;
+        left: 0px;
+        transition-property: left, opacity;
+        transition-duration: 0.5s, 0.4s;
+        transition-timing-function: ease-out, ease-in-out;
+        transition-delay: 0s, 0s;
+    }
+
+    .Hiragana.StageLeft {
+        left: -100%;
+        opacity: 0;
+        transition-timing-function: ease-in, ease-in-out;
+    }
+
+    .Katakana {
+        display: flex;
+        justify-content: center;
+        position: relative;
+        width: 100%;
+        top: 0px;
+        left: 0px;
+        transition-property: left, opacity;
+        transition-duration: 0.5s, 0.4s;
+        transition-timing-function: ease-out, ease-in-out;
+        transition-delay: 0s, 0s;
+    }
+
+    .Katakana.StageRight {
+        left: 100%;
+        opacity: 0;
+        transition-timing-function: ease-in, ease-in-out;
+    }
+
+    .Romaji {
+        display: flex;
+        width: 100%;
+        justify-content: center;
+    }
+}

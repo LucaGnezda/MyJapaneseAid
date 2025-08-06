@@ -30,6 +30,10 @@
     font-weight: 800;
 }
 
+.Italic {
+    font-style: italic;
+}
+
 /* --- Japanese Fonts --- */
 .KanaXL {
     font-size: 3vw;
@@ -60,27 +64,22 @@
 @media (width <= 800px) {
     .KanaXL {
         font-size: 1.5rem;
-        font-family: Noto Sans JP;
     }
 
     .KanaL {
         font-size: 1.3rem;
-        font-family: Noto Sans JP;
     }
 
     .KanaM{
         font-size: 1.1rem;
-        font-family: Noto Sans JP;
     }
 
     .KanaS {
         font-size: 0.95rem;
-        font-family: Noto Sans JP;
     }
 
     .KanaXS {
         font-size: 0.8rem;
-        font-family: Noto Sans JP;
     }
 }
 
@@ -88,124 +87,120 @@
 @media (width >= 1000px) {
     .KanaXL {
         font-size: 1.875rem;
-        font-family: Noto Sans JP;
     }
 
     .KanaL {
         font-size: 1.625rem;
-        font-family: Noto Sans JP;
     }
 
     .KanaM {
         font-size: 1.375rem;
-        font-family: Noto Sans JP;
     }
 
     .KanaS {
         font-size: 1.1875rem;
-        font-family: Noto Sans JP;
     }
 
     .KanaXS {
         font-size: 1rem;
-        font-family: Noto Sans JP;
     }
 }
 
 
 /* --- Equivalent English Fonts --- */
+.RomanXXXL {
+    font-size: 4vw;
+    font-family: Linotte;
+}
+
 .RomanXXL {
-    font-size: 3.6vw;
-    font-family: Fredoka;
+    font-size: 3.2vw;
+    font-family: Linotte;
 }
 
 .RomanXL {
-    font-size: 2.2vw;
-    font-family: Fredoka;
+    font-size: 2.6vw;
+    font-family: Linotte;
 }
 
 .RomanL {
-    font-size: 1.9vw;
-    font-family: Fredoka;
+    font-size: 2.2vw;
+    font-family: Linotte;
 }
 
 .RomanM {
-    font-size: 1.6vw;
-    font-family: Fredoka;
+    font-size: 1.9vw;
+    font-family: Linotte;
 }
 
 .RomanS {
-    font-size: 1.4vw;
-    font-family: Fredoka;
+    font-size: 1.6vw;
+    font-family: Linotte;
 }
 
 .RomanXS {
-    font-size: 1.2vw;
-    font-family: Fredoka;
+    font-size: 1.4vw;
+    font-family: Linotte;
 }
 
 /* --- Equivalent English Font Minimums --- */
 @media (width <= 800px) {
+    .RomanXXXL {
+        font-size: 2rem;
+    }
+
     .RomanXXL {
-        font-size: 1.8rem;
-        font-family: Fredoka;
+        font-size: 1.6rem;
     }
 
     .RomanXL {
-        font-size: 1.1rem;
-        font-family: Fredoka;
+        font-size: 1.3rem;
     }
 
     .RomanL {
-        font-size: 0.95rem;
-        font-family: Fredoka;
+        font-size: 1.1rem;
     }
 
     .RomanM {
-        font-size: 0.8rem;
-        font-family: Fredoka;
+        font-size: 0.95rem;
     }
 
     .RomanS {
-        font-size: 0.7rem;
-        font-family: Fredoka;
+        font-size: 0.8rem;
     }
 
     .RomanXS {
-        font-size: 0.6rem;
-        font-family: Fredoka;
+        font-size: 0.7rem;
     }
 }
 
 /* --- Equivalent English Font Maximums --- */
 @media (width >= 1000px) {
+    .RomanXXXL {
+        font-size: 2.5rem;
+    }
+
     .RomanXXL {
-        font-size: 2.25rem;
-        font-family: Fredoka;
+        font-size: 2rem;
     }
 
     .RomanXL {
-        font-size: 1.375rem;
-        font-family: Fredoka;
+        font-size: 1.625rem;
     }
 
     .RomanL {
-        font-size: 1.1875rem;
-        font-family: Fredoka;
+        font-size: 1.375rem;
     }
 
     .RomanM {
-        font-size: 1rem;
-        font-family: Fredoka;
+        font-size: 1.1875rem;
     }
 
     .RomanS {
-        font-size: 0.875rem;
-        font-family: Fredoka;
+        font-size: 1rem;
     }
 
     .RomanXS {
-        font-size: 0.75rem;
-        font-family: Fredoka;
+        font-size: 0.875rem;
     }
 }

@@ -50,7 +50,9 @@
  *      gojuonKey: string?,
  *      priorGojuonKey: string?,
  *      languageType: number?,
+ *      languageTypeBitmask: number?,
  *      languageTypeLabel: string?,
+ *      priorLanguageType: number?,
  *      kana: string?,
  *      kanaHighlighterString: string?,
  *      romaji: string?,
@@ -62,6 +64,20 @@
  *      notes: string?,
  *      examples: CCLanguageItemPropertyBagExample[];
  * }} CCLanguageItemPropertyBag
+ * 
+ * @typedef {{
+ *      languageType: number?,
+ *      kana: string?,
+ *      kanaHighlighterString: string?,
+ *      romaji: string?,
+ *      romajiHighlighterString: string?,
+ *      meaning: string?,
+ *      meaningHighlighterString: string?,
+ *      literal: string?,
+ *      structure: string?,
+ *      notes: string?,
+ *      examples: CCLanguageItemPropertyBagExample[];
+ * }} CCLanguageItemSimplifiedPropertyBag
  * 
  * @typedef {{
  *      kana: string?,
@@ -139,7 +155,9 @@ class CCLanguageItem extends CCBase {
         gojuonKey: null,
         priorGojuonKey: null,
         languageType: null,
+        languageTypeBitmask: null,
         languageTypeLabel: null,
+        priorLanguageType: null,
         kana: null,
         kanaHighlighterString: null,
         romaji: null,
@@ -223,11 +241,11 @@ class CCLanguageItem extends CCBase {
                             </div>
                         </div>
                         <div class="GridLabel" data-use="literal.grid-cell-1"><p class="RomanM NoBlockMargins">Literal:</p></div>
-                        <div class="FlexLayout Col" data-use="literal.grid-cell-2"><input class="ItemInput RomanM NoBlockMargins Font300" data-use="literal.input"></input></div>
+                        <div class="FlexLayout Col" data-use="literal.grid-cell-2"><textarea spellcheck="false" class="ItemInput RomanM NoBlockMargins Font300" data-use="literal.input"></textarea></div>
                         <div class="GridLabel"  data-use="structure.grid-cell-1"><p class="RomanM NoBlockMargins">Structure:</p></div>
-                        <div class="FlexLayout Col" data-use="structure.grid-cell-2"><input class="ItemInput RomanM NoBlockMargins Font300" data-use="structure.input"></input></div>
+                        <div class="FlexLayout Col" data-use="structure.grid-cell-2"><textarea spellcheck="false" class="ItemInput RomanM NoBlockMargins Font300" data-use="structure.input"></textarea></div>
                         <div class="GridLabel" data-use="notes.grid-cell-1"><p class="RomanM NoBlockMargins">Notes:</p></div>
-                        <div class="FlexLayout Col" data-use="notes.grid-cell-2"><input class="ItemInput RomanM NoBlockMargins Font300" data-use="notes.input"></input></div>
+                        <div class="FlexLayout Col" data-use="notes.grid-cell-2"><textarea spellcheck="false" class="ItemInput RomanM NoBlockMargins Font300" data-use="notes.input"></textarea></div>
                     </div>
                     <div class="ExamplesSectionBreak MarginTXL MarginBS">
                         <div class="ExamplesHeader" data-use="examples-header">
@@ -247,16 +265,16 @@ class CCLanguageItem extends CCBase {
                         <div class="Example MarginBM PadLXL" data-use="example">
                             <div class="ExampleInputs PadRXL">
                                 <div class="FlexLayout Col">
-                                    <label class="InputLabel RomanS">Kana</label>
-                                    <input class="ItemInput KanaS NoBlockMargins" data-use="example.kana.input" data-as="kana"></input>
+                                    <label class="InputLabel Font300 RomanS">Kana</label>
+                                    <textarea spellcheck="false" class="ItemInput KanaS NoBlockMargins" data-use="example.kana.input" data-as="kana"></textarea>
                                 </div>
                                 <div class="FlexLayout Col">
-                                    <label class="InputLabel RomanS">Romaji</label>
-                                    <input class="ItemInput RomanS NoBlockMargins" data-use="example.romaji.input" data-as="romaji"></input>
+                                    <label class="InputLabel Font300 RomanS">Romaji</label>
+                                    <textarea spellcheck="false" class="ItemInput Font300 RomanS NoBlockMargins" data-use="example.romaji.input" data-as="romaji"></textarea>
                                 </div>
                                 <div class="FlexLayout Col">
-                                    <label class="InputLabel RomanS">Meaning</label>
-                                    <input class="ItemInput RomanS NoBlockMargins" data-use="example.meaning.input" data-as="meaning"></input>
+                                    <label class="InputLabel Font300 RomanS">Meaning</label>
+                                    <textarea spellcheck="false" class="ItemInput Font300 RomanS NoBlockMargins" data-use="example.meaning.input" data-as="meaning"></textarea>
                                 </div>
                             </div>
                             <div class="ExampleControls">
@@ -297,16 +315,41 @@ class CCLanguageItem extends CCBase {
         return this.#propertyBag.gojuonKey;
     }
 
+    get priorGojuonKey() {
+        return this.#propertyBag.priorGojuonKey;
+    }
+
     get searchKey() {
-        return "| " + this.#propertyBag.kana + " | " + this.#propertyBag.romaji + " | " + this.#propertyBag.meaning + " |";
+        return "| " + this.#propertyBag.kana + " | " + this.#propertyBag.romaji?.toLowerCase() + " | " + this.simpleromaji?.toLowerCase() + " | " + this.#propertyBag.meaning?.toLowerCase() + " |";
     }
 
     get romaji() {
         return this.#propertyBag.romaji;
     }
 
+    get simpleromaji() {
+        if (!this.#propertyBag.romaji) {
+            return null;
+        }
+        return this.#propertyBag.romaji
+            .replaceAll(String.fromCharCode(256),"A")
+            .replaceAll(String.fromCharCode(257),"a")
+            .replaceAll(String.fromCharCode(274),"E")
+            .replaceAll(String.fromCharCode(275),"e")
+            .replaceAll(String.fromCharCode(298),"I")
+            .replaceAll(String.fromCharCode(299),"i")
+            .replaceAll(String.fromCharCode(332),"O")
+            .replaceAll(String.fromCharCode(333),"o")
+            .replaceAll(String.fromCharCode(362),"U")
+            .replaceAll(String.fromCharCode(363),"u");
+    }
+
     get meaning() {
         return this.#propertyBag.meaning;
+    }
+
+    get typeBitmask() {
+        return this.#propertyBag.languageTypeBitmask;
     }
 
 
@@ -360,6 +403,7 @@ class CCLanguageItem extends CCBase {
         this.#subComponents.languageTypeButtonStrip.addTextButton(this.#languageTypeLabels[2], null, false, "GreenTint");
 
         this.#propertyBag.languageType = 0;
+        this.#propertyBag.languageTypeBitmask = 1 << this.#propertyBag.languageType;
         this.#propertyBag.languageTypeLabel = this.#languageTypeLabels[this.#propertyBag.languageType];
 
         this.#elements.languageTypeInput?.appendChild(this.#subComponents.languageTypeButtonStrip);
@@ -401,6 +445,7 @@ class CCLanguageItem extends CCBase {
             this.#elements.examplesAdd.addEventListener("click", this.examplesAddCallback.bind(this), this.getPreDisposeSignal());
 
             this.#elements.examplesContainer.addEventListener("click", this.exampleClickCallback.bind(this), this.getPreDisposeSignal());
+            this.#elements.examplesContainer.addEventListener("input", this.exampleChangeCallback.bind(this), this.getPreDisposeSignal());
 
             this.#elements.romajiInput.setAttribute("data-isvalid", "data-isvalid");
             this.#elements.kanaHighlighterInput.setAttribute("data-isvalid", "data-isvalid");
@@ -480,6 +525,10 @@ class CCLanguageItem extends CCBase {
                 this.#elements.notesGridCell2.classList.remove("Hide");
             }
 
+            this.#elements.literalInput.setAttribute("spellcheck", "false");
+            this.#elements.structureInput.setAttribute("spellcheck", "false");
+            this.#elements.notesInput.setAttribute("spellcheck", "false");
+
             // Hide if no content to show
             let foundExample = false;
 
@@ -489,7 +538,7 @@ class CCLanguageItem extends CCBase {
 
                     let foundContent = false;
 
-                    for(let input of Array.from(example.querySelectorAll("input"))) {
+                    for(let input of Array.from(example.querySelectorAll("textarea"))) {
 
                         if (input.value.trim().length == 0) {
                             input.parentElement?.classList.add("Hide");
@@ -498,6 +547,8 @@ class CCLanguageItem extends CCBase {
                             foundContent = true;
                             foundExample = true;
                         }
+
+                        input.setAttribute("spellcheck", "false");
                     }
 
                     if (!foundContent) {
@@ -535,6 +586,7 @@ class CCLanguageItem extends CCBase {
             this.#elements.literalGridCell1 && this.#elements.literalGridCell2 && 
             this.#elements.structureGridCell1 && this.#elements.structureGridCell2 &&
             this.#elements.notesGridCell1 && this.#elements.notesGridCell2 &&
+            this.#elements.literalInput && this.#elements.structureInput && this.#elements.notesInput &&
             this.#elements.examplesHeader && this.#elements.examplesExpander && 
             this.#elements.examplesAdd && this.#elements.examplesContainer) {
 
@@ -551,6 +603,10 @@ class CCLanguageItem extends CCBase {
             this.#elements.notesGridCell1.classList.remove("Hide");
             this.#elements.notesGridCell2.classList.remove("Hide");
 
+            this.#elements.literalInput.setAttribute("spellcheck", "true");
+            this.#elements.structureInput.setAttribute("spellcheck", "true");
+            this.#elements.notesInput.setAttribute("spellcheck", "true");
+
             /** @ts-ignore */ 
             this.#elements.examplesHeader.parentNode.classList.remove("Hide");
 
@@ -565,9 +621,10 @@ class CCLanguageItem extends CCBase {
 
                 if (example instanceof HTMLDivElement && example.getAttribute("data-use")=="example") {
 
-                    for(let input of Array.from(example.querySelectorAll("input"))) {
+                    for(let input of Array.from(example.querySelectorAll("textarea"))) {
 
                         input.parentElement?.classList.remove("Hide");
+                        input.setAttribute("spellcheck", "true");
                     }
 
                     example.classList.remove("Hide");
@@ -696,7 +753,9 @@ class CCLanguageItem extends CCBase {
 
             // update the propertybag
             this.#propertyBag.priorGojuonKey = this.#propertyBag.gojuonKey;
+            this.#propertyBag.priorLanguageType = this.#propertyBag.languageType;
             this.#propertyBag.languageType = this.#subComponents.languageTypeButtonStrip.getSelectedIndexForGroup(0) || 0;
+            this.#propertyBag.languageTypeBitmask = 1 << this.#propertyBag.languageType;
             this.#propertyBag.languageTypeLabel = this.#languageTypeLabels[this.#propertyBag.languageType];
             this.#propertyBag.kana = this.#elements.kanaInput.value;
             this.#propertyBag.kanaHighlighterString = this.#elements.kanaHighlighterInput.value;
@@ -718,11 +777,11 @@ class CCLanguageItem extends CCBase {
                     let propertyBagExample = {};
                     
                     /** @type {HTMLInputElement | ?} */
-                    let kana = example.querySelector("input[data-as='kana']");
+                    let kana = example.querySelector("textarea[data-as='kana']");
                     /** @type {HTMLInputElement | ?} */
-                    let romaji = example.querySelector("input[data-as='romaji']");
+                    let romaji = example.querySelector("textarea[data-as='romaji']");
                     /** @type {HTMLInputElement | ?} */
-                    let meaning = example.querySelector("input[data-as='meaning']");
+                    let meaning = example.querySelector("textarea[data-as='meaning']");
 
                     propertyBagExample.kana = kana?.value;
                     propertyBagExample.romaji = romaji?.value;
@@ -768,19 +827,19 @@ class CCLanguageItem extends CCBase {
                 let fragment = getDOMFragmentFromString(CCLanguageItem.#htmlExampleTemplate);
 
                 /** @type {HTMLInputElement | ?} */
-                let kana = fragment.querySelector("input[data-use='example.kana.input']");
+                let kana = fragment.querySelector("textarea[data-use='example.kana.input']");
                 if (kana) {
                     kana.value = propertyBagExample.kana;
                 }
 
                 /** @type {HTMLInputElement | ?} */
-                let romaji = fragment.querySelector("input[data-use='example.romaji.input']");
+                let romaji = fragment.querySelector("textarea[data-use='example.romaji.input']");
                 if (romaji) {
                     romaji.value = propertyBagExample.romaji;
                 }
 
                 /** @type {HTMLInputElement | ?} */
-                let meaning = fragment.querySelector("input[data-use='example.meaning.input']");
+                let meaning = fragment.querySelector("textarea[data-use='example.meaning.input']");
                 if (meaning) {
                     meaning.value = propertyBagExample.meaning;
                 }
@@ -930,12 +989,47 @@ class CCLanguageItem extends CCBase {
         }
     }
 
+    /**
+     * @param {InputEvent & {target:HTMLInputElement}} event 
+     */
+    #replaceRomajiLongSound(event) {
+
+        let isVowel = /^[aeiouAEIOU]$/;
+
+        if (event.inputType == "insertText" && 
+            event.data == "-" && 
+            event.target && 
+            event.target.selectionStart && 
+            event.target.selectionStart >= 2 &&
+            isVowel.test(event.target.value.charAt(event.target.selectionStart - 2))) {
+            
+            event.target.value = event.target.value
+                .replaceAll("A-", String.fromCharCode(256))
+                .replaceAll("a-", String.fromCharCode(257))
+                .replaceAll("E-", String.fromCharCode(274))
+                .replaceAll("e-", String.fromCharCode(275))
+                .replaceAll("I-", String.fromCharCode(298))
+                .replaceAll("i-", String.fromCharCode(299))
+                .replaceAll("O-", String.fromCharCode(332))
+                .replaceAll("o-", String.fromCharCode(333))
+                .replaceAll("U-", String.fromCharCode(362))
+                .replaceAll("u-", String.fromCharCode(363));
+        }
+    }
 
     /**
      * Public methods
      */
     render() {
+        
+    }
 
+    show() {
+        this.#elements.rootContainer?.classList.remove("Hide");
+    }
+
+    hide() {
+        this.#elements.rootContainer?.classList.add("Hide");
     }
 
     /**
@@ -966,8 +1060,52 @@ class CCLanguageItem extends CCBase {
         return false;
     }
 
+    clearAll() {
+        /** @type {CCLanguageItemPropertyBag} */
+        let propertyBag = {
+            gojuonKey: "",
+            priorGojuonKey: "",
+            languageType: 0,
+            languageTypeBitmask: 1,
+            languageTypeLabel: this.#languageTypeLabels[0],
+            priorLanguageType: 0,
+            kana: "",
+            kanaHighlighterString: "",
+            romaji: "",
+            romajiHighlighterString: "",
+            meaning: "",
+            meaningHighlighterString: "",
+            literal: "",
+            structure: "",
+            notes: "",
+            examples: [],
+        }
+
+        this.loadFromPropertyBag(propertyBag);
+
+        if (this.#elements.romajiInput){
+            this.#elements.romajiInput.classList.remove("Error");
+            this.#elements.romajiInput.setAttribute("data-isvalid", "data-isvalid");
+        }
+    }
+
     /**
-     * @param {CCLanguageItemPropertyBag} propertyBag 
+     * @returns {CCLanguageItemSimplifiedPropertyBag} 
+     */
+    getSimplifiedPropertybag() {
+        
+        let propertyBag = JSON.parse(JSON.stringify(this.#propertyBag));
+        delete propertyBag.gojuonKey;
+        delete propertyBag.priorGojuonKey;
+        delete propertyBag.languageTypeBitmask;
+        delete propertyBag.languageTypeLabel;
+        delete propertyBag.priorLanguageType;
+
+        return propertyBag;
+    }
+
+    /**
+     * @param {CCLanguageItemSimplifiedPropertyBag} propertyBag 
      * @returns
      */
     loadFromPropertyBag(propertyBag) {
@@ -978,7 +1116,9 @@ class CCLanguageItem extends CCBase {
             this.#propertyBag.gojuonKey = GojuonGroupingService.getGroupingFor(propertyBag.kana || "")?.gojuonKey || null;
             this.#propertyBag.priorGojuonKey = this.#propertyBag.gojuonKey;
             this.#propertyBag.languageType = (propertyBag.languageType && propertyBag.languageType >=0 && propertyBag.languageType <= 2 ? propertyBag.languageType : 0);
+            this.#propertyBag.languageTypeBitmask = 1 << this.#propertyBag.languageType;
             this.#propertyBag.languageTypeLabel = this.#languageTypeLabels[this.#propertyBag.languageType];
+            this.#propertyBag.priorLanguageType = propertyBag.languageType;
             this.#propertyBag.kana = propertyBag.kana || "";
             this.#propertyBag.kanaHighlighterString = propertyBag.kanaHighlighterString || "";
             this.#propertyBag.romaji = propertyBag.romaji || "";
@@ -1217,6 +1357,7 @@ class CCLanguageItem extends CCBase {
     validateRomajiCallback(event) {
         Log.debug("Romaji Change", "COMPONENT");
 
+        this.#replaceRomajiLongSound(event);
         this.#validateNotNull(event.currentTarget);
         this.#validateForm();
 
@@ -1311,6 +1452,18 @@ class CCLanguageItem extends CCBase {
                 }, 500);
 
             }
+        }
+    }
+
+    /**
+     * @param {Event & {currentTarget:HTMLElement} |?} event 
+     * @returns
+     */
+    exampleChangeCallback(event) {
+        Log.debug("Example Change", "COMPONENT");
+
+        if (event.target.getAttribute("data-use") == "example.romaji.input") {
+            this.#replaceRomajiLongSound(event);
         }
     }
 }

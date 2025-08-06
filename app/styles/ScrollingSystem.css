@@ -1,7 +1,35 @@
+/*
 @property --ThumbColour {
     syntax: "<color>";
     inherits: true;
     initial-value: transparent;
+}
+*/
+
+.PageScrollerFixed {
+    height: auto;
+    max-height: 100%;
+    flex: 0 0 auto;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.PageScroller {
+    height: auto;
+    max-height: 100%;
+    flex: 1 1 auto;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.PageScrollerFlex {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    max-height: 100%;
+    flex: 1 1 auto;
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 
 .CustomScroll {

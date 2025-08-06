@@ -98,6 +98,8 @@
     --redtranslucent20: #e74856cc;
     --redtranslucent10: #e74856e6;
     
+    --colourOrange: #dd8622;
+    --colourPurple: #8349cf;
     --colourBlue: #238ddd;                 /* var(--colourBlue) */
     --colourIce: #9cdcfe;                  /* var(--colourIce) */
     --colourYellow: #fffdab;               /* var(--colourYellow) */
@@ -106,4 +108,16 @@
     --colourDDDDarkSteelBlue: #3E5668;     /* var(--colourDDDDarkSteelBlue) */
     --colourDDDTeal: #1BA5A6;              /* var(--colourDDDTeal) */
     --colourDDDTan: #f3ebe0;               /* var(--colourDDDTan) */
+}
+
+.RedForeground {
+    color: var(--colourRed);
+}
+
+.OrangeForeground {
+    color: var(--colourOrange);
+}
+
+.GreenForeground {
+    color: var(--colourPrimaryDarker10);
 }

@@ -115,9 +115,9 @@ class Store {
 
     /**
      * Emits notifications if any have been backlogged.
-     * @param {boolean} isforced
+     * @param {boolean} [isforced]
      */
-    emitNotifications(isforced) {
+    emitNotifications(isforced = false) {
         if (this.#appstate) {
             this.#appstate.emitNotifications(isforced);
         }

@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline';" />
+        <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline'; worker-src blob:;" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1" />
 
         <!-- Styles -->
         <link rel="stylesheet" type="text/css" href="./app/assets/fonts/Fonts.css">
@@ -15,9 +16,10 @@
 
         <link rel="stylesheet" type="text/css" href="./app/styles/components/CCButtonStrip.css">
         <link rel="stylesheet" type="text/css" href="./app/styles/components/CCCommon.css">
-        <link rel="stylesheet" type="text/css" href="./app/styles/components/CCSearch.css">
+        <link rel="stylesheet" type="text/css" href="./app/styles/components/CCKana.css">
         <link rel="stylesheet" type="text/css" href="./app/styles/components/CCLanguageItem.css">
         <link rel="stylesheet" type="text/css" href="./app/styles/components/CCLanguageItemList.css">
+        <link rel="stylesheet" type="text/css" href="./app/styles/components/CCSearch.css">
         <link rel="stylesheet" type="text/css" href="./app/styles/components/CCTopNav.css">
 
         <!-- Framework -->
@@ -46,13 +48,14 @@
         <script defer src="./app/scripts/actionHandlers/AppActionHandler.js"></script>
 
         <!-- Bindings -->
-        <!-- Add your project specific component binding callbacks here -->
+        <script defer src="./app/scripts/bindings/StoreBindings.js"></script>
 
         <!-- Components -->
-         <script defer src="./app/scripts/components/CCButtonStrip.js"></script>
-        <script defer src="./app/scripts/components/CCSearch.js"></script>
+        <script defer src="./app/scripts/components/CCButtonStrip.js"></script>
+        <script defer src="./app/scripts/components/CCKana.js"></script>
         <script defer src="./app/scripts/components/CCLanguageItem.js"></script>
         <script defer src="./app/scripts/components/CCLanguageItemList.js"></script>
+        <script defer src="./app/scripts/components/CCSearch.js"></script>
         <script defer src="./app/scripts/components/CCTopNav.js"></script>
         
 
@@ -60,10 +63,17 @@
         <script defer src="./app/scripts/services/App.js"></script>
         <script defer src="./app/scripts/services/AppBootstrappingService.js"></script>
         <script defer src="./app/scripts/services/ComponentRegistry.js"></script>
+        <script defer src="./app/scripts/services/FilesystemAccessService.js"></script>
         <script defer src="./app/scripts/services/GojuonGroupingService.js"></script>
+        <script defer src="./app/scripts/services/MultithreadingService.js"></script>
+        <script defer src="./app/scripts/services/PersistentStorageService.js"></script>
         <script defer src="./app/scripts/services/UnicodeService.js"></script>
+        
 
         <!-- Helpers -->
+
+        <!-- Data -->
+        <script defer src="./app/assets/data/StarterContent.js"></script>
         
         
     </head>
@@ -73,40 +83,132 @@
             <div class="TopNavContainer" id="TopNavContainer"></div>
             <div class="PagesContainer">
                 <div class="Page StageLeft" id="KanaPage">
-                    <div class="PageControlStrip PadTBS" id="KanaControls"></div>
-                    <div class="PageBody CustomScroll PadLRXL" id="KanaPageBody"></div>
+                    <div class="PageControlStrip PadTBS" id="KanaPageControls"></div>
+                    <div class="PageBody">
+                        <div class="PageScrollerFlex CustomScroll" id="KanaPageBody"></div>
+                    </div>
                 </div>
                 <div class="Page" id="LanguagePage">
                     <div class="PageControlStrip PadTBS" id="LanguagePageControls"></div>
                     <div class="PageBody">
-                        <div class="LanguageNewFlyoutScroller CustomScroll">
+                        <div class="PageScrollerFixed CustomScroll">
                             <div class="LanguageNewFlyout" id="LanguageNewFlyout">
-                                <div class="FlyoutTitle MarginBS"><p class="RomanXXL NoBlockMargins" data-use="list.title">New Item</p></div>
+                                <div class="FlyoutTitle MarginBS"><p class="RomanXXXL NoBlockMargins">New Item</p></div>
                             </div>
                         </div>
-                        <div class="LanguageNewListScroller CustomScroll">
+                        <div class="PageScroller CustomScroll">
                             <div class="LanguageListBody" id="LanguageListBody">
                             </div>
                         </div>
                     </div>
+                </div>
+                <div class="Page StageRight" id="SettingsPage">
+                    <div class="PageBody">
+                        <div class="PageControlStrip PadTXXS SizeH40" id="SettingsPageControls"></div>
+                        <div class="PageScrollerFlex CustomScroll">
+                            <div class="PageHeader">
+                                <div class="PageTitle"><p class="RomanXXXL NoBlockMargins">Setting</p></div>
+                            </div>
+                            <div class="PageContent MarginTL MarginLRXL">                                
+                                <div class="SettingsTitle RomanXXL MarginTXL">Local Data Storage</div>
+                                <div class="RomanL MarginTBXL">Your local storage currently contains:</div>
+                                <div class="RomanL MarginLXL Font300"><span class="MarginRM Font600" id="SettingsWordcount">#</span>words</div>
+                                <div class="RomanL MarginLXL Font300"><span class="MarginRM Font600" id="SettingsPhrasecount">#</span>phrases</div>
+                                <div class="RomanL MarginLXL Font300"><span class="MarginRM Font600" id="SettingsSentencecount">#</span>sentences</div>
+                                <div class="RomanL MarginLXL Font300"><span class="MarginRM Font600" id="SettingsTotalcount">#</span>total items</div>
+                                <div class="RomanL MarginLXL Font300">last modified on<span class="MarginLRM Font600" id="SettingsLastModifiedDate">#</span>at<span class="MarginLRM Font600" id="SettingsLastModifiedTime">#</span></div>
+                                <div class="RomanL MarginTXL">Available Actions:</div>
+                                <div class="SettingsActionGroup Row Gap16 PadTXL">
+                                    <div class="FormButton Large Red PadLRXL PadTBS Gap16 RomanXL" id="AppSettingsDeleteData"><span>Delete All Data</span><img src="./app/assets/svg/trash.svg" class="Icon SizeWH24"></div>
+                                    <div class="FormButton Large Red PadLRXL PadTBS Gap16 RomanXL Hide" id="AppSettingsDeleteDataConfirm"><span>Click again to confirm</span><img src="./app/assets/svg/trash.svg" class="Icon SizeWH24"></div>
+                                    <div class="FormButton Large ShadowGreen PadLRXL PadTBS Gap16 RomanXL Hide" id="AppSettingsDeleteDataCancel"><span>Cancel</span><img src="./app/assets/svg/cross.svg" class="Icon SizeWH24"></div>
+                                </div>
+                                <div class="RomanM MarginTXL MarginLXL Italic GreenForeground">Please note, this action will irreversibly <span class="Font600 RedForeground">delete</span> all locally stored data for this app. Make sure you have taken an export first if you think you might want to reload the current data in the future.</div>
+                                <div class="SettingsTitle RomanXXL MarginTXL">Import & Export Data</div>
+                                <div class="RomanL MarginTXL">Available Actions:</div>
+                                <div class="SettingsActionGroup Column Gap16 PadTXL">
+                                    <div class="FormButton Large Red PadLRXL PadTBS Gap16 RomanXL" id="AppSettingsDeleteImport"><span>Import Over Existing</span><img src="./app/assets/svg/import.svg" class="Icon SizeWH24"></div>
+                                    <div class="FormButton Large Orange PadLRXL PadTBS Gap16 RomanXL" id="AppSettingsAdditiveImport"><span>Import Into Existing</span><img src="./app/assets/svg/import.svg" class="Icon SizeWH24"></div>
+                                    <div class="FormButton Large Green PadLRXL PadTBS Gap16 RomanXL" id="AppSettingsExport"><span>Export</span><img src="./app/assets/svg/export.svg" class="Icon SizeWH24"></div>
+                                </div>
+                                <div class="RomanM PadBXL MarginTXL MarginLXL Italic GreenForeground">Please note <span class="Font600">importing</span> will irreversibly <span class="Font600 RedForeground">replace and/or alter</span> locally stored data for this app. Make sure you have taken an export first if you think you might want to reload the current data in the future.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="Page StageRight" id="TipsPage">
+                    <div class="PageBody">
+                        <div class="PageControlStrip PadTXXS SizeH40" id="TipsPageControls"></div>
+                        <div class="PageScrollerFlex CustomScroll">
+                            <div class="PageHeader">
+                                <div class="PageTitle"><p class="RomanXXXL NoBlockMargins">Usage Tips</p></div>
+                            </div>
+                            <div class="PageContent MarginTL MarginLRXL">
+                                <ul class="NoBlockMargins PadBXL">                                
+                                    <li class="RomanL MarginTBXL">MyJapaneseAid recommends installing Japanese kana input on your device, it will make it so much easier to work with, and learn kana.</li>
+                                    <li class="RomanL MarginTBXL">When typing romaji specifically, MyJapaneseAid will automatically convert '-' after a vowel, into the equivalent long sound vowel.</li>
+                                    <li class="RomanL MarginTBXL">Try using highlighters in the edit panel of language items. When applied correctly this will underline text across kana, romaji and english meaning when not in edit mode.</li>
+                                    <li class="RomanL MarginTBXL">Highlighters are comma separated lists of character positions, with the first character position being 1. You can even create multiple highlighter sets with the '\' delimiter. When using sets, each comma position will highlight the same position in all sets. This is especially useful when you have both Kanji and Hiragana version in the same line. You can only include a position index once per highlighter, but this still gives some pretty awesome linked highlighting effects. for example the following text:</li>
+                                    <ul>
+                                        <li class="RomanL MarginTBS">kana = わたしは[A]です (私は[A]です)</li>
+                                        <li class="RomanL MarginTBS">romaji = watashi wa [A] desu</li>
+                                        <li class="RomanL MarginTBS">meaning = I am [A]</li>
+                                    </ul>
+                                    <li class="RomanL MarginTBXL">Might be highlighted as follows:</li>
+                                    <ul>
+                                        <li class="RomanL MarginTBS">kana = 1-3,4,5-7,8-9\12,13,14-16,17-18</li>
+                                        <li class="RomanL MarginTBS">romaji = 1-7,9-10,12-14,16-19</li>
+                                        <li class="RomanL MarginTBS">meaning = 1,,6-8,3-4</li>
+                                    </ul>
+                                    <li class="RomanL MarginTBXL">Language searching will allow both 'and' and 'or' searches if you include more than one term separated by a space.</li>
+                                    <li class="RomanL MarginTBXL">The kana tab will present bot hhiragana and katakana in a variety of layouts. Extended katakana is also included (there is no equivalent hiragana for these sounds). Word of caution, this list might not be comprehensive as the set seems to evolve over time as the Japanese language adopts new loanwords.</li>
+                                    <li class="RomanL MarginTBXL">I hope you enjoy using MyJapaneseAid.</li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-
-            <!--
-            <div class="AppHeader">
-                <div class="AppHeaderSpacer AlignLeft">
-                    <div class="AppTitle"><span>My</span>Japanese<span>Aid</span></div>
+        </div>
+        <div class="AppModal" id="AppWelcome">
+            <div class="AppTitle Font600 PadLRXL"><span>My</span>Japanese<span>Aid</span></div>
+            <div class="AppWelcomePages">
+                <div class="Page" id="AppWelcomePage1">
+                    <div class="ModalContent">
+                        <div class="ModalTitle RomanXXXL MarginBXL">Welcome...</div>
+                        <div class="RomanXL MarginBXL">MyJapaneseAid is a simple tool to help you build a personal repository of Japanese words, phrases and sentences you learn. It uses your local browser cache as a datastore, meaning no data is ever transmitted over the internet.</div>
+                        <div class="RomanXL MarginBXL">This is a personal project. You are welcome to use it, but I cannot commit to any form of support or bugfixing if you run into issues.</div>
+                        <div class="AppModalButtonStrip Gap16 PadTXL">
+                            <div class="FormButton Large Green PadLRXL PadTBS Gap16 RomanXL" id="AppWelcomePage1Next"><span>Ok, cool</span><img src="./app/assets/svg/check.svg" class="Icon SizeWH24"></div>
+                        </div>
+                    </div>
                 </div>
-                <div class="AppHeaderControlSurface">
-                    <cc-search id="TopNavSearch"></cc-search>
+                <div class="Page StageRight" id="AppWelcomePage2">
+                    <div class="ModalContent">
+                        <div class="ModalTitle RomanXXXL MarginBXL">Use of browser cache...</div>
+                        <div class="RomanXL MarginBXL">Allow MyJapaneseAid to access your web browser's cache to store data between sessions.</div>
+                        <div class="AppModalButtonStrip Gap16 PadTXL">
+                            <div class="FormButton Large ShadowGreen PadLRS PadTBS Gap16 RomanXL" id="AppWelcomePage2Back"><img src="./app/assets/svg/chevron-left.svg" class="Icon SizeWH24"></div>
+                            <div class="FormButton Large Green PadLRXL PadTBS Gap16 RomanXL" id="AppWelcomePage2Yes"><span>Yes, go ahead</span><img src="./app/assets/svg/check.svg" class="Icon SizeWH24"></div>
+                            <div class="FormButton Large ShadowGreen PadLRXL PadTBS Gap16 RomanXL" id="AppWelcomePage2No"><span>No, exit</span><img src="./app/assets/svg/cross.svg" class="Icon SizeWH24"></div>
+                        </div>
+                    </div>
                 </div>
-                <div class="AppHeaderSpacer"></div>
+                <div class="Page StageRight" id="AppWelcomePage3">
+                    <div class="ModalContent">
+                        <div class="ModalTitle RomanXXXL MarginBXL">Starter content...</div>
+                        <div class="RomanXL MarginBXL">Would you prefer a few starter words, phrases and sentences, or a empty datastore?</div>
+                        <div class="AppModalButtonStrip Gap16 PadTXL">
+                            <div class="FormButton Large ShadowGreen PadLRS PadTBS Gap16 RomanXL" id="AppWelcomePage3Back"><img src="./app/assets/svg/chevron-left.svg" class="Icon SizeWH24"></div>
+                            <div class="FormButton Large Green PadLRXL PadTBS Gap16 RomanXL" id="AppWelcomePage3Starter"><span>Starter content</span></div>
+                            <div class="FormButton Large Green PadLRXL PadTBS Gap16 RomanXL" id="AppWelcomePage3Empty"><span>An empty datastore</span></div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            -->
         </div>
 
-        <!-- Please note this content will be absorbs and removed from the DOM on load -->
+        <!-- Please note this content will be absorbed and removed from the DOM on load -->
         <data value="HTMLFragments" style="display: none;">
             <!-- App Title -->
             <data value="AppTitle">

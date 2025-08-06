@@ -29,12 +29,12 @@
     height: 5vw;
 }
 
-.SizeWH48 {
+.SizeWH40 {
     width: 5vw;
     height: 5vw;
 }
 
-.SizeW48 {
+.SizeW40 {
     width: 5vw;
 }
 
@@ -212,12 +212,12 @@
         height: 40px;
     }
 
-    .SizeWH48 {
+    .SizeWH40 {
         width: 40px;
         height: 40px;
     }
 
-    .SizeW48 {
+    .SizeW40 {
         width: 40px;
     }
 
@@ -396,12 +396,12 @@
         height: 50px;
     }
 
-    .SizeWH48 {
+    .SizeWH40 {
         width: 50px;
         height: 50px;
     }
 
-    .SizeW48 {
+    .SizeW40 {
         width: 50px;
     }
 
@@ -546,6 +546,48 @@
 
     .SizeW1 {
         width: 1.25px;
+    }
+}
+
+
+/* --- Dynamic Gap --- */
+.Gap2 {
+    gap: 0.25vw;
+}
+
+.Gap8 {
+    gap: 1vw;
+}
+
+.Gap16 {
+    gap: 2vw;
+}
+
+@media (width <= 800px) {
+    .Gap2 {
+        gap: 2px;
+    }
+
+    .Gap8 {
+        gap: 8px;
+    }
+    
+    .Gap16 {
+        gap: 16px;
+    }
+}
+
+@media (width >= 1000px) {
+    .Gap2 {
+        gap: 2.5px;
+    }
+    
+    .Gap8 {
+        gap: 10px;
+    }
+
+    .Gap16 {
+        gap: 20px;
     }
 }
 

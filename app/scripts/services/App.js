@@ -2,6 +2,8 @@
  * List of valid Demo Elements (to minimise indexing errors while coding)
  * @typedef {{
  *      topNav: CCTopNav?,
+ *      kanaPageControls: CCButtonStrip?,
+ *      kana: CCKana?,
  *      searchComponent: CCSearch?,
  *      newItem: CCLanguageItem?,
  *      languagePageControls: CCButtonStrip?,
@@ -10,6 +12,9 @@
  * }} AppComponents
  * 
  * @typedef {{
+ *      wordCount: Number,
+ *      phraseCount: Number,
+ *      sentenceCount: Number,
  * }} AppPropertyBag
  */
 
@@ -34,11 +39,20 @@ class App {
     static dispatcher = null;
 
     /**
+     * @static
+     * @type {PersistentStorageService?}
+     */
+    static persistentStorageService = null;
+
+    /**
      * The elements that make up this component
      * @type {AppPropertyBag}
      */
     static propertyBag = {
         // Place variables here that act as global settings.
+        wordCount: 0,
+        phraseCount: 0,
+        sentenceCount: 0,
     };
 
     // Referenced elements
@@ -49,12 +63,37 @@ class App {
         appForeground: null,
         topNavContainer: null,
         kanaPage: null,
-        kanaControls: null,
+        kanaPageControls: null,
         kanaPageBody: null,
         languagePage: null,
         languagePageControls: null,
         languageNewFlyout: null,
         languageListBody: null,
+        settingsPage: null,
+        settingsPageWordCount: null,
+        settingsPagePhraseCount: null,
+        settingsPageSentenceCount: null,
+        settingsPageTotalCount: null,
+        settingsPageLastModifiedDate: null,
+        settingsPageLastModifiedTime: null,
+        settingsPageDeleteAllDataInitial: null,
+        settingsPageDeleteAllDataConfirm: null,
+        settingsPageDeleteAllDataCancel: null,
+        settingsPageDeleteImport: null,
+        settingsPageAdditiveImport: null,
+        settingsPageExport: null,
+        tipsPage: null,
+        welcomeModal: null,
+        welcomeModalPage1: null,
+        welcomeModalPage2: null,
+        welcomeModalPage3: null,
+        welcomeModalPage1Next: null,
+        welcomeModalPage2Back: null,
+        welcomeModalPage2Yes: null,
+        welcomeModalPage2No: null,
+        welcomeModalPage3Back: null,
+        welcomeModalPage3Starter: null,
+        welcomeModalPage3Empty: null,
     };
 
     /**
@@ -62,6 +101,8 @@ class App {
      */
     static components = {
         topNav: null,
+        kanaPageControls: null,
+        kana: null,
         searchComponent: null,
         newItem: null,
         languagePageControls: null,
