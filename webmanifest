@@ -3,12 +3,12 @@
     "display": "standalone",
     "icons": [
         {
-            "src": "/MyJapaneseAid192.png",
+            "src": "/MyJapaneseAid192W.png",
             "sizes": "192x192",
             "type": "image/png"
         },
         {
-            "src": "/MyJapaneseAid512.png",
+            "src": "/MyJapaneseAid512W.png",
             "sizes": "512x512",
             "type": "image/png"
         }
