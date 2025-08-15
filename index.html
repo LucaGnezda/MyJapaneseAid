@@ -2,7 +2,13 @@
 <html>
     <head>
         <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline'; worker-src blob:;" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1" />
+        <meta name="viewport" content="width=device-width, initial-scale=0.8, maximum-scale=1, minimum-scale=0.8" />
+
+        <title>MyJapaneseAid</title>
+
+        <link rel="manifest" href="./webmanifest">
+        <link rel="icon" type="image/svg+xml" sizes="any" href="./MyJapaneseAid192.png">
+        <link rel="apple-touch-icon" type="image/svg+xml" sizes="any" href="./MyJapaneseAid192.png">
 
         <!-- Styles -->
         <link rel="stylesheet" type="text/css" href="./app/assets/fonts/Fonts.css">
@@ -63,6 +69,7 @@
         <script defer src="./app/scripts/services/App.js"></script>
         <script defer src="./app/scripts/services/AppBootstrappingService.js"></script>
         <script defer src="./app/scripts/services/ComponentRegistry.js"></script>
+        <script defer src="./app/scripts/services/FilesystemAccessClassicService.js"></script>
         <script defer src="./app/scripts/services/FilesystemAccessService.js"></script>
         <script defer src="./app/scripts/services/GojuonGroupingService.js"></script>
         <script defer src="./app/scripts/services/MultithreadingService.js"></script>
@@ -85,18 +92,18 @@
                 <div class="Page StageLeft" id="KanaPage">
                     <div class="PageControlStrip PadTBS" id="KanaPageControls"></div>
                     <div class="PageBody">
-                        <div class="PageScrollerFlex CustomScroll" id="KanaPageBody"></div>
+                        <div class="PageScrollerFlex CustomScroll FixMoz141StableScrollGutter" id="KanaPageBody"></div>
                     </div>
                 </div>
                 <div class="Page" id="LanguagePage">
                     <div class="PageControlStrip PadTBS" id="LanguagePageControls"></div>
                     <div class="PageBody">
-                        <div class="PageScrollerFixed CustomScroll">
+                        <div class="PageScrollerFixed CustomScroll FixMoz141StableScrollGutter">
                             <div class="LanguageNewFlyout" id="LanguageNewFlyout">
                                 <div class="FlyoutTitle MarginBS"><p class="RomanXXXL NoBlockMargins">New Item</p></div>
                             </div>
                         </div>
-                        <div class="PageScroller CustomScroll">
+                        <div class="PageScroller CustomScroll FixMoz141StableScrollGutter">
                             <div class="LanguageListBody" id="LanguageListBody">
                             </div>
                         </div>
@@ -105,7 +112,7 @@
                 <div class="Page StageRight" id="SettingsPage">
                     <div class="PageBody">
                         <div class="PageControlStrip PadTXXS SizeH40" id="SettingsPageControls"></div>
-                        <div class="PageScrollerFlex CustomScroll">
+                        <div class="PageScrollerFlex CustomScroll FixMoz141StableScrollGutter">
                             <div class="PageHeader">
                                 <div class="PageTitle"><p class="RomanXXXL NoBlockMargins">Setting</p></div>
                             </div>
@@ -132,6 +139,7 @@
                                     <div class="FormButton Large Green PadLRXL PadTBS Gap16 RomanXL" id="AppSettingsExport"><span>Export</span><img src="./app/assets/svg/export.svg" class="Icon SizeWH24"></div>
                                 </div>
                                 <div class="RomanM PadBXL MarginTXL MarginLXL Italic GreenForeground">Please note <span class="Font600">importing</span> will irreversibly <span class="Font600 RedForeground">replace and/or alter</span> locally stored data for this app. Make sure you have taken an export first if you think you might want to reload the current data in the future.</div>
+                                <div id="AppSettingHiddenElements" class="HiddenElements"></div>
                             </div>
                         </div>
                     </div>
@@ -139,7 +147,7 @@
                 <div class="Page StageRight" id="TipsPage">
                     <div class="PageBody">
                         <div class="PageControlStrip PadTXXS SizeH40" id="TipsPageControls"></div>
-                        <div class="PageScrollerFlex CustomScroll">
+                        <div class="PageScrollerFlex CustomScroll FixMoz141StableScrollGutter">
                             <div class="PageHeader">
                                 <div class="PageTitle"><p class="RomanXXXL NoBlockMargins">Usage Tips</p></div>
                             </div>
@@ -212,7 +220,10 @@
         <data value="HTMLFragments" style="display: none;">
             <!-- App Title -->
             <data value="AppTitle">
-                <div class="AppTitle Font600 PadLRXL"><span>My</span>Japanese<span>Aid</span></div>
+                <div class="AppTitle Font600 PadLRXL">
+                    <img src="MyJapaneseAid.png" class="SizeWH20 PadRXL">
+                    <div class="AppTitleText"><span>My</span>Japanese<span>Aid</span></div>
+                </div>
             </data>
         </data>
     </body>

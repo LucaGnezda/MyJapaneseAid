@@ -34,6 +34,7 @@ class FilesystemAccessService {
      */
     static async readEntireFileAsString(filePickerOptions) {
 
+        Log.debug("Modern file service read", "FILESYS");
         let fileHandle
 
         try {
@@ -77,6 +78,7 @@ class FilesystemAccessService {
      */
     static async writeStringAsEntireFile(filePickerOptions, stringContentsForFile) {
 
+        Log.debug("Modern file service write", "FILESYS");
         let fileHandle
         
         try {

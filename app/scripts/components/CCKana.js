@@ -490,9 +490,14 @@ class CCKana extends CCBase {
      */
     setLayout(i) {
         this.#propertyBag.layout = i;
-        document.startViewTransition(() => {
+        if (document.startViewTransition) {
+            document.startViewTransition(() => {
+                this.render();
+            });
+        }
+        else {
             this.render();
-        });
+        }
     }
 
     /**
