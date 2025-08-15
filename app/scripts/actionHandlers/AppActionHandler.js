@@ -363,13 +363,28 @@ class AppActionHandler {
             }],
         };
         
-        let objectContents = await FilesystemAccessService.readEntireFileAsObject(openPickerOptions);
-        
+        /** @ts-ignore - Yes this a property in some browsers, We're explicitly testing for its presence */
+        if (window.showOpenFilePicker && App.config.allowModernFileAccessIfAvailable) {
+            let objectContents = await FilesystemAccessService.readEntireFileAsObject(openPickerOptions);
+            this.processImport(objectContents, deleteCurrentDataFirst);
+        }
+        else {
+            FilesystemAccessClassicService.readEntireFileAsObject(this.processImport, "application/json", deleteCurrentDataFirst);
+        }
+    }
+
+    /**
+     * @param {Object | Null} objectContents
+     * @param {Boolean} deleteCurrentDataFirst  
+     * @returns 
+     */
+    processImport(objectContents, deleteCurrentDataFirst) {
+
         // Abandon if not an object
         if (objectContents == null) {
             return;
         }
-
+        
         // Abandon if the object does not match the expected schema 
         if (!AppBootstrappingService.validateObjectForLoading(objectContents)){
             return;
@@ -388,6 +403,7 @@ class AppActionHandler {
         let d = new Date();
         let timestamp = `${d.getFullYear()}-${(d.getMonth() + 1).toString().padStart(2, "0")}-${d.getDate().toString().padStart(2, "0")}`;
         let suggestedFilename = `MyJapaneseAid LocalDB Export ${timestamp}.json`;
+
         let savePickerOptions = {
             startIn: "downloads",
             suggestedName: suggestedFilename,
@@ -401,8 +417,14 @@ class AppActionHandler {
 
         let exportableData = App.persistentStorageService?.getExportableData();
 
-        if (exportableData) {
-            await FilesystemAccessService.writeObjectAsEntireFile(savePickerOptions, exportableData);
+        if (exportableData && exportableData instanceof Object) {
+            /** @ts-ignore - Yes this a property in some browsers, We're explicitly testing for its presence */
+            if (window.showSaveFilePicker && App.config.allowModernFileAccessIfAvailable) {
+                await FilesystemAccessService.writeObjectAsEntireFile(savePickerOptions, exportableData);
+            }
+            else {
+                FilesystemAccessClassicService.writeObjectAsEntireFile(savePickerOptions.suggestedName, exportableData);
+            }
         }
         else {
             Log.error("No exportable data was returned from the FilesystemAccessService", "HANDLER");

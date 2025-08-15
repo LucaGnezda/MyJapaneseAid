@@ -6,7 +6,7 @@ class AppBootstrappingService {
 
     static Initialise() {
 
-        Log.setLoggingLevel(LogLevel.Infomation);
+        Log.setLoggingLevel(App.config.loggingLevel);
         Log.debug("AppService.Initialise - Begin", "APPSERVICE");
 
         // Bootstrap
@@ -68,6 +68,7 @@ class AppBootstrappingService {
             {id: "AppSettingsDeleteImport", objProperty: "settingsPageDeleteImport"},
             {id: "AppSettingsAdditiveImport", objProperty: "settingsPageAdditiveImport"},
             {id: "AppSettingsExport", objProperty: "settingsPageExport"},
+            {id: "AppSettingHiddenElements", objProperty: "settingsPageHiddenElements"},
             {id: "TipsPage", objProperty: "tipsPage"},
             {id: "AppWelcome", objProperty: "welcomeModal"},
             {id: "AppWelcomePage1", objProperty: "welcomeModalPage1"},
@@ -244,6 +245,14 @@ class AppBootstrappingService {
             App.elements.settingsPageExport.addEventListener("click", App.dispatcher.newEventDispatchCallback("Settings_ExportAction"));
         }
 
+        if (!("showOpenFiePicker" in window)) {
+
+        }
+
+        if (!("showSaveFiePicker" in window)) {
+
+        }
+
         if (App.elements.appForeground) {
             App.elements.appForeground.classList.remove("Hide");
         }
@@ -296,6 +305,17 @@ class AppBootstrappingService {
         if (!App.persistentStorageService) {
             Log.fatal("The Persistent Storage Service, must be initialised before initialising the database", "", this)
             return;
+        }
+
+        if (navigator.storage && navigator.storage.persist) {
+            navigator.storage.persist().then((persistent) => {
+                if (persistent) {
+                    Log.debug("Storage will not be cleared except by explicit user action", "");
+                } 
+                else {
+                    Log.debug("Storage may be cleared by the UA under storage pressure.", "");
+                }
+            });
         }
 
         if (!App.persistentStorageService.connect("MyJapaneseAid")) {
