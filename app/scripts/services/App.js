@@ -12,6 +12,11 @@
  * }} AppComponents
  * 
  * @typedef {{
+ *      loggingLevel: LogLevel,
+ *      allowModernFileAccessIfAvailable: Boolean,
+ * }} AppConfig
+ * 
+ * @typedef {{
  *      wordCount: Number,
  *      phraseCount: Number,
  *      sentenceCount: Number,
@@ -55,6 +60,15 @@ class App {
         sentenceCount: 0,
     };
 
+    /**
+     * The elements that make up this component
+     * @type {AppConfig}
+     */
+    static config = {
+        loggingLevel: LogLevel.Debug,
+        allowModernFileAccessIfAvailable: true,
+    }
+
     // Referenced elements
     /**
      * @type {LimitedDictionary<AppElements, HTMLElement?>}
@@ -82,6 +96,7 @@ class App {
         settingsPageDeleteImport: null,
         settingsPageAdditiveImport: null,
         settingsPageExport: null,
+        settingsPageHiddenElements: null,
         tipsPage: null,
         welcomeModal: null,
         welcomeModalPage1: null,

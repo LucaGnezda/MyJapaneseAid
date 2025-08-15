@@ -361,6 +361,7 @@ cc-kana {
         display: flex;
         flex-direction: column;
         opacity: 1;
+        white-space: nowrap;
     }
 
     .KanaCell.Hide {

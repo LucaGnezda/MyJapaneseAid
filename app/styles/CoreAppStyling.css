@@ -92,14 +92,12 @@
 }
 
 .AppTitle {
+    display: flex;
+    flex-direction: row;
     flex: 0 0 auto;
     font-family: "Linotte"; 
     font-weight: 700;
     font-size: 2.2vw;
-}
-
-.AppTitle > span {
-    color: var(--colourPrimaryDarker10);
 }
 
 @media (width <= 800px) {
@@ -114,6 +112,21 @@
     }
 }
 
+@media (width < 500px) {
+    .AppTitle.PadLRXL {
+        padding-left: 4px;
+        padding-right: 4px;
+    }  
+
+    .AppTitleText {
+        display: none;
+    }   
+}
+
+.AppTitleText > span {
+    color: var(--colourPrimaryDarker10);
+}
+
 .PageControlStrip {
     flex: 0 0 auto;
     display: flex;
@@ -121,6 +134,13 @@
     justify-content: center;
     margin-left: 15px;
     margin-right: 15px;
+}
+
+@media (width < 500px) {
+    .PageControlStrip {
+        margin-left: 4px;
+        margin-right: 4px;
+    }   
 }
 
 .PageBody {
@@ -245,4 +265,8 @@
 
 .SettingsActionGroup.Column {
     flex-direction: column;
+}
+
+.HiddenElements {
+    display: none;
 }
