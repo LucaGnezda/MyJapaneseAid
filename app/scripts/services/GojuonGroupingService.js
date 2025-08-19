@@ -97,6 +97,7 @@ class GojuonGroupingService {
             
             GojuonGroupingService.#gojuonGroupings.forEach((item) => {
                 // Do all just in case we eventually include Japanese Characters there
+                // Loading UTF8 Files has been fixed ... no longer need my Demunger :) but also :(
                 let gojuonKey = item.gojuonKey; //UnicodeService.demunge(item.gojuonKey);
 
                 if (gojuonKey != null) {
