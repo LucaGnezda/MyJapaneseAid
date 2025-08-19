@@ -51,12 +51,12 @@
 }
 
 .KanaS {
-    font-size: 1.9vw;
+    font-size: 2vw;
     font-family: Noto Sans JP;
 }
 
 .KanaXS {
-    font-size: 1.6vw;
+    font-size: 1.8vw;
     font-family: Noto Sans JP;
 }
 
@@ -75,11 +75,11 @@
     }
 
     .KanaS {
-        font-size: 0.95rem;
+        font-size: 1rem;
     }
 
     .KanaXS {
-        font-size: 0.8rem;
+        font-size: 0.9rem;
     }
 }
 
@@ -98,11 +98,11 @@
     }
 
     .KanaS {
-        font-size: 1.1875rem;
+        font-size: 1.25rem;
     }
 
     .KanaXS {
-        font-size: 1rem;
+        font-size: 1.125rem;
     }
 }
 
@@ -134,12 +134,12 @@
 }
 
 .RomanS {
-    font-size: 1.6vw;
+    font-size: 1.7vw;
     font-family: Linotte;
 }
 
 .RomanXS {
-    font-size: 1.4vw;
+    font-size: 1.5vw;
     font-family: Linotte;
 }
 
@@ -166,11 +166,11 @@
     }
 
     .RomanS {
-        font-size: 0.8rem;
+        font-size: 0.85rem;
     }
 
     .RomanXS {
-        font-size: 0.7rem;
+        font-size: 0.75rem;
     }
 }
 
@@ -197,10 +197,10 @@
     }
 
     .RomanS {
-        font-size: 1rem;
+        font-size: 1.0625rem;
     }
 
     .RomanXS {
-        font-size: 0.875rem;
+        font-size: 0.9375rem;
     }
 }

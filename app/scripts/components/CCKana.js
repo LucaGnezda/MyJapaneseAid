@@ -304,7 +304,7 @@ class CCKana extends CCBase {
     `;
 
     static #htmlHeadingTemplate = `
-        <div data-use="heading"></div>
+        <div data-use="Heading"></div>
     `;
 
     static #htmlKanaCellTemplate = `
@@ -369,14 +369,15 @@ class CCKana extends CCBase {
 
         // First time only initialisation
         if (!CCKana.#dataTemplateInitialised) {
-            for (let e of CCKana.#dataTemplate.headings) {
-                //e.label = UnicodeService.demunge(e.label) || "";
-            }
-            for (let e of CCKana.#dataTemplate.kana) {
-                //e.romaji = UnicodeService.demunge(e.romaji) || "";
-                //e.hiragana = UnicodeService.demunge(e.hiragana) || "";
-                //e.katakana = UnicodeService.demunge(e.katakana) || "";
-            }
+            // Loading UTF8 Files has been fixed ... no longer need my Demunger :) but also :(
+            //for (let e of CCKana.#dataTemplate.headings) {
+            //    e.label = UnicodeService.demunge(e.label) || "";
+            //}
+            //for (let e of CCKana.#dataTemplate.kana) {
+            //    e.romaji = UnicodeService.demunge(e.romaji) || "";
+            //    e.hiragana = UnicodeService.demunge(e.hiragana) || "";
+            //    e.katakana = UnicodeService.demunge(e.katakana) || "";
+            //}
             CCKana.#dataTemplateInitialised = true;
         }
 
