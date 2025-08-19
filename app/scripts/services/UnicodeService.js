@@ -718,6 +718,7 @@ class UnicodeService {
             return new Int32Array([input]).buffer;
         }
         else if (this.#isTypedArray(input)) {
+            //@ts-ignore
             return input.buffer;
         }
         else if (input instanceof ArrayBuffer) {

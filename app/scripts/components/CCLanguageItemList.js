@@ -104,7 +104,9 @@ class CCLanguageItemList extends CCBase {
                 <div class="ListTitle"><p class="RomanXXXL NoBlockMargins" data-use="list.title">List</p></div>
                 <div class="ButtonStipContainer" data-use="list.controls"></div>
             </div>
-            <div class="ListBody" data-use="list.body">
+            <div class="PageScroller CustomScroll FixMoz141StableScrollGutter">
+                <div class="ListBody" data-use="list.body">
+                </div>
             </div>
         </div>
     `;

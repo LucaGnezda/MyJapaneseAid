@@ -320,7 +320,7 @@ class CCLanguageItem extends CCBase {
     }
 
     get searchKey() {
-        return "| " + this.#propertyBag.kana + " | " + this.#propertyBag.romaji?.toLowerCase() + " | " + this.simpleromaji?.toLowerCase() + " | " + this.#propertyBag.meaning?.toLowerCase() + " |";
+        return "| " + this.#propertyBag.kana + " | " + this.#propertyBag.romaji?.toLowerCase() + " | " + this.simpleromaji?.toLowerCase() + " | " + this.#propertyBag.meaning?.toLowerCase() + " |" + this.#propertyBag.notes?.toLowerCase() + " |";
     }
 
     get romaji() {
@@ -346,6 +346,18 @@ class CCLanguageItem extends CCBase {
 
     get meaning() {
         return this.#propertyBag.meaning;
+    }
+
+    get literal() {
+        return this.#propertyBag.literal;
+    }
+
+    get structure() {
+        return this.#propertyBag.structure;
+    }
+
+    get notes() {
+        return this.#propertyBag.notes;
     }
 
     get typeBitmask() {
