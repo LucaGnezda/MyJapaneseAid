@@ -44,7 +44,7 @@
 }
 
 .CustomScroll::-webkit-scrollbar {
-    width: 15px;
+    width: 15px !important;
 }
 
 .CustomScroll::-webkit-scrollbar-thumb {
