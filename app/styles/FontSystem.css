@@ -36,171 +36,116 @@
 
 /* --- Japanese Fonts --- */
 .KanaXL {
-    font-size: 3vw;
+    font-size: clamp(1.5rem, 3vw, 1.875rem);
     font-family: Noto Sans JP;
 }
 
 .KanaL {
-    font-size: 2.6vw;
+    font-size: clamp(1.3rem, 2.6vw, 1.625rem);
     font-family: Noto Sans JP;
 }
 
 .KanaM {
-    font-size: 2.2vw;
+    font-size: clamp(1.1rem, 2.2vw, 1.375rem);
     font-family: Noto Sans JP;
 }
 
 .KanaS {
-    font-size: 2vw;
+    font-size: clamp(1rem, 2vw, 1.25rem);
     font-family: Noto Sans JP;
 }
 
 .KanaXS {
-    font-size: 1.8vw;
+    font-size: clamp(0.9rem, 1.8vw, 1.125rem);
     font-family: Noto Sans JP;
 }
 
-/* --- Japanese Font Minimums --- */
-@media (width <= 800px) {
-    .KanaXL {
-        font-size: 1.5rem;
-    }
-
-    .KanaL {
+@media (width < 500px) {
+    .SmallFFKanaL {
         font-size: 1.3rem;
+        font-family: Linotte;
     }
 
-    .KanaM{
+    .SmallFFKanaM {
         font-size: 1.1rem;
+        font-family: Linotte;
     }
 
-    .KanaS {
+    .SmallFFKanaS {
         font-size: 1rem;
+        font-family: Linotte;
     }
 
-    .KanaXS {
+    .SmallFFKanaXS {
         font-size: 0.9rem;
+        font-family: Linotte;
     }
 }
-
-/* --- Japanese Font Maximums --- */
-@media (width >= 1000px) {
-    .KanaXL {
-        font-size: 1.875rem;
-    }
-
-    .KanaL {
-        font-size: 1.625rem;
-    }
-
-    .KanaM {
-        font-size: 1.375rem;
-    }
-
-    .KanaS {
-        font-size: 1.25rem;
-    }
-
-    .KanaXS {
-        font-size: 1.125rem;
-    }
-}
-
 
 /* --- Equivalent English Fonts --- */
 .RomanXXXL {
-    font-size: 4vw;
+    font-size: clamp(2rem, 4vw, 2.5rem);
     font-family: Linotte;
 }
 
 .RomanXXL {
-    font-size: 3.2vw;
+    font-size: clamp(1.6rem, 3.2vw, 2rem);
     font-family: Linotte;
 }
 
 .RomanXL {
-    font-size: 2.6vw;
+    font-size: clamp(1.3rem, 2.6vw, 1.625rem);
     font-family: Linotte;
 }
 
 .RomanL {
-    font-size: 2.2vw;
+    font-size: clamp(1.1rem, 2.2vw, 1.375rem);
     font-family: Linotte;
 }
 
 .RomanM {
-    font-size: 1.9vw;
+    font-size: clamp(0.95rem, 1.9vw, 1.1875rem);
     font-family: Linotte;
 }
 
 .RomanS {
-    font-size: 1.7vw;
+    font-size: clamp(0.85rem, 1.7vw, 1.0625rem);
     font-family: Linotte;
 }
 
 .RomanXS {
-    font-size: 1.5vw;
+    font-size: clamp(0.75rem, 1.5vw, 0.9375rem);
     font-family: Linotte;
 }
 
-/* --- Equivalent English Font Minimums --- */
-@media (width <= 800px) {
-    .RomanXXXL {
-        font-size: 2rem;
-    }
-
-    .RomanXXL {
+@media (width < 500px) {
+    .SmallFFRomanXXL {
         font-size: 1.6rem;
+        font-family: Linotte;
     }
 
-    .RomanXL {
+    .SmallFFRomanXL {
         font-size: 1.3rem;
+        font-family: Linotte;
     }
 
-    .RomanL {
+    .SmallFFRomanL {
         font-size: 1.1rem;
+        font-family: Linotte;
     }
 
-    .RomanM {
+    .SmallFFRomanM {
         font-size: 0.95rem;
+        font-family: Linotte;
     }
 
-    .RomanS {
+    .SmallFFRomanS {
         font-size: 0.85rem;
+        font-family: Linotte;
     }
 
-    .RomanXS {
+    .SmallFFRomanXS {
         font-size: 0.75rem;
-    }
-}
-
-/* --- Equivalent English Font Maximums --- */
-@media (width >= 1000px) {
-    .RomanXXXL {
-        font-size: 2.5rem;
-    }
-
-    .RomanXXL {
-        font-size: 2rem;
-    }
-
-    .RomanXL {
-        font-size: 1.625rem;
-    }
-
-    .RomanL {
-        font-size: 1.375rem;
-    }
-
-    .RomanM {
-        font-size: 1.1875rem;
-    }
-
-    .RomanS {
-        font-size: 1.0625rem;
-    }
-
-    .RomanXS {
-        font-size: 0.9375rem;
+        font-family: Linotte;
     }
 }
