@@ -1,4 +1,4 @@
-let cacheKey = 'MJA|251019.7';
+let cacheKey = 'MJA|251019.8';
 
 
 self.addEventListener('install', (event) => {
@@ -39,7 +39,7 @@ self.addEventListener("fetch", (event) => {
                 let fetchResponse = await fetch(event.request);
         
                 if (fetchResponse) {
-                    /** @ts-ignore */
+                    /** @ts-ignore *//
                     console.log("fetchResponse: ", event.request.url);
                     /** @ts-ignore */
                     await cache.put(event.request, fetchResponse.clone());
@@ -47,8 +47,8 @@ self.addEventListener("fetch", (event) => {
                 }
             
             } catch (error) {
-                
-                console.log("Fetch failed: ", error);
+                /** @ts-ignore */
+                console.log("Fetch failed for " + event.request.url + ": " , error);
                 let cachedResponse = await cache.match("index.html");
                 return cachedResponse;
             }
