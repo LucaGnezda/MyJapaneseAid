@@ -9,7 +9,11 @@ class AppBootstrappingService {
         Log.setLoggingLevel(App.config.loggingLevel);
         Log.debug("AppService.Initialise - Begin", "APPSERVICE");
 
+        // Offline Cache
+        
+
         // Bootstrap
+        OfflineCaching.registerServiceWorker("/app/scripts/workers/OfflineCacheWorker.js");
         ComponentRegistry.registerComponents();
         AppBootstrappingService.indexDOM();
         AppBootstrappingService.loadFragementsFromDOMData("HTMLFragments");
@@ -376,21 +380,20 @@ class AppBootstrappingService {
 
     /**
      * @param {Object} partlyDecodedJSONObject
-     * @param {Boolean} [demunge] 
      */
-    static loadFromObject(partlyDecodedJSONObject, demunge = false) {
+    static loadFromObject(partlyDecodedJSONObject) { //, demunge = false) {
         for (let key in partlyDecodedJSONObject) {
             /** @ts-ignore - Yes JSDoc ... you can index an object by string */
             let contents = JSON.parse(partlyDecodedJSONObject[key]);
             if (typeof contents == 'object' && contents.hasOwnProperty("kana") && contents.hasOwnProperty("romaji")) {
-                if (demunge) {
-                    contents.kana = UnicodeService.demunge(contents.kana);
-                    contents.romaji = UnicodeService.demunge(contents.romaji);
-
-                    for (let egKey in contents.examples) {
-                        contents.examples[egKey].kana = UnicodeService.demunge(contents.examples[egKey].kana);
-                    }
-                }
+                //if (demunge) {
+                //    contents.kana = UnicodeService.demunge(contents.kana);
+                //    contents.romaji = UnicodeService.demunge(contents.romaji);
+                //
+                //    for (let egKey in contents.examples) {
+                //        contents.examples[egKey].kana = UnicodeService.demunge(contents.examples[egKey].kana);
+                //    }
+                //}
                 localStorage.setItem(key, JSON.stringify(contents));
             }
         }
