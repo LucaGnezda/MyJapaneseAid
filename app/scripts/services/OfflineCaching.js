@@ -46,7 +46,7 @@ class OfflineCaching {
             try {
                 await navigator.serviceWorker.register(
                     serviceWorkerFilePath,
-                    { scope: '/' }
+                    { scope: './' }
                 )
                 .then(registration => {
                     let data = {
