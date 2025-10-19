@@ -1,10 +1,10 @@
 let cacheAppPrefix = 'MJA|';
-let cacheKey = 'MJA|251019.10';
+let cacheKey = 'MJA|251019.11';
 
 importScripts("./framework/scripts/logging/LoggingEnums.js");
 importScripts("./framework/scripts/logging/Log.js");
 
-Log.setLoggingLevel(LogLevel.Infomation);
+Log.setLoggingLevel(LogLevel.Debug);
 
 self.addEventListener('install', (event) => {
     /** @ts-ignore */
@@ -17,6 +17,7 @@ self.addEventListener('message', (event) => {
         event.waitUntil(
             caches.open(cacheKey)
                 .then( (cache) => {
+                    Log.debug("Dynamically adding file keys to cache: " + cacheKey, "OFFLINECACHEWORKER");
                     return cache.addAll(event.data.payload);
                 })
         );
@@ -30,6 +31,7 @@ self.addEventListener("activate", (event) => {
             Promise.all(
                 keyList.map((key) => {
                     if (key.startsWith(cacheAppPrefix) && key != cacheKey) {
+                        Log.info("Removing old cache: " + key, "OFFLINECACHEWORKER");
                         return caches.delete(key);
                     }
                     return undefined;
@@ -52,8 +54,7 @@ self.addEventListener("fetch", (event) => {
         
                 if (cachedResponse) {
                     /** @ts-ignore */
-                    //console.log("%cWorkr%c | [OFFLINECACHEWORKER] Cache response url " + event.request.url, "color:#808080;", "");
-                    Log.info("Cache response url " + event.request.url, "[OFFLINECACHEWORKER]");
+                    Log.debug("Cache response url " + event.request.url, "OFFLINECACHEWORKER");
                     return cachedResponse;
                 }
 
@@ -62,8 +63,7 @@ self.addEventListener("fetch", (event) => {
         
                 if (fetchResponse) {
                     /** @ts-ignore */
-                    //console.log("%cWorkr%c | [OFFLINECACHEWORKER] Fetch response url " + event.request.url, "color:#808080;", "");
-                    Log.info("Fetch response url " + event.request.url, "[OFFLINECACHEWORKER]");
+                    Log.debug("Fetch response url " + event.request.url, "OFFLINECACHEWORKER");
                     /** @ts-ignore */
                     await cache.put(event.request, fetchResponse.clone());
                     return fetchResponse;
@@ -71,8 +71,7 @@ self.addEventListener("fetch", (event) => {
             
             } catch (error) {
                 /** @ts-ignore */
-                //console.log("%cWorkr%c | [OFFLINECACHEWORKER] Fetch response url " + event.request.url, "color:#ec9e30;", "");
-                Log.error("Fetch failed for url " + event.request.url, "[OFFLINECACHEWORKER]");
+                Log.error("Fetch failed for url " + event.request.url, "OFFLINECACHEWORKER");
                 let cachedResponse = await cache.match("index.html");
                 return cachedResponse;
             }
