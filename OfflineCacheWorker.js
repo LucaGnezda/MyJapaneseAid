@@ -39,7 +39,7 @@ self.addEventListener("fetch", (event) => {
                 let fetchResponse = await fetch(event.request);
         
                 if (fetchResponse) {
-                    /** @ts-ignore *//
+                    /** @ts-ignore */
                     console.log("fetchResponse: ", event.request.url);
                     /** @ts-ignore */
                     await cache.put(event.request, fetchResponse.clone());
