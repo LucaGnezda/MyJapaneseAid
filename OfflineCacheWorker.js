@@ -1,10 +1,10 @@
 let cacheAppPrefix = 'MJA|';
-let cacheKey = 'MJA|251019.11';
+let cacheKey = 'MJA|251019.12';
 
 importScripts("./framework/scripts/logging/LoggingEnums.js");
 importScripts("./framework/scripts/logging/Log.js");
 
-Log.setLoggingLevel(LogLevel.Debug);
+Log.setLoggingLevel(LogLevel.Infomation);
 
 self.addEventListener('install', (event) => {
     /** @ts-ignore */
