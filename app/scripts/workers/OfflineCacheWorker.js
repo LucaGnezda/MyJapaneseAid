@@ -1,4 +1,4 @@
-let cacheKey = 'MJA|250820.1';
+let cacheKey = 'MJA|251019.4';
 
 
 self.addEventListener('install', (event) => {
