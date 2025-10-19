@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline'; worker-src blob:;" />
+        <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline'; worker-src blob: 'self';" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.1, minimum-scale=0.9" />
 
         <title>MyJapaneseAid</title>
@@ -74,8 +74,9 @@
         <script defer src="./app/scripts/services/FilesystemAccessService.js"></script>
         <script defer src="./app/scripts/services/GojuonGroupingService.js"></script>
         <script defer src="./app/scripts/services/MultithreadingService.js"></script>
+        <script defer src="./app/scripts/services/OfflineCaching.js"></script>
         <script defer src="./app/scripts/services/PersistentStorageService.js"></script>
-        <script defer src="./app/scripts/services/UnicodeService.js"></script>
+        <!--<script defer src="./app/scripts/services/UnicodeService.js"></script>-->
         
 
         <!-- Helpers -->
@@ -143,7 +144,7 @@
                                 <div class="RomanL MarginTBXL Font600">Created by</div>
                                 <div class="RomanL MarginLXL Font400">LucaG Studios</div>
                                 <div class="RomanL MarginTBXL Font600">Version</div>
-                                <div class="RomanL MarginLXL Font400">Build 250820.1</div>
+                                <div class="RomanL MarginLXL Font400">Build 251019.13</div>
                             </div>
                         </div>
                     </div>
@@ -156,8 +157,9 @@
                                 <div class="PageTitle"><p class="RomanXXXL NoBlockMargins">Usage Tips</p></div>
                             </div>
                             <div class="PageContent MarginTL MarginLRXL">
-                                <ul class="NoBlockMargins PadBXL">                                
-                                    <li class="RomanL MarginTBXL">MyJapaneseAid recommends installing Japanese kana input on your device, it will make it so much easier to work with, and learn kana.</li>
+                                <ul class="NoBlockMargins PadBXL">
+                                    <li class="RomanL MarginTBXL">The starter content provided with MyJapaneseAid spans course content from "Japanese For Fun and Travel (2024)" and "Japanese 1 (2025)" as run by the Worker's Educational Association of South Australia (WEA). Much of this content can also be found in the first half of the textbook "Japanese for busy people, 4th edition", on which "Japanese 1" was based. Thank you kindly Emiko-san and Yoshimi-san for being such awesome teachers and inspiring us.</li>                                
+                                    <li class="RomanL MarginTBXL">MyJapaneseAid works best when Japanese kana input is installed on your device. It will make it so much easier to work with, and learn kana.</li>
                                     <li class="RomanL MarginTBXL">When typing romaji specifically, MyJapaneseAid will automatically convert '-' after a vowel, into the equivalent long sound vowel.</li>
                                     <li class="RomanL MarginTBXL">Try using highlighters in the edit panel of language items. When applied correctly this will underline text across kana, romaji and english meaning when not in edit mode.</li>
                                     <li class="RomanL MarginTBXL">Highlighters are comma separated lists of character positions, with the first character position being 1. You can even create multiple highlighter sets with the '\' delimiter. When using sets, each comma position will highlight the same position in all sets. This is especially useful when you have both Kanji and Hiragana version in the same line. You can only include a position index once per highlighter, but this still gives some pretty awesome linked highlighting effects. for example the following text:</li>
@@ -173,7 +175,7 @@
                                         <li class="RomanL MarginTBS">meaning = 1,,6-8,3-4</li>
                                     </ul>
                                     <li class="RomanL MarginTBXL">Language searching will allow both 'and' and 'or' searches if you include more than one term separated by a space.</li>
-                                    <li class="RomanL MarginTBXL">The kana tab will present bot hhiragana and katakana in a variety of layouts. Extended katakana is also included (there is no equivalent hiragana for these sounds). Word of caution, this list might not be comprehensive as the set seems to evolve over time as the Japanese language adopts new loanwords.</li>
+                                    <li class="RomanL MarginTBXL">The kana tab will present both hiragana and katakana in a variety of layouts. Extended katakana is also included (there is no equivalent hiragana for these sounds). Word of caution, this list might not be comprehensive as the set seems to evolve over time as the Japanese language adopts new loanwords.</li>
                                     <li class="RomanL MarginTBXL">I hope you enjoy using MyJapaneseAid.</li>
                                 </ul>
                             </div>

@@ -154,7 +154,7 @@ class AppActionHandler {
      * @returns {void}
      */
     applySearch(payload) {
-        Log.info(payload.searchString + " | " + payload.searchType, "HANDLER");
+        Log.info("Applying search string: " + payload.searchString + " | " + payload.searchType, "HANDLER");
         if (App.store){
             App.store.searchState.observableData.searchString = payload.searchString;
             App.store.searchState.observableData.searchType = payload.searchType;

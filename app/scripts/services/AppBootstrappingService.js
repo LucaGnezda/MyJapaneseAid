@@ -7,9 +7,13 @@ class AppBootstrappingService {
     static Initialise() {
 
         Log.setLoggingLevel(App.config.loggingLevel);
-        Log.debug("AppService.Initialise - Begin", "APPSERVICE");
+        Log.debug("AppService.Initialise - Begin", "BOOTSTRAPSERVICE");
+
+        // Offline Cache
+        
 
         // Bootstrap
+        OfflineCaching.registerServiceWorker("./OfflineCacheWorker.js");
         ComponentRegistry.registerComponents();
         AppBootstrappingService.indexDOM();
         AppBootstrappingService.loadFragementsFromDOMData("HTMLFragments");
@@ -36,7 +40,7 @@ class AppBootstrappingService {
             App.dispatcher?.dispatch(new Action("App_UpdateCountDisplay", null));
         }
 
-        Log.debug("AppService.Initialise - Complete", "APPSERVICE");
+        Log.debug("AppService.Initialise - Complete", "BOOTSTRAPSERVICE");
     }
 
     static indexDOM() {
@@ -86,14 +90,14 @@ class AppBootstrappingService {
 
         for (let m of mapping) {
             if (App.elements[m.objProperty] === undefined) {
-                Log.fatal(`DOM indexing mapping error, ${m.objProperty} is not a property of App.elements`, "", this);
+                Log.fatal(`DOM indexing mapping error, ${m.objProperty} is not a property of App.elements`, "BOOTSTRAPSERVICE", this);
                 return;
             } 
 
             App.elements[m.objProperty] = document.getElementById(m.id);
 
             if (App.elements[m.objProperty] === null) {
-                Log.fatal(`DOM indexing mapping error, ID ${m.id} could not be is not be found in the DOM`, "", this);
+                Log.fatal(`DOM indexing mapping error, ID ${m.id} could not be is not be found in the DOM`, "BOOTSTRAPSERVICE", this);
                 return;
             } 
         }
@@ -111,7 +115,7 @@ class AppBootstrappingService {
         let fragmentSource = document.querySelector(`data[value='${rootDataKey}']`);
 
         if (!fragmentSource) {
-            Log.fatal("Unable to find fragment Source", "", this);
+            Log.fatal("Unable to find fragment Source", "BOOTSTRAPSERVICE", this);
             return;
         }
 
@@ -153,7 +157,7 @@ class AppBootstrappingService {
     static initialiseUX() {
 
         if (!App.dispatcher || !App.store || !Object.values(App.elements).every(x => x != null)) {
-            Log.fatal("The Store, Dispatcher and DOM indexing must be initialised before Core UI", "", this)
+            Log.fatal("The Store, Dispatcher and DOM indexing must be initialised before Core UI", "BOOTSTRAPSERVICE", this)
             return;
         }
 
@@ -261,7 +265,7 @@ class AppBootstrappingService {
     static loadStore() {
 
         if (!App.store) {
-            Log.fatal("App Store must be initialised before Store content can be loaded", "", this);
+            Log.fatal("App Store must be initialised before Store content can be loaded", "BOOTSTRAPSERVICE", this);
             return;
         }
 
@@ -276,7 +280,7 @@ class AppBootstrappingService {
     static attachStoreSubscribers() {
 
         if (!App.store) {
-            Log.fatal("App Store must be initialised before Store content can be loaded", "", this);
+            Log.fatal("App Store must be initialised before Store content can be loaded", "BOOTSTRAPSERVICE", this);
             return;
         }
 
@@ -287,7 +291,7 @@ class AppBootstrappingService {
     static initialiseWelcomeUX() {
 
         if (!App.dispatcher) {
-            Log.fatal("The Store, Dispatcher and DOM indexing must be initialised before Core UI", "", this)
+            Log.fatal("The Store, Dispatcher and DOM indexing must be initialised before Core UI", "BOOTSTRAPSERVICE", this)
             return;
         }
 
@@ -303,17 +307,17 @@ class AppBootstrappingService {
     static initialiseLocalCacheDatabase() {
 
         if (!App.persistentStorageService) {
-            Log.fatal("The Persistent Storage Service, must be initialised before initialising the database", "", this)
+            Log.fatal("The Persistent Storage Service, must be initialised before initialising the database", "BOOTSTRAPSERVICE", this)
             return;
         }
 
         if (navigator.storage && navigator.storage.persist) {
             navigator.storage.persist().then((persistent) => {
                 if (persistent) {
-                    Log.debug("Storage will not be cleared except by explicit user action", "");
+                    Log.debug("Storage will not be cleared except by explicit user action", "BOOTSTRAPSERVICE");
                 } 
                 else {
-                    Log.debug("Storage may be cleared by the UA under storage pressure.", "");
+                    Log.debug("Storage may be cleared by the UA under storage pressure.", "BOOTSTRAPSERVICE");
                 }
             });
         }
@@ -343,7 +347,7 @@ class AppBootstrappingService {
                     /** @ts-ignore - Yes this is ok for this purpose */
                     /*!isNaN(new Date(contents.lastmodified))*/) {
                     
-                    Log.info(`File contents key ${key} is a valid database definition`, "");
+                    Log.info(`File contents key ${key} is a valid database definition`, "BOOTSTRAPSERVICE");
                 }
                 else if (
                     typeof contents == 'object' &&
@@ -359,16 +363,16 @@ class AppBootstrappingService {
                     contents.hasOwnProperty("notes") && (typeof contents.notes === "string" || contents.notes instanceof String) &&
                     contents.hasOwnProperty("examples") && Array.isArray(contents.examples)) {
                     
-                    Log.info(`File contents key ${key} is a valid item`, "");
+                    Log.info(`File contents key ${key} is a valid item`, "BOOTSTRAPSERVICE");
                 }
                 else {
-                    Log.error(`Unexpected contents found within key ${key}, unable to load file`, "");
+                    Log.error(`Unexpected contents found within key ${key}, unable to load file`, "BOOTSTRAPSERVICE");
                     return false;
                 }
             }
         }
         catch {
-            Log.error(`Unexpected contents found within key ${key}, unable to load file`, "");
+            Log.error(`Unexpected contents found within key ${key}, unable to load file`, "BOOTSTRAPSERVICE");
             return false;
         }
         return true;
@@ -376,21 +380,20 @@ class AppBootstrappingService {
 
     /**
      * @param {Object} partlyDecodedJSONObject
-     * @param {Boolean} [demunge] 
      */
-    static loadFromObject(partlyDecodedJSONObject, demunge = false) {
+    static loadFromObject(partlyDecodedJSONObject) { //, demunge = false) {
         for (let key in partlyDecodedJSONObject) {
             /** @ts-ignore - Yes JSDoc ... you can index an object by string */
             let contents = JSON.parse(partlyDecodedJSONObject[key]);
             if (typeof contents == 'object' && contents.hasOwnProperty("kana") && contents.hasOwnProperty("romaji")) {
-                if (demunge) {
-                    contents.kana = UnicodeService.demunge(contents.kana);
-                    contents.romaji = UnicodeService.demunge(contents.romaji);
-
-                    for (let egKey in contents.examples) {
-                        contents.examples[egKey].kana = UnicodeService.demunge(contents.examples[egKey].kana);
-                    }
-                }
+                //if (demunge) {
+                //    contents.kana = UnicodeService.demunge(contents.kana);
+                //    contents.romaji = UnicodeService.demunge(contents.romaji);
+                //
+                //    for (let egKey in contents.examples) {
+                //        contents.examples[egKey].kana = UnicodeService.demunge(contents.examples[egKey].kana);
+                //    }
+                //}
                 localStorage.setItem(key, JSON.stringify(contents));
             }
         }
@@ -399,7 +402,7 @@ class AppBootstrappingService {
     static loadFromPersistentStorage() {
 
         if (!App.persistentStorageService) {
-            Log.fatal("Persistent Storage Service must be initialised before content can be loaded", "", this);
+            Log.fatal("Persistent Storage Service must be initialised before content can be loaded", "BOOTSTRAPSERVICE", this);
             return;
         }
 
