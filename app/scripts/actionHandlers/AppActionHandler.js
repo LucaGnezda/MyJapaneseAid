@@ -55,6 +55,7 @@ class AppActionHandler {
 
             case "KanaPageControls_ForeignSoundExceptions":
                 this.useForeignSoundExceptionsLayout();
+                break;
 
             case "LanguageListControls_NewItem":
                 this.showLanguageNewFlyout();
