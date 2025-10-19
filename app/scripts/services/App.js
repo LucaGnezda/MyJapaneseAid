@@ -65,7 +65,7 @@ class App {
      * @type {AppConfig}
      */
     static config = {
-        loggingLevel: LogLevel.Debug,
+        loggingLevel: LogLevel.Infomation,
         allowModernFileAccessIfAvailable: true,
     }
 
