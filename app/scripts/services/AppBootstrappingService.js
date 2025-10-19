@@ -13,7 +13,7 @@ class AppBootstrappingService {
         
 
         // Bootstrap
-        OfflineCaching.registerServiceWorker("./app/scripts/workers/OfflineCacheWorker.js");
+        OfflineCaching.registerServiceWorker("./OfflineCacheWorker.js");
         ComponentRegistry.registerComponents();
         AppBootstrappingService.indexDOM();
         AppBootstrappingService.loadFragementsFromDOMData("HTMLFragments");
