@@ -38,3 +38,7 @@ textarea:disabled {
     border: none;
     color: black;
 }
+
+a {
+    color: var(--colourDDDDarkSteelBlue);
+}
