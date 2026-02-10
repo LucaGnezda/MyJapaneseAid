@@ -85,7 +85,7 @@ class CCKana extends CCBase {
         headings: [
             { label: "monographs", layoutCSS: [[], ["R1", "C3", "W5", "RomanXL", "SmallFFRomanL", "Font400"],[],[]]},
             { label: "digraphs", layoutCSS: [[], ["R1", "C8", "W3", "RomanXL", "SmallFFRomanL", "Font400"],["R19", "C1", "H7", "VerticalText", "RomanXL", "Font400"],[]]},
-            { label: "monographs", layoutCSS: [[], ["R3", "C1", "H11", "VerticalText", "RomanXL", "SmallFFRomanL", "Font400"],["R2", "C1", "H11", "VerticalText", "RomanXL", "Font400"],[]]},
+            { label: "regular", layoutCSS: [[], ["R3", "C1", "H11", "VerticalText", "RomanXL", "SmallFFRomanL", "Font400"],["R2", "C1", "H11", "VerticalText", "RomanXL", "Font400"],[]]},
             { label: "diacritics", layoutCSS: [[], ["R14", "C1", "H5", "VerticalText", "RomanXL", "SmallFFRomanL", "Font400"],["R13", "C1", "H5", "VerticalText", "RomanXL", "Font400"],[]]},
             { label: "diacritic digraphs", layoutCSS: [[], [],["R26", "C1", "H5", "VerticalText", "RomanXL", "Font400"],[]]},
             { label: "extended katakana sounds", layoutCSS: [[],[],[],[],["R1", "C2","W8", "RomanXL", "SmallFFRomanL", "Font400"]]},
