@@ -1,5 +1,5 @@
 let cacheAppPrefix = 'MJA|';
-let cacheKey = 'MJA|260210.1';
+let cacheKey = 'MJA|260210.2';
 
 importScripts("./framework/scripts/logging/LoggingEnums.js");
 importScripts("./framework/scripts/logging/Log.js");
